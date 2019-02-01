@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
+  m_Name: Ryleigh
+  m_EditorClassIdentifier: 
+  characterPortrait: {fileID: 21300000, guid: f27b1a66898a59545847139ec73db17c, type: 3}
+  characterImage: {fileID: 21300000, guid: ba3990345ea48544eb2394c8a31b8cd0, type: 3}
+  defeatedImage: {fileID: 0}
+  characterName: Ryleigh
+  baseSpd: 3
+  currentSpd: 0
+  abilities: []
+  effects: []
+  characterClass: {fileID: 0}
+  currentLevel: 0
+  baseHP: 0
+  baseAnt: 0
+  baseAtk: 0
+  baseDef: 0
+  baseAntGen: 0
+  hpModifier: 0
+  atkModifier: 0
+  defModifier: 0
+  spdModifier: 1.5520000457763672
+  antGenModifier: 0
+  currentHP: 0
+  currentAnt: 0
+  currentAtk: 0
+  currentDef: 0
+  currentAntGen: 0

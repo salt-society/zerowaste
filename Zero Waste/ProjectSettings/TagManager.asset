@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Controller
+  - Effects
+  - CurrentSaveBadge
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Background
+  - Foreground
+  - Player
+  - Particles
+  - OverlayUI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Camera
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 388809709
+    locked: 0
+  - name: Objects
+    uniqueID: 3565048253
+    locked: 0
+  - name: UI
+    uniqueID: 3542809279
+    locked: 0
+  - name: Interactable
+    uniqueID: 772400233
+    locked: 0
+  - name: Particles
+    uniqueID: 670851727
+    locked: 0
+  - name: OverlayUI
+    uniqueID: 2980005853
+    locked: 0

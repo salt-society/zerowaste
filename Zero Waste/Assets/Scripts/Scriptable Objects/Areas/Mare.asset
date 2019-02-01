@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0d735094c08ef4282e022a096a2106, type: 3}
+  m_Name: Mare
+  m_EditorClassIdentifier: 
+  isAreaLocked: 1
+  parentName: Terre
+  name: Mare
+  description: "A land close to the sea, Mare\u2019s main source of income is its
+    fishing industry. With a long and bountiful river to boot, it\u2019s no wonder
+    this country is a land rich in both culture and resources. However, the people
+    have dumped their wastes on the river. This caused the marine life to reach an
+    all time low, endangering the country\u2019s economy. ZWA considers Mare a 2*
+    threat."
+  areaNumber: 1
+  coordinates: {x: 0, y: 0, z: 0}
+  battles:
+  - {fileID: 11400000, guid: 239a42901e59f9a468a13a846925b78c, type: 2}
+  - {fileID: 11400000, guid: 92aa79c4cad1d0740a08528e054bbc35, type: 2}
+  - {fileID: 11400000, guid: 239a42901e59f9a468a13a846925b78c, type: 2}
+  - {fileID: 11400000, guid: 92aa79c4cad1d0740a08528e054bbc35, type: 2}
+  - {fileID: 11400000, guid: 239a42901e59f9a468a13a846925b78c, type: 2}
+  - {fileID: 11400000, guid: 92aa79c4cad1d0740a08528e054bbc35, type: 2}
+  - {fileID: 11400000, guid: 239a42901e59f9a468a13a846925b78c, type: 2}
+  - {fileID: 11400000, guid: 92aa79c4cad1d0740a08528e054bbc35, type: 2}
+  - {fileID: 11400000, guid: 239a42901e59f9a468a13a846925b78c, type: 2}
+  continent: {fileID: 21300000, guid: 5df8d7a05686c2045bc25dee69d077bd, type: 3}
