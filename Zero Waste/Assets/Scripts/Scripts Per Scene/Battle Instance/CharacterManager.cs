@@ -10,23 +10,59 @@ public class CharacterManager : MonoBehaviour {
     public GameObject[] mutants;
 
     [Header("Managers")]
+    public StatusManager statusManager;
     public CameraManager cameraManager;
+
+    public Dictionary<string, Character[]> CloneCharacters(Player[] scavengers, Enemy[] mutants)
+    {
+        Dictionary<string, Character[]> characters = 
+            new Dictionary<string, Character[]>();
+
+        characters.Add("Scavenger", (Player[])scavengers.Clone());
+        characters.Add("Mutants", (Enemy[])mutants.Clone());
+
+        return characters;
+    }
+
+    public Player[] InitializeScavengers(Player[] scavengers)
+    {
+        foreach (Player scavenger in scavengers)
+            scavenger.OnInitialize();
+
+        return scavengers;
+    }
+
+    public Enemy[] InitializeMutants(Enemy[] mutants)
+    {
+        foreach (Enemy mutant in mutants)
+            mutant.OnInitialize();
+
+        return mutants;
+    }
 
     public void ChangeSprite(Player[] scavengers, Enemy[] mutants)
     {
-        // TEMPORARY! DOESNT CHECK IF NULL
-        for (int i = 0; i < scavengers.Length; i++)
+        int i = 0;
+        foreach (Player scavenger in scavengers)
         {
             this.scavengers[i].GetComponent<SpriteRenderer>().sprite = scavengers[i].characterImage;
-            this.mutants[i].GetComponent<SpriteRenderer>().sprite = mutants[i].characterImage;
+            i++;
+        }
+
+        int j = 0;
+        foreach (Enemy mutant in mutants)
+        {
+            this.mutants[j].GetComponent<SpriteRenderer>().sprite = mutants[j].characterImage;
+            j++;
         }
     }
 
+
     public IEnumerator ScavengersEntrance()
     {
-        cameraManager.ScavengerFocus(true);
+        cameraManager.ScavengerFocus(1);
         yield return new WaitForSeconds(1f);
-        cameraManager.ScavengerFocus(false);
+        cameraManager.ScavengerFocus(0);
 
         foreach (GameObject scavenger in scavengers)
         {
@@ -39,9 +75,9 @@ public class CharacterManager : MonoBehaviour {
 
     public IEnumerator MutantEntrance()
     {
-        cameraManager.MutantFocus(true);
+        cameraManager.MutantFocus(1);
         yield return new WaitForSeconds(.5f);
-        cameraManager.MutantFocus(false);
+        cameraManager.MutantFocus(0);
 
         foreach (GameObject mutant in mutants)
         {
@@ -49,9 +85,9 @@ public class CharacterManager : MonoBehaviour {
             yield return new WaitForSeconds(.5f);
         }
 
-        cameraManager.BackToNormalCamera(true);
+        cameraManager.BackToNormalCamera(1);
         yield return new WaitForSeconds(1f);
-        cameraManager.BackToNormalCamera(false);
+        cameraManager.BackToNormalCamera(0);
 
         yield return null;
     }

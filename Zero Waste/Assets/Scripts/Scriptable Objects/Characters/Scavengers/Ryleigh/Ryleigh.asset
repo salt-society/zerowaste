@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -19,18 +20,18 @@ MonoBehaviour:
   currentSpd: 0
   abilities: []
   effects: []
-  characterClass: {fileID: 0}
-  currentLevel: 0
-  baseHP: 0
-  baseAnt: 0
-  baseAtk: 0
-  baseDef: 0
-  baseAntGen: 0
-  hpModifier: 0
-  atkModifier: 0
-  defModifier: 0
+  characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
+  currentLevel: 21
+  baseHP: 9
+  baseAnt: 8
+  baseAtk: 5
+  baseDef: 3
+  baseAntGen: 3
+  hpModifier: 1.7929999828338623
+  atkModifier: 0.9629999995231628
+  defModifier: 0.6579999923706055
   spdModifier: 1.5520000457763672
-  antGenModifier: 0
+  antGenModifier: 0.8019999861717224
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

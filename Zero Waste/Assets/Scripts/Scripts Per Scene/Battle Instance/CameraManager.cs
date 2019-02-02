@@ -9,19 +9,22 @@ public class CameraManager : MonoBehaviour {
     public Camera uiCamera;
     public Camera fxCamera;
 
-    public void ScavengerFocus(bool isFocus)
+    public void ScavengerFocus(int focus)
     {
-        mainCamera.GetComponent<Animator>().SetBool("Scavenger Focus", isFocus);
+        bool focusCam = (focus > 0) ? true : false;
+        mainCamera.GetComponent<Animator>().SetBool("Scavenger Focus", focusCam);
     }
 
-    public void MutantFocus(bool isFocus)
+    public void MutantFocus(int focus)
     {
-        mainCamera.GetComponent<Animator>().SetBool("Mutant Focus", isFocus);
+        bool focusCam = (focus > 0) ? true : false;
+        mainCamera.GetComponent<Animator>().SetBool("Mutant Focus", focusCam);
     }
 
-    public void BackToNormalCamera(bool isFocus)
+    public void BackToNormalCamera(int focus)
     {
-        mainCamera.GetComponent<Animator>().SetBool("Normal Camera", isFocus);
+        bool focusCam = (focus > 0) ? true : false;
+        mainCamera.GetComponent<Animator>().SetBool("Normal Camera", focusCam);
     }
     
 }

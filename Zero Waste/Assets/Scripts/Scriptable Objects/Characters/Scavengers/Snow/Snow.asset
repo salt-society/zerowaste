@@ -4,33 +4,34 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
-  m_Name: Blank
+  m_Name: Snow
   m_EditorClassIdentifier: 
   characterPortrait: {fileID: 21300000, guid: e2b23f52d4061344a82788e83a9ca6b1, type: 3}
   characterImage: {fileID: 21300000, guid: a5a7f4a249554394ea937e26d0479a11, type: 3}
   defeatedImage: {fileID: 0}
-  characterName: Blank
+  characterName: Snow
   baseSpd: 5
   currentSpd: 0
   abilities: []
   effects: []
-  characterClass: {fileID: 0}
-  currentLevel: 0
-  baseHP: 0
-  baseAnt: 0
-  baseAtk: 0
-  baseDef: 0
-  baseAntGen: 0
-  hpModifier: 0
-  atkModifier: 0
-  defModifier: 0
-  spdModifier: 1.2669999599456787
-  antGenModifier: 0
+  characterClass: {fileID: 11400000, guid: 36095d1aaca4ace42aae40eebddead5d, type: 2}
+  currentLevel: 12
+  baseHP: 10
+  baseAnt: 10
+  baseAtk: 3
+  baseDef: 4
+  baseAntGen: 2
+  hpModifier: 1.5720000267028809
+  atkModifier: 0.8830000162124634
+  defModifier: 0.722000002861023
+  spdModifier: 1.3200000524520874
+  antGenModifier: 0.6980000138282776
   currentHP: 0
   currentAnt: 0
   currentAtk: 0
