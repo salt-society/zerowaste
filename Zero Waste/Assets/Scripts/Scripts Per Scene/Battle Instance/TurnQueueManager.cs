@@ -79,7 +79,7 @@ public class TurnQueueManager : MonoBehaviour {
         int i = 0;
         foreach(Character character in characterQueue) 
         {
-            queueIcons[i].GetComponent<Image>().sprite = character.characterPortrait;
+            queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
             queueIcons[i].SetActive(true);
             yield return new WaitForSeconds(.3f);
             i++;

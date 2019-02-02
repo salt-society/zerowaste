@@ -45,14 +45,14 @@ public class CharacterManager : MonoBehaviour {
         int i = 0;
         foreach (Player scavenger in scavengers)
         {
-            this.scavengers[i].GetComponent<SpriteRenderer>().sprite = scavengers[i].characterImage;
+            this.scavengers[i].GetComponent<SpriteRenderer>().sprite = scavengers[i].characterFull;
             i++;
         }
 
         int j = 0;
         foreach (Enemy mutant in mutants)
         {
-            this.mutants[j].GetComponent<SpriteRenderer>().sprite = mutants[j].characterImage;
+            this.mutants[j].GetComponent<SpriteRenderer>().sprite = mutants[j].characterFull;
             j++;
         }
     }

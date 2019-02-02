@@ -83,7 +83,7 @@ public class StatusManager : MonoBehaviour {
     {
         for (int i = 0; i < scavengerCount; i++)
         {
-            scavengerIcon[i].GetComponent<Image>().sprite = scavengers[i].characterPortrait;
+            scavengerIcon[i].GetComponent<Image>().sprite = scavengers[i].characterHalf;
             scavengerName[i].GetComponent<TextMeshProUGUI>().text = scavengers[i].characterName;
             scavengerLvl[i].GetComponent<TextMeshProUGUI>().text = "LVL. " + scavengers[i].currentLevel;
             // scavengerClass[i].GetComponent<TextMeshProUGUI>().text = scavengers[i].characterClass.roleName;

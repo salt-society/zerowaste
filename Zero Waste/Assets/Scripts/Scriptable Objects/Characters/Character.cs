@@ -4,9 +4,9 @@ using UnityEngine;
 public class Character : ScriptableObject {
 
     [Header("Basic Information")]
-    public Sprite characterPortrait;
-    public Sprite characterImage;
-    public Sprite defeatedImage;
+    public Sprite characterThumb;
+    public Sprite characterHalf;
+    public Sprite characterFull;
     public string characterName;
 
     [Header("Shared Information")]
