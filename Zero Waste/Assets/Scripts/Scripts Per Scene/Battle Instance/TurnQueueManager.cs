@@ -6,16 +6,21 @@ using UnityEngine.UI;
 public class TurnQueueManager : MonoBehaviour {
 
     [Header("Queue Components")]
+    public GameObject turnQueue;
+    public GameObject pointer;
+
+    [Space]
     public GameObject[] queueIcons;
     public GameObject[] queueOverlays;
-    public GameObject turnQueue;
-
+    
     [Header("Managers")]
     public BattleInfoManager battleInfoManager;
     public StatusManager statusManager;
 
     private List<Character> characterQueue;
-    private Character fastestCharacter;   
+    private Character fastestCharacter;
+
+    private Character currentCharacter;
 
     public void CalculateTurn(Player[] scavengers, Enemy[] mutants)
     {
@@ -100,6 +105,30 @@ public class TurnQueueManager : MonoBehaviour {
        
 
         yield return null;
+    }
+
+    public void SetCurrentCharacter(int index)
+    {
+        currentCharacter = characterQueue[index];
+    }
+
+    public Character GetCurrentCharacter()
+    {
+        return currentCharacter;
+    }
+
+    public void PointCurrentCharacter(int index)
+    {
+        BoxCollider2D collider = queueIcons[index].GetComponent<BoxCollider2D>();
+        float midpoint = collider.bounds.center.x;
+
+        pointer.transform.position = new Vector3(midpoint, pointer.transform.position.y);
+    }
+
+    public void ShowPointer(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        pointer.SetActive(showComponent);
     }
 
     // 

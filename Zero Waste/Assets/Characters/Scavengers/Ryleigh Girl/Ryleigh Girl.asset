@@ -10,28 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
-  m_Name: Ryleigh
+  m_Name: Ryleigh Girl
   m_EditorClassIdentifier: 
   characterThumb: {fileID: 21300000, guid: 5af44208b71c7cb43b94d2708573bffa, type: 3}
   characterHalf: {fileID: 21300000, guid: 4d8e86de402ece9448cebec2da6bedf2, type: 3}
   characterFull: {fileID: 21300000, guid: de58bf6e01c20a149b67fdfee4593494, type: 3}
   characterName: Ryleigh
-  baseSpd: 3
+  prefab: {fileID: 0}
+  scale: {x: 0, y: 0, z: 0}
+  baseSpd: 5
   currentSpd: 34
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 47cb3232060b86f449566543774e0620, type: 2}
+  - {fileID: 11400000, guid: 387b2608c6362ed4c8f0348289204686, type: 2}
+  - {fileID: 11400000, guid: c2496644c98ac5c47ab81e0ce2854790, type: 2}
+  - {fileID: 11400000, guid: 9f1e18ee57156684eb794fb5f97423c2, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 21
+  currentLevel: 30
   baseHP: 9
-  baseAnt: 8
+  baseAnt: 10
   baseAtk: 5
   baseDef: 3
   baseAntGen: 3
   hpModifier: 1.7929999828338623
   atkModifier: 0.9629999995231628
   defModifier: 0.6579999923706055
-  spdModifier: 1.5520000457763672
-  antGenModifier: 0.8019999861717224
+  spdModifier: 2
+  antGenModifier: 1
   currentHP: 44
   currentAnt: 4
   currentAtk: 24

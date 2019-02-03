@@ -9,6 +9,10 @@ public class Character : ScriptableObject {
     public Sprite characterFull;
     public string characterName;
 
+    [Space]
+    public GameObject prefab;
+    public Vector3 scale;
+
     [Header("Shared Information")]
     [Range(1, 5)] public int baseSpd;
     [HideInInspector] public int currentSpd;

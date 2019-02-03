@@ -6,7 +6,7 @@ using TMPro;
 
 public class StatusManager : MonoBehaviour {
 
-    [Header("Status Panel")]
+    [Header("Scavengers Status Panel")]
     public GameObject scavengerStatus;
 
     [Space]
@@ -19,6 +19,12 @@ public class StatusManager : MonoBehaviour {
     public GameObject[] scavengerAntBars;
     public GameObject[] scavengerAntFills;
     public GameObject[] damageCounters;
+
+    [Space]
+    public GameObject pollutionBarPanel;
+    public GameObject pollutionLevelPrefab;
+
+    private GameObject[] pollutionLevels;
 
     private int scavengerCount;
     private int mutantCount;
@@ -51,7 +57,7 @@ public class StatusManager : MonoBehaviour {
             scavengerMaxHealth.Add(maxHealth);
             scavengerCurrentHealth.Add(scavenger.currentHP);
 
-            double maxAntidote = scavenger.currentAnt;
+            double maxAntidote = scavenger.baseAnt;
             scavengerMaxAntidote.Add(maxAntidote);
             scavengerCurrentAntidote.Add(scavenger.currentAnt);
         }
@@ -96,12 +102,7 @@ public class StatusManager : MonoBehaviour {
         foreach (GameObject healthFill in scavengerHealthFills)
         {
             healthFill.GetComponent<Image>().fillAmount = 0;
-        }
-
-        for (double i = 0; i <= fillAmount; i+=.05)
-        {
-            scavengerHealthFills[position].GetComponent<Image>().fillAmount += (float)i;
-            yield return new WaitForSeconds(.2f);
+            healthFill.GetComponent<Image>().fillAmount = (float)fillAmount;
         }
 
         yield return null;
@@ -110,16 +111,12 @@ public class StatusManager : MonoBehaviour {
     IEnumerator SetScavengerAntidoteBar(double currentAnt, double maxAnt, int position)
     {
         double fillAmount = ComputeAntidote(currentAnt, maxAnt);
+        Debug.Log(currentAnt + " : " + maxAnt + " : " + fillAmount);
 
         foreach (GameObject antFill in scavengerAntFills)
         {
             antFill.GetComponent<Image>().fillAmount = 0;
-        }
-
-        for (double i = 0; i <= fillAmount; i+=.05)
-        {
-            scavengerAntFills[position].GetComponent<Image>().fillAmount += (float)i;
-            yield return new WaitForSeconds(.2f);
+            antFill.GetComponent<Image>().fillAmount = (float)fillAmount;
         }
 
         yield return null;
@@ -153,7 +150,7 @@ public class StatusManager : MonoBehaviour {
     IEnumerator IncrementHealth(double heal, int position)
     {
         double additionHealth = heal / scavengerMaxHealth[position];
-        for(int i = 1; i <= additionHealth; i++) 
+        for(float i = 0; i <= additionHealth; i+=0.5f) 
         {
             scavengerAntFills[position].GetComponent<Image>().fillAmount += i;
             yield return new WaitForSeconds(.2f);
@@ -163,7 +160,7 @@ public class StatusManager : MonoBehaviour {
     IEnumerator DecrementHealth(double damage, int position)
     {
         double damageTaken = damage / scavengerMaxHealth[position];
-        for (int i = (int)damageTaken; i > 0; i++)
+        for (float i = (float)damageTaken; i > 0; i+=0.5f)
         {
             scavengerAntFills[position].GetComponent<Image>().fillAmount -= i;
             yield return new WaitForSeconds(.2f);
@@ -173,7 +170,7 @@ public class StatusManager : MonoBehaviour {
     IEnumerator IncrementAntidote(double charge, int position)
     {
         double antidoteCharge = charge / scavengerMaxHealth[position];
-        for (int i = 1; i <= antidoteCharge; i++)
+        for (float i = 0; i <= antidoteCharge; i+=0.5f)
         {
             scavengerAntFills[position].GetComponent<Image>().fillAmount += i;
             yield return new WaitForSeconds(.2f);
@@ -183,13 +180,33 @@ public class StatusManager : MonoBehaviour {
     IEnumerator DecrementAntidote(double lostAntidote, int position)
     {
         double antidoteUsed = lostAntidote / scavengerMaxHealth[position];
-        for (int i = (int)antidoteUsed; i > 0; i++)
+        for (float i = (float)antidoteUsed; i > 0; i+=0.5f)
         {
             scavengerAntFills[position].GetComponent<Image>().fillAmount -= i;
             yield return new WaitForSeconds(.2f);
         }
     }
 
-    
+    public void SetPollutionLevelBarCount()
+    {
+        pollutionLevels = new GameObject[mutantCount];
+    }
+
+    public void DisplayPollutionBars(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        pollutionBarPanel.SetActive(showComponent);
+    }
+
+    public void AddPollutionLevelBar(float minX, float minY, float extentY, int position)
+    {
+        Vector3 pollutionBarWorldPos = new Vector3(minX, minY + extentY);
+        Vector3 screenPoint = Camera.main.WorldToScreenPoint(pollutionBarWorldPos);
+
+        GameObject pollutionBarObj = Instantiate(pollutionLevelPrefab, 
+            pollutionBarPanel.transform) as GameObject;
+        pollutionBarObj.transform.position = screenPoint;
+        pollutionLevels[position] = pollutionBarObj;
+    }
 
 }

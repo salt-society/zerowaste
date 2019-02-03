@@ -16,12 +16,14 @@ MonoBehaviour:
   characterHalf: {fileID: 21300000, guid: d817021e15aaa0445aec0ab42da86731, type: 3}
   characterFull: {fileID: 21300000, guid: 554f4a7bd7acc6f449af6e660fba5105, type: 3}
   characterName: Snow
-  baseSpd: 5
+  prefab: {fileID: 0}
+  scale: {x: 0, y: 0, z: 0}
+  baseSpd: 1
   currentSpd: 19
   abilities: []
   effects: []
   characterClass: {fileID: 11400000, guid: 36095d1aaca4ace42aae40eebddead5d, type: 2}
-  currentLevel: 12
+  currentLevel: 1
   baseHP: 10
   baseAnt: 10
   baseAtk: 3
@@ -30,7 +32,7 @@ MonoBehaviour:
   hpModifier: 1.5720000267028809
   atkModifier: 0.8830000162124634
   defModifier: 0.722000002861023
-  spdModifier: 2
+  spdModifier: 1
   antGenModifier: 0.6980000138282776
   currentHP: 27
   currentAnt: 5

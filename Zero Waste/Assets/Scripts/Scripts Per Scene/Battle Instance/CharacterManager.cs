@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour {
 
-    [Header("Sprites")]
+    [Header("Character Holder")]
     public GameObject[] scavengers;
     public GameObject[] mutants;
 
@@ -25,7 +25,7 @@ public class CharacterManager : MonoBehaviour {
         return clonedMutants;
     }
 
-    public Player[] InstantiateCharacters(Player[] scavengers)
+    public Player[] InstantiateCharacterData(Player[] scavengers)
     {
         
         Player[] instantiatedScavengers = new Player[scavengers.Length];      
@@ -36,7 +36,7 @@ public class CharacterManager : MonoBehaviour {
         return instantiatedScavengers;
     }
 
-    public Enemy[] InstantiateCharacters(Enemy[] mutants)
+    public Enemy[] InstantiateCharacterData(Enemy[] mutants)
     {
 
         Enemy[] instantiatedMutants = new Enemy[mutants.Length];
@@ -62,23 +62,55 @@ public class CharacterManager : MonoBehaviour {
         return mutants;
     }
 
-    public void ChangeSprite(Player[] scavengers, Enemy[] mutants)
+    public void ChangeSprite(Player[] scavengers)
     {
         int i = 0;
         foreach (Player scavenger in scavengers)
         {
-            this.scavengers[i].GetComponent<SpriteRenderer>().sprite = scavengers[i].characterFull;
+            this.scavengers[i].GetComponent<SpriteRenderer>().sprite = scavenger.characterFull;
             i++;
-        }
-
-        int j = 0;
-        foreach (Enemy mutant in mutants)
-        {
-            this.mutants[j].GetComponent<SpriteRenderer>().sprite = mutants[j].characterFull;
-            j++;
         }
     }
 
+    public void ChangeSprite(Enemy[] mutants)
+    {
+        int i = 0;
+        foreach (Enemy mutant in mutants)
+        {
+            this.mutants[i].GetComponent<SpriteRenderer>().sprite = mutant.characterFull;
+            i++;
+        }
+    }
+
+    public void InstantiateCharacterPrefab(Player[] scavengers) 
+    {
+        int i = 0;
+        foreach (Player scavenger in scavengers)
+        {
+            GameObject mutantObject = Instantiate(scavenger.prefab, this.scavengers[i].transform);
+            mutantObject.transform.localScale = scavenger.scale;
+            i++;
+        }
+    }
+
+    public void InstantiateCharacterPrefab(Enemy[] mutants)
+    {
+        statusManager.SetPollutionLevelBarCount();
+
+        int i = 0;
+        foreach (Enemy mutant in mutants)
+        {
+            GameObject mutantObject = Instantiate(mutant.prefab, this.mutants[i].transform);
+            mutantObject.transform.localScale = mutant.scale;
+
+            float minX = mutantObject.GetComponent<BoxCollider2D>().bounds.min.x;
+            float minY = mutantObject.GetComponent<BoxCollider2D>().bounds.min.y;
+            float extentY = mutantObject.GetComponent<BoxCollider2D>().size.y * 3;
+            statusManager.AddPollutionLevelBar(minX, minY, extentY, i);
+
+            i++;
+        }
+    }
 
     public IEnumerator ScavengersEntrance()
     {
