@@ -10,14 +10,17 @@ public class BattleController : MonoBehaviour {
     public StatusManager statusManager;
     public TurnQueueManager turnQueueManager;
     public CharacterManager characterManager;
+    public ItemManager itemManager;
+    public AttackController attackController;
 
     private string battleNo;
     private string nodeName;
-    private Dictionary<string, Character[]> characters;
 
     [Space]
     [SerializeField] private Player[] scavengers;
     [SerializeField] private Enemy[] mutants;
+    private Player[] scavengerTeam;
+    private Enemy[] mutantTeam;
 
     [Space]
     [SerializeField] private Sprite backgroundSprite;
@@ -43,13 +46,23 @@ public class BattleController : MonoBehaviour {
     // 
     void GetBattleData()
     {
-        // TEMPORARY
+        Player[] scavengerTemp = (Player[])scavengers.Clone();
+        Enemy[] mutantTemp = (Enemy[])mutants.Clone();
+
+        scavengerTeam = new Player[scavengerTemp.Length];
+        for (int i = 0; i < scavengerTemp.Length; i++)
+        {
+            scavengerTeam[i] = Instantiate(scavengerTemp[i]);
+        }
+
+        mutantTeam = new Enemy[mutantTemp.Length];
+        mutantTeam = characterManager.InstantiateCharacters(mutantTemp);
+
+        scavengerTeam = characterManager.InitializeScavengers(scavengerTeam);
+        mutantTeam = characterManager.InitializeMutants(mutantTeam);
+
         battleNo = "Battle 1";
         nodeName = "Misty Forest";
-
-        characters = characterManager.CloneCharacters(scavengers, mutants);
-        scavengers = characterManager.InitializeScavengers(characters["Scavenger"] as Player[]);
-        mutants = characterManager.InitializeMutants(characters["Mutants"] as Enemy[]);
     }
 
     // 
@@ -58,24 +71,33 @@ public class BattleController : MonoBehaviour {
     // 
     void SetupBattle()
     {
-        firstLoop = true; loopDone = true;
         turnCount = 1;
-        
-        environmentManager.ChangeBackground(backgroundSprite);
-        characterManager.ChangeSprite(scavengers, mutants);
-        battleInfoManager.SetBattleDetails(battleNo, nodeName);
 
-        statusManager.SetCharacterCount(scavengers.Length, mutants.Length);
-        statusManager.SetCharactersStatistics(scavengers, mutants);
-        statusManager.SetScavengerDetails(scavengers);
+        firstLoop = true; 
+        loopDone = true;
+        
+        environmentManager.SetBackground(backgroundSprite);
+        characterManager.ChangeSprite(scavengerTeam, mutantTeam);
+        battleInfoManager.SetBattleDetails(battleNo, nodeName);
+        itemManager.SetBoosterPanelBg(backgroundSprite);
+
+        statusManager.SetCharacterCount(scavengerTeam.Length, mutantTeam.Length);
+        statusManager.SetCharactersStatistics(scavengerTeam, mutantTeam);
+        statusManager.SetScavengerDetails(scavengerTeam);
         
         ProcessTurn();
     }
 
     void ProcessTurn()
     {
-        turnQueueManager.CalculateTurn(scavengers, mutants);
+        turnQueueManager.CalculateTurn(scavengerTeam, mutantTeam);
+
+        characterQueue = new List<Character>();
         characterQueue = turnQueueManager.GetCharacterQueue();
+        foreach (Character character in characterQueue)
+        {
+            Debug.Log(character.characterName + " : " + character.GetInstanceID());
+        }
 
         StartCoroutine(BattleLoop());
     }
@@ -95,6 +117,10 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
 
         StartCoroutine(statusManager.DisplayScavengerDetails());
+        yield return new WaitForSeconds(.5f);
+
+        itemManager.DisplayTrashcanBox(1);
+        attackController.DisplayAttackButtons(1);
 
         firstLoop = false;
         yield return null;
@@ -108,76 +134,62 @@ public class BattleController : MonoBehaviour {
             yield return new WaitForSeconds(6.5f);
         }
 
-        if(characterQueue.Count > 0)
+        if((turnCount - 1) < 6)
         {
             if (loopDone)
             {
-                // Turn Queue
                 battleInfoManager.SetMiddleMessage("Processing Turn");
                 battleInfoManager.DisplayMiddleMessage(1);
                 yield return new WaitForSeconds(1f);
                 battleInfoManager.DisplayMiddleMessage(0);
 
-                StartCoroutine(turnQueueManager.DisplayTurnQueue());
-                yield return new WaitForSeconds(3f);
+                StartCoroutine(turnQueueManager.DisplayTurnQueue(1));
+
+                if (turnCount == 1)
+                    yield return new WaitForSeconds(2.5f);
 
                 loopDone = false;
             }
 
+            // Debug.Log("Turn: " + turnCount);
+            battleInfoManager.SetCurrentTurn(characterQueue[turnCount - 1].characterThumb, 
+                characterQueue[turnCount - 1].characterName);
+            battleInfoManager.DisplayNextTurnPanel(1);
+            yield return new WaitForSeconds(.5f);
+            battleInfoManager.DisplayNextTurnSign(1);
+            yield return new WaitForSeconds(1f);
+
+            battleInfoManager.DisplayNextTurnSign(0);
+            battleInfoManager.DisplayNextTurnPanel(0);
+
+            Debug.Log("Queue Size: " + characterQueue.Count);
             if (characterQueue[turnCount - 1] is Player)
             {
+                Debug.Log("Player's Turn");
+                
 
-            }
-
-            if (characterQueue[turnCount - 1] is Enemy)
+                // turnCount++;
+                // StartCoroutine(BattleLoop());
+            } 
+            else
             {
+                Debug.Log("Enemy's Turn");
+                
 
+                // turnCount++;
+                // StartCoroutine(BattleLoop());
             }
         }
         else
         {
+            /*
+            turnCount = 1;
             loopDone = true;
-            firstLoop = true;
-            
-            ProcessTurn();
+            StartCoroutine(turnQueueManager.DisplayTurnQueue(0));
+
+            ProcessTurn(); */
         }
 
         yield return null;
     }
-
-    /*IEnumerator SetUpBattle()
-    {
-        // Battle Start
-        battleInfoManager.DisplayStart(true);
-        yield return new WaitForSeconds(1f);
-        battleInfoManager.DisplayStart(false);
-
-        // Character Sprites
-        characterManager.ChangeSprite(players, enemies);
-        StartCoroutine(characterManager.ScavengersEntrance());
-        yield return new WaitForSeconds(2.5f);
-        StartCoroutine(characterManager.MutantEntrance());
-        yield return new WaitForSeconds(2.5f);
-
-        // Battle Info
-        battleInfoManager.DisplayBattleDetails(battleNo, nodeName);
-        yield return new WaitForSeconds(.5f);
-
-        // Turn Queue
-        battleInfoManager.DisplayTurnProcess(true);
-        yield return new WaitForSeconds(1f);
-        battleInfoManager.DisplayTurnProcess(false);
-
-        turnQueueManager.CalculateTurn(players, enemies);
-        StartCoroutine(turnQueueManager.DisplayTurnQueue());
-        yield return new WaitForSeconds(3f);
-
-        // Scavenger Status Panel
-
-        // Booster Panel
-
-        // Attack Panel
-
-        yield return null;
-    }*/
 }

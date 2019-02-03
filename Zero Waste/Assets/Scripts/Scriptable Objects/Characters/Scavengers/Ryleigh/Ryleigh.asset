@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
   m_Name: Ryleigh
   m_EditorClassIdentifier: 
-  characterPortrait: {fileID: 21300000, guid: f27b1a66898a59545847139ec73db17c, type: 3}
-  characterImage: {fileID: 21300000, guid: ba3990345ea48544eb2394c8a31b8cd0, type: 3}
-  defeatedImage: {fileID: 0}
+  characterThumb: {fileID: 21300000, guid: 5af44208b71c7cb43b94d2708573bffa, type: 3}
+  characterHalf: {fileID: 21300000, guid: 4d8e86de402ece9448cebec2da6bedf2, type: 3}
+  characterFull: {fileID: 21300000, guid: de58bf6e01c20a149b67fdfee4593494, type: 3}
   characterName: Ryleigh
   baseSpd: 3
-  currentSpd: 0
+  currentSpd: 34
   abilities: []
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
@@ -32,8 +32,8 @@ MonoBehaviour:
   defModifier: 0.6579999923706055
   spdModifier: 1.5520000457763672
   antGenModifier: 0.8019999861717224
-  currentHP: 0
-  currentAnt: 0
-  currentAtk: 0
-  currentDef: 0
-  currentAntGen: 0
+  currentHP: 44
+  currentAnt: 4
+  currentAtk: 24
+  currentDef: 16
+  currentAntGen: 19

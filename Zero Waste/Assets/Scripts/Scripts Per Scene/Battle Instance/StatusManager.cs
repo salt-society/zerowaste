@@ -12,7 +12,6 @@ public class StatusManager : MonoBehaviour {
     [Space]
     public GameObject[] scavengerName;
     public GameObject[] scavengerLvl;
-    public GameObject[] scavengerClass;
     public GameObject[] scavengerIcon;
     public GameObject[] classIcon;
     public GameObject[] scavengerHealthFills;
@@ -86,7 +85,6 @@ public class StatusManager : MonoBehaviour {
             scavengerIcon[i].GetComponent<Image>().sprite = scavengers[i].characterHalf;
             scavengerName[i].GetComponent<TextMeshProUGUI>().text = scavengers[i].characterName;
             scavengerLvl[i].GetComponent<TextMeshProUGUI>().text = "LVL. " + scavengers[i].currentLevel;
-            // scavengerClass[i].GetComponent<TextMeshProUGUI>().text = scavengers[i].characterClass.roleName;
             classIcon[i].GetComponent<Image>().sprite = scavengers[i].characterClass.roleLogo;
         }
     }
@@ -94,7 +92,6 @@ public class StatusManager : MonoBehaviour {
     IEnumerator SetScavengerHealthBar(double currentHealth, double maxHealth, int position)
     {
         double fillAmount = ComputeHealth(currentHealth, maxHealth);
-        Debug.Log(currentHealth + " / " + maxHealth + " : " + fillAmount);
 
         foreach (GameObject healthFill in scavengerHealthFills)
         {
@@ -103,7 +100,6 @@ public class StatusManager : MonoBehaviour {
 
         for (double i = 0; i <= fillAmount; i+=.05)
         {
-            Debug.Log(i);
             scavengerHealthFills[position].GetComponent<Image>().fillAmount += (float)i;
             yield return new WaitForSeconds(.2f);
         }
@@ -114,7 +110,6 @@ public class StatusManager : MonoBehaviour {
     IEnumerator SetScavengerAntidoteBar(double currentAnt, double maxAnt, int position)
     {
         double fillAmount = ComputeAntidote(currentAnt, maxAnt);
-        Debug.Log(currentAnt + " / " + maxAnt+ " : " + fillAmount);
 
         foreach (GameObject antFill in scavengerAntFills)
         {

@@ -69,21 +69,35 @@ public class TurnQueueManager : MonoBehaviour {
         characterQueue = characterQ;
     }
 
-    public IEnumerator DisplayTurnQueue()
+    public IEnumerator DisplayTurnQueue(int visibility)
     {
-        // Display turn queue box
-        turnQueue.SetActive(true);
-        yield return new WaitForSeconds(.5f);
+        bool showComponent = (visibility > 0) ? true : false;
 
-        // Display each queue cell one at a time
-        int i = 0;
-        foreach(Character character in characterQueue) 
+        if (showComponent)
         {
-            queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
-            queueIcons[i].SetActive(true);
-            yield return new WaitForSeconds(.3f);
-            i++;
+            // Display turn queue box
+            turnQueue.SetActive(showComponent);
+            yield return new WaitForSeconds(.5f);
+
+            // Display each queue cell one at a time
+            int i = 0;
+            foreach (Character character in characterQueue)
+            {
+                queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
+                queueIcons[i].SetActive(true);
+                Debug.Log(character.characterName + " : " + character.GetInstanceID());
+                i++;
+            }
         }
+        else
+        {
+            turnQueue.SetActive(showComponent);
+            foreach (GameObject queueIcon in queueIcons)
+            {
+                queueIcon.SetActive(showComponent);
+            }
+        }
+       
 
         yield return null;
     }

@@ -8,7 +8,7 @@ public class EnvironmentManager : MonoBehaviour
     [Header("Environment Components")]
     public GameObject background;
 
-    public void ChangeBackground(Sprite backgroundSprite)
+    public void SetBackground(Sprite backgroundSprite)
     {
         background.GetComponent<SpriteRenderer>().sprite = backgroundSprite;
     }

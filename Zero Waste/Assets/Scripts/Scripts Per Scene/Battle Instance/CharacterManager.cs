@@ -13,15 +13,37 @@ public class CharacterManager : MonoBehaviour {
     public StatusManager statusManager;
     public CameraManager cameraManager;
 
-    public Dictionary<string, Character[]> CloneCharacters(Player[] scavengers, Enemy[] mutants)
+    public Player[] CloneCharacters(Player[] scavengers)
     {
-        Dictionary<string, Character[]> characters = 
-            new Dictionary<string, Character[]>();
+        Player[] clonedScavengers = (Player[])scavengers.Clone();
+        return clonedScavengers;
+    }
 
-        characters.Add("Scavenger", (Player[])scavengers.Clone());
-        characters.Add("Mutants", (Enemy[])mutants.Clone());
+    public Enemy[] CloneCharacters(Enemy[] mutants)
+    {
+        Enemy[] clonedMutants = (Enemy[])mutants.Clone();
+        return clonedMutants;
+    }
 
-        return characters;
+    public Player[] InstantiateCharacters(Player[] scavengers)
+    {
+        
+        Player[] instantiatedScavengers = new Player[scavengers.Length];      
+        for (int i = 0; i < scavengers.Length; i++)
+            instantiatedScavengers[i] = Instantiate(scavengers[i]);
+
+
+        return instantiatedScavengers;
+    }
+
+    public Enemy[] InstantiateCharacters(Enemy[] mutants)
+    {
+
+        Enemy[] instantiatedMutants = new Enemy[mutants.Length];
+        for (int i = 0; i < mutants.Length; i++)
+            instantiatedMutants[i] = Instantiate(mutants[i]);
+
+        return instantiatedMutants;
     }
 
     public Player[] InitializeScavengers(Player[] scavengers)

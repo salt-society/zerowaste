@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BattleInfoManager : MonoBehaviour {
@@ -16,6 +17,10 @@ public class BattleInfoManager : MonoBehaviour {
     [Header("Pop Up Components")]
     public GameObject battleStart;
     public GameObject turnProcessSign;
+    public GameObject turnSignPanel;
+    public GameObject turnSignInnerBox;
+    public Image currentCharacter;
+    public TextMeshProUGUI turnNumber;
 
     // Shows start animation upon battle load
     public void ShowStartAnimation(int visibility)
@@ -50,4 +55,24 @@ public class BattleInfoManager : MonoBehaviour {
         bool showComponent = (visibility > 0) ? true : false;
         battleInfo.SetActive(showComponent);
     }
+
+    public void SetCurrentTurn(Sprite currentCharacter, string name)
+    {
+        this.currentCharacter.sprite = currentCharacter;
+        this.turnNumber.text = name + "'s Turn";
+    }
+
+    public void DisplayNextTurnPanel(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        turnSignPanel.SetActive(showComponent);
+    }
+
+    public void DisplayNextTurnSign(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        turnSignInnerBox.SetActive(showComponent);
+    }
+
+
 }

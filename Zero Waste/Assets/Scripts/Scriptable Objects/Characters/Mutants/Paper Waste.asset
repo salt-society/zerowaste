@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
   m_Name: Paper Waste
   m_EditorClassIdentifier: 
-  characterPortrait: {fileID: 21300000, guid: 3e5dc7b008575f04093a0ccd9479de58, type: 3}
-  characterImage: {fileID: 21300000, guid: 3e5dc7b008575f04093a0ccd9479de58, type: 3}
-  defeatedImage: {fileID: 0}
+  characterThumb: {fileID: 21300000, guid: 14632a0d6af04094e8ba3922d810e234, type: 3}
+  characterHalf: {fileID: 0}
+  characterFull: {fileID: 21300000, guid: 8daa6973a8e68b74089693f3ecf5f4e4, type: 3}
   characterName: Paper Waste
-  baseSpd: 5
-  currentSpd: 0
+  baseSpd: 4
+  currentSpd: 5
   abilities: []
   effects: []
   maxPollutionLevel: 0
   maxAtk: 0
   maxDef: 0
-  baseScrapReward: 0
+  baseScrapReward: 30
   baseEXPReward: 0
   instanceAbilities: []
   currentPollutionLevel: 0
