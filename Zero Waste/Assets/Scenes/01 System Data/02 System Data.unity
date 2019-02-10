@@ -123,8 +123,8 @@ GameObject:
   - component: {fileID: 1854166}
   - component: {fileID: 1854165}
   - component: {fileID: 1854164}
-  m_Layer: 10
-  m_Name: MainCamera
+  m_Layer: 31
+  m_Name: Main Canera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +316,6 @@ GameObject:
   - component: {fileID: 317610473}
   - component: {fileID: 317610475}
   - component: {fileID: 317610474}
-  - component: {fileID: 317610476}
   - component: {fileID: 317610477}
   m_Layer: 5
   m_Name: Loading Text
@@ -468,27 +467,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317610472}
   m_CullTransparentMesh: 0
---- !u!114 &317610476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317610472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c15fd30422823e4383c78d798aa5ed8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  messageHolder: {fileID: 317610474}
-  messages:
-    messageArray:
-    - Checking if game data exists...
-    - "You have no game data! \nCreating a new one..."
-    - Game data created!
-    - Game data exists.
-  speed: 0.05
-  delay: 0.8
 --- !u!95 &317610477
 Animator:
   serializedVersion: 3
@@ -518,9 +496,8 @@ GameObject:
   m_Component:
   - component: {fileID: 564261520}
   - component: {fileID: 564261522}
-  - component: {fileID: 564261521}
-  m_Layer: 10
-  m_Name: UICamera
+  m_Layer: 31
+  m_Name: UI Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,14 +517,6 @@ Transform:
   m_Father: {fileID: 1385308093}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &564261521
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564261519}
-  m_Enabled: 1
 --- !u!20 &564261522
 Camera:
   m_ObjectHideFlags: 0
@@ -730,7 +699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1385308093}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Cameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,9 +733,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1709622250}
   - component: {fileID: 1709622252}
-  - component: {fileID: 1709622251}
-  m_Layer: 10
-  m_Name: EffectsCamera
+  m_Layer: 31
+  m_Name: Effects Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -786,14 +754,6 @@ Transform:
   m_Father: {fileID: 1385308093}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1709622251
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709622249}
-  m_Enabled: 1
 --- !u!20 &1709622252
 Camera:
   m_ObjectHideFlags: 0

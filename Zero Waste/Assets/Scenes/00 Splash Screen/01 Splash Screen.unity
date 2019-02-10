@@ -307,7 +307,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1015809045
 GameObject:
@@ -393,7 +393,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1095870813}
   - component: {fileID: 1095870815}
-  - component: {fileID: 1095870814}
   m_Layer: 31
   m_Name: FX Camera
   m_TagString: Untagged
@@ -415,14 +414,6 @@ Transform:
   m_Father: {fileID: 1869096562}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1095870814
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1095870812}
-  m_Enabled: 0
 --- !u!20 &1095870815
 Camera:
   m_ObjectHideFlags: 0
@@ -559,7 +550,7 @@ RectTransform:
   - {fileID: 1201885846}
   - {fileID: 1286212001}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -769,7 +760,7 @@ Transform:
   - {fileID: 534669905}
   - {fileID: 1095870813}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1915336096
 GameObject:
@@ -839,6 +830,90 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915336096}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1917663044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1917663046}
+  - component: {fileID: 1917663045}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1917663045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917663044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30102d2c3562e8c4d9a9c85fbb8b7dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 8300000, guid: 8edf3969e5e7ef4478b527624f42cdeb, type: 3}
+    soundName: Button Click 1
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: bc0259a9483348c47b092659af8cfb22, type: 3}
+    soundName: Button Click 2
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 1cb0a04159d5d284eba87a0a8a1d6d2e, type: 3}
+    soundName: Rotating Button
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 15e8dae1fdfd38f4fa31e2f0679cef2b, type: 3}
+    soundName: Hazy Darkness
+    source: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: ff70777932f2dd348b0afeb014caf7df, type: 3}
+    soundName: Amulet Absorption
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+--- !u!4 &1917663046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917663044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

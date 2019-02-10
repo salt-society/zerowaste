@@ -12,6 +12,7 @@ public class TitleScreenController : MonoBehaviour
     [Header("Mask Effect")]
     public GameObject spriteMask;
     public GameObject genderPanel;
+    public GameObject[] genderImages;
     public Button[] genderButtons;
 
     [Header("Transition")]
@@ -23,6 +24,9 @@ public class TitleScreenController : MonoBehaviour
     {
         // Get reference to Data Controller
         dataController = GameObject.FindObjectOfType<DataController>();
+
+        // Play Sound
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Hazy Darkness");
     }
 
     void Update()
@@ -46,6 +50,9 @@ public class TitleScreenController : MonoBehaviour
 
     public void StartGame()
     {
+        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Hazy Darkness", 2f));
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
+
         if (dataController != null)
         {
             // If save is new, ask for player's gender
@@ -66,7 +73,7 @@ public class TitleScreenController : MonoBehaviour
 
     public void ChooseGender(int chosenGender)
     {
-        StopAllCoroutines();
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
         StartCoroutine(ChangeGender(chosenGender));
     }
 
@@ -78,6 +85,7 @@ public class TitleScreenController : MonoBehaviour
             {
                 genderButtons[1].GetComponent<Animator>().SetBool("Chosen", false);
                 genderButtons[1].GetComponent<Animator>().SetBool("Exit", true);
+                genderImages[1].GetComponent<Image>().color = Color.black;
                 yield return new WaitForSeconds(1f);
             }
 
@@ -85,6 +93,7 @@ public class TitleScreenController : MonoBehaviour
             {
                 genderButtons[0].GetComponent<Animator>().SetBool("Chosen", false);
                 genderButtons[0].GetComponent<Animator>().SetBool("Exit", true);
+                genderImages[0].GetComponent<Image>().color = Color.black;
                 yield return new WaitForSeconds(1f);
             }
         }
@@ -92,6 +101,7 @@ public class TitleScreenController : MonoBehaviour
         string gender = (chosenGender > 0) ? "Female" : "Male";
         dataController.currentSaveData.gender = gender;
         genderButtons[chosenGender].GetComponent<Animator>().SetBool("Chosen", true);
+        genderImages[chosenGender].GetComponent<Image>().color = Color.white;
 
         Debug.Log(dataController.currentSaveData.gender);
     }

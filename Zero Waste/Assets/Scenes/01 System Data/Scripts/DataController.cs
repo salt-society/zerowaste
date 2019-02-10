@@ -25,7 +25,7 @@ public class DataController : MonoBehaviour
         else if (dataControllerInstance != this)
             Destroy(this);
 
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void CreateGameData()
