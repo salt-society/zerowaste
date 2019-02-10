@@ -17,5 +17,6 @@ MonoBehaviour:
   abilityType: Offensive
   abilityRange: Single
   abilityDescription: 
-  effects: []
-  antRequirement: 0
+  effects:
+  - {fileID: 11400000, guid: cfe289795f6be254bb1f38997aaea525, type: 2}
+  antRequirement: 1

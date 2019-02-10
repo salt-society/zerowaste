@@ -42,6 +42,24 @@ public class BattleInfoManager : MonoBehaviour {
         turnProcessSign.SetActive(showComponent);
     }
 
+    public void ShowMiddleMessage(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        turnProcessSign.GetComponent<Animator>().SetBool("Target", showComponent);
+    }
+
+    public void HideMiddleMessage(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        turnProcessSign.GetComponent<Animator>().SetBool("Hide", showComponent);
+    }
+
+    public bool GetMiddleMessageState()
+    {
+        bool visible = turnProcessSign.GetComponent<Animator>().GetBool("Target");
+        return visible;
+    }
+
     // Sets battle details that can be seen on the top left
     public void SetBattleDetails(string battleNo, string nodeName)
     {

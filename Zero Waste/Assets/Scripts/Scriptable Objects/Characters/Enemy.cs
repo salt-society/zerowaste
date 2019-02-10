@@ -56,6 +56,7 @@ public class Enemy : Character {
         damage = (attacker.currentAtk + statModifier) - currentDef;
         estimatedStat = CheckMin(currentPollutionLevel - damage);
         currentPollutionLevel = estimatedStat;
+        Debug.Log("1: " + currentPollutionLevel);
     }
 
     // Call if enemy has been healed

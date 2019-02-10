@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/00 Splash Screen/01 Splash Screen.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/01 System Data/02 System Data.unity
+    guid: 4d0a6cf3687ea4245a319a22bab009ad
+  - enabled: 1
+    path: Assets/Scenes/02 Title Screen/02 Title Screen.unity
+    guid: c33358209f71cec47972b7b8afc367a6
+  - enabled: 1
+    path: Assets/Scenes/03 Cutcene/03 Cutscene.unity
+    guid: 00f7bba453b23784e864b543bd8965c6
   m_configObjects: {}

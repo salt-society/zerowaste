@@ -16,8 +16,8 @@ MonoBehaviour:
   characterHalf: {fileID: 21300000, guid: 4d8e86de402ece9448cebec2da6bedf2, type: 3}
   characterFull: {fileID: 21300000, guid: de58bf6e01c20a149b67fdfee4593494, type: 3}
   characterName: Ryleigh
-  prefab: {fileID: 0}
-  scale: {x: 0, y: 0, z: 0}
+  prefab: {fileID: 1566735176780554641, guid: f71499b25fb68124784592889522347d, type: 3}
+  scale: {x: 1, y: 1, z: 0}
   baseSpd: 5
   currentSpd: 34
   abilities:

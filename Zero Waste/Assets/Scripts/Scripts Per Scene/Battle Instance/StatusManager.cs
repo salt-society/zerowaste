@@ -111,7 +111,6 @@ public class StatusManager : MonoBehaviour {
     IEnumerator SetScavengerAntidoteBar(double currentAnt, double maxAnt, int position)
     {
         double fillAmount = ComputeAntidote(currentAnt, maxAnt);
-        Debug.Log(currentAnt + " : " + maxAnt + " : " + fillAmount);
 
         foreach (GameObject antFill in scavengerAntFills)
         {
@@ -147,44 +146,34 @@ public class StatusManager : MonoBehaviour {
         yield return new WaitForSeconds(3f);
     }
 
-    IEnumerator IncrementHealth(double heal, int position)
+    public void IncrementHealth(double heal, int position)
     {
         double additionHealth = heal / scavengerMaxHealth[position];
-        for(float i = 0; i <= additionHealth; i+=0.5f) 
-        {
-            scavengerAntFills[position].GetComponent<Image>().fillAmount += i;
-            yield return new WaitForSeconds(.2f);
-        }
+        scavengerHealthFills[position].GetComponent<Image>().fillAmount += (float)additionHealth;
     }
 
-    IEnumerator DecrementHealth(double damage, int position)
+    public void DecrementHealth(double damage, int position)
     {
         double damageTaken = damage / scavengerMaxHealth[position];
-        for (float i = (float)damageTaken; i > 0; i+=0.5f)
-        {
-            scavengerAntFills[position].GetComponent<Image>().fillAmount -= i;
-            yield return new WaitForSeconds(.2f);
-        }
+        scavengerHealthFills[position].GetComponent<Image>().fillAmount -= (float)damageTaken;
     }
 
-    IEnumerator IncrementAntidote(double charge, int position)
+    public void ShowDamage(string damagePoints, int position)
     {
-        double antidoteCharge = charge / scavengerMaxHealth[position];
-        for (float i = 0; i <= antidoteCharge; i+=0.5f)
-        {
-            scavengerAntFills[position].GetComponent<Image>().fillAmount += i;
-            yield return new WaitForSeconds(.2f);
-        }
+        damageCounters[0].GetComponent<TextMeshProUGUI>().text = damagePoints;
+        damageCounters[0].SetActive(true);
+    }
+    
+    public void IncrementAntidote(double charge, int position)
+    {
+        double antidoteCharge = charge / scavengerMaxAntidote[position];
+        scavengerAntFills[position].GetComponent<Image>().fillAmount += (float)antidoteCharge;
     }
 
-    IEnumerator DecrementAntidote(double lostAntidote, int position)
+    public void DecrementAntidote(double lostAntidote, int position)
     {
-        double antidoteUsed = lostAntidote / scavengerMaxHealth[position];
-        for (float i = (float)antidoteUsed; i > 0; i+=0.5f)
-        {
-            scavengerAntFills[position].GetComponent<Image>().fillAmount -= i;
-            yield return new WaitForSeconds(.2f);
-        }
+        double antidoteUsed = lostAntidote / scavengerMaxAntidote[position];
+        scavengerAntFills[position].GetComponent<Image>().fillAmount -= (float)antidoteUsed;
     }
 
     public void SetPollutionLevelBarCount()
@@ -204,9 +193,26 @@ public class StatusManager : MonoBehaviour {
         Vector3 screenPoint = Camera.main.WorldToScreenPoint(pollutionBarWorldPos);
 
         GameObject pollutionBarObj = Instantiate(pollutionLevelPrefab, 
-            pollutionBarPanel.transform) as GameObject;
+            pollutionBarPanel.transform);
         pollutionBarObj.transform.position = screenPoint;
-        pollutionLevels[position] = pollutionBarObj;
+        pollutionLevels[position] = pollutionBarObj.transform.GetChild(0).gameObject;
+    }
+
+    public void IncrementPollutionBar(double heal, int position)
+    {
+        double additionalHealth = heal / mutantMaxPollutionLvl[position];
+        pollutionLevels[position].GetComponent<Image>().fillAmount += (float)additionalHealth;
+    }
+
+    public void DecrementPollutionBar(double damage, int position)
+    {
+        double damageTaken = damage / mutantMaxPollutionLvl[position];
+        pollutionLevels[position].GetComponent<Image>().fillAmount -= (float)damageTaken;
+    }
+
+    public void DisplayEffects(string appliedTo, Effect effect)
+    {
+
     }
 
 }

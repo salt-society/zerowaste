@@ -23,10 +23,10 @@ MonoBehaviour:
   abilities: []
   effects: []
   maxPollutionLevel: 100
-  maxAtk: 0
-  maxDef: 0
+  maxAtk: 5
+  maxDef: 20
   baseScrapReward: 30
-  baseEXPReward: 0
+  baseEXPReward: 60
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

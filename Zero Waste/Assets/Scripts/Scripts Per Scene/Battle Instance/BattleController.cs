@@ -75,9 +75,8 @@ public class BattleController : MonoBehaviour {
         statusManager.SetCharacterCount(scavengerTeam.Length, mutantTeam.Length);
         
         environmentManager.SetBackground(backgroundSprite);
-        itemManager.SetBoosterPanelBg(backgroundSprite);
 
-        characterManager.ChangeSprite(scavengerTeam);
+        characterManager.InstantiateCharacterPrefab(scavengerTeam);
         characterManager.InstantiateCharacterPrefab(mutantTeam);
 
         battleInfoManager.SetBattleDetails(battleNo, nodeName);
@@ -94,10 +93,6 @@ public class BattleController : MonoBehaviour {
 
         characterQueue = new List<Character>();
         characterQueue = turnQueueManager.GetCharacterQueue();
-        foreach (Character character in characterQueue)
-        {
-            Debug.Log(character.characterName + " : " + character.GetInstanceID());
-        }
 
         StartCoroutine(BattleLoop());
     }
@@ -120,7 +115,7 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(.5f);
 
         statusManager.DisplayPollutionBars(1);
-        itemManager.DisplayTrashcanBox(1);
+        // itemManager.DisplayTrashcanBox(1);
         attackController.DisplayAttackButtons(1);
         attackController.EnableAttackButtons(0);
 
@@ -145,7 +140,6 @@ public class BattleController : MonoBehaviour {
                 battleInfoManager.SetMiddleMessage("Processing Turn");
                 battleInfoManager.DisplayMiddleMessage(1);
                 yield return new WaitForSeconds(1f);
-                battleInfoManager.DisplayMiddleMessage(0);
 
                 StartCoroutine(turnQueueManager.DisplayTurnQueue(1));
 
@@ -173,7 +167,6 @@ public class BattleController : MonoBehaviour {
             {
                 Debug.Log("Player's Turn");
 
-                // attackController.EnableAttackButtons(1);
                 turnQueueManager.SetCurrentCharacter(turnCount);
                 attackController.PlayerAttackSetup();
 
@@ -185,7 +178,9 @@ public class BattleController : MonoBehaviour {
             else
             {
                 Debug.Log("Enemy's Turn");
+
                 attackController.EnableAttackButtons(0);
+                turnQueueManager.SetCurrentCharacter(turnCount);
 
                 //turnCount++;
                 //yield return new WaitForSeconds(3f);

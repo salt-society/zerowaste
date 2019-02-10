@@ -90,7 +90,6 @@ public class TurnQueueManager : MonoBehaviour {
             {
                 queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
                 queueIcons[i].SetActive(true);
-                Debug.Log(character.characterName + " : " + character.GetInstanceID());
                 i++;
             }
         }
@@ -105,6 +104,18 @@ public class TurnQueueManager : MonoBehaviour {
        
 
         yield return null;
+    }
+
+    public void ShowTurnQueue(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        turnQueue.GetComponent<Animator>().SetBool("Exit", showComponent);
+    }
+
+    public void HideTurnQueue(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        turnQueue.GetComponent<Animator>().SetBool("Exit Up", showComponent);
     }
 
     public void SetCurrentCharacter(int index)

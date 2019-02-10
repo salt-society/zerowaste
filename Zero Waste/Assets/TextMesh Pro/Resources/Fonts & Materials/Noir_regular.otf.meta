@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: caf92993fde3a474d85bb260188fc95e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Noir
+  fontNames:
+  - Noir
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 401971f281d931e4aaa94e98f7e19d76, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

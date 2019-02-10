@@ -11,6 +11,9 @@ public class AttackController : MonoBehaviour
 
     [Header("Manager")]
     public TurnQueueManager turnQueueManager;
+    public CharacterManager characterManager;
+
+    private PlayerAbility chosenAbility;
 
     public void DisplayAttackButtons(int visibility)
     {
@@ -24,7 +27,6 @@ public class AttackController : MonoBehaviour
 
         foreach (Button attackButton in attackButtons)
         {
-            Debug.Log(attackButton.name);
             attackButton.enabled = showComponent;
             Image[] buttons = attackButton.GetComponentsInChildren<Image>();
 
@@ -59,6 +61,8 @@ public class AttackController : MonoBehaviour
     public void PlayerAttackSetup()
     {
         Player currentCharacter = turnQueueManager.GetCurrentCharacter() as Player;
+        GameObject currentCharacterPrefab = characterManager.GetScavengerPrefab(currentCharacter);
+        int position = characterManager.GetScavengerPosition(currentCharacter);
 
         int i = 0;
         foreach (Button attackButton in attackButtons)
@@ -69,12 +73,30 @@ public class AttackController : MonoBehaviour
             }
             else
             {
-                attackButton.GetComponent<AbilityManager>().SetUpAbility(currentCharacter.abilities[i] as PlayerAbility);
-                attackButton.GetComponent<AbilityManager>().IsAbilityAvailable(currentCharacter);
+                attackButton.GetComponent<AbilityManager>().SetCurrentCharacterPrefab(currentCharacterPrefab);
+                attackButton.GetComponent<AbilityManager>().SetUpAbility(i);
+                attackButton.GetComponent<AbilityManager>().IsAbilityAvailable();
+                attackButton.GetComponent<AbilityManager>().SetScavengerPosition(position);
             }
             
             i++;
         }
 
+    }
+
+    public void SetCurrentAbility(PlayerAbility chosenAbility)
+    {
+        if (this.chosenAbility == null)
+            this.chosenAbility = chosenAbility;
+        else if (this.chosenAbility.Equals(chosenAbility))
+            this.chosenAbility = null;
+        else
+            this.chosenAbility = chosenAbility;
+    }
+
+
+    public bool IsCurrentAttackNull()
+    {
+        return (chosenAbility == null) ? true: false;
     }
 }

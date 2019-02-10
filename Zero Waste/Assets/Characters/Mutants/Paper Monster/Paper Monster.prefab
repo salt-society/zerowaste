@@ -103,9 +103,10 @@ GameObject:
   - component: {fileID: 6360173412088857775}
   - component: {fileID: 6360173412088857777}
   - component: {fileID: 6360173412088857776}
-  - component: {fileID: 6360173412088857779}
   - component: {fileID: 6360173412088857780}
   - component: {fileID: 6360173412088857778}
+  - component: {fileID: 6360173412088857779}
+  - component: {fileID: 4401091657159962518}
   m_Layer: 10
   m_Name: Paper Monster
   m_TagString: Untagged
@@ -207,29 +208,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 4.5}
   m_EdgeRadius: 0
---- !u!114 &6360173412088857779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6360173412088857774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RootBone: {fileID: 6360173412350820978}
-  m_BoneTransforms:
-  - {fileID: 6360173412350820978}
-  - {fileID: 6360173410922208545}
-  - {fileID: 6360173412179403366}
-  - {fileID: 6360173412937785214}
-  - {fileID: 6360173411739269123}
-  - {fileID: 6360173411771596540}
-  m_Bounds:
-    m_Center: {x: -0.25433183, y: 0.0385921, z: 0}
-    m_Extent: {x: 3.215609, y: 2.2792757, z: 0}
 --- !u!50 &6360173412088857780
 Rigidbody2D:
   serializedVersion: 4
@@ -270,6 +248,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6360173412088857779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6360173412088857774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RootBone: {fileID: 6360173412350820978}
+  m_BoneTransforms:
+  - {fileID: 6360173412350820978}
+  - {fileID: 6360173410922208545}
+  - {fileID: 6360173412179403366}
+  - {fileID: 6360173412937785214}
+  - {fileID: 6360173411739269123}
+  - {fileID: 6360173411771596540}
+  m_Bounds:
+    m_Center: {x: -0.25433183, y: 0.0385921, z: 0}
+    m_Extent: {x: 3.215609, y: 2.2792757, z: 0}
+--- !u!114 &4401091657159962518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6360173412088857774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f73b71874e7d145a6df637839e6e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6360173412179403365
 GameObject:
   m_ObjectHideFlags: 0

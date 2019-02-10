@@ -16,8 +16,8 @@ MonoBehaviour:
   characterHalf: {fileID: 21300000, guid: d817021e15aaa0445aec0ab42da86731, type: 3}
   characterFull: {fileID: 21300000, guid: 554f4a7bd7acc6f449af6e660fba5105, type: 3}
   characterName: Snow
-  prefab: {fileID: 0}
-  scale: {x: 0, y: 0, z: 0}
+  prefab: {fileID: 1566735176780554641, guid: b0dd8ad1fe6f337459f0e50eb41dcfcb, type: 3}
+  scale: {x: 1, y: 1, z: 0}
   baseSpd: 1
   currentSpd: 19
   abilities: []
