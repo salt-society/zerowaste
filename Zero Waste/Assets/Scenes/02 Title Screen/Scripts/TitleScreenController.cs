@@ -18,7 +18,7 @@ public class TitleScreenController : MonoBehaviour
     [Header("Transition")]
     public GameObject fadeTransition;
 
-    private int nextScene;
+    private int nextSceneId;
 
     void Start()
     {
@@ -55,18 +55,18 @@ public class TitleScreenController : MonoBehaviour
 
         if (dataController != null)
         {
-            // If save is new, ask for player's gender
-            // If not, go to main menu
-            if (!dataController.currentSaveData.prologueFinish)
+            int currentCutscene = dataController.currentSaveData.currentCutscene;
+            string nextLevel = dataController.currentSaveData.nextLevel;
+            
+            nextSceneId = dataController.currentSaveData.NextSceneId(nextLevel);
+
+            if (nextSceneId == 3 && currentCutscene == 0)
             {
                 genderPanel.SetActive(true);
-
-                dataController.currentSaveData.currentCutscene = 0;
-                nextScene = 3;
             }
             else
             {
-                nextScene = 4;
+
             }
         }
     }
@@ -120,6 +120,6 @@ public class TitleScreenController : MonoBehaviour
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
         yield return new WaitForSeconds(2f);
 
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(nextSceneId);
     }
 }

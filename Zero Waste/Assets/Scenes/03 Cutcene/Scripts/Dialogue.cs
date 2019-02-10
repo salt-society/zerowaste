@@ -6,7 +6,7 @@ using UnityEngine;
 public class Dialogue : ScriptableObject {
 
     [Header("Unique Identifier")]
-    public int dialogueNo;
+    public int dialogueId;
 
     [Header("Details")]
     public string characterName;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Cutscene : ScriptableObject {
 
     [Header("Unique Identifier")]
-	public int cutsceneNo;
+	public int cutsceneId;
 
     [Space]
     [Header("Cutscene Details")]
@@ -14,6 +14,9 @@ public class Cutscene : ScriptableObject {
     public string title;
     public Sprite firstBackground;
     public string transition;
+
+    [Space]
+    public string nextLevel;
 
     [Space]
     [Header("Dialogue")]

@@ -5,25 +5,29 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Area", menuName = "Area")]
 public class Areas : ScriptableObject {
 
-    [Header("State of Level")]
-    public bool isAreaLocked = true;
+    [Header("Details")]
+    public Sprite sprite;
 
     [Space]
-    public string parentName;
+    public string areaName;
+    public string subtitle;
+
+    [Multiline]
+    public string info;
 
     [Space]
-    [Header("Area Details")]
-    public new string name;
-    public string description;
-    public int areaNumber;
     public Vector3 coordinates;
+
+    [Range(1f, 5f)]
+    public float zoomSpeed;
+    [Range(1f, 5f)]
+    public float moveSpeed;
 
     [Space]
     [Header("Nodes")]
-    public BattleInstance[] battles;
+    public Battle[] battles;
 
-    [Space]
-    [Header("Graphics")]
-    public Sprite continent;
+    [Header("Progess")]
+    public string nextLevel;
     
 }

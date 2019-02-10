@@ -15,6 +15,9 @@ public class DataController : MonoBehaviour
     public GameData currentGameData;
     public SaveData currentSaveData;
 
+    [Header("Cutscene")]
+    public Effect[] battleModifiers;
+
     [Space]
     public string folderName;
 

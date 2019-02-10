@@ -39,7 +39,7 @@ public class CutsceneController : MonoBehaviour {
     public TextMeshProUGUI narrationText;
     public GameObject narrationBox;
 
-    private int cutsceneNo;
+    private int cutsceneId;
     private int currentDialogueNo;
     private int skipCount;
     private int currentLine;
@@ -51,7 +51,6 @@ public class CutsceneController : MonoBehaviour {
     private bool skipDialogue;
     private bool choiceSelected;
     private Choice currentChoice;
-    private Effect[] effects;
 
     void Start()
     {
@@ -63,9 +62,9 @@ public class CutsceneController : MonoBehaviour {
     void GetCutsceneNumber()
     {
         // Get reference to Data Controller
-        //dataController = GameObject.FindObjectOfType<DataController>();
-        //cutsceneNo = dataController.currentSaveData.currentCutscene;
-        cutsceneNo = 0;
+        dataController = GameObject.FindObjectOfType<DataController>();
+        cutsceneId = dataController.currentSaveData.currentCutscene;
+        cutsceneId = 0;
     }
 
     void PrepareCutscene()
@@ -73,7 +72,7 @@ public class CutsceneController : MonoBehaviour {
         // Get cutscene data
         foreach (Cutscene cutscene in cutscenes) 
         {
-            if (cutscene.cutsceneNo == cutsceneNo)
+            if (cutscene.cutsceneId == cutsceneId)
             {
                 currentCutscene = cutscene;
                 dialogues = currentCutscene.dialogues.ToArray();
@@ -278,7 +277,7 @@ public class CutsceneController : MonoBehaviour {
         Choice[] choices = dialogues[currentDialogueNo].choices;
         choiceButtons[choiceNo].GetComponent<Image>().color = choices[choiceNo].color;
 
-        effects = choices[choiceNo].effects;
+        GameObject.FindObjectOfType<DataController>().battleModifiers = choices[choiceNo].effects;
         currentChoice = choices[choiceNo];
 
         StartCoroutine(HideChoiceBox(choices[choiceNo]));
@@ -314,6 +313,7 @@ public class CutsceneController : MonoBehaviour {
             if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 skipCount++;
+
                 // Skip to next dialogue if current doesn't have options
                 if (!dialogues[currentDialogueNo].withChoices)
                 {
@@ -348,6 +348,9 @@ public class CutsceneController : MonoBehaviour {
                         }
                         else
                         {
+                            dataController.currentSaveData.FinishCutscene(cutscenes[cutsceneId]);
+                            int nextSceneId = dataController.currentSaveData.
+                                NextSceneId(cutscenes[cutsceneId].nextLevel);
 
                         }
                     }
@@ -412,8 +415,9 @@ public class CutsceneController : MonoBehaviour {
         }
     }
 
-    IEnumerator LoadScene()
+    IEnumerator LoadScene(int nextSceneId)
     {
         yield return null;
+
     }
 }

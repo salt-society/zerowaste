@@ -19,12 +19,19 @@ public class SaveData { // holds player progress
     public string gender;
 
     [Header("Game Progress")]
-    public bool prologueFinish;
-    public bool battleTutorial;
+    public string nextLevel;
+
+    public List<Cutscene> finishedCutscenes;
+    public List<Areas> unlockedAreas;
+    public List<Battle> unlockedTerreBattles;
+    public List<Battle> unlockedMareBattles;
+    public List<Battle> unlockedAtmosBattles;
 
     public int currentCutscene;
     public int currentArea;
-    public int currentNode;
+    public int currentTerreBattles;
+    public int currentMareBattles;
+    public int currentAtmosBattles;
     
     public void InitializeSaveData()
     {
@@ -33,7 +40,6 @@ public class SaveData { // holds player progress
 
         launchDates = new List<DateTime>();
         launchDates.Add(dateCreated);
-
         playCount++;
 
         SetDefault();
@@ -41,11 +47,84 @@ public class SaveData { // holds player progress
 
     public void SetDefault()
     {
-        prologueFinish = false;
-        battleTutorial = false;
+        nextLevel = "Cutscene";
 
-        currentCutscene = 1;
+        currentCutscene = 0;
         currentArea = 0;
-        currentNode = 0;
+        currentTerreBattles = 0;
+        currentMareBattles = 0;
+        currentAtmosBattles = 0;
+    }
+
+    public int NextSceneId(string nextLevel)
+    {
+        switch (nextLevel)
+        {
+            case "Splash Screen":
+                {
+                    return 0;
+                }
+            case "Loading Data":
+                {
+                    return 1;
+                }
+            case "Title Screen":
+                {
+                    return 2;
+                }
+            case "Cutscene":
+                {
+                    return 3;
+                }
+            case "ZWA":
+                {
+                    return 4;
+                }
+            case "Map":
+                {
+                    return 5;
+                }
+            case "Battle":
+                {
+                    return 6;
+                }
+            default:
+                {
+                    return -1;
+                }
+        }
+    }
+
+    public void FinishCutscene(Cutscene cutscene)
+    {
+        finishedCutscenes.Add(cutscene);
+        currentCutscene = finishedCutscenes.Count;
+    }
+
+    public void AddArea(Areas area)
+    {
+        unlockedAreas.Add(area);
+        currentArea = unlockedAreas.Count;
+    }
+
+    public void AddBattle(Battle battle, string areaName)
+    {
+        if (areaName.Equals("Terre"))
+        {
+            unlockedTerreBattles.Add(battle);
+            currentTerreBattles = unlockedTerreBattles.Count;
+        }
+
+        if (areaName.Equals("Mare"))
+        {
+            unlockedMareBattles.Add(battle);
+            currentMareBattles = unlockedMareBattles.Count;
+        }
+
+        if (areaName.Equals("Atmos"))
+        {
+            unlockedAtmosBattles.Add(battle);
+            currentAtmosBattles = unlockedAtmosBattles.Count;
+        }
     }
 }
