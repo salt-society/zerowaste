@@ -12,6 +12,12 @@ public class Battle : ScriptableObject {
     public string battleId;
     public string battleName;
     public string info;
+    public Color threatLevel;
+
+    [Space]
+    public bool isCutscene;
+    public bool cutsceneAtStart;
+    public bool cutsceneAtEnd;
 
     [Space]
     public Areas area;

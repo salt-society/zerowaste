@@ -27,11 +27,15 @@ public class SaveData { // holds player progress
     public List<Battle> unlockedMareBattles;
     public List<Battle> unlockedAtmosBattles;
 
+    public Dictionary<Battle, bool> terreBattles;
+    public Dictionary<Battle, bool> mareBattles;
+    public Dictionary<Battle, bool> atmosBattles;
+
     public int currentCutscene;
     public int currentArea;
-    public int currentTerreBattles;
-    public int currentMareBattles;
-    public int currentAtmosBattles;
+    public int currentTerre;
+    public int currentMare;
+    public int currentAtmos;
     
     public void InitializeSaveData()
     {
@@ -49,11 +53,16 @@ public class SaveData { // holds player progress
     {
         nextLevel = "Cutscene";
 
+        terreBattles = new Dictionary<Battle, bool>();
+        mareBattles = new Dictionary<Battle, bool>();
+        atmosBattles = new Dictionary<Battle, bool>();
+
         currentCutscene = 0;
         currentArea = 0;
-        currentTerreBattles = 0;
-        currentMareBattles = 0;
-        currentAtmosBattles = 0;
+
+        currentTerre = 0;
+        currentMare = 0;
+        currentAtmos = 0;
     }
 
     public int NextSceneId(string nextLevel)
@@ -111,20 +120,38 @@ public class SaveData { // holds player progress
     {
         if (areaName.Equals("Terre"))
         {
-            unlockedTerreBattles.Add(battle);
-            currentTerreBattles = unlockedTerreBattles.Count;
+            terreBattles.Add(battle, false);
+            currentTerre = terreBattles.Count - 1;
         }
 
         if (areaName.Equals("Mare"))
         {
-            unlockedMareBattles.Add(battle);
-            currentMareBattles = unlockedMareBattles.Count;
+            mareBattles.Add(battle, false);
+            currentMare = mareBattles.Count - 1;
         }
 
         if (areaName.Equals("Atmos"))
         {
-            unlockedAtmosBattles.Add(battle);
-            currentAtmosBattles = unlockedAtmosBattles.Count;
+            atmosBattles.Add(battle, false);
+            currentAtmos = atmosBattles.Count - 1;
+        }
+    }
+
+    public void FinishBattle(Battle battle, string areaName, bool status)
+    {
+        if (areaName.Equals("Terre"))
+        {
+            terreBattles[battle] = status;
+        }
+
+        if (areaName.Equals("Mare"))
+        {
+            mareBattles[battle] = status;
+        }
+
+        if (areaName.Equals("Atmos"))
+        {
+            atmosBattles[battle] = status;
         }
     }
 }
