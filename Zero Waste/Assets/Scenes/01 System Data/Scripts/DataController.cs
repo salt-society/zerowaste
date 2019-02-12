@@ -8,8 +8,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 [System.Serializable]
 public class DataController : MonoBehaviour
 {
-    [Header("Data Communication")]
-    public static DataController dataControllerInstance;
+    [Header("Data Controller")]
+    public static DataController instance;
 
     [Header("Game Data")]
     public GameData currentGameData;
@@ -23,9 +23,9 @@ public class DataController : MonoBehaviour
 
     void Awake()
     {
-        if (dataControllerInstance == null)
-            dataControllerInstance = this;
-        else if (dataControllerInstance != this)
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
             Destroy(this);
 
         DontDestroyOnLoad(gameObject);
@@ -75,7 +75,7 @@ public class DataController : MonoBehaviour
         return File.Exists(Application.persistentDataPath + "/" + folderName + "/ZeroWaste.Game");
     }
 
-    public void SaveGameDate()
+    public void SaveGameData()
     {
         string path = Application.persistentDataPath + "/" + folderName;
 
@@ -108,7 +108,7 @@ public class DataController : MonoBehaviour
                 binaryFormatter.Serialize(fileStream, newSaveData);
                 fileStream.Close();
 
-                SaveGameDate();
+                SaveGameData();
             }
         }
     }

@@ -9,6 +9,7 @@ public class Areas : ScriptableObject {
     public Sprite sprite;
 
     [Space]
+    public int areaId;
     public string areaName;
     public string subtitle;
 
@@ -17,16 +18,21 @@ public class Areas : ScriptableObject {
 
     [Space]
     public Vector3 coordinates;
+    public float zoomSize;
 
-    [Range(1f, 5f)]
+    [Range(1f, 100f)]
     public float zoomSpeed;
-    [Range(1f, 5f)]
+    [Range(1f, 100f)]
     public float moveSpeed;
 
     [Space]
     [Header("Nodes")]
-    public Battle[] battles;
+    public int maxNodes;
 
+    [Space]
+    public List<Battle> battles;
+    public List<Vector3> positions;
+    
     [Header("Progess")]
     public string nextLevel;
     

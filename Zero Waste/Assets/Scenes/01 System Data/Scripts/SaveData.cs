@@ -23,19 +23,22 @@ public class SaveData { // holds player progress
 
     public List<Cutscene> finishedCutscenes;
     public List<Areas> unlockedAreas;
-    public List<Battle> unlockedTerreBattles;
-    public List<Battle> unlockedMareBattles;
-    public List<Battle> unlockedAtmosBattles;
 
     public Dictionary<Battle, bool> terreBattles;
     public Dictionary<Battle, bool> mareBattles;
     public Dictionary<Battle, bool> atmosBattles;
+    public Dictionary<Battle, bool> unlockedBattles;
 
     public int currentCutscene;
     public int currentArea;
     public int currentTerre;
     public int currentMare;
     public int currentAtmos;
+    public int currentBattleId;
+
+    [Header("Character Roster")]
+    public List<Player> scavengerRoster;
+    public List<Enemy> wasteRoster;
     
     public void InitializeSaveData()
     {
@@ -63,6 +66,8 @@ public class SaveData { // holds player progress
         currentTerre = 0;
         currentMare = 0;
         currentAtmos = 0;
+
+        currentBattleId = 0;
     }
 
     public int NextSceneId(string nextLevel)
@@ -122,19 +127,28 @@ public class SaveData { // holds player progress
         {
             terreBattles.Add(battle, false);
             currentTerre = terreBattles.Count - 1;
+            currentBattleId = unlockedBattles.Count - 1;
         }
 
         if (areaName.Equals("Mare"))
         {
             mareBattles.Add(battle, false);
             currentMare = mareBattles.Count - 1;
+            currentBattleId = unlockedBattles.Count - 1;
         }
 
         if (areaName.Equals("Atmos"))
         {
             atmosBattles.Add(battle, false);
             currentAtmos = atmosBattles.Count - 1;
+            currentBattleId = unlockedBattles.Count - 1;
         }
+    }
+
+    public void AddBattle(Battle battle)
+    {
+        unlockedBattles.Add(battle, false);
+        currentBattleId = unlockedBattles.Count - 1;
     }
 
     public void FinishBattle(Battle battle, string areaName, bool status)
@@ -151,7 +165,12 @@ public class SaveData { // holds player progress
 
         if (areaName.Equals("Atmos"))
         {
-            atmosBattles[battle] = status;
+            atmosBattles[battle] = status; 
         }
+    }
+
+    public void FinishBattle(Battle battle, bool status)
+    {
+        unlockedBattles[battle] = status;
     }
 }

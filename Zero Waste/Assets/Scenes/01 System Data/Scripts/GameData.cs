@@ -22,12 +22,9 @@ public class GameData
     public int maxNoOfSaveFiles;
     public int currentNoOfSaves;
 
-    [Header("Scene Indentifier")]
-    public int loading;
-    public int title;
-    public int cutscene;
-    public int world;
-    public int battle;
+    [Header("Character Roster")]
+    public List<Player> scavengerRoster;
+    public List<Enemy> wasteRoster;
 
     public void InitializeGameData()
     {
@@ -38,11 +35,44 @@ public class GameData
         maxNoOfSaveFiles = 3;
         currentNoOfSaves = 0;
         saves = new List<SaveData>();
+    }
 
-        loading = 1;
-        title = 2;
-        cutscene = 3;
-        world = 4;
-        battle = 5;
+    public int NextSceneId(string nextLevel)
+    {
+        switch (nextLevel)
+        {
+            case "Splash Screen":
+                {
+                    return 0;
+                }
+            case "Loading Data":
+                {
+                    return 1;
+                }
+            case "Title Screen":
+                {
+                    return 2;
+                }
+            case "Cutscene":
+                {
+                    return 3;
+                }
+            case "ZWA":
+                {
+                    return 4;
+                }
+            case "Map":
+                {
+                    return 5;
+                }
+            case "Battle":
+                {
+                    return 6;
+                }
+            default:
+                {
+                    return -1;
+                }
+        }
     }
 }

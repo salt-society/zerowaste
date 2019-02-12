@@ -13,16 +13,25 @@ MonoBehaviour:
   m_Name: Terre
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: b30478fbe610ba841a6f166826ecdd10, type: 3}
+  areaId: 0
   areaName: Terre
   subtitle: Land of Filth
   info: 
-  coordinates: {x: 48, y: -196, z: 0}
-  zoomSpeed: 2
-  moveSpeed: 2
+  coordinates: {x: 28, y: -68, z: -10}
+  zoomSize: 100
+  zoomSpeed: 100
+  moveSpeed: 100
+  maxNodes: 5
   battles:
   - {fileID: 11400000, guid: 556b51b5c0972ba4d96bb9ba0660ca93, type: 2}
   - {fileID: 11400000, guid: d13b18da553703643982135fbcc1a08c, type: 2}
   - {fileID: 11400000, guid: 2ab804b2c7ad06a478d83893a813fa4c, type: 2}
   - {fileID: 11400000, guid: fe5533bcb6256974b9f73382c7c54ca1, type: 2}
   - {fileID: 11400000, guid: 4ae2c3b454812d24b8bc13037aeb3309, type: 2}
+  positions:
+  - {x: -6, y: -1.21, z: 0}
+  - {x: -2.5, y: 2.25, z: 0}
+  - {x: 1.21, y: -2.92, z: 0}
+  - {x: 1.33, y: 1.46, z: 0}
+  - {x: 4.9, y: 4.57, z: 0}
   nextLevel: 

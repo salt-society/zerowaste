@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Terre 05
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  battleId: 5
-  battleName: 
+  battleId: 4
+  battleName: Terre 5
   info: 
   threatLevel: {r: 0, g: 0, b: 0, a: 0}
+  hasPath: 0
+  pathPosition: {x: 0, y: 0, z: 0}
+  pathRotation: {x: 0, y: 0, z: 0}
+  pathScale: {x: 0, y: 0, z: 0}
   isCutscene: 0
   cutsceneAtStart: 0
   cutsceneAtEnd: 0

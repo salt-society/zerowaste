@@ -9,10 +9,16 @@ public class Battle : ScriptableObject {
     public Sprite nodeIcon;
 
     [Space]
-    public string battleId;
+    public int battleId;
     public string battleName;
     public string info;
     public Color threatLevel;
+
+    [Space]
+    public bool hasPath;
+    public Vector3 pathPosition;
+    public Vector3 pathRotation;
+    public Vector3 pathScale;
 
     [Space]
     public bool isCutscene;

@@ -63,7 +63,7 @@ public class CutsceneController : MonoBehaviour {
     {
         // Get reference to Data Controller
         dataController = GameObject.FindObjectOfType<DataController>();
-        cutsceneId = dataController.currentSaveData.currentCutscene;
+        // cutsceneId = dataController.currentSaveData.currentCutscene;
         cutsceneId = 0;
     }
 

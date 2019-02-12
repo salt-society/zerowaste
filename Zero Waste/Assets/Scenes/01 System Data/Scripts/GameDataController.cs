@@ -11,6 +11,10 @@ public class GameDataController : MonoBehaviour
     [Header("Transition Components")]
     public GameObject fadeTransition;
 
+    [Header("Character Roster")]
+    public List<Player> scavengerRoster;
+    public List<Enemy> wasteRoster;
+
     void Start()
     {
         // Get reference to Data Controller
@@ -32,6 +36,11 @@ public class GameDataController : MonoBehaviour
             {
                 dataController.CreateGameData();
 
+                // Add roster
+                dataController.currentGameData.scavengerRoster = scavengerRoster;
+                dataController.currentGameData.wasteRoster = wasteRoster;
+                dataController.SaveGameData();
+
                 // Then create a save file for player
                 dataController.NewSaveData();
             }
@@ -48,7 +57,7 @@ public class GameDataController : MonoBehaviour
         //fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
 
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene(dataController.currentGameData.title);
+        SceneManager.LoadScene(dataController.currentGameData.NextSceneId("Title Screen"));
     }
 
 }
