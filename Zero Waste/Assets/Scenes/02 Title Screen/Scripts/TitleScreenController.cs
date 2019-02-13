@@ -31,14 +31,14 @@ public class TitleScreenController : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchCount > 0)
+        /*if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             if (TouchPhase.Moved == touch.phase)
             {
                 MoveMask(touch.position);
             }
-        }
+        }*/
     }
 
     void MoveMask(Vector2 touchPosition)
@@ -58,7 +58,7 @@ public class TitleScreenController : MonoBehaviour
             int currentCutscene = dataController.currentSaveData.currentCutscene;
             string nextLevel = dataController.currentSaveData.nextLevel;
             
-            nextSceneId = dataController.currentSaveData.NextSceneId(nextLevel);
+            nextSceneId = dataController.currentGameData.NextSceneId(nextLevel);
 
             if (nextSceneId == 3 && currentCutscene == 0)
             {
@@ -66,7 +66,7 @@ public class TitleScreenController : MonoBehaviour
             }
             else
             {
-
+                genderPanel.SetActive(true);
             }
         }
     }
@@ -86,7 +86,7 @@ public class TitleScreenController : MonoBehaviour
                 genderButtons[1].GetComponent<Animator>().SetBool("Chosen", false);
                 genderButtons[1].GetComponent<Animator>().SetBool("Exit", true);
                 genderImages[1].GetComponent<Image>().color = Color.black;
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
             }
 
             if (chosenGender == 1)
@@ -94,16 +94,37 @@ public class TitleScreenController : MonoBehaviour
                 genderButtons[0].GetComponent<Animator>().SetBool("Chosen", false);
                 genderButtons[0].GetComponent<Animator>().SetBool("Exit", true);
                 genderImages[0].GetComponent<Image>().color = Color.black;
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
         string gender = (chosenGender > 0) ? "Female" : "Male";
         dataController.currentSaveData.gender = gender;
+        AddScavenger(gender);
+
         genderButtons[chosenGender].GetComponent<Animator>().SetBool("Chosen", true);
         genderImages[chosenGender].GetComponent<Image>().color = Color.white;
+    }
 
-        Debug.Log(dataController.currentSaveData.gender);
+    private void AddScavenger(string gender)
+    {
+        if (gender.Equals("Female"))
+        {
+            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[0].name);
+            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[3].name);
+
+            dataController.SaveScavenger(dataController.scavengerRoster[0]);
+            dataController.SaveScavenger(dataController.scavengerRoster[3]);
+        }
+
+        if (gender.Equals("Male"))
+        {
+            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[1].name);
+            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[2].name);
+
+            dataController.SaveScavenger(dataController.scavengerRoster[1]);
+            dataController.SaveScavenger(dataController.scavengerRoster[2]);
+        }
     }
 
     public void ContinueGame()

@@ -364,11 +364,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1016071241}
-  - {fileID: 889916868}
   - {fileID: 803239094}
   - {fileID: 428133272}
   - {fileID: 763438559}
   - {fileID: 1705763276}
+  - {fileID: 889916868}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -605,7 +605,7 @@ RectTransform:
   m_Children:
   - {fileID: 1841415522}
   m_Father: {fileID: 355450082}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1238,7 +1238,7 @@ RectTransform:
   - {fileID: 492665608}
   - {fileID: 1015885510}
   m_Father: {fileID: 355450082}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1358,18 +1358,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: cHAPTER 1
+  m_text: Chapter 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a07a45117119434396d347434f034ca, type: 2}
-  m_sharedMaterial: {fileID: 21217762672264400, guid: 2a07a45117119434396d347434f034ca,
+  m_fontAsset: {fileID: 11400000, guid: d4e988e86563abc458e76dfa187cf1cd, type: 2}
+  m_sharedMaterial: {fileID: 21787219898366996, guid: d4e988e86563abc458e76dfa187cf1cd,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1492,7 +1492,7 @@ RectTransform:
   m_Children:
   - {fileID: 2019160726}
   m_Father: {fileID: 355450082}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1525,7 +1525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &889916868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1540,11 +1540,11 @@ RectTransform:
   - {fileID: 778969666}
   - {fileID: 1191435780}
   m_Father: {fileID: 355450082}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015258789, y: 620}
+  m_AnchoredPosition: {x: 0.000015258789, y: -1}
   m_SizeDelta: {x: 745.2, y: 375.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889916869
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1594,7 +1594,7 @@ Animator:
   m_GameObject: {fileID: 889916867}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 42eccd8ca73c984459b14869ee016c1e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1789,7 +1789,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b9488ed09e7432b42b2581a8d033b985, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6246f5100bcf5f49bf1dc68edfb9d3b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1840,7 +1840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -9.021606, y: -37.8}
+  m_AnchoredPosition: {x: -9.021606, y: -52}
   m_SizeDelta: {x: -78.3, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1191435781
@@ -1865,16 +1865,16 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Title of Chapter
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ab3244bdd1e5b8540bbfa6837425a040, type: 2}
-  m_sharedMaterial: {fileID: 21415760006888344, guid: ab3244bdd1e5b8540bbfa6837425a040,
+  m_fontAsset: {fileID: 11400000, guid: 4da6dcd8729553547ab885bef702de91, type: 2}
+  m_sharedMaterial: {fileID: 21295118186959122, guid: 4da6dcd8729553547ab885bef702de91,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2032,7 +2032,7 @@ RectTransform:
   m_LocalScale: {x: 0.9999596, y: 0.9999596, z: 0.9999596}
   m_Children: []
   m_Father: {fileID: 355450082}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2161,6 +2161,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6771352850fa1e94d80b118840e01193, type: 2}
   backgroundManager: {fileID: 1705763280}
   dialogueManager: {fileID: 572293419}
+  cutsceneTitle: {fileID: 889916867}
   characterName: {fileID: 388719654}
   dialogueText: {fileID: 572293416}
   dialogueBox: {fileID: 2019160725}

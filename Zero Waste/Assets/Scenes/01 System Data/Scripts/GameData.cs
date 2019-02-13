@@ -22,10 +22,6 @@ public class GameData
     public int maxNoOfSaveFiles;
     public int currentNoOfSaves;
 
-    [Header("Character Roster")]
-    public List<Player> scavengerRoster;
-    public List<Enemy> wasteRoster;
-
     public void InitializeGameData()
     {
         dateOfFirstPlay = DateTime.Now;

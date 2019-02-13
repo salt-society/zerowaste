@@ -15,18 +15,12 @@ public class Battle : ScriptableObject {
     public Color threatLevel;
 
     [Space]
-    public bool hasPath;
-    public Vector3 pathPosition;
-    public Vector3 pathRotation;
-    public Vector3 pathScale;
-
-    [Space]
     public bool isCutscene;
     public bool cutsceneAtStart;
     public bool cutsceneAtEnd;
 
     [Space]
-    public Areas area;
+    public Node node;
 
     [Header("Modifier")]
     public string targetParty;

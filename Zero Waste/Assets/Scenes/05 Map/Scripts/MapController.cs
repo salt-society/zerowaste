@@ -20,6 +20,7 @@ public class MapController : MonoBehaviour
     public Button zoomOutButton;
     public Button exploreButton;
     public GameObject nodeDetails;
+    public GameObject levelList;
     public GameObject teamSelect;
     public GameObject scavengerRoster;
     public GameObject boosterRoster;
@@ -41,7 +42,7 @@ public class MapController : MonoBehaviour
     public List<GameObject> nodeParents;
 
     private int currentAreaId;
-    private int currentBattleId;
+    private int currentNodeId;
 
     private bool canSelectMap;
     private bool focusArea;
@@ -57,6 +58,7 @@ public class MapController : MonoBehaviour
     private string currentSelectedMap;
 
     private GameObject currentSelectedNode;
+    private GameObject currentSelectedBattle;
     
     void Start()
     {
@@ -64,7 +66,7 @@ public class MapController : MonoBehaviour
         // 0 indicates tutorial/start game
         SetDefaultValues();
 
-        AssignBattleData();
+        AssignNodeData();
         UnlockMaps();
     }
 
@@ -77,40 +79,40 @@ public class MapController : MonoBehaviour
         zoomOut = false;
 
         currentAreaId = 0;
-        currentBattleId = 4;
+        currentNodeId = 2;
     }
 
-    void AssignBattleData()
+    void AssignNodeData()
     {
         int i = 0;
         foreach (Areas area in areaData)
         {
             GameObject parent = nodeParents[area.areaId];
-            List<Battle> battles = area.battles;
+            List<Node> nodes = area.nodes;
 
-            if (battles.Count > 0)
+            if (nodes.Count > 0)
             {
-                foreach (Battle battle in battles)
+                foreach (Node node in nodes)
                 {
-                    GameObject node = Instantiate(nodePrefab, parent.transform);
-                    node.transform.localPosition = area.positions[i];
+                    GameObject nodeObj = Instantiate(nodePrefab, parent.transform);
+                    nodeObj.transform.localPosition = area.positions[i];
 
-                    if (battle.hasPath)
+                    if (node.hasPath)
                     {
-                        GameObject path = Instantiate(pathPrefab, node.transform);
-                        path.transform.localScale = battle.pathScale;
-                        path.transform.localPosition = battle.pathPosition;
-                        path.transform.Rotate(battle.pathRotation);
+                        GameObject path = Instantiate(pathPrefab, nodeObj.transform);
+                        path.transform.localScale = node.pathScale;
+                        path.transform.localPosition = node.pathPosition;
+                        path.transform.Rotate(node.pathRotation);
 
                         path.SetActive(false);
                     }
-                    
-                    node.SetActive(false);
-                    nodes.Add(node);
 
-                    nodes[i].GetComponent<NodeManager>().SetBattleData(Instantiate(battle), node);
+                    nodeObj.SetActive(false);
+                    this.nodes.Add(nodeObj);
+
+                    this.nodes[i].GetComponent<NodeManager>().SetNodeData(Instantiate(node), nodeObj);
                     i++;
-                }  
+                }
             }
             else
             {
@@ -152,25 +154,26 @@ public class MapController : MonoBehaviour
         {
             if (area.areaId <= currentAreaId)
             {
-                foreach (Battle battle in area.battles)
+                foreach (Node node in area.nodes)
                 {
-                    if (battle.battleId <= currentBattleId)
+                    if (node.nodeId <= currentNodeId)
                     {
-                        nodes[battle.battleId].SetActive(true);
+                        nodes[node.nodeId].SetActive(true);
 
-                        if (battle.hasPath && (battle.battleId < currentBattleId))
+                        if (node.hasPath && (node.nodeId < currentNodeId))
                         {
-                            Transform pathTransform = nodes[battle.battleId].transform.GetChild(1);
+                            Transform pathTransform = nodes[node.nodeId].transform.GetChild(1);
                             GameObject path = pathTransform.gameObject;
                             path.SetActive(true);
                         }
 
-                        if (battle.battleId == currentBattleId)
-                            PointCurrentNode(battle.battleId);
+                        if (node.nodeId == currentNodeId)
+                            PointCurrentNode(node.nodeId);
                     }
                 }
 
                 nodeParents[area.areaId].SetActive(true);
+                Debug.Log("Unlocked Nodes");
             }
         }
     }
@@ -181,21 +184,21 @@ public class MapController : MonoBehaviour
         {
             if (area.areaId <= currentAreaId)
             {
-                foreach (Battle battle in area.battles)
+                foreach (Node node in area.nodes)
                 {
-                    if (battle.battleId <= currentBattleId)
+                    if (node.nodeId <= currentNodeId)
                     {
-                        nodes[battle.battleId].SetActive(false);
+                        nodes[node.nodeId].SetActive(false);
 
-                        if (battle.hasPath && (battle.battleId < currentBattleId))
+                        if (node.hasPath && (node.nodeId < currentNodeId))
                         {
-                            Transform pathTransform = nodes[battle.battleId].transform.GetChild(1);
+                            Transform pathTransform = nodes[node.nodeId].transform.GetChild(1);
                             GameObject path = pathTransform.gameObject;
                             path.SetActive(false);
                         }
 
-                        if (battle.battleId == currentBattleId)
-                            PointCurrentNode(battle.battleId);
+                        if (node.nodeId == currentNodeId)
+                            PointCurrentNode(node.nodeId);
                     }
                 }
 
@@ -204,42 +207,51 @@ public class MapController : MonoBehaviour
         }
     }
 
-    public void PointCurrentNode(int battleId)
+    public void PointCurrentNode(int nodeId)
     {
-        Transform pointerTransform = nodes[battleId].transform.GetChild(0);
+        Transform pointerTransform = nodes[nodeId].transform.GetChild(0);
         pointerTransform.gameObject.SetActive(true);
     }
 
-    public void RemovePointer(int battleId)
+    public void RemovePointer(int nodeId)
     {
-        Transform pointerTransform = nodes[battleId].transform.GetChild(0);
+        Transform pointerTransform = nodes[nodeId].transform.GetChild(0);
         pointerTransform.gameObject.SetActive(false);
     }
 
-    IEnumerator UnlockNodeWithAnimation(Battle battle)
+    public void RemoveAllPointers()
     {
-        if (battle.battleId <= currentBattleId)
+        for (int i = 0; i < nodes.Count; i++)
         {
-            if(battle.battleId != 0) 
+            Transform pointerTransform = nodes[i].transform.GetChild(0);
+            pointerTransform.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator UnlockNodeWithAnimation(Node node)
+    {
+        if (node.nodeId <= currentNodeId)
+        {
+            if (node.nodeId != 0)
             {
-                Battle previousBattle = areaData[currentAreaId].battles[battle.battleId - 1];
-                if (previousBattle.hasPath)
+                Node previousNode = areaData[currentAreaId].nodes[node.nodeId - 1];
+                if (previousNode.hasPath)
                 {
-                    Transform pathTransform = nodes[previousBattle.battleId].transform.GetChild(1);
+                    Transform pathTransform = nodes[previousNode.nodeId].transform.GetChild(1);
                     GameObject path = pathTransform.gameObject;
                     path.SetActive(true);
 
-                    RemovePointer(previousBattle.battleId);
+                    RemovePointer(previousNode.nodeId);
                 }
 
                 yield return new WaitForSeconds(.5f);
             }
-            
-            nodes[battle.battleId].SetActive(true);
 
-            if (battle.battleId == currentBattleId)
-                PointCurrentNode(battle.battleId);
-                
+            nodes[node.nodeId].SetActive(true);
+
+            if (node.nodeId == currentNodeId)
+                PointCurrentNode(node.nodeId);
+
             yield return null;
         }
     }
@@ -311,8 +323,6 @@ public class MapController : MonoBehaviour
                         
                         mainCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
                         fxCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-
-                        Debug.Log("X greater than 0");
                     }
                     else
                     {
@@ -329,8 +339,6 @@ public class MapController : MonoBehaviour
 
                         mainCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
                         fxCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-
-                        Debug.Log("X lesser than 0");
                     }
                     else
                     {
@@ -476,9 +484,9 @@ public class MapController : MonoBehaviour
 
     IEnumerator ZoomOutAnimation()
     {
-        foreach (GameObject node in nodes)
-            StartCoroutine(node.GetComponent<NodeManager>().HideNode());
-
+        for (int i = 0; i <= currentNodeId; i++)
+            StartCoroutine(nodes[i].GetComponent<NodeManager>().HideNode());   
+            
         yield return new WaitForSeconds(1f);
 
         camDefaultPosition = mainCamera.transform.position;
@@ -488,6 +496,9 @@ public class MapController : MonoBehaviour
         focusArea = true;
         move = true;
         zoomOut = true;
+
+        yield return new WaitForSeconds(1f);
+        areaNames[currentSelectMapData.areaId].SetActive(true);
     }
 
     private void ShowFocusedAreaContent()
@@ -507,9 +518,10 @@ public class MapController : MonoBehaviour
         {
             node.GetComponent<NodeManager>().SetMapController(this);
             node.GetComponent<NodeManager>().AllowNodeSelection(1);
-            node.GetComponent<NodeManager>().SetPreviousBattleData(currentSelectMapData.battles[currentBattleId], nodes[currentBattleId]);
+            node.GetComponent<NodeManager>().SetPreviousBattleData(currentSelectMapData.nodes[currentNodeId], nodes[currentNodeId]);
             node.GetComponent<NodeManager>().SendAreaNameComponents(focusedAreaName, focusedSubname);
             node.GetComponent<NodeManager>().SendNodeDetailComponents(nodeDetails);
+            node.GetComponent<NodeManager>().SendLevelListComponents(levelList);
         }
             
     }
@@ -531,10 +543,25 @@ public class MapController : MonoBehaviour
         this.currentSelectedNode = currentSelectedNode;
     }
 
+    public void SetCurrentSelectedBattle(GameObject currentSelectedBattle)
+    {
+        this.currentSelectedBattle = currentSelectedBattle;
+    }
+
+    public void EnableNodeColliders(bool enabled)
+    {
+        foreach (Node node in currentSelectMapData.nodes)
+            nodes[node.nodeId].GetComponent<BoxCollider2D>().enabled = enabled;
+    }
+
+    public void HideListOfLevels()
+    {
+        StartCoroutine(currentSelectedNode.GetComponent<NodeManager>().HideListOfLevels());
+    }
+
     public void RetreatFromNode()
     {
-        nodeDetails.GetComponent<Animator>().SetBool("Exit", true);
-        StartCoroutine(currentSelectedNode.GetComponent<NodeManager>().HideNodeDetails());
+        StartCoroutine(currentSelectedBattle.GetComponent<LevelManager>().HideBattleDetails());
     }
 
     public void HuntNode()
@@ -545,8 +572,14 @@ public class MapController : MonoBehaviour
     IEnumerator ShowTeamSelect()
     {
         RetreatFromNode();
+        HideListOfLevels();
+
         yield return new WaitForSeconds(2f);
+
         teamSelect.SetActive(true);
+        EnableNodeColliders(false);
+
+        Debug.Log(currentSelectedBattle.GetComponent<LevelManager>().GetBattleData().battleName);
     }
 
     public void CancelTeamSelection()
@@ -556,6 +589,8 @@ public class MapController : MonoBehaviour
 
     IEnumerator HideTeamSelect()
     {
+        EnableNodeColliders(true);
+
         teamSelect.GetComponent<Animator>().SetBool("Exit", true);
         yield return new WaitForSeconds(2f);
         teamSelect.GetComponent<Animator>().SetBool("Exit", false);

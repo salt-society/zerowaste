@@ -13,6 +13,9 @@ public class Dialogue : ScriptableObject {
     public Sprite characterSprite;
 
     [Space]
+    public bool isLive2D;
+
+    [Space]
     [TextArea(1, 10)]
     public string content;
 

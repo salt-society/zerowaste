@@ -6,17 +6,20 @@ using TMPro;
 
 public class NodeManager : MonoBehaviour
 {
-    private GameObject node, previousNode;
     public Battle battle;
+    public Node nodeData;
+
     private Battle previousBattle;
+    private Node previousNodeData;
+
+    private GameObject node, previousNode;
     private MapController mapController;
 
-    [Space]
     private TextMeshProUGUI focusedAreaName;
     private TextMeshProUGUI focusedSubname;
 
-    [Space]
     private GameObject nodeDetails;
+    private GameObject levelList;
 
     private bool canSelectNode;
 
@@ -26,9 +29,21 @@ public class NodeManager : MonoBehaviour
         this.node = node;
     }
 
+    public void SetNodeData(Node nodeData, GameObject node)
+    {
+        this.nodeData = nodeData;
+        this.node = node;
+    }
+
     public void SetPreviousBattleData(Battle previousBattle, GameObject previousNode)
     {
         this.previousBattle = previousBattle;
+        this.previousNode = previousNode;
+    }
+
+    public void SetPreviousBattleData(Node previousNodeData, GameObject previousNode)
+    {
+        this.previousNodeData = previousNodeData;
         this.previousNode = previousNode;
     }
 
@@ -46,6 +61,11 @@ public class NodeManager : MonoBehaviour
     public void SendNodeDetailComponents(GameObject nodeDetails)
     {
         this.nodeDetails = nodeDetails;
+    }
+
+    public void SendLevelListComponents(GameObject levelList)
+    {
+        this.levelList = levelList;
     }
 
     public void AllowNodeSelection(int allow)
@@ -67,27 +87,37 @@ public class NodeManager : MonoBehaviour
                     if (hit.collider != null)
                     {
                         GameObject obj = hit.transform.gameObject;
+                        
                         if (obj.Equals(node))
                         {
-                            Debug.Log("Clicked " + battle.battleName);
                             canSelectNode = false;
-
+                            
+                            mapController.EnableNodeColliders(false);
                             mapController.SetCurrentSelectedNode(node);
-                            StartCoroutine(ShowNodeDetails());
+                            mapController.RemoveAllPointers();
+
+                            StartCoroutine(ShowListOfLevels());
+
+                            Debug.Log(nodeData.nodeName + " selected");
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("No node clicked.");
                     }
                 }
             }
         }
     }
 
-    IEnumerator ShowNodeDetails()
+    IEnumerator ShowListOfLevels()
     {
-        SetNodeDetails();
+        LevelList levelListManager = levelList.transform.GetChild(3).transform.GetChild(1).transform.
+            GetChild(0).transform.GetChild(0).GetComponent<LevelList>();
+        levelListManager.gameObject.SetActive(true);
+        levelListManager.nodeData = nodeData;
+        levelListManager.SendScripts(mapController, this);
+        levelListManager.SendBattleComponents(nodeDetails, levelList);
+        levelListManager.PopulateGrid();
+
+        levelList.transform.GetChild(2).transform.GetChild(0).
+            GetComponent<TextMeshProUGUI>().text = nodeData.nodeName;
 
         focusedAreaName.GetComponent<Animator>().SetBool("Fade Out", true);
         focusedSubname.GetComponent<Animator>().SetBool("Fade Out", true);
@@ -103,66 +133,64 @@ public class NodeManager : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         PointCurrentNode(node);
 
-        nodeDetails.SetActive(true);
+        levelList.SetActive(true);
     }
 
-    public IEnumerator HideNodeDetails()
+    public IEnumerator HideListOfLevels()
     {
         canSelectNode = true;
+        mapController.EnableNodeColliders(true);
+
+        levelList.transform.GetChild(3).transform.GetChild(1).transform.
+            GetChild(0).transform.GetChild(0).GetComponent<LevelList>().RemoveCellsfFromGrid();
+        levelList.GetComponent<Animator>().SetBool("Exit", true);
+        yield return new WaitForSeconds(1f);
+        levelList.GetComponent<Animator>().SetBool("Exit", false);
+        levelList.SetActive(false);
+
+        /*RemovePointer(node);
+        yield return new WaitForSeconds(.2f);
+        PointCurrentNode(previousNode);*/
 
         focusedAreaName.gameObject.SetActive(true);
         focusedSubname.gameObject.SetActive(true);
-
-        nodeDetails.GetComponent<Animator>().SetBool("Exit", true);
-        yield return new WaitForSeconds(1f);
-        nodeDetails.SetActive(false);
-        nodeDetails.GetComponent<Animator>().SetBool("Exit", false);
-
-        RemovePointer(node);
-        yield return new WaitForSeconds(.5f);
-        PointCurrentNode(previousNode);
     }
 
-    private void PointCurrentNode(GameObject node)
+    public void PointCurrentNode(GameObject node)
     {
         Transform pointerTransform = node.transform.GetChild(0);
         pointerTransform.gameObject.SetActive(true);
     }
 
-    private void RemovePointer(GameObject node)
+    public void RemovePointer(GameObject node)
     {
         Transform pointerTransform = node.transform.GetChild(0);
         pointerTransform.gameObject.SetActive(false);
     }
 
-    public void SetNodeDetails()
-    {
-        TextMeshProUGUI nodeName = nodeDetails.transform.GetChild(2).
-            gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        nodeName.text = battle.battleName;
-
-        TextMeshProUGUI description = nodeDetails.transform.GetChild(3).
-            gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-    }
-
     public IEnumerator HideNode()
     {
         node.transform.GetChild(0).gameObject.SetActive(false);
+        if (nodeData.hasPath)
+        {
+            if (node.transform.GetChild(1).gameObject.activeInHierarchy)
+                node.transform.GetChild(1).gameObject.GetComponent<Animator>().SetBool("Lock Path", true);
+        }
+
         node.GetComponent<Animator>().SetBool("Fade Out", true);
 
-        if(battle.hasPath)
-            node.transform.GetChild(1).gameObject.GetComponent<Animator>().SetBool("Lock Path", true);
+       yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(1f);
+        if (nodeData.hasPath)
+        {
+            if (node.transform.GetChild(1).gameObject.activeInHierarchy)
+            {
+                node.transform.GetChild(1).gameObject.GetComponent<Animator>().SetBool("Lock Path", false);
+                node.transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
 
         node.GetComponent<Animator>().SetBool("Fade Out", false);
-
-        if(battle.hasPath)
-            node.transform.GetChild(1).gameObject.GetComponent<Animator>().SetBool("Lock Path", false);
-
         node.SetActive(false);
-
-        if(battle.hasPath)
-            node.transform.GetChild(1).gameObject.SetActive(false);
     }
 }

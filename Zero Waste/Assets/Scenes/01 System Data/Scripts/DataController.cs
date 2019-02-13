@@ -15,6 +15,14 @@ public class DataController : MonoBehaviour
     public GameData currentGameData;
     public SaveData currentSaveData;
 
+    [Space]
+    public Node currentNode;
+    public Battle currentBattle;
+
+    [Space]
+    public List<Player> scavengerRoster;
+    public List<Enemy> wasteRoster;
+
     [Header("Cutscene")]
     public Effect[] battleModifiers;
 
@@ -168,5 +176,48 @@ public class DataController : MonoBehaviour
         binaryFormatter.Serialize(fileStream, currentSaveData);
 
         fileStream.Close();
+    }
+
+    public void SaveScavenger(Player player)
+    {
+        string saveFileName = Path.GetFileNameWithoutExtension(currentSaveData.fileName);
+        string fileName = saveFileName + "_" + player.name;
+
+        if (Directory.Exists(Application.persistentDataPath + "/" + folderName))
+        {
+            string path = Application.persistentDataPath + "/" + folderName;
+
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = File.Create(path + "/" + fileName + ".txt");
+
+            var scavengerJson = JsonUtility.ToJson(player);
+            binaryFormatter.Serialize(fileStream, scavengerJson);
+
+            fileStream.Close();
+        }
+    }
+
+    public Player LoadScavenger(string fileName)
+    {
+        Player scavenger = new Player();
+        if (!Directory.Exists(Application.persistentDataPath + "/" + folderName
+            + "/" + currentSaveData.fileName + "_ScavengerRoster"))
+        {
+            string path = Application.persistentDataPath + "/" + folderName
+            + "/" + currentSaveData.fileName + "_ScavengerRoster";
+
+            if (File.Exists(path + "/" + fileName))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                FileStream fileStream = File.Open(path + "/" + fileName, FileMode.Open);
+                JsonUtility.FromJsonOverwrite((string)binaryFormatter.Deserialize(fileStream), scavenger);
+
+                Debug.Log(scavenger.characterName);
+
+                fileStream.Close();
+            }
+        }
+
+        return scavenger;
     }
 }

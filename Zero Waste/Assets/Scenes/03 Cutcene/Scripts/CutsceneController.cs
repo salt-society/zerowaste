@@ -17,6 +17,8 @@ public class CutsceneController : MonoBehaviour {
     public DialogueManager dialogueManager;
 
     [Header("Components")]
+    public GameObject cutsceneTitle;
+
     [Header("Dialogue")]
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueText;
@@ -56,15 +58,24 @@ public class CutsceneController : MonoBehaviour {
     {
         GetCutsceneNumber();
         PrepareCutscene();
-        InitialDialogue();
+        StartCoroutine(InitialDialogue());
     }
 
     void GetCutsceneNumber()
     {
         // Get reference to Data Controller
-        dataController = GameObject.FindObjectOfType<DataController>();
-        // cutsceneId = dataController.currentSaveData.currentCutscene;
-        cutsceneId = 0;
+        if (GameObject.FindObjectOfType<DataController>() != null)
+        {
+            dataController = GameObject.FindObjectOfType<DataController>();
+            dataController.LoadSaveData(dataController.currentGameData.currentSave.fileName);
+
+            cutsceneId = dataController.currentSaveData.currentCutscene;
+            Debug.Log(dataController.currentSaveData.scavengerRoster.Count);
+        }
+        else
+        {
+            cutsceneId = 0;
+        }
     }
 
     void PrepareCutscene()
@@ -76,6 +87,7 @@ public class CutsceneController : MonoBehaviour {
             {
                 currentCutscene = cutscene;
                 dialogues = currentCutscene.dialogues.ToArray();
+                break;
             }
         }
 
@@ -88,10 +100,22 @@ public class CutsceneController : MonoBehaviour {
         skipDialogue = true;
     }
 
-    void InitialDialogue()
+    IEnumerator InitialDialogue()
     {
         parsedLines = new List<string>();
         currentDialogueNo = 0;
+
+        cutsceneTitle.transform.GetChild(0).gameObject.
+            GetComponent<TextMeshProUGUI>().text = cutscenes[cutsceneId].chapter;
+        cutsceneTitle.transform.GetChild(1).gameObject.
+            GetComponent<TextMeshProUGUI>().text = cutscenes[cutsceneId].title;
+
+        if (cutsceneId != 0)
+        {
+            cutsceneTitle.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            cutsceneTitle.SetActive(false);
+        }
 
         PlayCutscene(currentDialogueNo);
     }
@@ -277,7 +301,9 @@ public class CutsceneController : MonoBehaviour {
         Choice[] choices = dialogues[currentDialogueNo].choices;
         choiceButtons[choiceNo].GetComponent<Image>().color = choices[choiceNo].color;
 
-        GameObject.FindObjectOfType<DataController>().battleModifiers = choices[choiceNo].effects;
+        if (dataController != null)
+            GameObject.FindObjectOfType<DataController>().battleModifiers = choices[choiceNo].effects;
+
         currentChoice = choices[choiceNo];
 
         StartCoroutine(HideChoiceBox(choices[choiceNo]));
@@ -348,10 +374,14 @@ public class CutsceneController : MonoBehaviour {
                         }
                         else
                         {
-                            dataController.currentSaveData.FinishCutscene(cutscenes[cutsceneId]);
-                            int nextSceneId = dataController.currentSaveData.
-                                NextSceneId(cutscenes[cutsceneId].nextLevel);
+                            if (dataController != null)
+                            {
+                                dataController.currentSaveData.FinishCutscene();
+                                int nextSceneId = dataController.currentSaveData.
+                                    NextSceneId(cutscenes[cutsceneId].nextLevel);
 
+                                dataController.SaveSaveData();
+                            }
                         }
                     }
                     
@@ -405,7 +435,15 @@ public class CutsceneController : MonoBehaviour {
                             }
                             else
                             {
+                                if (dataController != null)
+                                {
+                                    dataController.currentSaveData.FinishCutscene();
+                                    dataController.currentSaveData.nextLevel = currentCutscene.nextLevel;
+                                    int nextSceneId = dataController.currentSaveData.
+                                        NextSceneId(currentCutscene.nextLevel);
 
+                                    dataController.SaveSaveData();
+                                }
                             }
                         }
                         

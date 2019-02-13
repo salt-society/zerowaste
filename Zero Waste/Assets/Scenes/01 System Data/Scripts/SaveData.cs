@@ -27,6 +27,8 @@ public class SaveData { // holds player progress
     public Dictionary<Battle, bool> terreBattles;
     public Dictionary<Battle, bool> mareBattles;
     public Dictionary<Battle, bool> atmosBattles;
+
+    public Dictionary<Node, bool> unlockedNodes;
     public Dictionary<Battle, bool> unlockedBattles;
 
     public int currentCutscene;
@@ -34,11 +36,12 @@ public class SaveData { // holds player progress
     public int currentTerre;
     public int currentMare;
     public int currentAtmos;
+
+    public int currentNodeId;
     public int currentBattleId;
 
     [Header("Character Roster")]
-    public List<Player> scavengerRoster;
-    public List<Enemy> wasteRoster;
+    public List<String> scavengerRoster;
     
     public void InitializeSaveData()
     {
@@ -56,18 +59,31 @@ public class SaveData { // holds player progress
     {
         nextLevel = "Cutscene";
 
+        finishedCutscenes = new List<Cutscene>();
+        scavengerRoster = new List<String>();
+
         terreBattles = new Dictionary<Battle, bool>();
         mareBattles = new Dictionary<Battle, bool>();
         atmosBattles = new Dictionary<Battle, bool>();
 
+        unlockedNodes = new Dictionary<Node, bool>();
+        unlockedBattles = new Dictionary<Battle, bool>();
+
         currentCutscene = 0;
         currentArea = 0;
+        currentBattleId = 0;
+        currentNodeId = -1;
 
         currentTerre = 0;
         currentMare = 0;
         currentAtmos = 0;
 
-        currentBattleId = 0;
+        
+    }
+
+    public void AddScavenger(String scavengerName)
+    {
+        scavengerRoster.Add(scavengerName);
     }
 
     public int NextSceneId(string nextLevel)
@@ -109,16 +125,21 @@ public class SaveData { // holds player progress
         }
     }
 
-    public void FinishCutscene(Cutscene cutscene)
+    public void FinishCutscene()
     {
-        finishedCutscenes.Add(cutscene);
-        currentCutscene = finishedCutscenes.Count;
+        currentCutscene++;
     }
 
     public void AddArea(Areas area)
     {
         unlockedAreas.Add(area);
         currentArea = unlockedAreas.Count;
+    }
+
+    public void AddNode(Node node)
+    {
+        unlockedNodes.Add(node, false);
+        currentNodeId = unlockedNodes.Count - 1;
     }
 
     public void AddBattle(Battle battle, string areaName)
@@ -149,6 +170,11 @@ public class SaveData { // holds player progress
     {
         unlockedBattles.Add(battle, false);
         currentBattleId = unlockedBattles.Count - 1;
+    }
+
+    public void FinishNode(Node node, bool status)
+    {
+        unlockedNodes[node] = status;
     }
 
     public void FinishBattle(Battle battle, string areaName, bool status)

@@ -28,6 +28,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ab804b2c7ad06a478d83893a813fa4c, type: 2}
   - {fileID: 11400000, guid: fe5533bcb6256974b9f73382c7c54ca1, type: 2}
   - {fileID: 11400000, guid: 4ae2c3b454812d24b8bc13037aeb3309, type: 2}
+  nodes:
+  - {fileID: 11400000, guid: 385719f75d227cd4e83ba83a540632db, type: 2}
+  - {fileID: 11400000, guid: 0847881b6e4635d4ea423281a75f4e99, type: 2}
+  - {fileID: 11400000, guid: c99edfdde1d8b5645a7ea916bd60bdef, type: 2}
+  - {fileID: 11400000, guid: ee0634a4615cf3545839c0495d66d93f, type: 2}
+  - {fileID: 11400000, guid: 213db330ffa5686498276300e7f01ef2, type: 2}
   positions:
   - {x: -6, y: -1.21, z: 0}
   - {x: -2.5, y: 2.25, z: 0}

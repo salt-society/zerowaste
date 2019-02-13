@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player", menuName = "Player")]
+[System.Serializable]
 public class Player : Character {
 
     [Header("Statistics")]

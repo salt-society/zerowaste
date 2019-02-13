@@ -31,15 +31,19 @@ public class GameDataController : MonoBehaviour
                     SaveData saveData = dataController.currentGameData.currentSave;
                     dataController.LoadSaveData(saveData.fileName);
                 }
+
+                // Add roster
+                dataController.scavengerRoster = scavengerRoster;
+                dataController.wasteRoster = wasteRoster;
             }
             else
             {
+                // New game data
                 dataController.CreateGameData();
 
                 // Add roster
-                dataController.currentGameData.scavengerRoster = scavengerRoster;
-                dataController.currentGameData.wasteRoster = wasteRoster;
-                dataController.SaveGameData();
+                dataController.scavengerRoster = scavengerRoster;
+                dataController.wasteRoster = wasteRoster;
 
                 // Then create a save file for player
                 dataController.NewSaveData();
