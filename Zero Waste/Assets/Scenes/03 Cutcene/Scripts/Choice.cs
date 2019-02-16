@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Choice", menuName = "Choice")]
+[CreateAssetMenu(fileName = "New Choice", menuName = "Cutscene/Choice")]
 public class Choice : ScriptableObject
 {
     [Header("Choice Details")]

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
   m_Name: Ryleigh Boy
   m_EditorClassIdentifier: 
+  characterId: 0
+  characterName: Ryleigh
   characterThumb: {fileID: 21300000, guid: 0626a946375c850448e01ddadf36b7ef, type: 3}
   characterHalf: {fileID: 21300000, guid: 68bf0e4e0d803fa4c9b76ad89db527b7, type: 3}
   characterFull: {fileID: 21300000, guid: 908884550752cfd40b14e0381498dbb9, type: 3}
-  characterName: Ryleigh
   prefab: {fileID: 0}
   scale: {x: 1, y: 1, z: 1}
   baseSpd: 3

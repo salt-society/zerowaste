@@ -51,6 +51,7 @@ public class CutsceneController : MonoBehaviour {
     private List<string> parsedLines;
 
     private bool skipDialogue;
+    private bool lineEnded;
     private bool choiceSelected;
     private Choice currentChoice;
 
@@ -67,10 +68,7 @@ public class CutsceneController : MonoBehaviour {
         if (GameObject.FindObjectOfType<DataController>() != null)
         {
             dataController = GameObject.FindObjectOfType<DataController>();
-            dataController.LoadSaveData(dataController.currentGameData.currentSave.fileName);
-
             cutsceneId = dataController.currentSaveData.currentCutscene;
-            Debug.Log(dataController.currentSaveData.scavengerRoster.Count);
         }
         else
         {
@@ -93,11 +91,12 @@ public class CutsceneController : MonoBehaviour {
 
         // Set background
         StartCoroutine(backgroundManager.
-            BackgroundChangeAndTransition(currentCutscene.firstBackground));
+            BackgroundChangeAndTransition(currentCutscene.firstBackground, Color.black));
 
         skipCount = 0;
         choiceSelected = false;
         skipDialogue = true;
+        lineEnded = false;
     }
 
     IEnumerator InitialDialogue()
@@ -138,10 +137,11 @@ public class CutsceneController : MonoBehaviour {
     private IEnumerator DisplayDialogue(Dialogue dialogue)
     {
         TextMeshProUGUI textbox;
+        lineEnded = false;
 
         // Change background
         StartCoroutine(backgroundManager.
-            BackgroundChangeAndTransition(dialogue.background));
+            BackgroundChangeAndTransition(dialogue.background, dialogue.backgroundColor));
 
 
         // Check if dialogue is normal dialogue or a narration
@@ -205,6 +205,7 @@ public class CutsceneController : MonoBehaviour {
             // last line and if not, clear text box for next line
             if (!(lastLine.Equals(line)))
             {
+                lineEnded = true;
                 textbox.SetText("");
                 currentLine++;
                 yield return new WaitForSeconds(nextLineSpeed);
@@ -212,6 +213,8 @@ public class CutsceneController : MonoBehaviour {
             // When last line is reached, check if there are choices
             else
             {
+                lineEnded = true;
+
                 if (dialogue.withChoices)
                 {
                     ShowChoiceBox(dialogue);
@@ -298,7 +301,7 @@ public class CutsceneController : MonoBehaviour {
 
     public void SelectChoice(int choiceNo)
     {
-        Choice[] choices = dialogues[currentDialogueNo].choices;
+        List<Choice> choices = dialogues[currentDialogueNo].choices;
         choiceButtons[choiceNo].GetComponent<Image>().color = choices[choiceNo].color;
 
         if (dataController != null)
@@ -338,7 +341,14 @@ public class CutsceneController : MonoBehaviour {
         {
             if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
-                skipCount++;
+                if (lineEnded)
+                {
+                    skipCount = 2;
+                }
+                else
+                {
+                    skipCount++;
+                }
 
                 // Skip to next dialogue if current doesn't have options
                 if (!dialogues[currentDialogueNo].withChoices)

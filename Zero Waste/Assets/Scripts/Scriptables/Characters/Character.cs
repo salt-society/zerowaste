@@ -5,11 +5,15 @@ using UnityEngine;
 public class Character : ScriptableObject {
 
     [Header("Basic Information")]
+    public int characterId;
+
+
+    [Space]
+    public string characterName;
     public Sprite characterThumb;
     public Sprite characterHalf;
     public Sprite characterFull;
-    public string characterName;
-
+ 
     [Space]
     public GameObject prefab;
     public Vector3 scale;

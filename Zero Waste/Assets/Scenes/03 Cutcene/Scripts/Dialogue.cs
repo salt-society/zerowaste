@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue")]
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "Cutscene/Dialogue")]
 public class Dialogue : ScriptableObject {
 
     [Header("Unique Identifier")]
@@ -24,7 +24,13 @@ public class Dialogue : ScriptableObject {
     public bool canSkip;
 
     [Space]
+    public List<string> SFX;
+
+    [Space]
     public Sprite background;
+    public Color backgroundColor;
+
+    [Space]
     public Color dialogueBoxColor;
 
     [Space]
@@ -32,5 +38,5 @@ public class Dialogue : ScriptableObject {
 
     [Header("Choices")]
     public bool withChoices;
-    public Choice[] choices;
+    public List<Choice> choices;
 }

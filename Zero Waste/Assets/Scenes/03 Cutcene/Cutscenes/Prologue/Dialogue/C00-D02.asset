@@ -10,17 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4339a6ba8249b134db7c16e4a4cc5c5c, type: 3}
-  m_Name: Prologue D01
+  m_Name: C00-D02
   m_EditorClassIdentifier: 
-  dialogueId: 0
-  characterName: ???
-  characterSprite: {fileID: 21300000, guid: d2cfe5b71f1798d4a9bcd704eaf46b20, type: 3}
+  dialogueId: 2
+  characterName: Narrator
+  characterSprite: {fileID: 0}
   isLive2D: 0
-  content: No... I mustn't do this.
-  isNarration: 0
+  content: "There was a kind doctor, who wanted the world to be clean for his little
+    daughter. But his neighbors wouldn\u2019t have it\u2026 They continued polluting
+    until his daughter got sick."
+  isNarration: 1
   canSkip: 0
+  SFX: []
   background: {fileID: 21300000, guid: a6246f5100bcf5f49bf1dc68edfb9d3b, type: 3}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   dialogueBoxColor: {r: 0, g: 0, b: 0, a: 0}
-  transition: Start
+  transition: None
   withChoices: 0
   choices: []

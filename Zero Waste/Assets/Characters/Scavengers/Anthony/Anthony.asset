@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
   m_Name: Anthony
   m_EditorClassIdentifier: 
+  characterId: 4
+  characterName: Anthony
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
-  characterName: Anthony
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
   baseSpd: 1

@@ -799,30 +799,51 @@ MonoBehaviour:
       playCount: 0
       playerName: 
       gender: Male
-      prologueFinish: 0
-      battleTutorial: 0
+      nextLevel: 
+      finishedCutscenes: []
+      unlockedAreas: []
       currentCutscene: 0
       currentArea: 0
-      currentNode: 0
+      currentTerre: 0
+      currentMare: 0
+      currentAtmos: 0
+      currentNodeId: 0
+      currentBattleId: 0
+      scavengerRoster: 
     saves: []
     maxNoOfSaveFiles: 0
     currentNoOfSaves: 0
-    loading: 0
-    title: 0
-    cutscene: 0
-    world: 0
-    battle: 0
   currentSaveData:
     fileName: 
     playCount: 0
     playerName: 
     gender: 
-    prologueFinish: 0
-    battleTutorial: 0
+    nextLevel: 
+    finishedCutscenes: []
+    unlockedAreas: []
     currentCutscene: 0
     currentArea: 0
-    currentNode: 0
-  folderName: SaveData
+    currentTerre: 0
+    currentMare: 0
+    currentAtmos: 0
+    currentNodeId: 0
+    currentBattleId: 0
+    scavengerRoster: 
+  currentNode: {fileID: 0}
+  currentBattle: {fileID: 0}
+  allScavengersList:
+  - {fileID: 11400000, guid: a2c8028abd4b51448814724edf67f26c, type: 2}
+  - {fileID: 11400000, guid: 4c5bb17b98e43ad42a42f92ea09e2e46, type: 2}
+  - {fileID: 11400000, guid: 57e356ecb7ac091499d290f2b83ddf2c, type: 2}
+  - {fileID: 11400000, guid: ea36f1db71cd5b441b8180a75c93e984, type: 2}
+  - {fileID: 11400000, guid: 3a6a82af57c5e8d4ab8282d4d042f85c, type: 2}
+  - {fileID: 11400000, guid: 6b6b2bf6d7b200540a00c39a944c8b79, type: 2}
+  - {fileID: 11400000, guid: c0961660f0302e043a9bc6912f24c2cd, type: 2}
+  - {fileID: 11400000, guid: e797dc2a48d5cc74eb19e9f0ecb1d817, type: 2}
+  allWasteList: []
+  scavengerRoster: []
+  battleModifiers: []
+  saveFolderName: Save Data
 --- !u!4 &1915336098
 Transform:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Cutscene", menuName = "Cutscene")]
+[CreateAssetMenu(fileName = "New Cutscene", menuName = "Cutscene/Cutscene")]
 public class Cutscene : ScriptableObject {
 
     [Header("Unique Identifier")]

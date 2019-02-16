@@ -24,6 +24,10 @@ public class TitleScreenController : MonoBehaviour
     {
         // Get reference to Data Controller
         dataController = GameObject.FindObjectOfType<DataController>();
+        if (dataController != null)
+        {
+           
+        }
 
         // Play Sound
         GameObject.FindObjectOfType<AudioManager>().PlaySound("Hazy Darkness");
@@ -100,36 +104,47 @@ public class TitleScreenController : MonoBehaviour
 
         string gender = (chosenGender > 0) ? "Female" : "Male";
         dataController.currentSaveData.gender = gender;
-        AddScavenger(gender);
-
+        AddDefaultScavengers(gender);
+        
         genderButtons[chosenGender].GetComponent<Animator>().SetBool("Chosen", true);
         genderImages[chosenGender].GetComponent<Image>().color = Color.white;
     }
 
-    private void AddScavenger(string gender)
+    public void AddDefaultScavengers(string gender)
     {
-        if (gender.Equals("Female"))
-        {
-            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[0].name);
-            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[3].name);
-
-            dataController.SaveScavenger(dataController.scavengerRoster[0]);
-            dataController.SaveScavenger(dataController.scavengerRoster[3]);
-        }
+        Player scavenger01 = ScriptableObject.CreateInstance<Player>();
+        Player scavenger02 = ScriptableObject.CreateInstance<Player>();
+        dataController.scavengerRoster = new List<Player>();
 
         if (gender.Equals("Male"))
         {
-            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[1].name);
-            dataController.currentSaveData.AddScavenger(dataController.scavengerRoster[2].name);
+            scavenger01 = Instantiate(dataController.allScavengersList[0]);
+            scavenger01.name = "Ryleigh";
 
-            dataController.SaveScavenger(dataController.scavengerRoster[1]);
-            dataController.SaveScavenger(dataController.scavengerRoster[2]);
+            scavenger02 = Instantiate(dataController.allScavengersList[3]);
+            scavenger02.name = "Paige";
         }
+
+        if (gender.Equals("Female"))
+        {
+            scavenger01 = Instantiate(dataController.allScavengersList[1]);
+            scavenger01.name = "Ryleigh";
+
+            scavenger02 = Instantiate(dataController.allScavengersList[2]);
+            scavenger02.name = "Paige";
+        }
+
+        dataController.AddScavenger(scavenger01);
+        dataController.AddScavenger(scavenger02);
     }
 
     public void ContinueGame()
     {
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
+
+        dataController.SaveScavengers();
         dataController.SaveSaveData();
+        dataController.SaveGameData();
         StartCoroutine(LoadScene());
     }
 

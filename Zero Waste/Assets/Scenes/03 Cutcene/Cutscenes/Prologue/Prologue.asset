@@ -19,4 +19,14 @@ MonoBehaviour:
   transition: Start
   nextLevel: Cutscene
   dialogues:
-  - {fileID: 11400000, guid: c2dc255ae8c27ee47a904e4839c4977b, type: 2}
+  - {fileID: 11400000, guid: ca99d1f5b9e16024abc8bf905875b1b7, type: 2}
+  - {fileID: 11400000, guid: fd167feb33c10244387d451213fbe506, type: 2}
+  - {fileID: 11400000, guid: 04795dc52025213448033cd6af38f01f, type: 2}
+  - {fileID: 11400000, guid: 53a85c98f2d3d5f46a53b05f78c5f427, type: 2}
+  - {fileID: 11400000, guid: 2f08c2f14765e4d4ab9a819fc895c4ed, type: 2}
+  - {fileID: 11400000, guid: bfcd24ff74a265b44b38d5a614eb5e28, type: 2}
+  - {fileID: 11400000, guid: 27da0f732b300fc4f982e835dabfb946, type: 2}
+  - {fileID: 11400000, guid: 861b14def6cd1be49bbfcd9788eb1d21, type: 2}
+  - {fileID: 11400000, guid: eeaa1722397f11b4abb758015936fe14, type: 2}
+  - {fileID: 11400000, guid: 421bb524660589d429d5079a1b2a4b4c, type: 2}
+  - {fileID: 11400000, guid: 6f61d8e9ff0e4a1478046de82a76a228, type: 2}

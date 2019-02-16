@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
   m_Name: Paige Girl
   m_EditorClassIdentifier: 
+  characterId: 3
+  characterName: Paige
   characterThumb: {fileID: 21300000, guid: 8c4f4959637a0ca4f8973abe52d88461, type: 3}
   characterHalf: {fileID: 21300000, guid: c9e7871acead7754ea4f641d3ab394ed, type: 3}
   characterFull: {fileID: 21300000, guid: b59e24c188f883f439e7fb3882869183, type: 3}
-  characterName: Paige
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
   baseSpd: 4

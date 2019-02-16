@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2240c50a718ad974f9641f4520fb1dd9, type: 3}
+  m_Name: Default Scavenger Roster 02
+  m_EditorClassIdentifier: 
+  scavengers:
+  - {fileID: 11400000, guid: 4c5bb17b98e43ad42a42f92ea09e2e46, type: 2}
+  - {fileID: 11400000, guid: 57e356ecb7ac091499d290f2b83ddf2c, type: 2}
+  scavengerCount: 2

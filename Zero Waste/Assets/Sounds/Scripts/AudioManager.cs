@@ -74,7 +74,7 @@ public class AudioManager : MonoBehaviour
 
             soundToStop.source.volume = soundToStop.volume;
             soundToStop.source.Stop();
-            Debug.Log(soundToStop.source.isPlaying);
+            Debug.Log("Is Sfx Playing: " + soundToStop.source.isPlaying);
         }
     }
 }
