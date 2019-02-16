@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27f000d7df9ff3e4bae97267f7026140, type: 3}
-  m_Name: Paige Boy
+  m_Name: Blank
   m_EditorClassIdentifier: 
-  characterThumb: {fileID: 21300000, guid: 5585309e09bb45f409709170881760be, type: 3}
-  characterHalf: {fileID: 21300000, guid: b03de0c0ec9248040a2c2b5e9a1ae021, type: 3}
-  characterFull: {fileID: 21300000, guid: 98d02b82f78115643989bb1628884341, type: 3}
-  characterName: Paige
+  characterThumb: {fileID: 0}
+  characterHalf: {fileID: 0}
+  characterFull: {fileID: 0}
+  characterName: Blank
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 4
+  baseSpd: 5
   currentSpd: 0
   abilities:
   - {fileID: 0}
@@ -28,16 +28,16 @@ MonoBehaviour:
   effects: []
   characterClass: {fileID: 0}
   currentLevel: 1
-  baseHP: 6
-  baseAnt: 5
-  baseAtk: 1
-  baseDef: 3
-  antGen: 3
-  threatLevel: 2
-  hpModifier: 1.2999999523162842
-  atkModifier: 0.6000000238418579
-  defModifier: 0.75
-  spdModifier: 1.75
+  baseHP: 5
+  baseAnt: 10
+  baseAtk: 5
+  baseDef: 1
+  antGen: 2
+  threatLevel: 3
+  hpModifier: 1
+  atkModifier: 1
+  defModifier: 0.6000000238418579
+  spdModifier: 2
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a6750bfe262b54794ffd28f61b0075, type: 3}
-  m_Name: Ryleigh Girl Charge
+  m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
+  m_Name: Charge Effect 1
   m_EditorClassIdentifier: 
-  abilityIcon: {fileID: 0}
-  abilityName: Charge
-  abilityType: Defensive
-  abilityRange: Self
-  abilityDescription: 
-  effects: []
-  antRequirement: 0
+  effectIcon: {fileID: 0}
+  effectName: Recharge ANT
+  effectType: Direct
+  effectType2: 
+  effectTarget: Ant
+  effectStrength: 3
+  effectDuration: 0
+  turnsRemaining: 0

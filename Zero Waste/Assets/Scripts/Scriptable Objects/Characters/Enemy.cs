@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy")]
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Character/Enemy")]
 public class Enemy : Character {
 
     [Header("Enemy Statistics")]

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player Ability", menuName = "Player Ability")]
+[CreateAssetMenu(fileName = "Player Ability", menuName = "Abilities/Player Ability")]
 public class PlayerAbility : Ability {
 
     public int antRequirement;

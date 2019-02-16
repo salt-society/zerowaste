@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61a6750bfe262b54794ffd28f61b0075, type: 3}
-  m_Name: Ryleigh Girl Skill
+  m_Name: Ryleigh Character Ability
   m_EditorClassIdentifier: 
   abilityIcon: {fileID: 0}
-  abilityName: Skill
+  abilityName: Learn from Past Mistakes
   abilityType: Defensive
-  abilityRange: Single
-  abilityDescription: 
-  effects: []
+  abilityRange: Self
+  abilityDescription: 'Remember the mistakes of throwing trash
+
+    without hesitation. Heal self by 3 and increase
+
+    ATK by 2 for 3 turns.'
+  effects:
+  - {fileID: 11400000, guid: ac6e3c583127ef040843927fdc76c635, type: 2}
+  - {fileID: 11400000, guid: 0ff1f23b27c8a3842adf2fb265ca1a89, type: 2}
   antRequirement: 5

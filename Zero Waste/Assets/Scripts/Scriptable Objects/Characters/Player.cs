@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Player", menuName = "Player")]
+[CreateAssetMenu(fileName = "New Player", menuName = "Character/Player")]
 [System.Serializable]
 public class Player : Character {
 
@@ -8,23 +8,26 @@ public class Player : Character {
     public Role characterClass;
     [Range(1, 30)] public int currentLevel;
     [Range(5, 10)] public int baseHP;
-    [Range(5, 10)] public int baseAnt;
+    public int baseAnt;
     [Range(1, 5)] public int baseAtk;
     [Range(1, 5)] public int baseDef;
-    [Range(1, 3)] public int baseAntGen;
+    [Range(1, 3)] public int antGen;
+    [Range(1, 5)] public int threatLevel;
 
     [Header("Level Modifiers")]
     [Range(1f, 2f)] public double hpModifier;
     [Range(0.5f, 1f)] public double atkModifier;
     [Range(0.5f, 1f)] public double defModifier;
     [Range(1f, 2f)] public double spdModifier;
-    [Range(0.1f, 1f)] public double antGenModifier;
 
     [HideInInspector] public int currentHP;
     [HideInInspector] public int currentAnt;
     [HideInInspector] public int currentAtk;
     [HideInInspector] public int currentDef;
     [HideInInspector] public int currentAntGen;
+    [HideInInspector] public int currentThreatLevel;
+    public int currentExp;
+    public int currentLevelCap;
 
     // Apply level modifiers to character
     public void OnInitialize()
@@ -34,7 +37,8 @@ public class Player : Character {
         currentAtk = baseAtk + (int)((currentLevel - 1) * atkModifier);
         currentDef = baseDef + (int)((currentLevel - 1) * defModifier);
         currentSpd = baseSpd + (int)((currentLevel - 1) * spdModifier);
-        currentAntGen = baseAntGen + (int)((currentLevel - 1) * antGenModifier);
+        currentAntGen = antGen;
+        currentThreatLevel = threatLevel;
     }
 
     // Check if the HP or ANT stat will exceed the characters current MAX HP / ANT
@@ -136,6 +140,11 @@ public class Player : Character {
                 currentAntGen += effect.effectStrength;
                 effects.Add(effect);
                 break;
+
+            case "Threat Level":
+                currentThreatLevel += effect.effectStrength;
+                effects.Add(effect);
+                break;
         }
     }
 
@@ -179,6 +188,12 @@ public class Player : Character {
             case "Ant Gen":
                 estimatedStat = CheckMin(currentAntGen - effect.effectStrength);
                 currentAntGen = estimatedStat;
+                effects.Add(effect);
+                break;
+
+            case "Threat Level":
+                estimatedStat = CheckMin(currentThreatLevel - effect.effectStrength);
+                currentThreatLevel = estimatedStat;
                 effects.Add(effect);
                 break;
         }
