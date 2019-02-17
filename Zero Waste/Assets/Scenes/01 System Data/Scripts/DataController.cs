@@ -15,16 +15,19 @@ public class DataController : MonoBehaviour
     public GameData currentGameData;
     public SaveData currentSaveData;
 
-    [Space]
-    public Node currentNode;
-    public Battle currentBattle;
-
     [Header("Roster")]
     public List<Player> allScavengersList;
     public List<Enemy> allWasteList;
 
     [Space]
     public List<Player> scavengerRoster;
+
+    [Space]
+    public Node currentNode;
+    public Battle currentBattle;
+
+    [Space]
+    public Cutscene currentCutscene;
 
     [Header("Cutscene")]
     public Effect[] battleModifiers;

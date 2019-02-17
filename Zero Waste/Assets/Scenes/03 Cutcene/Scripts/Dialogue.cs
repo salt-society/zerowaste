@@ -10,6 +10,8 @@ public class Dialogue : ScriptableObject {
 
     [Header("Details")]
     public string characterName;
+    public Sprite characterThumb;
+    public Sprite characterHalf;
     public Sprite characterSprite;
 
     [Space]

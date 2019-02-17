@@ -6,6 +6,7 @@ using UnityEngine;
 public class Choice : ScriptableObject
 {
     [Header("Choice Details")]
+    public int choiceId;
     public string characterName;
     public string choice;
 
