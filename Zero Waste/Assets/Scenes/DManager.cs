@@ -106,8 +106,69 @@ public class DManager : MonoBehaviour
 
             if (currentDialogue.characterHalf == null)
             {
-                dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(false);
-                dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                if (currentDialogue.characterName.Equals("Ryleigh"))
+                {
+                    if (dataController != null)
+                    {
+                        string gender = dataController.currentSaveData.gender;
+
+                        if (gender.Equals("Male"))
+                        {
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
+                                GetComponent<Image>().sprite = dataController.allScavengersList[0].characterHalf;
+
+                            yield return null;
+
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(true);
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        }
+
+                        if (gender.Equals("Female"))
+                        {
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
+                                GetComponent<Image>().sprite = dataController.allScavengersList[1].characterHalf;
+
+                            yield return null;
+
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(true);
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        }
+                    }
+                }
+                else if (currentDialogue.characterName.Equals("Paige"))
+                {
+                    if (dataController != null)
+                    {
+                        string gender = dataController.currentSaveData.gender;
+
+                        if (gender.Equals("Male"))
+                        {
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
+                                GetComponent<Image>().sprite = dataController.allScavengersList[3].characterHalf;
+
+                            yield return null;
+
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(true);
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        }
+
+                        if (gender.Equals("Female"))
+                        {
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
+                                GetComponent<Image>().sprite = dataController.allScavengersList[2].characterHalf;
+
+                            yield return null;
+
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(true);
+                            dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        }
+                    }
+                }
+                else
+                {
+                    dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(false);
+                    dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(true);
+                }
             }
             else
             {

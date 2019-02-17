@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueId: 1
   characterName: Narrator
+  characterThumb: {fileID: 0}
+  characterHalf: {fileID: 0}
   characterSprite: {fileID: 0}
   isLive2D: 0
   content: This story is about a man who lost everything thanks to those who would

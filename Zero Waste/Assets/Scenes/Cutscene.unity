@@ -3754,6 +3754,8 @@ MonoBehaviour:
   playerCharacter:
   - {fileID: 11400000, guid: a2c8028abd4b51448814724edf67f26c, type: 2}
   - {fileID: 11400000, guid: 4c5bb17b98e43ad42a42f92ea09e2e46, type: 2}
+  - {fileID: 11400000, guid: 57e356ecb7ac091499d290f2b83ddf2c, type: 2}
+  - {fileID: 11400000, guid: ea36f1db71cd5b441b8180a75c93e984, type: 2}
 --- !u!1 &1850297551
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,11 +8,13 @@ public class HistoryGrid : MonoBehaviour
 {
     public DataController dataController;
 
+    [Space]
     public GameObject historyCell01;
     public GameObject historyCell02;
     public GameObject historyCell03;
     public GameObject historyCell04;
 
+    [Space]
     public string playerGender;
     public Player[] playerCharacter;
 
@@ -63,24 +65,32 @@ public class HistoryGrid : MonoBehaviour
                                 gameObject.SetActive(false);
                         }
                     }
-                    else
+                }
+                else if (dialogue.characterName.Equals("Paige"))
+                {
+                    historyCell = Instantiate(historyCell01, transform);
+
+                    if (dataController != null)
                     {
-                        if (playerGender.Equals("Male"))
-                        {
-                            historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().sprite = playerCharacter[0].characterThumb;
-                            historyCell.transform.GetChild(2).GetChild(0).
-                              GetComponent<Image>().color = Color.white;
-                            historyCell.transform.GetChild(2).GetChild(1).
-                                gameObject.SetActive(false);
-                        }
+                        playerGender = dataController.currentSaveData.gender;
+                        Debug.Log(playerGender);
 
                         if (playerGender.Equals("Male"))
                         {
                             historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().sprite = playerCharacter[1].characterThumb;
+                                GetComponent<Image>().sprite = playerCharacter[3].characterThumb;
                             historyCell.transform.GetChild(2).GetChild(0).
-                              GetComponent<Image>().color = Color.white;
+                                GetComponent<Image>().color = Color.white;
+                            historyCell.transform.GetChild(2).GetChild(1).
+                                gameObject.SetActive(false);
+                        }
+
+                        if (playerGender.Equals("Female"))
+                        {
+                            historyCell.transform.GetChild(2).GetChild(0).
+                                GetComponent<Image>().sprite = playerCharacter[2].characterThumb;
+                            historyCell.transform.GetChild(2).GetChild(0).
+                               GetComponent<Image>().color = Color.white;
                             historyCell.transform.GetChild(2).GetChild(1).
                                 gameObject.SetActive(false);
                         }
