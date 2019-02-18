@@ -17,17 +17,19 @@ MonoBehaviour:
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterSprite: {fileID: 0}
-  isLive2D: 0
+  isCharacterLive2D: 0
   content: "The worst problem for us people is that we only learn when it\u2019s too
     late."
   isNarration: 0
   canSkip: 0
   SFX: []
   background: {fileID: 21300000, guid: 40bc80d3f84541d41ba780f7df77f9b2, type: 3}
-  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   dialogueBoxColor: {r: 0, g: 0, b: 0, a: 0}
-  transition: None
-  withChoices: 1
-  choices:
-  - {fileID: 11400000, guid: 99eec529fbb4efc4f9a7c4ef04059737, type: 2}
-  - {fileID: 11400000, guid: 5c0672f887d9bc5419ff6b1d12b06f88, type: 2}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  withChoices: 0
+  choices: []
+  withItem: 0
+  itemSprite: {fileID: 0}
+  withUnfamiliarWord: 0
+  words: []
+  wordColors: []

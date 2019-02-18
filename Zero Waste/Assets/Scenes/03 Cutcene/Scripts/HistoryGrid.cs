@@ -42,28 +42,12 @@ public class HistoryGrid : MonoBehaviour
 
                     if (dataController != null)
                     {
-                        playerGender = dataController.currentSaveData.gender;
-                        Debug.Log(playerGender);
-
-                        if (playerGender.Equals("Male"))
-                        {
-                            historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().sprite = playerCharacter[0].characterThumb;
-                            historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().color = Color.white;
-                            historyCell.transform.GetChild(2).GetChild(1).
-                                gameObject.SetActive(false);
-                        }
-
-                        if (playerGender.Equals("Female"))
-                        {
-                            historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().sprite = playerCharacter[1].characterThumb;
-                            historyCell.transform.GetChild(2).GetChild(0).
-                               GetComponent<Image>().color = Color.white;
-                            historyCell.transform.GetChild(2).GetChild(1).
-                                gameObject.SetActive(false);
-                        }
+                        historyCell.transform.GetChild(2).GetChild(0).
+                                GetComponent<Image>().sprite = dataController.scavengerRoster[0].characterThumb;
+                        historyCell.transform.GetChild(2).GetChild(0).
+                            GetComponent<Image>().color = Color.white;
+                        historyCell.transform.GetChild(2).GetChild(1).
+                            gameObject.SetActive(false);
                     }
                 }
                 else if (dialogue.characterName.Equals("Paige"))
@@ -72,28 +56,12 @@ public class HistoryGrid : MonoBehaviour
 
                     if (dataController != null)
                     {
-                        playerGender = dataController.currentSaveData.gender;
-                        Debug.Log(playerGender);
-
-                        if (playerGender.Equals("Male"))
-                        {
-                            historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().sprite = playerCharacter[3].characterThumb;
-                            historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().color = Color.white;
-                            historyCell.transform.GetChild(2).GetChild(1).
-                                gameObject.SetActive(false);
-                        }
-
-                        if (playerGender.Equals("Female"))
-                        {
-                            historyCell.transform.GetChild(2).GetChild(0).
-                                GetComponent<Image>().sprite = playerCharacter[2].characterThumb;
-                            historyCell.transform.GetChild(2).GetChild(0).
-                               GetComponent<Image>().color = Color.white;
-                            historyCell.transform.GetChild(2).GetChild(1).
-                                gameObject.SetActive(false);
-                        }
+                        historyCell.transform.GetChild(2).GetChild(0).
+                                GetComponent<Image>().sprite = dataController.scavengerRoster[1].characterThumb;
+                        historyCell.transform.GetChild(2).GetChild(0).
+                            GetComponent<Image>().color = Color.white;
+                        historyCell.transform.GetChild(2).GetChild(1).
+                            gameObject.SetActive(false);
                     }
                 }
                 else

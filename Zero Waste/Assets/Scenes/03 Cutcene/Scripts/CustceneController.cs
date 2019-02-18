@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CController : MonoBehaviour
+public class CustceneController : MonoBehaviour
 {
     public DataController dataController;
     public Cutscene currentCutscene;
 
     [Space]
     public List<Cutscene> cutsceneList;
-    public DManager dialogueManager;
+    public DialogueManager dialogueManager;
 
     [Space]
     public GameObject historyBox;

@@ -14,15 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueId: 4
   characterName: ???
+  characterThumb: {fileID: 0}
+  characterHalf: {fileID: 0}
   characterSprite: {fileID: 0}
-  isLive2D: 0
+  isCharacterLive2D: 0
   content: "But no! They didn\u2019t mean too\u2026 they just didn\u2019t know enough\u2026"
   isNarration: 0
   canSkip: 0
   SFX: []
   background: {fileID: 21300000, guid: a6246f5100bcf5f49bf1dc68edfb9d3b, type: 3}
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   dialogueBoxColor: {r: 0, g: 0, b: 0, a: 0}
-  transition: 
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   withChoices: 0
   choices: []
+  withItem: 1
+  itemSprite: {fileID: 21300000, guid: 56ca13e489c975b41a40e8ebb59ff4f0, type: 3}
+  withUnfamiliarWord: 0
+  words: []
+  wordColors: []

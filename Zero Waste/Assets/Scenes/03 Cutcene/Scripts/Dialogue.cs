@@ -8,37 +8,43 @@ public class Dialogue : ScriptableObject {
     [Header("Unique Identifier")]
     public int dialogueId;
 
-    [Header("Details")]
+    [Header("Character")]
     public string characterName;
     public Sprite characterThumb;
     public Sprite characterHalf;
     public Sprite characterSprite;
 
     [Space]
-    public bool isLive2D;
+    public bool isCharacterLive2D;
 
-    [Space]
+    [Header("Content")]
     [TextArea(1, 10)]
     public string content;
 
-    [Space]
+    [Header("Content Details")]
     public bool isNarration;
     public bool canSkip;
 
-    [Space]
+    [Header("Sounds")]
     public List<string> SFX;
 
-    [Space]
+    [Header("Graphics")]
     public Sprite background;
-    public Color backgroundColor;
-
+    
     [Space]
     public Color dialogueBoxColor;
-
-    [Space]
-    public string transition;
+    public Color backgroundColor;
 
     [Header("Choices")]
     public bool withChoices;
     public List<Choice> choices;
+
+    [Header("Item")]
+    public bool withItem;
+    public Sprite itemSprite;
+
+    [Header("Words")]
+    public bool withUnfamiliarWord;
+    public List<string> words;
+    public List<Color32> wordColors;
 }
