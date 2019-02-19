@@ -24,7 +24,8 @@ public class GameDataController : MonoBehaviour
             if (dataController.GameDataExists())
             {
                 dataController.ReadGameData();
-                dataController.LoadScavengers(dataController.currentSaveData.scavengerIdList);
+                dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
+                PrintSave();
             }
             else
             {
@@ -35,19 +36,27 @@ public class GameDataController : MonoBehaviour
                 dataController.NewSaveData();
             }
 
-            StartCoroutine(LoadNextScene());
+            StartCoroutine(LoadScene());
         }
     }
 
-    IEnumerator LoadNextScene()
+    IEnumerator LoadScene()
     {
-        //yield return new WaitForSeconds(0.5f);
-        //fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
-        //yield return new WaitForSeconds(0.5f);
-        //fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
-
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(dataController.currentGameData.NextSceneId("Title Screen"));
+    }
+
+    void PrintSave()
+    {
+        Debug.Log("Save File: " + dataController.currentSaveData.fileName);
+        Debug.Log("Date Last Acessed: " + dataController.currentSaveData.dateLastAccessed);
+        Debug.Log("Gender: " + dataController.currentSaveData.gender);
+        Debug.Log("Game Progress");
+        Debug.Log("");
+        Debug.Log("Scavenger Count: " + dataController.currentSaveData.scavengerList.Count);
+        Debug.Log("Current Area: " + dataController.currentSaveData.currentAreaId);
+        Debug.Log("Current Node: " + dataController.currentSaveData.currentNodeId);
+        Debug.Log("Current Battle: " + dataController.currentSaveData.currentBattleId);
     }
 
 }

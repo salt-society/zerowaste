@@ -13,7 +13,6 @@ public class Cutscene : ScriptableObject {
     public string chapter;
     public string title;
     public Sprite firstBackground;
-    public string transition;
 
     [Space]
     public string nextLevel;

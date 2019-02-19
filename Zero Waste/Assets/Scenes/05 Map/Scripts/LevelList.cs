@@ -37,6 +37,8 @@ public class LevelList : MonoBehaviour
     {
         this.mapController = mapController;
         this.nodeManager = nodeManager;
+
+        dataController = mapController.dataController;
     }
 
     public void RemoveCellsfFromGrid()
@@ -72,14 +74,23 @@ public class LevelList : MonoBehaviour
 
             if (dataController != null)
             {
-                if (i <= dataController.currentSaveData.unlockedBattles.Count)
+                if (dataController.currentSaveData.currentBattleId == -1)
+                {
+                    dataController.currentSaveData.currentBattleId++;
+                    dataController.currentSaveData.UnlockedBattle();
+                }
+
+                if (i <= dataController.currentSaveData.currentBattleId)
                 {
                     levelCell.GetComponent<Button>().interactable = true;
 
-                    if (dataController.currentSaveData.unlockedBattles[nodeData.battles[i]])
+                    if (dataController.currentSaveData.unlockedBattles[i])
                         levelCell.GetComponent<Image>().color = finishedColor;
                     else
                         levelCell.GetComponent<Image>().color = currentColor;
+
+                    levelCell.transform.GetChild(0).transform.gameObject.SetActive(true);
+                    levelCell.transform.GetChild(1).transform.gameObject.SetActive(false);
                 }
                 else
                 {

@@ -26,11 +26,9 @@ public class TitleScreenController : MonoBehaviour
         dataController = GameObject.FindObjectOfType<DataController>();
         if (dataController != null)
         {
-           
+            // Play Sound
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Hazy Darkness");
         }
-
-        // Play Sound
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Hazy Darkness");
     }
 
     void Update()
@@ -59,18 +57,21 @@ public class TitleScreenController : MonoBehaviour
 
         if (dataController != null)
         {
-            int currentCutscene = dataController.currentSaveData.currentCutscene;
+            int currentCutsceneId = dataController.currentSaveData.currentCutsceneId;
             string nextLevel = dataController.currentSaveData.nextLevel;
             
             nextSceneId = dataController.currentGameData.NextSceneId(nextLevel);
 
-            if (nextSceneId == 3 && currentCutscene == 0)
+            if (nextSceneId == 3 && currentCutsceneId == 0)
             {
+                if(!(dataController.currentSaveData.unlockedCutscenes.Count > 0))
+                    dataController.currentSaveData.UnlockCutscene();
+
                 genderPanel.SetActive(true);
             }
             else
             {
-                genderPanel.SetActive(true);
+                
             }
         }
     }

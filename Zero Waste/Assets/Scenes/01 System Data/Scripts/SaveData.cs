@@ -21,24 +21,19 @@ public class SaveData { // holds player progress
     [Header("Game Progress")]
     public string nextLevel;
 
-    public List<Cutscene> finishedCutscenes;
-    public List<Areas> unlockedAreas;
-
-    public Dictionary<Node, bool> unlockedNodes;
-    public Dictionary<Battle, bool> unlockedBattles;
-
-    public int currentCutscene;
-    public int currentArea;
-    public int currentTerre;
-    public int currentMare;
-    public int currentAtmos;
-
+    public int currentCutsceneId;
+    public int currentAreaId;
     public int currentNodeId;
     public int currentBattleId;
 
+    public List<bool> unlockedCutscenes;
+    public List<bool> unlockedAreas;
+    public List<bool> unlockedNodes;
+    public List<bool> unlockedBattles;
+
     [Header("Character Roster")]
-    public List<int> scavengerIdList;
-    public Dictionary<int, int> boosterIdList;
+    public List<int> scavengerList;
+    public Dictionary<int, int> boosterList;
 
     public void InitializeSaveData()
     {
@@ -49,104 +44,75 @@ public class SaveData { // holds player progress
         launchDates.Add(dateCreated);
         playCount++;
 
-        SetDefault();
+        SetDefaultValues();
     }
 
-    public void SetDefault()
+    public void SetDefaultValues()
     {
-        nextLevel = "Cutscene";
-
-        finishedCutscenes = new List<Cutscene>();
-        scavengerIdList = new List<int>();
-
-        unlockedNodes = new Dictionary<Node, bool>();
-        unlockedBattles = new Dictionary<Battle, bool>();
-
-        currentCutscene = 0;
-        currentArea = 0;
-        currentBattleId = 0;
+        currentCutsceneId = 0;
+        currentAreaId = -1;
+        currentBattleId = -1;
         currentNodeId = -1;
+
+        unlockedCutscenes = new List<bool>();
+        unlockedAreas = new List<bool>();
+        unlockedNodes = new List<bool>();
+        unlockedBattles = new List<bool>();
+
+        scavengerList = new List<int>();
+        boosterList = new Dictionary<int, int>();
+
+        nextLevel = "Cutscene";
     }
 
-    public void AddScavenger(int scavengerId)
+    public void UnlockCutscene()
     {
-        scavengerIdList.Add(scavengerId);
+        unlockedCutscenes.Add(false);
     }
 
-    public void DeleteScavenger(int scavengerId)
+    public void FinishedCutscene()
     {
-        scavengerIdList.Remove(scavengerId);
+        unlockedCutscenes[currentCutsceneId] = true;
+        currentCutsceneId++;
     }
 
-    public int NextSceneId(string nextLevel)
+    public void UnlockScavenger(int scavengerId)
     {
-        switch (nextLevel)
-        {
-            case "Splash Screen":
-                {
-                    return 0;
-                }
-            case "Loading Data":
-                {
-                    return 1;
-                }
-            case "Title Screen":
-                {
-                    return 2;
-                }
-            case "Cutscene":
-                {
-                    return 3;
-                }
-            case "ZWA":
-                {
-                    return 4;
-                }
-            case "Map":
-                {
-                    return 5;
-                }
-            case "Battle":
-                {
-                    return 6;
-                }
-            default:
-                {
-                    return -1;
-                }
-        }
+        scavengerList.Add(scavengerId);
     }
 
-    public void FinishCutscene()
+    public void RemoveScavenger(int scavengerId)
     {
-        currentCutscene++;
+        scavengerList.Remove(scavengerId);
     }
 
-    public void AddArea(Areas area)
+    public void UnlockArea()
     {
-        unlockedAreas.Add(area);
-        currentArea = unlockedAreas.Count;
+        unlockedAreas.Add(false);
     }
 
-    public void AddNode(Node node)
+    public void FinishedArea(int areaId)
     {
-        unlockedNodes.Add(node, false);
-        currentNodeId = unlockedNodes.Count - 1;
+        unlockedAreas[areaId] = true;
     }
 
-    public void AddBattle(Battle battle)
+    public void UnlockedNode()
     {
-        unlockedBattles.Add(battle, false);
-        currentBattleId = unlockedBattles.Count - 1;
+        unlockedNodes.Add(false);
     }
 
-    public void FinishNode(Node node, bool status)
+    public void FinishedNode(int nodeId)
     {
-        unlockedNodes[node] = status;
+        unlockedNodes[nodeId] = true;
     }
 
-    public void FinishBattle(Battle battle, bool status)
+    public void UnlockedBattle()
     {
-        unlockedBattles[battle] = status;
+        unlockedBattles.Add(false);
+    }
+
+    public void FinishedBattle(int battleId) 
+    {
+        unlockedBattles[battleId] = true;
     }
 }

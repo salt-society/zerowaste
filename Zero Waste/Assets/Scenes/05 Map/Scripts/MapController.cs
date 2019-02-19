@@ -62,12 +62,30 @@ public class MapController : MonoBehaviour
     
     void Start()
     {
-        // dataController = GameObject.FindObjectOfType<DataController>();
-        // 0 indicates tutorial/start game
-        SetDefaultValues();
+        dataController = GameObject.FindObjectOfType<DataController>();
+        if (dataController != null)
+        {
+            SetDefaultValues();
 
-        AssignNodeData();
-        UnlockMaps();
+            Debug.Log("Current Area Id: " + currentAreaId);
+
+            // Check if game's just started
+            if (dataController.currentSaveData.currentAreaId == -1)
+            {
+                dataController.currentSaveData.currentAreaId++;
+                currentAreaId = dataController.currentSaveData.currentAreaId;
+
+                dataController.currentSaveData.UnlockArea();
+
+                AssignNodeData();
+                StartCoroutine(UnlockMapWithAnimation(areaData[currentAreaId]));
+            }
+            else
+            {
+                AssignNodeData();
+                UnlockMaps();
+            }
+        }
     }
 
     void SetDefaultValues()
@@ -77,9 +95,6 @@ public class MapController : MonoBehaviour
         move = false;
         focus = false;
         zoomOut = false;
-
-        currentAreaId = 0;
-        currentNodeId = 2;
     }
 
     void AssignNodeData()
@@ -139,12 +154,23 @@ public class MapController : MonoBehaviour
 
     IEnumerator UnlockMapWithAnimation(Areas area)
     {
+        if (currentAreaId == 0)
+        {
+            yield return new WaitForSeconds(1.5f);
+        }
+
         if (area.areaId <= currentAreaId)
         {
             locks[area.areaId].GetComponent<Animator>().SetBool("Unlock Map", true);
             yield return new WaitForSeconds(1.5f);
             locks[area.areaId].GetComponent<Animator>().SetBool("Unlock Map", false);
             locks[area.areaId].SetActive(false);
+
+            yield return new WaitForSeconds(0.2f);
+
+            areaNames[area.areaId].SetActive(true);
+            areaMap[area.areaId].GetComponent<BoxCollider2D>().enabled = true;
+            canSelectMap = true;
         }
     }
 
@@ -203,6 +229,7 @@ public class MapController : MonoBehaviour
                 }
 
                 nodeParents[area.areaId].SetActive(false);
+                Debug.Log("Unlocked Nodes");
             }
         }
     }
@@ -230,6 +257,11 @@ public class MapController : MonoBehaviour
 
     IEnumerator UnlockNodeWithAnimation(Node node)
     {
+        if (currentNodeId == 0)
+        {
+            yield return new WaitForSeconds(1.5f);
+        }
+
         if (node.nodeId <= currentNodeId)
         {
             if (node.nodeId != 0)
@@ -248,6 +280,7 @@ public class MapController : MonoBehaviour
             }
 
             nodes[node.nodeId].SetActive(true);
+            nodeParents[currentAreaId].SetActive(true);
 
             if (node.nodeId == currentNodeId)
                 PointCurrentNode(node.nodeId);
@@ -512,7 +545,25 @@ public class MapController : MonoBehaviour
         focusedSubname.text = currentSelectMapData.subtitle;
         focusedSubname.gameObject.SetActive(true);
 
-        UnlockNodes();
+        if(dataController != null) 
+        {
+            Debug.Log(dataController.currentSaveData.currentNodeId);
+            if (dataController.currentSaveData.currentNodeId == -1)
+            {
+                dataController.currentSaveData.currentNodeId++;
+                currentNodeId = dataController.currentSaveData.currentNodeId;
+
+                StartCoroutine(UnlockNodeWithAnimation(currentSelectMapData.nodes[currentNodeId]));
+            }
+            else
+            {
+                UnlockNodes();
+            }
+        }
+        else
+        {
+            UnlockNodes();
+        }
 
         foreach (GameObject node in nodes)
         {
@@ -578,8 +629,6 @@ public class MapController : MonoBehaviour
 
         teamSelect.SetActive(true);
         EnableNodeColliders(false);
-
-        Debug.Log(currentSelectedBattle.GetComponent<LevelManager>().GetBattleData().battleName);
     }
 
     public void CancelTeamSelection()
