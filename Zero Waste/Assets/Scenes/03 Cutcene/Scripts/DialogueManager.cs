@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     [Space]
     public bool canSkipDialogue;
 
+    private Cutscene cutscene;
     private List<Dialogue> dialogues;
     private Dialogue currentDialogue;
     private int dialogueIndex;
@@ -191,53 +192,65 @@ public class DialogueManager : MonoBehaviour
         }
 
         char[] characterArray = currentDialogue.content.ToCharArray();
-        int lastIndex = characterArray.Length - 1;
 
-        int letterCount = 0;
-        foreach (char letter in characterArray)
+        if (characterArray.Length > 0)
         {
-            textMesh.text += letter;
+            int lastIndex = characterArray.Length - 1;
 
-            yield return new WaitForSeconds(0.02f);
-            letterCount++;
-
-            if (lastIndex == letterCount)
+            int letterCount = 0;
+            foreach (char letter in characterArray)
             {
-                historyGrid.AddCell(currentDialogue, null, false);
+                textMesh.text += letter;
 
-                if (currentDialogue.withChoices)
-                {
-                    canSkipDialogue = false;
-                    ShowChoices();
-                }
+                yield return new WaitForSeconds(0.02f);
+                letterCount++;
 
-                if (currentDialogue.withItem)
+                if (lastIndex == letterCount)
                 {
-                    canSkipDialogue = false;
-                    StartCoroutine(ShowItem());
-                }
+                    historyGrid.AddCell(currentDialogue, null, false);
 
-                if (currentDialogue.withUnfamiliarWord)
-                {
-                    canSkipDialogue = false;
-                    dialogueFinished = false;
+                    if (currentDialogue.withChoices)
+                    {
+                        canSkipDialogue = false;
+                        ShowChoices();
+                    }
+
+                    if (currentDialogue.withItem)
+                    {
+                        canSkipDialogue = false;
+                        StartCoroutine(ShowItem());
+                    }
+
+                    if (currentDialogue.withUnfamiliarWord)
+                    {
+                        canSkipDialogue = false;
+                        dialogueFinished = false;
+                    }
+                    else
+                    {
+                        dialogueFinished = true;
+                    }
+
                 }
-                else
-                {
-                    dialogueFinished = true;
-                }
-                
+            }
+
+            if (currentDialogue.withUnfamiliarWord)
+            {
+                CheckForUnfamiliarWords(textMesh);
+
+                yield return new WaitForSeconds(2f);
+
+                canSkipDialogue = true;
+                dialogueFinished = false;
             }
         }
-
-        if (currentDialogue.withUnfamiliarWord)
+        else
         {
-            CheckForUnfamiliarWords(textMesh);
-
-            yield return new WaitForSeconds(2f);
-
-            canSkipDialogue = true;
-            dialogueFinished = false;
+            if (currentDialogue.withItem)
+            {
+                canSkipDialogue = false;
+                StartCoroutine(ShowItem());
+            }
         }
     }
 
@@ -371,6 +384,7 @@ public class DialogueManager : MonoBehaviour
         itemBox.SetActive(false);
 
         canSkipDialogue = true;
+        dialogueFinished = true;
     }
 
     IEnumerator ShowNotification()
@@ -401,7 +415,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (TouchPhase.Ended == Input.GetTouch(0).phase)
             {
-                if (dialogueIndex < dialogues.Count)
+                if (dialogueIndex < dialogues.Count - 1)
                 {
                     if (dialogueFinished)
                     {
@@ -428,7 +442,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
-
+                    GameObject.FindObjectOfType<CustceneController>().CutsceneFinished();
                 }
             }
         }

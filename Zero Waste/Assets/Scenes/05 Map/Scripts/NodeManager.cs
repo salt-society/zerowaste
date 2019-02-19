@@ -6,6 +6,9 @@ using TMPro;
 
 public class NodeManager : MonoBehaviour
 {
+    public DataController dataController;
+
+    [Space]
     public Battle battle;
     public Node nodeData;
 
@@ -22,6 +25,11 @@ public class NodeManager : MonoBehaviour
     private GameObject levelList;
 
     private bool canSelectNode;
+
+    void Start()
+    {
+        dataController = GameObject.FindObjectOfType<DataController>();
+    }
 
     public void SetBattleData(Battle battle, GameObject node)
     {

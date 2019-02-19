@@ -6,6 +6,7 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
+    private DataController dataController;
     private Battle battle;
 
     private GameObject level;
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
     public void SetMapController(MapController mapController)
     {
         this.mapController = mapController;
+        dataController = mapController.dataController;
     }
 
     public void SetNodeManager(NodeManager nodeManager)

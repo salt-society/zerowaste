@@ -12,7 +12,9 @@ public class Dialogue : ScriptableObject {
     public string characterName;
     public Sprite characterThumb;
     public Sprite characterHalf;
-    public Sprite characterSprite;
+
+    [Space]
+    public Sprite[] characterSprites;
 
     [Space]
     public bool isCharacterLive2D;

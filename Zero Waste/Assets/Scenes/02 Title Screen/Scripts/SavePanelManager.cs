@@ -50,12 +50,15 @@ public class SavePanelManager : MonoBehaviour
         }
 
         // Enable if there's a save file
-        int i = 0;
-        foreach (SaveData save in saves)
+        if (dataController != null)
         {
-            saveButtons[i].enabled = true;
-            saveButtons[i].GetComponent<Image>().color = enabledColor;
-            i++;
+            int i = 0;
+            foreach (SaveData save in saves)
+            {
+                saveButtons[i].enabled = true;
+                saveButtons[i].GetComponent<Image>().color = enabledColor;
+                i++;
+            }
         }
 
         SetCurrentSave();
@@ -63,35 +66,42 @@ public class SavePanelManager : MonoBehaviour
 
     void SetCurrentSave()
     {
-        if (dataController.currentGameData.currentSave == null)
+        if (dataController != null)
         {
-            return;
-        }
-
-        int i = 0;
-        foreach (SaveData save in saves)
-        {
-            if (save.fileName.Equals(dataController.currentGameData.currentSave.fileName))
+            if (dataController.currentGameData.currentSave == null)
             {
-                saveButtons[i].GetComponent<Image>().color = currentSaveColor;
+                return;
             }
-            else
+
+            int i = 0;
+            foreach (SaveData save in saves)
             {
-                saveButtons[i].GetComponent<Image>().color = enabledColor;
+                if (save.fileName.Equals(dataController.currentGameData.currentSave.fileName))
+                {
+                    saveButtons[i].GetComponent<Image>().color = currentSaveColor;
+                }
+                else
+                {
+                    saveButtons[i].GetComponent<Image>().color = enabledColor;
+                }
             }
         }
     }
 
     public void ShowSaves()
     {
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 1");
+        if(dataController != null)
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 1");
+
         savePanel.SetActive(true);
         savePanelOpen = true;
     }
 
     IEnumerator HideSaves()
     {
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
+        if (dataController != null)
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
+
         savePanel.GetComponent<Animator>().SetBool("Fade Out", true);
         yield return new WaitForSeconds(1f);
         savePanel.GetComponent<Animator>().SetBool("Fade Out", false);
@@ -100,7 +110,8 @@ public class SavePanelManager : MonoBehaviour
 
     public void LoadSave(int saveNo)
     {
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 1");
+        if (dataController != null)
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 1");
         dataController.LoadSaveData(saveNo);
         StartCoroutine(ShowLoadResult());
     }

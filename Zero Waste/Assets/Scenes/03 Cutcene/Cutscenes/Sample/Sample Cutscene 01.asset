@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d1820cbb2de1e44eb1d7dc6b6607393, type: 3}
+  m_Name: Sample Cutscene 01
+  m_EditorClassIdentifier: 
+  cutsceneId: 0
+  chapter: Sample 01
+  title: Sample 01
+  firstBackground: {fileID: 21300000, guid: fc4b551e6b831464ebd59cff44cf2c76, type: 3}
+  nextLevel: Map
+  dialogues:
+  - {fileID: 11400000, guid: 16efd5b82a3d0e04dac31c1572f16b52, type: 2}
+  - {fileID: 11400000, guid: 3de06a09515a9854c81f25e816316080, type: 2}

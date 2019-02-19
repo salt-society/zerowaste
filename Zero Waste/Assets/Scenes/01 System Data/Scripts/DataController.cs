@@ -216,7 +216,7 @@ public class DataController : MonoBehaviour
             var scavengerJson = JsonUtility.ToJson(scavenger);
             binaryFormatter.Serialize(fileStream, scavengerJson);
 
-            currentSaveData.AddScavenger(scavenger.characterId);
+            currentSaveData.UnlockScavenger(scavenger.characterId);
 
             fileStream.Close();
         }

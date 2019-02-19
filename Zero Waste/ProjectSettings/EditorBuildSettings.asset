@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/02 Title Screen/02 Title Screen.unity
     guid: c33358209f71cec47972b7b8afc367a6
   - enabled: 1
-    path: Assets/Scenes/03 Cutcene/Cutscene.unity
+    path: Assets/Scenes/03 Cutcene/03 Cutscene.unity
     guid: 1e6701fb6f7c8fa4aada9bc2ae65ed84
+  - enabled: 1
+    path: Assets/Scenes/04 ZWA/04 ZWA.unity
+    guid: ee7115190cb365f4b9528182528440cb
+  - enabled: 1
+    path: Assets/Scenes/05 Map/05 Map.unity
+    guid: 7908a2baaf6d90f47aae46cd25697e9f
   m_configObjects: {}

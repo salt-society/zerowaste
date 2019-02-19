@@ -14,10 +14,10 @@ public class SplashScreenController : MonoBehaviour
     void Start()
     {
         nextScene = 1;
-        StartCoroutine(LoadNextScene());
+        StartCoroutine(LoadScene());
     }
 
-    IEnumerator LoadNextScene()
+    IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
