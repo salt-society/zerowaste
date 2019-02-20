@@ -7,6 +7,7 @@ using TMPro;
 public class MapController : MonoBehaviour
 {
     public DataController dataController;
+    public TeamSelect teamSelectManager;
 
     [Space]
     public Camera mainCamera;
@@ -55,7 +56,6 @@ public class MapController : MonoBehaviour
     private Vector2 destination;
 
     private Areas currentSelectMapData;
-    private string currentSelectedMap;
 
     private GameObject currentSelectedNode;
     private GameObject currentSelectedBattle;
@@ -66,8 +66,6 @@ public class MapController : MonoBehaviour
         if (dataController != null)
         {
             SetDefaultValues();
-
-            Debug.Log("Current Area Id: " + currentAreaId);
 
             // Check if game's just started
             if (dataController.currentSaveData.currentAreaId == -1)
@@ -289,6 +287,268 @@ public class MapController : MonoBehaviour
         }
     }
 
+    IEnumerator ShowAreaTooltip(GameObject obj)
+    {
+        foreach (Areas area in areaData)
+        {
+            if (area.areaName.Equals(obj.transform.parent.gameObject.name))
+            {
+                areaTooltips[area.areaId].SetActive(true);
+                yield return new WaitForSeconds(2f);
+                areaTooltips[area.areaId].SetActive(false);
+                break;
+            }
+        }
+    }
+
+    IEnumerator ShowAreaTooltip(int areaId)
+    {
+        areaTooltips[areaId].SetActive(true);
+        yield return new WaitForSeconds(2f);
+        areaTooltips[areaId].SetActive(false);
+    }
+
+    IEnumerator ShowAreaThreatLevel(GameObject obj)
+    {
+        if (dataController.currentArea != null)
+            StartCoroutine(HideAreaThreatLevel());
+
+        yield return new WaitForSeconds(.5f);
+
+        foreach (Areas area in areaData)
+        {
+            if(area.areaName.Equals(obj.transform.gameObject.name))
+            {
+                areaHover[area.areaId].SetActive(true);
+                exploreButton.gameObject.SetActive(true);
+
+                TextMeshProUGUI tooltipText = areaTooltips[area.areaId].transform.GetChild(0)
+                    .gameObject.GetComponent<TextMeshProUGUI>();
+                tooltipText.text = "Doctor Cooper allowed this area to be explored. " +
+                    " Still, be careful Scavenger!";
+                StartCoroutine(ShowAreaTooltip(area.areaId));
+                
+                currentSelectMapData = area;
+
+                if (dataController != null)
+                {
+                    dataController.currentArea = area;
+                }
+
+                break;
+            }
+                
+        }
+    }
+
+    IEnumerator HideAreaThreatLevel()
+    {
+        foreach (Areas area in areaData)
+        {
+            if (area.Equals(dataController.currentArea))
+            {
+                areaHover[area.areaId].GetComponent<Animator>().SetBool("Fade Out", true);
+                exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", true);
+                yield return new WaitForSeconds(.2f);
+                areaHover[area.areaId].GetComponent<Animator>().SetBool("Fade Out", false);
+                exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", false);
+                areaHover[area.areaId].SetActive(false);
+                exploreButton.gameObject.SetActive(false);
+
+                break;
+            }
+        }
+    }
+
+    private void ExploreMap()
+    {
+        camDefaultPosition = mainCamera.transform.position;
+
+        if (dataController != null)
+        {
+            destination = dataController.currentArea.coordinates;
+
+            canSelectMap = false;
+            focusArea = true;
+            move = true;
+
+            infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
+            zwaButton.gameObject.SetActive(false);
+
+            foreach (GameObject areaName in areaNames)
+                areaName.SetActive(false);
+        }
+        else
+        {
+            destination = currentSelectMapData.coordinates;
+
+            canSelectMap = false;
+            focusArea = true;
+            move = true;
+
+            infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
+            zwaButton.gameObject.SetActive(false);
+
+            foreach (GameObject areaName in areaNames)
+                areaName.SetActive(false);
+        }
+    }
+
+    private void ZoomOutOfMap()
+    {
+        StartCoroutine(ZoomOutAnimation());
+    }
+
+    IEnumerator ZoomOutAnimation()
+    {
+        for (int i = 0; i <= currentNodeId; i++)
+            StartCoroutine(nodes[i].GetComponent<NodeManager>().HideNode());   
+            
+        yield return new WaitForSeconds(1f);
+
+        camDefaultPosition = mainCamera.transform.position;
+        destination = new Vector3(0, 0, -10);
+
+        canSelectMap = true;
+        focusArea = true;
+        move = true;
+        zoomOut = true;
+
+        yield return new WaitForSeconds(1f);
+
+        if (dataController != null)
+        {
+            areaNames[dataController.currentArea.areaId].SetActive(true);
+        }
+        else
+        {
+            areaNames[currentSelectMapData.areaId].SetActive(true);
+        }
+        
+    }
+
+    private void ShowFocusedAreaContent()
+    {
+        infectedAreasSign.SetActive(false);
+        zoomOutButton.gameObject.SetActive(true);
+
+        focusedAreaName.text = dataController.currentArea.areaName;
+        focusedAreaName.gameObject.SetActive(true);
+
+        focusedSubname.text = dataController.currentArea.subtitle;
+        focusedSubname.gameObject.SetActive(true);
+
+        if(dataController != null) 
+        {
+            Debug.Log(dataController.currentSaveData.currentNodeId);
+            if (dataController.currentSaveData.currentNodeId == -1)
+            {
+                dataController.currentSaveData.currentNodeId++;
+                currentNodeId = dataController.currentSaveData.currentNodeId;
+
+                StartCoroutine(UnlockNodeWithAnimation(dataController.currentArea.nodes[currentNodeId]));
+            }
+            else
+            {
+                UnlockNodes();
+            }
+        }
+        else
+        {
+            UnlockNodes();
+        }
+
+        foreach (GameObject node in nodes)
+        {
+            node.GetComponent<NodeManager>().SetMapController(this);
+            node.GetComponent<NodeManager>().AllowNodeSelection(1);
+            node.GetComponent<NodeManager>().SetPreviousNodeData(dataController.currentArea.
+                nodes[currentNodeId], nodes[currentNodeId]);
+            node.GetComponent<NodeManager>().SendAreaNameComponents(focusedAreaName, focusedSubname);
+            node.GetComponent<NodeManager>().SendNodeDetailComponents(nodeDetails);
+            node.GetComponent<NodeManager>().SendLevelListComponents(levelList);
+        }
+            
+    }
+
+    private void HideFocusedAreaContent()
+    {
+        LockNodes();
+
+        zoomOutButton.gameObject.SetActive(false);
+        focusedAreaName.gameObject.SetActive(false);
+        focusedSubname.gameObject.SetActive(false);
+        infectedAreasSign.SetActive(true);
+        zwaButton.gameObject.SetActive(true);
+        infectedAreasSign.SetActive(true);
+    }
+
+    public void EnableNodeColliders(bool enabled)
+    {
+        foreach (Node node in dataController.currentArea.nodes)
+            nodes[node.nodeId].GetComponent<BoxCollider2D>().enabled = enabled;
+    }
+
+    public void HideListOfLevels()
+    {
+        if (dataController != null)
+        {
+            StartCoroutine(dataController.currentNodeObject.
+                GetComponent<NodeManager>().HideListOfLevels());
+        }
+        
+    }
+
+    public void RetreatFromNode()
+    {
+        if (dataController != null)
+        {
+            StartCoroutine(dataController.currentBattleObject.
+                GetComponent<LevelManager>().HideBattleDetails());
+        }
+    }
+
+    public void HuntNode()
+    {
+        StartCoroutine(ShowTeamSelect());
+    }
+
+    IEnumerator ShowTeamSelect()
+    {
+        RetreatFromNode();
+        HideListOfLevels();
+
+        yield return new WaitForSeconds(2f);
+
+        teamSelect.SetActive(true);
+        EnableNodeColliders(false);
+
+        StartCoroutine(teamSelectManager.SetDefaultScavengers());
+    }
+
+    public void CancelTeamSelection()
+    {
+        StartCoroutine(HideTeamSelect());
+    }
+
+    IEnumerator HideTeamSelect()
+    {
+        EnableNodeColliders(true);
+
+        teamSelect.GetComponent<Animator>().SetBool("Exit", true);
+        yield return new WaitForSeconds(2f);
+        teamSelect.GetComponent<Animator>().SetBool("Exit", false);
+        teamSelect.SetActive(false);
+    }
+
+    public void EnterBattle()
+    {
+        if (dataController != null)
+        {
+            Destroy(dataController.currentBattleObject);
+        }
+    }
+
     void Update()
     {
         // Map Selection through Raycast
@@ -303,8 +563,6 @@ public class MapController : MonoBehaviour
 
                     if (hit.collider != null)
                     {
-                        Debug.Log(hit.transform.gameObject.name);
-
                         GameObject obj = hit.transform.gameObject;
                         if (obj.name.Equals("Lock"))
                         {
@@ -316,16 +574,12 @@ public class MapController : MonoBehaviour
                         {
                             StartCoroutine(ShowAreaThreatLevel(obj));
                         }
-                        
+
                     }
                     else
                     {
-                        Debug.Log("No map clicked.");
-
-                        if (!string.IsNullOrEmpty(currentSelectedMap))
-                        {
+                        if (dataController.currentArea != null)
                             StartCoroutine(HideAreaThreatLevel());
-                        }
                     }
                 }
             }
@@ -353,9 +607,9 @@ public class MapController : MonoBehaviour
                             offset = destination + camDefaultPosition; ;
                             direction = Vector2.ClampMagnitude(offset, 1.0f);
                         }
-                        
-                        mainCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-                        fxCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
+
+                        mainCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
+                        fxCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
                     }
                     else
                     {
@@ -370,8 +624,8 @@ public class MapController : MonoBehaviour
                         Vector2 offset = destination - camDefaultPosition; ;
                         Vector2 direction = Vector2.ClampMagnitude(offset, 1.0f);
 
-                        mainCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-                        fxCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
+                        mainCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
+                        fxCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
                     }
                     else
                     {
@@ -388,10 +642,10 @@ public class MapController : MonoBehaviour
 
                 if (!zoomOut)
                 {
-                    if (mainCamSize >= currentSelectMapData.zoomSize && fxCamSize >= currentSelectMapData.zoomSize)
+                    if (mainCamSize >= dataController.currentArea.zoomSize && fxCamSize >= dataController.currentArea.zoomSize)
                     {
-                        mainCamera.orthographicSize -= (currentSelectMapData.zoomSpeed * Time.deltaTime);
-                        fxCamera.orthographicSize -= (currentSelectMapData.zoomSpeed * Time.deltaTime);
+                        mainCamera.orthographicSize -= (dataController.currentArea.zoomSpeed * Time.deltaTime);
+                        fxCamera.orthographicSize -= (dataController.currentArea.zoomSpeed * Time.deltaTime);
                     }
                     else
                     {
@@ -405,8 +659,8 @@ public class MapController : MonoBehaviour
                 {
                     if (mainCamSize <= 200 && fxCamSize <= 200)
                     {
-                        mainCamera.orthographicSize += (currentSelectMapData.zoomSpeed * Time.deltaTime);
-                        fxCamera.orthographicSize += (currentSelectMapData.zoomSpeed * Time.deltaTime);
+                        mainCamera.orthographicSize += (dataController.currentArea.zoomSpeed * Time.deltaTime);
+                        fxCamera.orthographicSize += (dataController.currentArea.zoomSpeed * Time.deltaTime);
                     }
                     else
                     {
@@ -417,232 +671,8 @@ public class MapController : MonoBehaviour
                         HideFocusedAreaContent();
                     }
                 }
-                
+
             }
         }
-    }
-
-    IEnumerator ShowAreaTooltip(GameObject obj)
-    {
-        Debug.Log(obj.transform.parent.gameObject.name);
-        foreach (Areas area in areaData)
-        {
-            if (area.areaName.Equals(obj.transform.parent.gameObject.name))
-            {
-                areaTooltips[area.areaId].SetActive(true);
-                yield return new WaitForSeconds(2f);
-                areaTooltips[area.areaId].SetActive(false);
-                break;
-            }
-        }
-    }
-
-    IEnumerator ShowAreaTooltip(int areaId)
-    {
-        areaTooltips[areaId].SetActive(true);
-        yield return new WaitForSeconds(2f);
-        areaTooltips[areaId].SetActive(false);
-    }
-
-    IEnumerator ShowAreaThreatLevel(GameObject obj)
-    {
-        if (!string.IsNullOrEmpty(currentSelectedMap))
-        {
-            StartCoroutine(HideAreaThreatLevel());
-        }
-
-        yield return new WaitForSeconds(.5f);
-
-        foreach (Areas area in areaData)
-        {
-            if(area.areaName.Equals(obj.transform.gameObject.name))
-            {
-                areaHover[area.areaId].SetActive(true);
-                exploreButton.gameObject.SetActive(true);
-
-                TextMeshProUGUI tooltipText = areaTooltips[area.areaId].transform.GetChild(0)
-                    .gameObject.GetComponent<TextMeshProUGUI>();
-                tooltipText.text = "Doctor Cooper allowed this area to be explored. " +
-                    " Still, be careful Scavenger!";
-                StartCoroutine(ShowAreaTooltip(area.areaId));
-                
-                currentSelectedMap = area.areaName;
-                currentSelectMapData = area;
-                break;
-            }
-                
-        }
-    }
-
-    IEnumerator HideAreaThreatLevel()
-    {
-        foreach (Areas area in areaData)
-        {
-            if (area.areaName.Equals(currentSelectedMap))
-            {
-                areaHover[area.areaId].GetComponent<Animator>().SetBool("Fade Out", true);
-                exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", true);
-                yield return new WaitForSeconds(.2f);
-                areaHover[area.areaId].GetComponent<Animator>().SetBool("Fade Out", false);
-                exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", false);
-                areaHover[area.areaId].SetActive(false);
-                exploreButton.gameObject.SetActive(false);
-
-                currentSelectedMap = string.Empty;
-                break;
-            }
-        }
-    }
-
-    private void ExploreMap()
-    {
-        camDefaultPosition = mainCamera.transform.position;
-        destination = currentSelectMapData.coordinates;
-
-        canSelectMap = false;
-        focusArea = true;
-        move = true;
-
-        infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
-        zwaButton.gameObject.SetActive(false);
-
-        foreach (GameObject areaName in areaNames)
-            areaName.SetActive(false);
-    }
-
-    private void ZoomOutOfMap()
-    {
-        StartCoroutine(ZoomOutAnimation());
-    }
-
-    IEnumerator ZoomOutAnimation()
-    {
-        for (int i = 0; i <= currentNodeId; i++)
-            StartCoroutine(nodes[i].GetComponent<NodeManager>().HideNode());   
-            
-        yield return new WaitForSeconds(1f);
-
-        camDefaultPosition = mainCamera.transform.position;
-        destination = new Vector3(0, 0, -10);
-
-        canSelectMap = true;
-        focusArea = true;
-        move = true;
-        zoomOut = true;
-
-        yield return new WaitForSeconds(1f);
-        areaNames[currentSelectMapData.areaId].SetActive(true);
-    }
-
-    private void ShowFocusedAreaContent()
-    {
-        infectedAreasSign.SetActive(false);
-        zoomOutButton.gameObject.SetActive(true);
-
-        focusedAreaName.text = currentSelectMapData.areaName;
-        focusedAreaName.gameObject.SetActive(true);
-
-        focusedSubname.text = currentSelectMapData.subtitle;
-        focusedSubname.gameObject.SetActive(true);
-
-        if(dataController != null) 
-        {
-            Debug.Log(dataController.currentSaveData.currentNodeId);
-            if (dataController.currentSaveData.currentNodeId == -1)
-            {
-                dataController.currentSaveData.currentNodeId++;
-                currentNodeId = dataController.currentSaveData.currentNodeId;
-
-                StartCoroutine(UnlockNodeWithAnimation(currentSelectMapData.nodes[currentNodeId]));
-            }
-            else
-            {
-                UnlockNodes();
-            }
-        }
-        else
-        {
-            UnlockNodes();
-        }
-
-        foreach (GameObject node in nodes)
-        {
-            node.GetComponent<NodeManager>().SetMapController(this);
-            node.GetComponent<NodeManager>().AllowNodeSelection(1);
-            node.GetComponent<NodeManager>().SetPreviousBattleData(currentSelectMapData.nodes[currentNodeId], nodes[currentNodeId]);
-            node.GetComponent<NodeManager>().SendAreaNameComponents(focusedAreaName, focusedSubname);
-            node.GetComponent<NodeManager>().SendNodeDetailComponents(nodeDetails);
-            node.GetComponent<NodeManager>().SendLevelListComponents(levelList);
-        }
-            
-    }
-
-    private void HideFocusedAreaContent()
-    {
-        LockNodes();
-
-        zoomOutButton.gameObject.SetActive(false);
-        focusedAreaName.gameObject.SetActive(false);
-        focusedSubname.gameObject.SetActive(false);
-        infectedAreasSign.SetActive(true);
-        zwaButton.gameObject.SetActive(true);
-        infectedAreasSign.SetActive(true);
-    }
-
-    public void SetCurrentSelectedNode(GameObject currentSelectedNode)
-    {
-        this.currentSelectedNode = currentSelectedNode;
-    }
-
-    public void SetCurrentSelectedBattle(GameObject currentSelectedBattle)
-    {
-        this.currentSelectedBattle = currentSelectedBattle;
-    }
-
-    public void EnableNodeColliders(bool enabled)
-    {
-        foreach (Node node in currentSelectMapData.nodes)
-            nodes[node.nodeId].GetComponent<BoxCollider2D>().enabled = enabled;
-    }
-
-    public void HideListOfLevels()
-    {
-        StartCoroutine(currentSelectedNode.GetComponent<NodeManager>().HideListOfLevels());
-    }
-
-    public void RetreatFromNode()
-    {
-        StartCoroutine(currentSelectedBattle.GetComponent<LevelManager>().HideBattleDetails());
-    }
-
-    public void HuntNode()
-    {
-        StartCoroutine(ShowTeamSelect());
-    }
-
-    IEnumerator ShowTeamSelect()
-    {
-        RetreatFromNode();
-        HideListOfLevels();
-
-        yield return new WaitForSeconds(2f);
-
-        teamSelect.SetActive(true);
-        EnableNodeColliders(false);
-    }
-
-    public void CancelTeamSelection()
-    {
-        StartCoroutine(HideTeamSelect());
-    }
-
-    IEnumerator HideTeamSelect()
-    {
-        EnableNodeColliders(true);
-
-        teamSelect.GetComponent<Animator>().SetBool("Exit", true);
-        yield return new WaitForSeconds(2f);
-        teamSelect.GetComponent<Animator>().SetBool("Exit", false);
-        teamSelect.SetActive(false);
     }
 }

@@ -442,7 +442,14 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.FindObjectOfType<CustceneController>().CutsceneFinished();
+                    if (dialogueFinished)
+                    {
+                        if (dataController != null)
+                        {
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
+                            GameObject.FindObjectOfType<CustceneController>().CutsceneFinished();
+                        }
+                    }
                 }
             }
         }

@@ -7,34 +7,41 @@ using TMPro;
 public class ScavengerRoster : MonoBehaviour
 {
     public DataController dataController;
+    public TeamSelect teamSelectManager;
 
     [Space]
     public GameObject scavengerCellPrefab;
-
-    [Space]
-    public List<Player> tempoScavRoster;
-
-    private int maxNoOfCells;
+    public int maxNoOfCells;
 
     void Start()
     {
-        maxNoOfCells = tempoScavRoster.Count;
+        dataController = GameObject.FindObjectOfType<DataController>();
         PopulateGrid();
     }
 
-    void PopulateGrid()
+    public void PopulateGrid()
     {
         GameObject scavengerCell;
+        if (dataController != null)
+            maxNoOfCells = dataController.scavengerRoster.Count;
 
         for (int i = 0; i < maxNoOfCells; i++)
         {
+           
             scavengerCell = Instantiate(scavengerCellPrefab, transform);
-            scavengerCell.GetComponent<ScavengerCell>().player = tempoScavRoster[i];
 
-            scavengerCell.transform.GetChild(0).gameObject.
-                GetComponent<TextMeshProUGUI>().text = tempoScavRoster[i].characterName;
-            scavengerCell.transform.GetChild(1).gameObject.
-                GetComponent<Image>().sprite = tempoScavRoster[i].characterThumb;
+            if (dataController != null)
+            {
+                scavengerCell.GetComponent<ScavengerCell>().SetScavengerData(dataController.scavengerRoster[i], teamSelectManager);
+                scavengerCell.GetComponent<ScavengerCell>().SetScavengerIndex(i);
+
+                Debug.Log(scavengerCell.GetComponent<ScavengerCell>().GetScavengerData().characterName);
+
+                scavengerCell.transform.GetChild(2).gameObject.
+                    GetComponent<TextMeshProUGUI>().text = dataController.scavengerRoster[i].characterName;
+                scavengerCell.transform.GetChild(0).GetChild(0).gameObject.
+                    GetComponent<Image>().sprite = dataController.scavengerRoster[i].characterHalf;
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ public class GameDataController : MonoBehaviour
             {
                 dataController.ReadGameData();
                 dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
+                dataController.currentSaveData.playCount++;
                 PrintSave();
             }
             else

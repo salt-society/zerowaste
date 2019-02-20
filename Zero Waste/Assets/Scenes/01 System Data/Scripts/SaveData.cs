@@ -78,7 +78,10 @@ public class SaveData { // holds player progress
 
     public void UnlockScavenger(int scavengerId)
     {
-        scavengerList.Add(scavengerId);
+        if(!scavengerList.Contains(scavengerId))
+        {
+            scavengerList.Add(scavengerId);
+        }
     }
 
     public void RemoveScavenger(int scavengerId)

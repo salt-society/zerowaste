@@ -50,7 +50,12 @@ public class LevelManager : MonoBehaviour
 
     public void SelectLevel()
     {
-        mapController.SetCurrentSelectedBattle(gameObject);
+        if (dataController != null)
+        {
+            dataController.currentBattle = battle;
+            dataController.currentBattleObject = gameObject;
+        }
+
         StartCoroutine(ShowBattleDetails());
     }
 

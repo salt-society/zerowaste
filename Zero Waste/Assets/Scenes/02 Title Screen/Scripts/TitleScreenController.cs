@@ -78,7 +78,8 @@ public class TitleScreenController : MonoBehaviour
 
     public void ChooseGender(int chosenGender)
     {
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
+        if(dataController != null)
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
         StartCoroutine(ChangeGender(chosenGender));
     }
 
@@ -141,7 +142,8 @@ public class TitleScreenController : MonoBehaviour
 
     public void ContinueGame()
     {
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
+        if(dataController != null)
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
 
         dataController.SaveScavengers();
         dataController.SaveSaveData();

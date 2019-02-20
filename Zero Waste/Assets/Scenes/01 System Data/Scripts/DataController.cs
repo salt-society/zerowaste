@@ -23,7 +23,10 @@ public class DataController : MonoBehaviour
     public List<Player> scavengerRoster;
 
     [Space]
+    public Areas currentArea;
+    public GameObject currentNodeObject;
     public Node currentNode;
+    public GameObject currentBattleObject;
     public Battle currentBattle;
 
     [Space]
@@ -198,7 +201,6 @@ public class DataController : MonoBehaviour
     public void AddScavenger(Player scavenger)
     {
         scavengerRoster.Add(scavenger);
-        Debug.Log(scavenger.name);
     }
 
     public void SaveScavenger(Player scavenger)
