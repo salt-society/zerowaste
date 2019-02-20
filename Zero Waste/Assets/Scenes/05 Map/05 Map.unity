@@ -15826,6 +15826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataController: {fileID: 0}
+  teamSelectManager: {fileID: 2041446676}
   scavengerCellPrefab: {fileID: 3042020719105159671, guid: f45ff1dcbf0861a4dba8afd7813a7b63,
     type: 3}
   maxNoOfCells: 0

@@ -7,6 +7,7 @@ using TMPro;
 public class ScavengerRoster : MonoBehaviour
 {
     public DataController dataController;
+    public TeamSelect teamSelectManager;
 
     [Space]
     public GameObject scavengerCellPrefab;
@@ -30,7 +31,7 @@ public class ScavengerRoster : MonoBehaviour
 
             if (dataController != null)
             {
-                scavengerCell.GetComponent<ScavengerCell>().SetScavengerData(dataController.scavengerRoster[i]);
+                scavengerCell.GetComponent<ScavengerCell>().SetScavengerData(dataController.scavengerRoster[i], teamSelectManager);
                 scavengerCell.GetComponent<ScavengerCell>().SetScavengerIndex(i);
 
                 Debug.Log(scavengerCell.GetComponent<ScavengerCell>().GetScavengerData().characterName);

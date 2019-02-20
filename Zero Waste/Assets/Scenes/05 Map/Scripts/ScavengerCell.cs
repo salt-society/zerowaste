@@ -1,15 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScavengerCell : MonoBehaviour
 {
     private Player scavenger;
+    private TeamSelect teamSelectManager;
     public int index;
 
-    public void SetScavengerData(Player scavenger)
+    void Start()
+    {
+        gameObject.GetComponent<Button>().onClick.AddListener(SelectScavenger);
+    }
+
+    public void SetScavengerData(Player scavenger, TeamSelect teamSelectManager)
     {
         this.scavenger = scavenger;
+        this.teamSelectManager = teamSelectManager;
     }
 
     public Player GetScavengerData()
@@ -25,6 +33,6 @@ public class ScavengerCell : MonoBehaviour
     public void SelectScavenger()
     {
         Debug.Log(index);
-        StartCoroutine(GameObject.FindObjectOfType<TeamSelect>().AddScavengerToTeam(index));
+        StartCoroutine(teamSelectManager.AddScavengerToTeam(index));
     }
 }
