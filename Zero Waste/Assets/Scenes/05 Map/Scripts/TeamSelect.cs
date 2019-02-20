@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TeamSelect : MonoBehaviour
 {
     public DataController dataController;
+    public ScavengerRoster scavengerRosterManager;
 
     [Space]
     public GameObject scavengerRoster;
@@ -14,12 +15,14 @@ public class TeamSelect : MonoBehaviour
     [Space]
     public List<GameObject> scavengerSlots;
     
-    private Player[] scavengerTeam;
+    public Player[] scavengerTeam;
+
     private int currentSlot;
 
     void Start()
     {
         dataController = GameObject.FindObjectOfType<DataController>();
+
         scavengerTeam = new Player[3];
     }
 
@@ -29,6 +32,8 @@ public class TeamSelect : MonoBehaviour
         {
             // Add Ryleigh as Default Scavenger
             scavengerTeam[0] = dataController.scavengerRoster[0];
+            scavengerTeam[1] = null;
+            scavengerTeam[2] = null;
 
             scavengerSlots[0].GetComponent<Image>().sprite = dataController.scavengerRoster[0].characterFull;
             yield return new WaitForSeconds(1f);
@@ -39,7 +44,11 @@ public class TeamSelect : MonoBehaviour
     public void SelectScavenger(int position)
     {
         currentSlot = position;
+
+        StopAllCoroutines();
         StartCoroutine(ShowScavengerRoster());
+
+        Debug.Log("Slot clicked: " + position);
     }
 
     IEnumerator ShowScavengerRoster()
@@ -57,18 +66,164 @@ public class TeamSelect : MonoBehaviour
 
     public IEnumerator AddScavengerToTeam(Player scavenger)
     {
-        if (!scavengerSlots[currentSlot].activeInHierarchy)
+        bool isInTeam = false;
+        int prevSlot = 0;
+
+        foreach(Player scav in scavengerTeam) 
         {
-            scavengerSlots[currentSlot].GetComponent<Animator>().SetBool("Remove", true);
-            yield return new WaitForSeconds(.8f);
-            scavengerSlots[currentSlot].GetComponent<Animator>().SetBool("Remove", false);
-            scavengerSlots[currentSlot].SetActive(false);
-            yield return null;
+            if (scav == scavenger)
+            {
+                if (prevSlot != currentSlot)
+                {
+                    isInTeam = true;
+                    break;
+                }
+                else
+                {
+                    isInTeam = false;
+                }
+            }
+
+            prevSlot++;
         }
 
-        scavengerTeam[currentSlot] = scavenger;
+        if (isInTeam)
+        {
+            if (prevSlot != currentSlot)
+            {
+                Debug.Log("Transfering scav to other slot.");
+                scavengerTeam[prevSlot] = null;
+                StartCoroutine(RemoveScavenger(prevSlot));
+                yield return new WaitForSeconds(1f);
 
-        scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
-        scavengerSlots[currentSlot].SetActive(true);
+                if (scavengerTeam[currentSlot] != null)
+                {
+                    Debug.Log("Removing scav on currently selected slot.");
+
+                    scavengerTeam[currentSlot] = null;
+                    StartCoroutine(RemoveScavenger(currentSlot));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                scavengerTeam[currentSlot] = scavenger;
+                scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
+                scavengerSlots[currentSlot].SetActive(true);
+
+                yield return new WaitForSeconds(1f);
+
+                scavengerSlots[currentSlot].GetComponent<Image>().fillAmount = 1;
+            }
+            else
+            {
+                Debug.Log("Scav is already in place.");
+            }
+        }
+        else
+        {
+            Debug.Log("Adding scavenger to slot.");
+            if (scavengerTeam[currentSlot] != null)
+            {
+                Debug.Log("Removing scav on currently selected slot.");
+
+                scavengerTeam[currentSlot] = null;
+                StartCoroutine(RemoveScavenger(currentSlot));
+                yield return new WaitForSeconds(1f);
+            }
+
+            scavengerTeam[currentSlot] = scavenger;
+            scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
+            scavengerSlots[currentSlot].SetActive(true);
+
+            yield return new WaitForSeconds(1f);
+
+            scavengerSlots[currentSlot].GetComponent<Image>().fillAmount = 1;
+        }
+    }
+
+    public IEnumerator AddScavengerToTeam(int scavengerIndex)
+    {
+        bool isInTeam = false;
+        int prevSlot = 0;
+
+        Player scavenger = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex];
+        Debug.Log(scavengerIndex + " " + scavenger.characterName);
+
+        foreach (Player scav in scavengerTeam)
+        {
+            if (scav == scavenger)
+            {
+                if (prevSlot != currentSlot)
+                {
+                    isInTeam = true;
+                    break;
+                }
+                else
+                {
+                    isInTeam = false;
+                }
+            }
+
+            prevSlot++;
+        }
+
+        if (isInTeam)
+        {
+            if (prevSlot != currentSlot)
+            {
+                Debug.Log("Transfering scav to other slot.");
+                scavengerTeam[prevSlot] = null;
+                StartCoroutine(RemoveScavenger(prevSlot));
+                yield return new WaitForSeconds(1f);
+
+                if (scavengerTeam[currentSlot] != null)
+                {
+                    Debug.Log("Removing scav on currently selected slot.");
+
+                    scavengerTeam[currentSlot] = null;
+                    StartCoroutine(RemoveScavenger(currentSlot));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                scavengerTeam[currentSlot] = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex];
+                scavengerSlots[currentSlot].GetComponent<Image>().sprite = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex].characterFull;
+                scavengerSlots[currentSlot].SetActive(true);
+
+                yield return new WaitForSeconds(1f);
+
+                scavengerSlots[currentSlot].GetComponent<Image>().fillAmount = 1;
+            }
+            else
+            {
+                Debug.Log("Scav is already in place.");
+            }
+        }
+        else
+        {
+            Debug.Log("Adding scavenger to slot.");
+            if (scavengerTeam[currentSlot] != null)
+            {
+                Debug.Log("Removing scav on currently selected slot.");
+
+                scavengerTeam[currentSlot] = null;
+                StartCoroutine(RemoveScavenger(currentSlot));
+                yield return new WaitForSeconds(1f);
+            }
+
+            scavengerTeam[currentSlot] = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex];
+            scavengerSlots[currentSlot].GetComponent<Image>().sprite = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex].characterFull;
+            scavengerSlots[currentSlot].SetActive(true);
+
+            yield return new WaitForSeconds(1f);
+
+            scavengerSlots[currentSlot].GetComponent<Image>().fillAmount = 1;
+        }
+    }
+
+    IEnumerator RemoveScavenger(int position)
+    {
+        scavengerSlots[position].GetComponent<Animator>().SetBool("Remove", true);
+        yield return new WaitForSeconds(1f);
+        scavengerSlots[position].GetComponent<Animator>().SetBool("Remove", false);
+        scavengerSlots[position].SetActive(false);
     }
 }

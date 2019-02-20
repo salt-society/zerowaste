@@ -56,7 +56,6 @@ public class MapController : MonoBehaviour
     private Vector2 destination;
 
     private Areas currentSelectMapData;
-    private string currentSelectedMap;
 
     private GameObject currentSelectedNode;
     private GameObject currentSelectedBattle;
@@ -67,8 +66,6 @@ public class MapController : MonoBehaviour
         if (dataController != null)
         {
             SetDefaultValues();
-
-            Debug.Log("Current Area Id: " + currentAreaId);
 
             // Check if game's just started
             if (dataController.currentSaveData.currentAreaId == -1)
@@ -290,142 +287,8 @@ public class MapController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // Map Selection through Raycast
-        if (canSelectMap)
-        {
-            if (Input.touchCount == 1)
-            {
-                if (TouchPhase.Began == Input.GetTouch(0).phase)
-                {
-                    Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-                    RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
-
-                    if (hit.collider != null)
-                    {
-                        Debug.Log(hit.transform.gameObject.name);
-
-                        GameObject obj = hit.transform.gameObject;
-                        if (obj.name.Equals("Lock"))
-                        {
-                            StartCoroutine(ShowAreaTooltip(obj));
-                        }
-
-                        if (obj.name.Equals("Terre") || obj.name.Equals("Mare")
-                            || obj.name.Equals("Atmos"))
-                        {
-                            StartCoroutine(ShowAreaThreatLevel(obj));
-                        }
-                        
-                    }
-                    else
-                    {
-                        Debug.Log("No map clicked.");
-
-                        if (!string.IsNullOrEmpty(currentSelectedMap))
-                        {
-                            StartCoroutine(HideAreaThreatLevel());
-                        }
-                    }
-                }
-            }
-        }
-
-        // Focus on Area
-        if (focusArea)
-        {
-            if (move)
-            {
-                Vector2 camPosition = mainCamera.transform.position;
-                if (destination.x > 0)
-                {
-                    if (camPosition.x <= destination.x)
-                    {
-                        Vector2 offset, direction;
-
-                        if (!zoomOut)
-                        {
-                            offset = destination - camDefaultPosition; ;
-                            direction = Vector2.ClampMagnitude(offset, 1.0f);
-                        }
-                        else
-                        {
-                            offset = destination + camDefaultPosition; ;
-                            direction = Vector2.ClampMagnitude(offset, 1.0f);
-                        }
-                        
-                        mainCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-                        fxCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        focus = true;
-                        move = false;
-                    }
-                }
-                else
-                {
-                    if (camPosition.x >= destination.x)
-                    {
-                        Vector2 offset = destination - camDefaultPosition; ;
-                        Vector2 direction = Vector2.ClampMagnitude(offset, 1.0f);
-
-                        mainCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-                        fxCamera.transform.Translate((direction) * currentSelectMapData.moveSpeed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        focus = true;
-                        move = false;
-                    }
-                }
-            }
-
-            if (focus)
-            {
-                float mainCamSize = mainCamera.orthographicSize;
-                float fxCamSize = fxCamera.orthographicSize;
-
-                if (!zoomOut)
-                {
-                    if (mainCamSize >= currentSelectMapData.zoomSize && fxCamSize >= currentSelectMapData.zoomSize)
-                    {
-                        mainCamera.orthographicSize -= (currentSelectMapData.zoomSpeed * Time.deltaTime);
-                        fxCamera.orthographicSize -= (currentSelectMapData.zoomSpeed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        focus = false;
-                        focusArea = false;
-
-                        ShowFocusedAreaContent();
-                    }
-                }
-                else
-                {
-                    if (mainCamSize <= 200 && fxCamSize <= 200)
-                    {
-                        mainCamera.orthographicSize += (currentSelectMapData.zoomSpeed * Time.deltaTime);
-                        fxCamera.orthographicSize += (currentSelectMapData.zoomSpeed * Time.deltaTime);
-                    }
-                    else
-                    {
-                        focus = false;
-                        focusArea = false;
-                        zoomOut = false;
-
-                        HideFocusedAreaContent();
-                    }
-                }
-                
-            }
-        }
-    }
-
     IEnumerator ShowAreaTooltip(GameObject obj)
     {
-        Debug.Log(obj.transform.parent.gameObject.name);
         foreach (Areas area in areaData)
         {
             if (area.areaName.Equals(obj.transform.parent.gameObject.name))
@@ -447,10 +310,8 @@ public class MapController : MonoBehaviour
 
     IEnumerator ShowAreaThreatLevel(GameObject obj)
     {
-        if (!string.IsNullOrEmpty(currentSelectedMap))
-        {
+        if (dataController.currentArea != null)
             StartCoroutine(HideAreaThreatLevel());
-        }
 
         yield return new WaitForSeconds(.5f);
 
@@ -467,8 +328,13 @@ public class MapController : MonoBehaviour
                     " Still, be careful Scavenger!";
                 StartCoroutine(ShowAreaTooltip(area.areaId));
                 
-                currentSelectedMap = area.areaName;
                 currentSelectMapData = area;
+
+                if (dataController != null)
+                {
+                    dataController.currentArea = area;
+                }
+
                 break;
             }
                 
@@ -479,7 +345,7 @@ public class MapController : MonoBehaviour
     {
         foreach (Areas area in areaData)
         {
-            if (area.areaName.Equals(currentSelectedMap))
+            if (area.Equals(dataController.currentArea))
             {
                 areaHover[area.areaId].GetComponent<Animator>().SetBool("Fade Out", true);
                 exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", true);
@@ -489,7 +355,6 @@ public class MapController : MonoBehaviour
                 areaHover[area.areaId].SetActive(false);
                 exploreButton.gameObject.SetActive(false);
 
-                currentSelectedMap = string.Empty;
                 break;
             }
         }
@@ -498,17 +363,35 @@ public class MapController : MonoBehaviour
     private void ExploreMap()
     {
         camDefaultPosition = mainCamera.transform.position;
-        destination = currentSelectMapData.coordinates;
 
-        canSelectMap = false;
-        focusArea = true;
-        move = true;
+        if (dataController != null)
+        {
+            destination = dataController.currentArea.coordinates;
 
-        infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
-        zwaButton.gameObject.SetActive(false);
+            canSelectMap = false;
+            focusArea = true;
+            move = true;
 
-        foreach (GameObject areaName in areaNames)
-            areaName.SetActive(false);
+            infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
+            zwaButton.gameObject.SetActive(false);
+
+            foreach (GameObject areaName in areaNames)
+                areaName.SetActive(false);
+        }
+        else
+        {
+            destination = currentSelectMapData.coordinates;
+
+            canSelectMap = false;
+            focusArea = true;
+            move = true;
+
+            infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
+            zwaButton.gameObject.SetActive(false);
+
+            foreach (GameObject areaName in areaNames)
+                areaName.SetActive(false);
+        }
     }
 
     private void ZoomOutOfMap()
@@ -532,7 +415,16 @@ public class MapController : MonoBehaviour
         zoomOut = true;
 
         yield return new WaitForSeconds(1f);
-        areaNames[currentSelectMapData.areaId].SetActive(true);
+
+        if (dataController != null)
+        {
+            areaNames[dataController.currentArea.areaId].SetActive(true);
+        }
+        else
+        {
+            areaNames[currentSelectMapData.areaId].SetActive(true);
+        }
+        
     }
 
     private void ShowFocusedAreaContent()
@@ -540,10 +432,10 @@ public class MapController : MonoBehaviour
         infectedAreasSign.SetActive(false);
         zoomOutButton.gameObject.SetActive(true);
 
-        focusedAreaName.text = currentSelectMapData.areaName;
+        focusedAreaName.text = dataController.currentArea.areaName;
         focusedAreaName.gameObject.SetActive(true);
 
-        focusedSubname.text = currentSelectMapData.subtitle;
+        focusedSubname.text = dataController.currentArea.subtitle;
         focusedSubname.gameObject.SetActive(true);
 
         if(dataController != null) 
@@ -554,7 +446,7 @@ public class MapController : MonoBehaviour
                 dataController.currentSaveData.currentNodeId++;
                 currentNodeId = dataController.currentSaveData.currentNodeId;
 
-                StartCoroutine(UnlockNodeWithAnimation(currentSelectMapData.nodes[currentNodeId]));
+                StartCoroutine(UnlockNodeWithAnimation(dataController.currentArea.nodes[currentNodeId]));
             }
             else
             {
@@ -570,7 +462,8 @@ public class MapController : MonoBehaviour
         {
             node.GetComponent<NodeManager>().SetMapController(this);
             node.GetComponent<NodeManager>().AllowNodeSelection(1);
-            node.GetComponent<NodeManager>().SetPreviousBattleData(currentSelectMapData.nodes[currentNodeId], nodes[currentNodeId]);
+            node.GetComponent<NodeManager>().SetPreviousNodeData(dataController.currentArea.
+                nodes[currentNodeId], nodes[currentNodeId]);
             node.GetComponent<NodeManager>().SendAreaNameComponents(focusedAreaName, focusedSubname);
             node.GetComponent<NodeManager>().SendNodeDetailComponents(nodeDetails);
             node.GetComponent<NodeManager>().SendLevelListComponents(levelList);
@@ -590,30 +483,29 @@ public class MapController : MonoBehaviour
         infectedAreasSign.SetActive(true);
     }
 
-    public void SetCurrentSelectedNode(GameObject currentSelectedNode)
-    {
-        this.currentSelectedNode = currentSelectedNode;
-    }
-
-    public void SetCurrentSelectedBattle(GameObject currentSelectedBattle)
-    {
-        this.currentSelectedBattle = currentSelectedBattle;
-    }
-
     public void EnableNodeColliders(bool enabled)
     {
-        foreach (Node node in currentSelectMapData.nodes)
+        foreach (Node node in dataController.currentArea.nodes)
             nodes[node.nodeId].GetComponent<BoxCollider2D>().enabled = enabled;
     }
 
     public void HideListOfLevels()
     {
-        StartCoroutine(currentSelectedNode.GetComponent<NodeManager>().HideListOfLevels());
+        if (dataController != null)
+        {
+            StartCoroutine(dataController.currentNodeObject.
+                GetComponent<NodeManager>().HideListOfLevels());
+        }
+        
     }
 
     public void RetreatFromNode()
     {
-        StartCoroutine(currentSelectedBattle.GetComponent<LevelManager>().HideBattleDetails());
+        if (dataController != null)
+        {
+            StartCoroutine(dataController.currentBattleObject.
+                GetComponent<LevelManager>().HideBattleDetails());
+        }
     }
 
     public void HuntNode()
@@ -647,5 +539,140 @@ public class MapController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         teamSelect.GetComponent<Animator>().SetBool("Exit", false);
         teamSelect.SetActive(false);
+    }
+
+    public void EnterBattle()
+    {
+        if (dataController != null)
+        {
+            Destroy(dataController.currentBattleObject);
+        }
+    }
+
+    void Update()
+    {
+        // Map Selection through Raycast
+        if (canSelectMap)
+        {
+            if (Input.touchCount == 1)
+            {
+                if (TouchPhase.Began == Input.GetTouch(0).phase)
+                {
+                    Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                    RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
+
+                    if (hit.collider != null)
+                    {
+                        GameObject obj = hit.transform.gameObject;
+                        if (obj.name.Equals("Lock"))
+                        {
+                            StartCoroutine(ShowAreaTooltip(obj));
+                        }
+
+                        if (obj.name.Equals("Terre") || obj.name.Equals("Mare")
+                            || obj.name.Equals("Atmos"))
+                        {
+                            StartCoroutine(ShowAreaThreatLevel(obj));
+                        }
+
+                    }
+                    else
+                    {
+                        if (dataController.currentArea != null)
+                            StartCoroutine(HideAreaThreatLevel());
+                    }
+                }
+            }
+        }
+
+        // Focus on Area
+        if (focusArea)
+        {
+            if (move)
+            {
+                Vector2 camPosition = mainCamera.transform.position;
+                if (destination.x > 0)
+                {
+                    if (camPosition.x <= destination.x)
+                    {
+                        Vector2 offset, direction;
+
+                        if (!zoomOut)
+                        {
+                            offset = destination - camDefaultPosition; ;
+                            direction = Vector2.ClampMagnitude(offset, 1.0f);
+                        }
+                        else
+                        {
+                            offset = destination + camDefaultPosition; ;
+                            direction = Vector2.ClampMagnitude(offset, 1.0f);
+                        }
+
+                        mainCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
+                        fxCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        focus = true;
+                        move = false;
+                    }
+                }
+                else
+                {
+                    if (camPosition.x >= destination.x)
+                    {
+                        Vector2 offset = destination - camDefaultPosition; ;
+                        Vector2 direction = Vector2.ClampMagnitude(offset, 1.0f);
+
+                        mainCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
+                        fxCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        focus = true;
+                        move = false;
+                    }
+                }
+            }
+
+            if (focus)
+            {
+                float mainCamSize = mainCamera.orthographicSize;
+                float fxCamSize = fxCamera.orthographicSize;
+
+                if (!zoomOut)
+                {
+                    if (mainCamSize >= dataController.currentArea.zoomSize && fxCamSize >= dataController.currentArea.zoomSize)
+                    {
+                        mainCamera.orthographicSize -= (dataController.currentArea.zoomSpeed * Time.deltaTime);
+                        fxCamera.orthographicSize -= (dataController.currentArea.zoomSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        focus = false;
+                        focusArea = false;
+
+                        ShowFocusedAreaContent();
+                    }
+                }
+                else
+                {
+                    if (mainCamSize <= 200 && fxCamSize <= 200)
+                    {
+                        mainCamera.orthographicSize += (dataController.currentArea.zoomSpeed * Time.deltaTime);
+                        fxCamera.orthographicSize += (dataController.currentArea.zoomSpeed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        focus = false;
+                        focusArea = false;
+                        zoomOut = false;
+
+                        HideFocusedAreaContent();
+                    }
+                }
+
+            }
+        }
     }
 }

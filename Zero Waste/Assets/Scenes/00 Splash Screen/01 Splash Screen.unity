@@ -523,7 +523,7 @@ Canvas:
   m_GameObject: {fileID: 1124017323}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -800,16 +800,15 @@ MonoBehaviour:
       playerName: 
       gender: Male
       nextLevel: 
-      finishedCutscenes: []
-      unlockedAreas: []
-      currentCutscene: 0
-      currentArea: 0
-      currentTerre: 0
-      currentMare: 0
-      currentAtmos: 0
+      currentCutsceneId: 0
+      currentAreaId: 0
       currentNodeId: 0
       currentBattleId: 0
-      scavengerRoster: 
+      unlockedCutscenes: 
+      unlockedAreas: 
+      unlockedNodes: 
+      unlockedBattles: 
+      scavengerList: 
     saves: []
     maxNoOfSaveFiles: 0
     currentNoOfSaves: 0
@@ -819,18 +818,15 @@ MonoBehaviour:
     playerName: 
     gender: 
     nextLevel: 
-    finishedCutscenes: []
-    unlockedAreas: []
-    currentCutscene: 0
-    currentArea: 0
-    currentTerre: 0
-    currentMare: 0
-    currentAtmos: 0
+    currentCutsceneId: 0
+    currentAreaId: 0
     currentNodeId: 0
     currentBattleId: 0
-    scavengerRoster: 
-  currentNode: {fileID: 0}
-  currentBattle: {fileID: 0}
+    unlockedCutscenes: 
+    unlockedAreas: 
+    unlockedNodes: 
+    unlockedBattles: 
+    scavengerList: 
   allScavengersList:
   - {fileID: 11400000, guid: a2c8028abd4b51448814724edf67f26c, type: 2}
   - {fileID: 11400000, guid: 4c5bb17b98e43ad42a42f92ea09e2e46, type: 2}
@@ -842,6 +838,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e797dc2a48d5cc74eb19e9f0ecb1d817, type: 2}
   allWasteList: []
   scavengerRoster: []
+  currentNode: {fileID: 0}
+  currentBattle: {fileID: 0}
+  currentCutscene: {fileID: 0}
   battleModifiers: []
   saveFolderName: Save Data
 --- !u!4 &1915336098

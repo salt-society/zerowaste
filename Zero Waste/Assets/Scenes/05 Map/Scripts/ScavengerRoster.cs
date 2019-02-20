@@ -10,54 +10,36 @@ public class ScavengerRoster : MonoBehaviour
 
     [Space]
     public GameObject scavengerCellPrefab;
-
-    [Space]
-    public List<Player> tempoScavRoster;
-
-    private int maxNoOfCells;
+    public int maxNoOfCells;
 
     void Start()
     {
         dataController = GameObject.FindObjectOfType<DataController>();
-        if (dataController != null)
-        {
-            maxNoOfCells = dataController.scavengerRoster.Count;
-        }
-        else
-        {
-            maxNoOfCells = tempoScavRoster.Count;
-        }
-        
         PopulateGrid();
     }
 
-    void PopulateGrid()
+    public void PopulateGrid()
     {
-        GameObject scavengerCell;
+        if (dataController != null)
+            maxNoOfCells = dataController.scavengerRoster.Count;
 
-        for (int i = 1; i < maxNoOfCells; i++)
+        for (int i = 0; i < maxNoOfCells; i++)
         {
+            GameObject scavengerCell;
             scavengerCell = Instantiate(scavengerCellPrefab, transform);
 
             if (dataController != null)
             {
-                scavengerCell.GetComponent<ScavengerCell>().player = dataController.scavengerRoster[i];
+                scavengerCell.GetComponent<ScavengerCell>().SetScavengerData(dataController.scavengerRoster[i]);
+                scavengerCell.GetComponent<ScavengerCell>().SetScavengerIndex(i);
+
+                Debug.Log(scavengerCell.GetComponent<ScavengerCell>().GetScavengerData().characterName);
 
                 scavengerCell.transform.GetChild(2).gameObject.
                     GetComponent<TextMeshProUGUI>().text = dataController.scavengerRoster[i].characterName;
                 scavengerCell.transform.GetChild(0).GetChild(0).gameObject.
                     GetComponent<Image>().sprite = dataController.scavengerRoster[i].characterHalf;
             }
-            else
-            {
-                scavengerCell.GetComponent<ScavengerCell>().player = tempoScavRoster[i];
-
-                scavengerCell.transform.GetChild(2).gameObject.
-                    GetComponent<TextMeshProUGUI>().text = tempoScavRoster[i].characterName;
-                scavengerCell.transform.GetChild(0).GetChild(0).gameObject.
-                    GetComponent<Image>().sprite = tempoScavRoster[i].characterHalf;
-            }
-            
         }
     }
 }

@@ -47,8 +47,19 @@ public class LevelList : MonoBehaviour
         {
             foreach (Transform cell in transform)
             {
-                Debug.Log("Destroying " + cell.gameObject.name);
-                Destroy(cell.gameObject);
+                if (dataController != null)
+                {
+                    if (cell != dataController.currentBattleObject)
+                    {
+                        Debug.Log("Destroying " + cell.gameObject.name);
+                        Destroy(cell.gameObject);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Destroying " + cell.gameObject.name);
+                    Destroy(cell.gameObject);
+                }
             }
 
             gameObject.SetActive(false);

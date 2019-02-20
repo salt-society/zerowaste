@@ -10311,7 +10311,7 @@ PrefabInstance:
     - target: {fileID: 6110327564203136262, guid: 9e051a4ba88ccd24c9c5ae50af2fac79,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6110327564203136263, guid: 9e051a4ba88ccd24c9c5ae50af2fac79,
         type: 3}
@@ -15828,10 +15828,7 @@ MonoBehaviour:
   dataController: {fileID: 0}
   scavengerCellPrefab: {fileID: 3042020719105159671, guid: f45ff1dcbf0861a4dba8afd7813a7b63,
     type: 3}
-  tempoScavRoster:
-  - {fileID: 11400000, guid: 4c5bb17b98e43ad42a42f92ea09e2e46, type: 2}
-  - {fileID: 11400000, guid: 57e356ecb7ac091499d290f2b83ddf2c, type: 2}
-  - {fileID: 11400000, guid: f2549dac88650e341ab76da912e7517d, type: 2}
+  maxNoOfCells: 0
 --- !u!1 &1959531698
 GameObject:
   m_ObjectHideFlags: 0
@@ -16382,12 +16379,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataController: {fileID: 0}
+  scavengerRosterManager: {fileID: 1954990825}
   scavengerRoster: {fileID: 661967789}
   boosterRoster: {fileID: 541431163}
   scavengerSlots:
   - {fileID: 218935806}
   - {fileID: 83214169}
   - {fileID: 2022680011}
+  scavengerTeam: []
 --- !u!1 &2058245809
 GameObject:
   m_ObjectHideFlags: 0

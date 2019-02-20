@@ -9,10 +9,7 @@ public class NodeManager : MonoBehaviour
     public DataController dataController;
 
     [Space]
-    public Battle battle;
-    public Node nodeData;
-
-    private Battle previousBattle;
+    private Node nodeData;
     private Node previousNodeData;
 
     private GameObject node, previousNode;
@@ -31,25 +28,13 @@ public class NodeManager : MonoBehaviour
         dataController = GameObject.FindObjectOfType<DataController>();
     }
 
-    public void SetBattleData(Battle battle, GameObject node)
-    {
-        this.battle = battle;
-        this.node = node;
-    }
-
     public void SetNodeData(Node nodeData, GameObject node)
     {
         this.nodeData = nodeData;
         this.node = node;
     }
 
-    public void SetPreviousBattleData(Battle previousBattle, GameObject previousNode)
-    {
-        this.previousBattle = previousBattle;
-        this.previousNode = previousNode;
-    }
-
-    public void SetPreviousBattleData(Node previousNodeData, GameObject previousNode)
+    public void SetPreviousNodeData(Node previousNodeData, GameObject previousNode)
     {
         this.previousNodeData = previousNodeData;
         this.previousNode = previousNode;
@@ -98,15 +83,18 @@ public class NodeManager : MonoBehaviour
                         
                         if (obj.Equals(node))
                         {
+                            if (dataController != null)
+                            {
+                                dataController.currentNode = nodeData;
+                                dataController.currentNodeObject = gameObject;
+                            }
+
                             canSelectNode = false;
                             
                             mapController.EnableNodeColliders(false);
-                            mapController.SetCurrentSelectedNode(node);
                             mapController.RemoveAllPointers();
 
                             StartCoroutine(ShowListOfLevels());
-
-                            Debug.Log(nodeData.nodeName + " selected");
                         }
                     }
                 }
@@ -155,10 +143,6 @@ public class NodeManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         levelList.GetComponent<Animator>().SetBool("Exit", false);
         levelList.SetActive(false);
-
-        /*RemovePointer(node);
-        yield return new WaitForSeconds(.2f);
-        PointCurrentNode(previousNode);*/
 
         focusedAreaName.gameObject.SetActive(true);
         focusedSubname.gameObject.SetActive(true);
