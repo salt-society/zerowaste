@@ -5,4 +5,9 @@ using UnityEngine;
 public class ScavengerCell : MonoBehaviour
 {
     public Player player;
+
+    public void SelectScavenger()
+    {
+        StartCoroutine(GameObject.FindObjectOfType<TeamSelect>().AddScavengerToTeam(player));
+    }
 }

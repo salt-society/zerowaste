@@ -7,6 +7,7 @@ using TMPro;
 public class MapController : MonoBehaviour
 {
     public DataController dataController;
+    public TeamSelect teamSelectManager;
 
     [Space]
     public Camera mainCamera;
@@ -629,6 +630,8 @@ public class MapController : MonoBehaviour
 
         teamSelect.SetActive(true);
         EnableNodeColliders(false);
+
+        StartCoroutine(teamSelectManager.SetDefaultScavengers());
     }
 
     public void CancelTeamSelection()

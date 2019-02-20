@@ -18,7 +18,16 @@ public class ScavengerRoster : MonoBehaviour
 
     void Start()
     {
-        maxNoOfCells = tempoScavRoster.Count;
+        dataController = GameObject.FindObjectOfType<DataController>();
+        if (dataController != null)
+        {
+            maxNoOfCells = dataController.scavengerRoster.Count;
+        }
+        else
+        {
+            maxNoOfCells = tempoScavRoster.Count;
+        }
+        
         PopulateGrid();
     }
 
@@ -26,15 +35,29 @@ public class ScavengerRoster : MonoBehaviour
     {
         GameObject scavengerCell;
 
-        for (int i = 0; i < maxNoOfCells; i++)
+        for (int i = 1; i < maxNoOfCells; i++)
         {
             scavengerCell = Instantiate(scavengerCellPrefab, transform);
-            scavengerCell.GetComponent<ScavengerCell>().player = tempoScavRoster[i];
 
-            scavengerCell.transform.GetChild(0).gameObject.
-                GetComponent<TextMeshProUGUI>().text = tempoScavRoster[i].characterName;
-            scavengerCell.transform.GetChild(1).gameObject.
-                GetComponent<Image>().sprite = tempoScavRoster[i].characterThumb;
+            if (dataController != null)
+            {
+                scavengerCell.GetComponent<ScavengerCell>().player = dataController.scavengerRoster[i];
+
+                scavengerCell.transform.GetChild(2).gameObject.
+                    GetComponent<TextMeshProUGUI>().text = dataController.scavengerRoster[i].characterName;
+                scavengerCell.transform.GetChild(0).GetChild(0).gameObject.
+                    GetComponent<Image>().sprite = dataController.scavengerRoster[i].characterHalf;
+            }
+            else
+            {
+                scavengerCell.GetComponent<ScavengerCell>().player = tempoScavRoster[i];
+
+                scavengerCell.transform.GetChild(2).gameObject.
+                    GetComponent<TextMeshProUGUI>().text = tempoScavRoster[i].characterName;
+                scavengerCell.transform.GetChild(0).GetChild(0).gameObject.
+                    GetComponent<Image>().sprite = tempoScavRoster[i].characterHalf;
+            }
+            
         }
     }
 }
