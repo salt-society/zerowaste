@@ -16,6 +16,7 @@ public class TeamSelect : MonoBehaviour
     public List<GameObject> scavengerSlots;
     
     public Player[] scavengerTeam;
+    public Player currentScavenger;
 
     private int currentSlot;
 
@@ -145,8 +146,9 @@ public class TeamSelect : MonoBehaviour
         bool isInTeam = false;
         int prevSlot = 0;
 
-        Player scavenger = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex];
-        Debug.Log(scavengerIndex + " " + scavenger.characterName);
+        Player scavenger = dataController.scavengerRoster[scavengerIndex];
+        currentScavenger = Instantiate(dataController.scavengerRoster[scavengerIndex]);
+        Debug.Log(scavengerIndex + " " + currentScavenger.characterName);
 
         foreach (Player scav in scavengerTeam)
         {
@@ -184,8 +186,8 @@ public class TeamSelect : MonoBehaviour
                     yield return new WaitForSeconds(1f);
                 }
 
-                scavengerTeam[currentSlot] = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex];
-                scavengerSlots[currentSlot].GetComponent<Image>().sprite = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex].characterFull;
+                scavengerTeam[currentSlot] = dataController.scavengerRoster[scavengerIndex];
+                scavengerSlots[currentSlot].GetComponent<Image>().sprite = dataController.scavengerRoster[scavengerIndex].characterFull;
                 scavengerSlots[currentSlot].SetActive(true);
 
                 yield return new WaitForSeconds(1f);
@@ -209,8 +211,8 @@ public class TeamSelect : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
 
-            scavengerTeam[currentSlot] = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex];
-            scavengerSlots[currentSlot].GetComponent<Image>().sprite = GameObject.FindObjectOfType<DataController>().scavengerRoster[scavengerIndex].characterFull;
+            scavengerTeam[currentSlot] = dataController.scavengerRoster[scavengerIndex];
+            scavengerSlots[currentSlot].GetComponent<Image>().sprite = dataController.scavengerRoster[scavengerIndex].characterFull;
             scavengerSlots[currentSlot].SetActive(true);
 
             yield return new WaitForSeconds(1f);

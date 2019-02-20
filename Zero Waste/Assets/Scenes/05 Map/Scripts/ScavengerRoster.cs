@@ -21,12 +21,13 @@ public class ScavengerRoster : MonoBehaviour
 
     public void PopulateGrid()
     {
+        GameObject scavengerCell;
         if (dataController != null)
             maxNoOfCells = dataController.scavengerRoster.Count;
 
         for (int i = 0; i < maxNoOfCells; i++)
         {
-            GameObject scavengerCell;
+           
             scavengerCell = Instantiate(scavengerCellPrefab, transform);
 
             if (dataController != null)
