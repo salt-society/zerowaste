@@ -77,6 +77,8 @@ public class MapController : MonoBehaviour
 
                 AssignNodeData();
                 StartCoroutine(UnlockMapWithAnimation(areaData[currentAreaId]));
+
+                GameObject.FindObjectOfType<AudioManager>().PlaySound("Game Menu Looping");
             }
             else
             {

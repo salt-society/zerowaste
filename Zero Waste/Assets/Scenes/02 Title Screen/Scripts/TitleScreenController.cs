@@ -27,7 +27,8 @@ public class TitleScreenController : MonoBehaviour
         if (dataController != null)
         {
             // Play Sound
-            GameObject.FindObjectOfType<AudioManager>().PlaySound("Hazy Darkness");
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("RPG Theme Looping");
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Burning");
         }
     }
 
@@ -52,7 +53,7 @@ public class TitleScreenController : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Hazy Darkness", 2f));
+        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
         GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
 
         if (dataController != null)
@@ -78,8 +79,12 @@ public class TitleScreenController : MonoBehaviour
 
     public void ChooseGender(int chosenGender)
     {
-        if(dataController != null)
-            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
+        if (dataController != null)
+        {
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
+        }
+            
         StartCoroutine(ChangeGender(chosenGender));
     }
 
@@ -109,7 +114,7 @@ public class TitleScreenController : MonoBehaviour
         AddDefaultScavengers(gender);
         
         genderButtons[chosenGender].GetComponent<Animator>().SetBool("Chosen", true);
-        genderImages[chosenGender].GetComponent<Image>().color = Color.white;
+        genderImages[chosenGender].GetComponent<Image>().color = new Color(255, 255, 255, .10f);
     }
 
     public void AddDefaultScavengers(string gender)
@@ -142,9 +147,12 @@ public class TitleScreenController : MonoBehaviour
 
     public void ContinueGame()
     {
-        if(dataController != null)
+        if(dataController != null) 
+        {
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
-
+            StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
+        }
+            
         dataController.SaveScavengers();
         dataController.SaveSaveData();
         dataController.SaveGameData();

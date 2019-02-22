@@ -74,7 +74,34 @@ public class AudioManager : MonoBehaviour
 
             soundToStop.source.volume = soundToStop.volume;
             soundToStop.source.Stop();
-            Debug.Log("Is Sfx Playing: " + soundToStop.source.isPlaying);
+        }
+    }
+
+    public bool IsSoundPlaying(string soundName)
+    {
+        Sound soundToStop = Array.Find(sounds, sound => sound.soundName == soundName);
+
+        if (soundToStop == null)
+        {
+            return false;
+        }
+        else
+        {
+            return soundToStop.source.isPlaying;
+        }
+    }
+
+    public float SoundLength(string soundName)
+    {
+        Sound soundToStop = Array.Find(sounds, sound => sound.soundName == soundName);
+
+        if (soundToStop == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return soundToStop.source.clip.length;
         }
     }
 }

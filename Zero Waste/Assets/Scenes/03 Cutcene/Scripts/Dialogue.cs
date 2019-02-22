@@ -28,7 +28,11 @@ public class Dialogue : ScriptableObject {
     public bool canSkip;
 
     [Header("Sounds")]
+    public List<string> BGM;
+    public List<int> bgmFinishedAt;
     public List<string> SFX;
+    public List<string> sfxState;
+    public List<bool> simultaneousSFX;
 
     [Header("Graphics")]
     public Sprite background;

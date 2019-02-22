@@ -11,7 +11,7 @@ public class ScavengerCell : MonoBehaviour
 
     void Start()
     {
-        gameObject.GetComponent<Button>().onClick.AddListener(SelectScavenger);
+
     }
 
     public void SetScavengerData(Player scavenger, TeamSelect teamSelectManager)
@@ -32,7 +32,7 @@ public class ScavengerCell : MonoBehaviour
 
     public void SelectScavenger()
     {
-        Debug.Log(index);
-        StartCoroutine(teamSelectManager.AddScavengerToTeam(index));
+        Debug.Log("Chose " + scavenger.name);
+        StartCoroutine(teamSelectManager.AddScavengerToTeam(scavenger));
     }
 }

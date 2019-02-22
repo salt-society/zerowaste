@@ -25,9 +25,8 @@ public class ScavengerRoster : MonoBehaviour
         if (dataController != null)
             maxNoOfCells = dataController.scavengerRoster.Count;
 
-        for (int i = 0; i < maxNoOfCells; i++)
+        for (int i = 1; i < maxNoOfCells; i++)
         {
-           
             scavengerCell = Instantiate(scavengerCellPrefab, transform);
 
             if (dataController != null)
@@ -37,9 +36,13 @@ public class ScavengerRoster : MonoBehaviour
 
                 Debug.Log(scavengerCell.GetComponent<ScavengerCell>().GetScavengerData().characterName);
 
+                scavengerCell.transform.GetChild(1).GetChild(1).gameObject.
+                    GetComponent<TextMeshProUGUI>().text = dataController.scavengerRoster[i].currentLevel.ToString();
+
                 scavengerCell.transform.GetChild(2).gameObject.
                     GetComponent<TextMeshProUGUI>().text = dataController.scavengerRoster[i].characterName;
-                scavengerCell.transform.GetChild(0).GetChild(0).gameObject.
+
+                scavengerCell.transform.GetChild(0).GetChild(1).gameObject.
                     GetComponent<Image>().sprite = dataController.scavengerRoster[i].characterHalf;
             }
         }

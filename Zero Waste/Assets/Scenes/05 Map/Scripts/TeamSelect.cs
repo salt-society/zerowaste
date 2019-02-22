@@ -13,17 +13,22 @@ public class TeamSelect : MonoBehaviour
     public GameObject boosterRoster;
 
     [Space]
+    public Color defaultSlotColor;
+    public Color highlightSlotColor;
+    public Color selectedSlotColor;
+
+    [Space]
+    public GameObject[] questionIcons;
+
+    [Space]
     public List<GameObject> scavengerSlots;
     
     public Player[] scavengerTeam;
-    public Player currentScavenger;
-
     private int currentSlot;
 
     void Start()
     {
         dataController = GameObject.FindObjectOfType<DataController>();
-
         scavengerTeam = new Player[3];
     }
 
@@ -45,6 +50,8 @@ public class TeamSelect : MonoBehaviour
     public void SelectScavenger(int position)
     {
         currentSlot = position;
+
+        scavengerSlots[position].GetComponent<Image>().color = highlightSlotColor;
 
         StopAllCoroutines();
         StartCoroutine(ShowScavengerRoster());
@@ -93,7 +100,9 @@ public class TeamSelect : MonoBehaviour
             if (prevSlot != currentSlot)
             {
                 Debug.Log("Transfering scav to other slot.");
+
                 scavengerTeam[prevSlot] = null;
+                questionIcons[prevSlot].SetActive(true);
                 StartCoroutine(RemoveScavenger(prevSlot));
                 yield return new WaitForSeconds(1f);
 
@@ -102,11 +111,14 @@ public class TeamSelect : MonoBehaviour
                     Debug.Log("Removing scav on currently selected slot.");
 
                     scavengerTeam[currentSlot] = null;
+                    questionIcons[currentSlot].SetActive(true);
                     StartCoroutine(RemoveScavenger(currentSlot));
                     yield return new WaitForSeconds(1f);
                 }
 
                 scavengerTeam[currentSlot] = scavenger;
+                questionIcons[currentSlot].SetActive(false);
+                scavengerSlots[currentSlot].GetComponent<Image>().color = selectedSlotColor;
                 scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
                 scavengerSlots[currentSlot].SetActive(true);
 
@@ -127,11 +139,13 @@ public class TeamSelect : MonoBehaviour
                 Debug.Log("Removing scav on currently selected slot.");
 
                 scavengerTeam[currentSlot] = null;
+                questionIcons[currentSlot].SetActive(true);
                 StartCoroutine(RemoveScavenger(currentSlot));
                 yield return new WaitForSeconds(1f);
             }
 
             scavengerTeam[currentSlot] = scavenger;
+            questionIcons[currentSlot].SetActive(false);
             scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
             scavengerSlots[currentSlot].SetActive(true);
 
@@ -146,9 +160,7 @@ public class TeamSelect : MonoBehaviour
         bool isInTeam = false;
         int prevSlot = 0;
 
-        Player scavenger = dataController.scavengerRoster[scavengerIndex];
-        currentScavenger = Instantiate(dataController.scavengerRoster[scavengerIndex]);
-        Debug.Log(scavengerIndex + " " + currentScavenger.characterName);
+        Player scavenger = Instantiate(dataController.scavengerRoster[scavengerIndex]);
 
         foreach (Player scav in scavengerTeam)
         {
@@ -187,7 +199,8 @@ public class TeamSelect : MonoBehaviour
                 }
 
                 scavengerTeam[currentSlot] = dataController.scavengerRoster[scavengerIndex];
-                scavengerSlots[currentSlot].GetComponent<Image>().sprite = dataController.scavengerRoster[scavengerIndex].characterFull;
+                scavengerSlots[currentSlot].GetComponent<Image>().color = selectedSlotColor;
+                scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
                 scavengerSlots[currentSlot].SetActive(true);
 
                 yield return new WaitForSeconds(1f);
@@ -212,7 +225,8 @@ public class TeamSelect : MonoBehaviour
             }
 
             scavengerTeam[currentSlot] = dataController.scavengerRoster[scavengerIndex];
-            scavengerSlots[currentSlot].GetComponent<Image>().sprite = dataController.scavengerRoster[scavengerIndex].characterFull;
+            scavengerSlots[currentSlot].GetComponent<Image>().color = selectedSlotColor;
+            scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
             scavengerSlots[currentSlot].SetActive(true);
 
             yield return new WaitForSeconds(1f);
@@ -223,6 +237,7 @@ public class TeamSelect : MonoBehaviour
 
     IEnumerator RemoveScavenger(int position)
     {
+        scavengerSlots[position].GetComponent<Image>().color = defaultSlotColor;
         scavengerSlots[position].GetComponent<Animator>().SetBool("Remove", true);
         yield return new WaitForSeconds(1f);
         scavengerSlots[position].GetComponent<Animator>().SetBool("Remove", false);

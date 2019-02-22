@@ -7,6 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public DataController dataController;
+    public AudioManager audioManager;
     public BackgroundManager backgroundManager;
     public HistoryGrid historyGrid;
 
@@ -30,6 +31,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         dataController = GameObject.FindObjectOfType<DataController>();
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
     }
 
     public void SetDialogues(List<Dialogue> dialogues)
@@ -45,13 +47,34 @@ public class DialogueManager : MonoBehaviour
 
     public IEnumerator DisplayDialogue()
     {
-        // State of dialogue as of the moment
-        TextMeshProUGUI textMesh;
+        if (audioManager != null)
+        {
+            if (currentDialogue.dialogueId == 0)
+            {
+                foreach(string bgm in currentDialogue.BGM) 
+                {
+                    audioManager.PlaySound(bgm);
+                }
+            }
+            else
+            {
+                foreach (string bgm in currentDialogue.BGM)
+                {
+                    if (audioManager.IsSoundPlaying(bgm))
+                    {
+                        StartCoroutine(audioManager.StopSound(bgm, 2f));
+                    }
+                    else
+                    {
+                        audioManager.PlaySound(bgm);
+                    }
+                }
+            }
+        }
 
+        // State of dialogue as of the moment
         dialogueFinished = false;
         canSkipDialogue = false;
-
-        canSkipDialogue = !currentDialogue.withChoices;
 
         if (!backgroundManager.CompareBackground(currentDialogue.background))
         {
@@ -60,6 +83,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         // Check type if narration or dialogue
+        TextMeshProUGUI textMesh;
         if (currentDialogue.isNarration)
         {
             if (dialogueBox.activeInHierarchy)
@@ -183,21 +207,16 @@ public class DialogueManager : MonoBehaviour
         canSkipDialogue = true;
 
         if (currentDialogue.isNarration)
-        {
             narrationBox.SetActive(true);
-        }
         else
-        {
             dialogueBox.SetActive(true);
-        }
 
         char[] characterArray = currentDialogue.content.ToCharArray();
-
         if (characterArray.Length > 0)
         {
             int lastIndex = characterArray.Length - 1;
-
             int letterCount = 0;
+            
             foreach (char letter in characterArray)
             {
                 textMesh.text += letter;
@@ -205,8 +224,50 @@ public class DialogueManager : MonoBehaviour
                 yield return new WaitForSeconds(0.02f);
                 letterCount++;
 
+                int sfxIndex = 0;
+                foreach (string sfx in currentDialogue.SFX)
+                {
+                    if (letterCount == 1)
+                    {
+                        if (currentDialogue.sfxState[sfxIndex] == "Start")
+                        {
+                            if (currentDialogue.simultaneousSFX[sfxIndex])
+                            {
+                                audioManager.PlaySound(sfx);
+                                sfxIndex++;
+                            }
+                            else
+                            {
+                                audioManager.PlaySound(sfx);
+                                sfxIndex++;
+                                yield return new WaitForSeconds(audioManager.SoundLength(sfx) + 1f);
+                            }
+                        }
+                    }
+                    else if (letterCount == (lastIndex / 2))
+                    {
+                        if (currentDialogue.sfxState[sfxIndex] == "Middle")
+                        {
+                            if (currentDialogue.simultaneousSFX[sfxIndex])
+                            {
+                                audioManager.PlaySound(sfx);
+                                sfxIndex++;
+                            }
+                            else
+                            {
+                                audioManager.PlaySound(sfx);
+                                sfxIndex++;
+                                yield return new WaitForSeconds(audioManager.SoundLength(sfx) + 1f);
+                            }
+                        }
+                    }
+                }
+
                 if (lastIndex == letterCount)
                 {
+
+                    
+
                     historyGrid.AddCell(currentDialogue, null, false);
 
                     if (currentDialogue.withChoices)
@@ -420,7 +481,7 @@ public class DialogueManager : MonoBehaviour
                     if (dialogueFinished)
                     {
                         if (dataController != null)
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 2");
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
 
                         dialogueIndex++;
                         currentDialogue = dialogues[dialogueIndex];
@@ -431,7 +492,7 @@ public class DialogueManager : MonoBehaviour
                     else
                     {
                         if (dataController != null)
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 1");
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 4");
 
                         if (dialogueIndex == 0)
                             GameObject.FindObjectOfType<CustceneController>().StopAllCoroutines();
@@ -442,7 +503,15 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    if (dialogueFinished)
+                    if (!dialogueFinished)
+                    {
+                        if (dataController != null)
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
+                        StopAllCoroutines();
+                        DisplayDialogue();
+                    }
+                    else
                     {
                         if (dataController != null)
                         {
