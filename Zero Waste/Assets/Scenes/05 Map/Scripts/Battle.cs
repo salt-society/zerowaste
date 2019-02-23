@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Battle", menuName = "Battle")]
+[CreateAssetMenu(fileName = "New Battle", menuName = "Map/Battle")]
 public class Battle : ScriptableObject {
 
     [Header("Details")]
@@ -15,16 +15,20 @@ public class Battle : ScriptableObject {
     public Color threatLevel;
 
     [Space]
-    public bool isCutscene;
-    public bool cutsceneAtStart;
-    public bool cutsceneAtEnd;
+    public Node node;
+    public WastePool wastePool;
 
     [Space]
-    public Node node;
+    public bool isCutscene;
+    public Cutscene mainCutscene;
 
-    [Header("Modifier")]
-    public string targetParty;
-    public Effect[] effects;
+    [Space]
+    public bool cutsceneAtStart;
+    public Cutscene startCutscene;
+
+    [Space]
+    public bool cutsceneAtEnd;
+    public Cutscene endCutscene;
 
     [Header("Progess")]
     public string nextLevel;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SaveData { // holds player progress
+public class SaveData {
 
     [Header("Save Details")]
     public string fileName;
@@ -14,18 +14,20 @@ public class SaveData { // holds player progress
     public DateTime dateCreated;
     public DateTime dateLastAccessed;
 
-    [Header("Player Details")]
+    [Space]
     public string playerName;
     public string gender;
 
     [Header("Game Progress")]
     public string nextLevel;
 
+    [Space]
     public int currentCutsceneId;
     public int currentAreaId;
     public int currentNodeId;
     public int currentBattleId;
 
+    [Space]
     public List<bool> unlockedCutscenes;
     public List<bool> unlockedAreas;
     public List<bool> unlockedNodes;

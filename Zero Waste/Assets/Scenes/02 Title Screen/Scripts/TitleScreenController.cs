@@ -53,8 +53,7 @@ public class TitleScreenController : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
 
         if (dataController != null)
         {
@@ -149,7 +148,8 @@ public class TitleScreenController : MonoBehaviour
     {
         if(dataController != null) 
         {
-            GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
+            StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
             StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
         }
             

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Area", menuName = "Area")]
+[CreateAssetMenu(fileName = "New Area", menuName = "Map/Area")]
 public class Areas : ScriptableObject {
 
     [Header("Details")]

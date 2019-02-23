@@ -29,10 +29,10 @@ public class Dialogue : ScriptableObject {
 
     [Header("Sounds")]
     public List<string> BGM;
-    public List<int> bgmFinishedAt;
-    public List<string> SFX;
-    public List<string> sfxState;
-    public List<bool> simultaneousSFX;
+    public List<string> startSFX;
+    public bool startSimultaneousSFX;
+    public List<string> endSFX;
+    public bool endSimultaneousSFX;
 
     [Header("Graphics")]
     public Sprite background;

@@ -7993,7 +7993,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 257101401}
-        m_MethodName: CancelTeamSelection
+        m_MethodName: CancelTeamSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13146,7 +13146,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1652269850}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 257101401}
+        m_MethodName: EnterBattle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1652269850
@@ -13583,6 +13594,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5567f756dc75d18429969c4e965f9e11, type: 3}
+--- !u!1 &1688535904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5133363355534025644, guid: 5567f756dc75d18429969c4e965f9e11,
+    type: 3}
+  m_PrefabInstance: {fileID: 1688535903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1695421967
 GameObject:
   m_ObjectHideFlags: 0
@@ -16470,18 +16487,21 @@ MonoBehaviour:
   scavengerRosterManager: {fileID: 0}
   scavengerRoster: {fileID: 923615415}
   boosterRoster: {fileID: 541431163}
+  scavengerPlatforms:
+  - {fileID: 67513325}
+  - {fileID: 466174061}
+  - {fileID: 2096957468}
   defaultSlotColor: {r: 0.6313726, g: 0.6313726, b: 0.62352943, a: 0.7058824}
   highlightSlotColor: {r: 0.98977304, g: 1, b: 0, a: 0.7058824}
   selectedSlotColor: {r: 0.6117647, g: 1, b: 0, a: 0.7058824}
   questionIcons:
   - {fileID: 907095795}
-  - {fileID: 0}
+  - {fileID: 1688535904}
   - {fileID: 948397328}
   scavengerSlots:
   - {fileID: 218935806}
   - {fileID: 83214169}
   - {fileID: 2022680011}
-  scavengerTeam: []
 --- !u!1 &2058245809
 GameObject:
   m_ObjectHideFlags: 0

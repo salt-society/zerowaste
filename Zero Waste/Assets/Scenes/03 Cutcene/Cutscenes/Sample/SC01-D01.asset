@@ -21,7 +21,18 @@ MonoBehaviour:
   content: This is a sample cutscene that I am going to show you.
   isNarration: 1
   canSkip: 0
-  SFX: []
+  BGM:
+  - Rain
+  - Burning
+  startSFX:
+  - Rotating Button
+  startSimultaneousSFX: 0
+  midSFX:
+  - Heavy Thunder
+  midSimultaneousSFX: 0
+  endSFX:
+  - Button Click 3
+  endSimultaneousSFX: 0
   background: {fileID: 21300000, guid: fc4b551e6b831464ebd59cff44cf2c76, type: 3}
   dialogueBoxColor: {r: 0, g: 0, b: 0, a: 0}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}

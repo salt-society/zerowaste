@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Node", menuName = "Node")]
+[CreateAssetMenu(fileName = "New Node", menuName = "Map/Node")]
 public class Node : ScriptableObject
 {
     [Header("Details")]

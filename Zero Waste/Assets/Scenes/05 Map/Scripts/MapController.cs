@@ -78,7 +78,7 @@ public class MapController : MonoBehaviour
                 AssignNodeData();
                 StartCoroutine(UnlockMapWithAnimation(areaData[currentAreaId]));
 
-                GameObject.FindObjectOfType<AudioManager>().PlaySound("Game Menu Looping");
+                GameObject.FindObjectOfType<AudioManager>().PlaySound("Monsters Underground");
             }
             else
             {
@@ -528,14 +528,20 @@ public class MapController : MonoBehaviour
         StartCoroutine(teamSelectManager.SetDefaultScavengers());
     }
 
-    public void CancelTeamSelection()
+    public void CancelTeamSelect()
     {
+        teamSelectManager.CancelBattle();
         StartCoroutine(HideTeamSelect());
     }
 
     IEnumerator HideTeamSelect()
     {
         EnableNodeColliders(true);
+
+        scavengerRoster.GetComponent<Animator>().SetBool("Slide Right", true);
+        yield return new WaitForSeconds(.5f);
+        scavengerRoster.GetComponent<Animator>().SetBool("Slide Right", false);
+        scavengerRoster.SetActive(false);
 
         teamSelect.GetComponent<Animator>().SetBool("Exit", true);
         yield return new WaitForSeconds(2f);
@@ -547,7 +553,7 @@ public class MapController : MonoBehaviour
     {
         if (dataController != null)
         {
-            Destroy(dataController.currentBattleObject);
+            teamSelectManager.EnterBattle();
         }
     }
 

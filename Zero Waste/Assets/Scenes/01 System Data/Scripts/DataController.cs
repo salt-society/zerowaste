@@ -10,17 +10,23 @@ public class DataController : MonoBehaviour
 {
     [Header("Data Controller")]
     public static DataController instance;
+    public string saveFolderName;
 
     [Header("Game Data")]
     public GameData currentGameData;
     public SaveData currentSaveData;
 
-    [Header("Roster")]
+    [Space]
     public List<Player> allScavengersList;
     public List<Enemy> allWasteList;
 
-    [Space]
+    [Header("Player Roster")]
     public List<Player> scavengerRoster;
+
+    [Space]
+    public Cutscene currentCutscene;
+    public string targetParty;
+    public Effect[] battleModifiers;
 
     [Space]
     public Areas currentArea;
@@ -30,13 +36,8 @@ public class DataController : MonoBehaviour
     public Battle currentBattle;
 
     [Space]
-    public Cutscene currentCutscene;
-
-    [Header("Cutscene")]
-    public Effect[] battleModifiers;
-
-    [Space]
-    public string saveFolderName;
+    public Player[] scavengerTeam;
+    public Enemy[] wasteTeam;
 
     void Awake()
     {

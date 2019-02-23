@@ -49,27 +49,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (audioManager != null)
         {
-            if (currentDialogue.dialogueId == 0)
-            {
-                foreach(string bgm in currentDialogue.BGM) 
-                {
-                    audioManager.PlaySound(bgm);
-                }
-            }
-            else
-            {
-                foreach (string bgm in currentDialogue.BGM)
-                {
-                    if (audioManager.IsSoundPlaying(bgm))
-                    {
-                        StartCoroutine(audioManager.StopSound(bgm, 2f));
-                    }
-                    else
-                    {
-                        audioManager.PlaySound(bgm);
-                    }
-                }
-            }
+            PlayBGM();
         }
 
         // State of dialogue as of the moment
@@ -216,58 +196,17 @@ public class DialogueManager : MonoBehaviour
         {
             int lastIndex = characterArray.Length - 1;
             int letterCount = 0;
+
+            StartCoroutine(PlaySFX(currentDialogue.startSFX));
             
             foreach (char letter in characterArray)
             {
                 textMesh.text += letter;
-
                 yield return new WaitForSeconds(0.02f);
                 letterCount++;
 
-                int sfxIndex = 0;
-                foreach (string sfx in currentDialogue.SFX)
-                {
-                    if (letterCount == 1)
-                    {
-                        if (currentDialogue.sfxState[sfxIndex] == "Start")
-                        {
-                            if (currentDialogue.simultaneousSFX[sfxIndex])
-                            {
-                                audioManager.PlaySound(sfx);
-                                sfxIndex++;
-                            }
-                            else
-                            {
-                                audioManager.PlaySound(sfx);
-                                sfxIndex++;
-                                yield return new WaitForSeconds(audioManager.SoundLength(sfx) + 1f);
-                            }
-                        }
-                    }
-                    else if (letterCount == (lastIndex / 2))
-                    {
-                        if (currentDialogue.sfxState[sfxIndex] == "Middle")
-                        {
-                            if (currentDialogue.simultaneousSFX[sfxIndex])
-                            {
-                                audioManager.PlaySound(sfx);
-                                sfxIndex++;
-                            }
-                            else
-                            {
-                                audioManager.PlaySound(sfx);
-                                sfxIndex++;
-                                yield return new WaitForSeconds(audioManager.SoundLength(sfx) + 1f);
-                            }
-                        }
-                    }
-                }
-
                 if (lastIndex == letterCount)
                 {
-
-                    
-
                     historyGrid.AddCell(currentDialogue, null, false);
 
                     if (currentDialogue.withChoices)
@@ -292,8 +231,10 @@ public class DialogueManager : MonoBehaviour
                         dialogueFinished = true;
                     }
 
+                    yield return null;
+                    StartCoroutine(PlaySFX(currentDialogue.endSFX));
                 }
-            }
+            } 
 
             if (currentDialogue.withUnfamiliarWord)
             {
@@ -305,12 +246,53 @@ public class DialogueManager : MonoBehaviour
                 dialogueFinished = false;
             }
         }
-        else
+        else if (characterArray.Length == 0)
         {
             if (currentDialogue.withItem)
             {
                 canSkipDialogue = false;
                 StartCoroutine(ShowItem());
+            }
+        }
+    }
+
+    void PlayBGM()
+    {
+        if (currentDialogue.dialogueId == 0)
+        {
+            foreach (string bgm in currentDialogue.BGM)
+            {
+                audioManager.PlaySound(bgm);
+            }
+        }
+        else
+        {
+            foreach (string bgm in currentDialogue.BGM)
+            {
+                if (audioManager.IsSoundPlaying(bgm))
+                {
+                    StartCoroutine(audioManager.StopSound(bgm, 2f));
+                }
+                else
+                {
+                    audioManager.PlaySound(bgm);
+                }
+            }
+        }
+    }
+
+    IEnumerator PlaySFX(List<string> SFXs)
+    {
+        foreach (string sfx in SFXs)
+        {
+            if (currentDialogue.startSimultaneousSFX)
+            {
+                audioManager.PlaySound(sfx);
+            }
+            else
+            {
+                audioManager.PlaySound(sfx);
+                yield return new WaitForSeconds(audioManager.SoundLength(sfx));
             }
         }
     }
@@ -509,13 +491,14 @@ public class DialogueManager : MonoBehaviour
                             GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
 
                         StopAllCoroutines();
-                        DisplayDialogue();
+                        DisplayFullDialogue();
                     }
                     else
                     {
                         if (dataController != null)
                         {
                             GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
                             GameObject.FindObjectOfType<CustceneController>().CutsceneFinished();
                         }
                     }
