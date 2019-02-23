@@ -27,6 +27,8 @@ public class LevelList : MonoBehaviour
     private GameObject nodeDetails;
     private GameObject levelList;
 
+    private GameObject cellToUnlock;
+
     public void SendBattleComponents(GameObject nodeDetails, GameObject levelList)
     {
         this.nodeDetails = nodeDetails;
@@ -95,31 +97,16 @@ public class LevelList : MonoBehaviour
                 {
                     levelCell.GetComponent<Button>().interactable = true;
 
-                    if (dataController.currentSaveData.unlockedBattles[i])
+                    if (dataController.currentSaveData.unlockedBattles[i]) 
+                    {
                         levelCell.GetComponent<Image>().color = finishedColor;
+                        levelCell.transform.GetChild(0).transform.gameObject.SetActive(true);
+                        levelCell.transform.GetChild(1).transform.gameObject.SetActive(false);
+                    }
                     else
-                        levelCell.GetComponent<Image>().color = currentColor;
-
-                    levelCell.transform.GetChild(0).transform.gameObject.SetActive(true);
-                    levelCell.transform.GetChild(1).transform.gameObject.SetActive(false);
-                }
-                else
-                {
-                    levelCell.GetComponent<Button>().interactable = false;
-                }
-            }
-            else
-            {
-                if (i <= tempUnlockedBattleCount)
-                {
-                    if(i != tempUnlockedBattleCount)
-                        levelCell.GetComponent<Image>().color = finishedColor;
-                    else
-                        levelCell.GetComponent<Image>().color = currentColor;
-
-                    levelCell.GetComponent<Button>().interactable = true;
-                    levelCell.transform.GetChild(0).transform.gameObject.SetActive(true);
-                    levelCell.transform.GetChild(1).transform.gameObject.SetActive(false);
+                    {
+                        cellToUnlock = levelCell;
+                    }
                 }
                 else
                 {
@@ -127,5 +114,17 @@ public class LevelList : MonoBehaviour
                 }
             }
         }
+    }
+
+    public IEnumerator UnlockLevel()
+    {
+        yield return new WaitForSeconds(.5f);
+        cellToUnlock.transform.GetComponent<Animator>().SetBool("Unlock", true);
+        yield return new WaitForSeconds(1f);
+        cellToUnlock.transform.GetComponent<Animator>().SetBool("Unlock", false);
+        cellToUnlock.transform.GetChild(1).gameObject.SetActive(false);
+
+        cellToUnlock.transform.GetChild(0).transform.gameObject.SetActive(true);
+        cellToUnlock.GetComponent<Image>().color = currentColor;
     }
 }

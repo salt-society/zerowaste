@@ -52,6 +52,8 @@ public class LevelManager : MonoBehaviour
     {
         if (dataController != null)
         {
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
             dataController.currentBattle = battle;
             dataController.currentBattleObject = gameObject;
         }

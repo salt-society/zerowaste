@@ -71,7 +71,10 @@ public class TitleScreenController : MonoBehaviour
             }
             else
             {
-                
+                nextSceneId = dataController.currentGameData.NextSceneId("Map");
+                StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
+                StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
+                StartCoroutine(LoadScene());
             }
         }
     }

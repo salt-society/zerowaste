@@ -32,7 +32,7 @@ public class ScavengerCell : MonoBehaviour
 
     public void SelectScavenger()
     {
-        Debug.Log("Chose " + scavenger.name);
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
         StartCoroutine(teamSelectManager.AddScavengerToTeam(scavenger));
     }
 }

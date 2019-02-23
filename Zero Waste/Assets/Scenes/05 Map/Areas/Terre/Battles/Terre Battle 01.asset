@@ -25,4 +25,4 @@ MonoBehaviour:
   startCutscene: {fileID: 0}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
-  nextLevel: Map
+  nextLevel: Battle

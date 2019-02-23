@@ -497,7 +497,6 @@ public class DialogueManager : MonoBehaviour
                     {
                         if (dataController != null)
                         {
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Amulet Absorption");
                             GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
                             GameObject.FindObjectOfType<CustceneController>().CutsceneFinished();
                         }

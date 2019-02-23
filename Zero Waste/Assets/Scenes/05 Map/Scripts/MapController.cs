@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MapController : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class MapController : MonoBehaviour
     [Space]
     public Camera mainCamera;
     public Camera fxCamera;
+
+    [Space]
+    public GameObject fadeTransition;
+    public GameObject loadingPanel;
 
     [Space]
     public GameObject infectedAreasSign;
@@ -50,6 +55,7 @@ public class MapController : MonoBehaviour
     private bool move;
     private bool focus;
     private bool zoomOut;
+    private bool zoomSfxDone;
     private bool canSelectNode;
 
     private Vector2 camDefaultPosition;
@@ -65,9 +71,9 @@ public class MapController : MonoBehaviour
         dataController = GameObject.FindObjectOfType<DataController>();
         if (dataController != null)
         {
-            SetDefaultValues();
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Monsters Underground");
 
-            // Check if game's just started
+            SetDefaultValues();
             if (dataController.currentSaveData.currentAreaId == -1)
             {
                 dataController.currentSaveData.currentAreaId++;
@@ -77,13 +83,10 @@ public class MapController : MonoBehaviour
 
                 AssignNodeData();
                 StartCoroutine(UnlockMapWithAnimation(areaData[currentAreaId]));
-
-                GameObject.FindObjectOfType<AudioManager>().PlaySound("Monsters Underground");
             }
             else
             {
-                AssignNodeData();
-                UnlockMaps();
+                StartCoroutine(LoadGameProgress());
             }
         }
     }
@@ -95,6 +98,62 @@ public class MapController : MonoBehaviour
         move = false;
         focus = false;
         zoomOut = false;
+        zoomSfxDone = false;
+    }
+
+    IEnumerator LoadGameProgress()
+    {
+        if((dataController.currentArea == null) && (dataController.currentNode == null) &&
+            (dataController.currentBattle == null))
+        {
+            AssignNodeData();
+            UnlockMaps();
+        }
+        else
+        {
+            loadingPanel.SetActive(true);
+            if (dataController.currentArea.areaId == (dataController.currentSaveData.currentAreaId - 1))
+            {
+
+            }
+            else
+            {
+                if (dataController.currentNode.nodeId == (dataController.currentSaveData.currentNodeId - 1))
+                {
+
+                }
+                else
+                {
+                    if (dataController.currentBattle.battleId == (dataController.currentSaveData.currentBattleId - 1))
+                    {
+                        AssignNodeData();
+                        UnlockMaps();
+
+                        dataController.currentArea = dataController.currentNode.area;
+
+                        ExploreMap();
+                        EnableNodeColliders(false);
+                        RemoveAllPointers();
+
+                        int nodeId = dataController.currentSaveData.currentNodeId;
+
+                        yield return new WaitForSeconds(5f);
+
+                        loadingPanel.SetActive(false);
+                        StartCoroutine(nodes[nodeId].GetComponent<NodeManager>().ShowListOfLevels());
+
+                        dataController.currentBattle = null;
+                    }
+                    else
+                    {
+                        AssignNodeData();
+                        UnlockMaps();
+
+                        loadingPanel.SetActive(false);
+                    }
+                }
+            }
+        }
     }
 
     void AssignNodeData()
@@ -156,7 +215,7 @@ public class MapController : MonoBehaviour
     {
         if (currentAreaId == 0)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         if (area.areaId <= currentAreaId)
@@ -331,11 +390,7 @@ public class MapController : MonoBehaviour
                 StartCoroutine(ShowAreaTooltip(area.areaId));
                 
                 currentSelectMapData = area;
-
-                if (dataController != null)
-                {
-                    dataController.currentArea = area;
-                }
+                dataController.currentArea = area;
 
                 break;
             }
@@ -364,8 +419,9 @@ public class MapController : MonoBehaviour
 
     private void ExploreMap()
     {
-        camDefaultPosition = mainCamera.transform.position;
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
 
+        camDefaultPosition = mainCamera.transform.position;
         if (dataController != null)
         {
             destination = dataController.currentArea.coordinates;
@@ -495,6 +551,7 @@ public class MapController : MonoBehaviour
     {
         if (dataController != null)
         {
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Whoosh 06");
             StartCoroutine(dataController.currentNodeObject.
                 GetComponent<NodeManager>().HideListOfLevels());
         }
@@ -505,6 +562,7 @@ public class MapController : MonoBehaviour
     {
         if (dataController != null)
         {
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
             StartCoroutine(dataController.currentBattleObject.
                 GetComponent<LevelManager>().HideBattleDetails());
         }
@@ -512,6 +570,7 @@ public class MapController : MonoBehaviour
 
     public void HuntNode()
     {
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
         StartCoroutine(ShowTeamSelect());
     }
 
@@ -530,6 +589,8 @@ public class MapController : MonoBehaviour
 
     public void CancelTeamSelect()
     {
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
         teamSelectManager.CancelBattle();
         StartCoroutine(HideTeamSelect());
     }
@@ -554,7 +615,34 @@ public class MapController : MonoBehaviour
         if (dataController != null)
         {
             teamSelectManager.EnterBattle();
+
+            if (dataController.currentBattle.cutsceneAtStart)
+            {
+
+            }
+            else if (dataController.currentBattle.isCutscene)
+            {
+                int nextSceneId = dataController.currentGameData.NextSceneId("Cutscene");
+                dataController.currentCutscene = dataController.currentBattle.mainCutscene;
+                StartCoroutine(LoadScene(nextSceneId));
+            } 
+            else
+            {
+                string nextLevel = dataController.currentBattle.nextLevel;
+                int nextSceneId = dataController.currentGameData.NextSceneId(nextLevel);
+                StartCoroutine(LoadScene(nextSceneId));
+            }
         }
+    }
+
+    IEnumerator LoadScene(int sceneId)
+    {
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
+
+        SceneManager.LoadScene(sceneId);
     }
 
     void Update()
@@ -574,12 +662,14 @@ public class MapController : MonoBehaviour
                         GameObject obj = hit.transform.gameObject;
                         if (obj.name.Equals("Lock"))
                         {
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Beep Denied");
                             StartCoroutine(ShowAreaTooltip(obj));
                         }
 
                         if (obj.name.Equals("Terre") || obj.name.Equals("Mare")
                             || obj.name.Equals("Atmos"))
                         {
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
                             StartCoroutine(ShowAreaThreatLevel(obj));
                         }
 
@@ -648,6 +738,12 @@ public class MapController : MonoBehaviour
                 float mainCamSize = mainCamera.orthographicSize;
                 float fxCamSize = fxCamera.orthographicSize;
 
+                if (!zoomSfxDone)
+                {
+                    GameObject.FindObjectOfType<AudioManager>().PlaySound("Whoosh 02");
+                    zoomSfxDone = true;
+                }
+
                 if (!zoomOut)
                 {
                     if (mainCamSize >= dataController.currentArea.zoomSize && fxCamSize >= dataController.currentArea.zoomSize)
@@ -659,6 +755,7 @@ public class MapController : MonoBehaviour
                     {
                         focus = false;
                         focusArea = false;
+                        zoomSfxDone = false;
 
                         ShowFocusedAreaContent();
                     }
@@ -675,6 +772,7 @@ public class MapController : MonoBehaviour
                         focus = false;
                         focusArea = false;
                         zoomOut = false;
+                        zoomSfxDone = false;
 
                         HideFocusedAreaContent();
                     }

@@ -59,6 +59,7 @@ public class CustceneController : MonoBehaviour
     {
         if(dataController != null)
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Rotating Button");
+
         historyBox.SetActive(!historyBox.activeInHierarchy);
         dialogueManager.canSkipDialogue = !historyOpen;
     }
@@ -67,10 +68,31 @@ public class CustceneController : MonoBehaviour
     {
         if (dataController != null)
         {
-            Debug.Log(currentCutscene.chapter + " finished.");
+            if (dataController.currentBattle != null)
+            {
+                int battleId = dataController.currentSaveData.currentBattleId;
 
-            dataController.currentSaveData.FinishedCutscene();
-            dataController.currentSaveData.currentCutsceneId++;
+                if (dataController.currentSaveData.unlockedBattles[battleId])
+                {
+
+                }
+                else
+                {
+                    dataController.currentSaveData.FinishedCutscene();
+                    dataController.currentSaveData.currentCutsceneId++;
+                }
+
+                if (dataController.currentBattle.isCutscene || dataController.currentBattle.cutsceneAtEnd)
+                {
+                    dataController.currentSaveData.FinishedBattle(battleId);
+
+                    dataController.currentSaveData.UnlockedBattle();
+                    dataController.currentSaveData.currentBattleId++;
+
+                    dataController.SaveSaveData();
+                    dataController.SaveGameData();
+                }
+            }
 
             nextSceneId = dataController.currentGameData.NextSceneId(currentCutscene.nextLevel);
             StartCoroutine(LoadScene());

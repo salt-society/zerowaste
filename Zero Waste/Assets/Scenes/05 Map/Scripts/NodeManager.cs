@@ -83,6 +83,8 @@ public class NodeManager : MonoBehaviour
                         
                         if (obj.Equals(node))
                         {
+                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
                             if (dataController != null)
                             {
                                 dataController.currentNode = nodeData;
@@ -102,7 +104,7 @@ public class NodeManager : MonoBehaviour
         }
     }
 
-    IEnumerator ShowListOfLevels()
+    public IEnumerator ShowListOfLevels()
     {
         LevelList levelListManager = levelList.transform.GetChild(3).transform.GetChild(1).transform.
             GetChild(0).transform.GetChild(0).GetComponent<LevelList>();
@@ -130,6 +132,8 @@ public class NodeManager : MonoBehaviour
         PointCurrentNode(node);
 
         levelList.SetActive(true);
+
+        StartCoroutine(levelListManager.UnlockLevel());
     }
 
     public IEnumerator HideListOfLevels()

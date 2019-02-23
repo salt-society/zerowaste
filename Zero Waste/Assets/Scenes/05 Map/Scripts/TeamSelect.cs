@@ -54,6 +54,8 @@ public class TeamSelect : MonoBehaviour
 
     public void SelectScavenger(int position)
     {
+        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
         currentSlot = position;
 
         scavengerPlatforms[position].GetComponent<Image>().color = highlightSlotColor;
@@ -122,6 +124,7 @@ public class TeamSelect : MonoBehaviour
                 scavengerPlatforms[currentSlot].GetComponent<Image>().color = selectedSlotColor;
                 scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
                 scavengerSlots[currentSlot].SetActive(true);
+                GameObject.FindObjectOfType<AudioManager>().PlaySound("Prrrt");
 
                 yield return new WaitForSeconds(1f);
 
@@ -149,6 +152,7 @@ public class TeamSelect : MonoBehaviour
             scavengerPlatforms[currentSlot].GetComponent<Image>().color = selectedSlotColor;
             scavengerSlots[currentSlot].GetComponent<Image>().sprite = scavenger.characterFull;
             scavengerSlots[currentSlot].SetActive(true);
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Prrrt");
 
             yield return new WaitForSeconds(1f);
 
@@ -182,6 +186,8 @@ public class TeamSelect : MonoBehaviour
 
                 if (scavengerCount == 3)
                 {
+                    GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
                     dataController.scavengerTeam = scavengerTeam;
                     dataController.wasteTeam = wasteTeam;
                 }
@@ -201,6 +207,8 @@ public class TeamSelect : MonoBehaviour
 
                 if (scavengerCount == 2)
                 {
+                    GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+
                     dataController.scavengerTeam = scavengerTeam;
                     dataController.wasteTeam = wasteTeam;
                 }
