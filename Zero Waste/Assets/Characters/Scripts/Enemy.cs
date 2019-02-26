@@ -53,7 +53,7 @@ public class Enemy : Character {
     {
         int estimatedStat = 0;
         int damage = 0;
-        damage = (attacker.currentAtk + statModifier) - currentDef;
+        damage = CheckMin((attacker.currentAtk + statModifier) - currentDef);
         estimatedStat = CheckMin(currentPollutionLevel - damage);
         currentPollutionLevel = estimatedStat;
 

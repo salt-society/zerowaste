@@ -71,7 +71,7 @@ public class Player : Character {
         {
             case "HP":
                 int damage = 0;
-                damage = (attacker.currentAtk + statModifier) - currentDef;
+                damage = CheckMin((attacker.currentAtk + statModifier) - currentDef);
                 estimatedStat = CheckMin(currentHP - damage);
                 currentHP = estimatedStat;
                 break;
