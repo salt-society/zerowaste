@@ -277,4 +277,43 @@ public class DataController : MonoBehaviour
             }
         }
     }
+
+    public int GetNextSceneId(string nextLevel)
+    {
+        switch (nextLevel)
+        {
+            case "Splash Screen":
+                {
+                    return 0;
+                }
+            case "Loading Data":
+                {
+                    return 1;
+                }
+            case "Title Screen":
+                {
+                    return 2;
+                }
+            case "Cutscene":
+                {
+                    return 3;
+                }
+            case "ZWA":
+                {
+                    return 4;
+                }
+            case "Map":
+                {
+                    return 5;
+                }
+            case "Battle":
+                {
+                    return 6;
+                }
+            default:
+                {
+                    return -1;
+                }
+        }
+    }
 }

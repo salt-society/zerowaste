@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wastePool:
   - {fileID: 11400000, guid: f51534d7f9fbd3d4294a3241ac74422c, type: 2}
-  spawnRate: 64000000
+  - {fileID: 11400000, guid: c66f34b844de5024eace84a7512753d6, type: 2}
+  spawnRate: 6400000032000000

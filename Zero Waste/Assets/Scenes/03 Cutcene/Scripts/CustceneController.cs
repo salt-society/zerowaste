@@ -82,7 +82,7 @@ public class CustceneController : MonoBehaviour
                     dataController.currentSaveData.currentCutsceneId++;
                 }
 
-                if (dataController.currentBattle.isCutscene || dataController.currentBattle.cutsceneAtEnd)
+                if (dataController.currentBattle.isMajorCutscene || dataController.currentBattle.cutsceneAtEnd)
                 {
                     dataController.currentSaveData.FinishedBattle(battleId);
 
@@ -94,7 +94,7 @@ public class CustceneController : MonoBehaviour
                 }
             }
 
-            nextSceneId = dataController.currentGameData.NextSceneId(currentCutscene.nextLevel);
+            nextSceneId = dataController.GetNextSceneId(currentCutscene.nextLevel);
             StartCoroutine(LoadScene());
         }
     }

@@ -171,7 +171,7 @@ public class TeamSelect : MonoBehaviour
         scavengerTeam[position] = null;
     }
 
-    public void EnterBattle()
+    public bool EnterBattle()
     {
         if (dataController != null)
         {
@@ -186,14 +186,16 @@ public class TeamSelect : MonoBehaviour
 
                 if (scavengerCount == 3)
                 {
-                    GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                    GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
 
                     dataController.scavengerTeam = scavengerTeam;
                     dataController.wasteTeam = wasteTeam;
+
+                    return true;
                 }
                 else
                 {
-
+                    return false;
                 }
             }
             else
@@ -207,16 +209,22 @@ public class TeamSelect : MonoBehaviour
 
                 if (scavengerCount == 2)
                 {
-                    GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                    GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
 
                     dataController.scavengerTeam = scavengerTeam;
                     dataController.wasteTeam = wasteTeam;
+
+                    return true;
                 }
                 else
                 {
-
+                    return false;
                 }
             }
+        }
+        else
+        {
+            return false;
         }
     }
 

@@ -17,7 +17,7 @@ MonoBehaviour:
   characterThumb: {fileID: 21300000, guid: 0626a946375c850448e01ddadf36b7ef, type: 3}
   characterHalf: {fileID: 21300000, guid: 68bf0e4e0d803fa4c9b76ad89db527b7, type: 3}
   characterFull: {fileID: 21300000, guid: 908884550752cfd40b14e0381498dbb9, type: 3}
-  prefab: {fileID: 0}
+  prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
   scale: {x: 1, y: 1, z: 1}
   baseSpd: 3
   currentSpd: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b164f5efdfb8cfd469dfe65b54af699e, type: 2}
   - {fileID: 11400000, guid: 3a91431911db14b45ad69310b09006e9, type: 2}
   effects: []
-  characterClass: {fileID: 0}
+  characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
   currentLevel: 1
   baseHP: 8
   baseAnt: 5

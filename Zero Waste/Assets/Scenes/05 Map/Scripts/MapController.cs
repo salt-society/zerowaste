@@ -614,23 +614,24 @@ public class MapController : MonoBehaviour
     {
         if (dataController != null)
         {
-            teamSelectManager.EnterBattle();
+            bool canEnterBattle = teamSelectManager.EnterBattle();
 
-            if (dataController.currentBattle.cutsceneAtStart)
+            if (canEnterBattle)
             {
+                StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Monsters Underground", 2f));
 
-            }
-            else if (dataController.currentBattle.isCutscene)
-            {
-                int nextSceneId = dataController.currentGameData.NextSceneId("Cutscene");
-                dataController.currentCutscene = dataController.currentBattle.mainCutscene;
-                StartCoroutine(LoadScene(nextSceneId));
-            } 
-            else
-            {
-                string nextLevel = dataController.currentBattle.nextLevel;
-                int nextSceneId = dataController.currentGameData.NextSceneId(nextLevel);
-                StartCoroutine(LoadScene(nextSceneId));
+                int nextSceneId = 0;
+                if (dataController.currentBattle.cutsceneAtStart || dataController.currentBattle.isMajorCutscene)
+                {
+                    nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextLevel);
+                    dataController.currentCutscene = dataController.currentBattle.startCutscene;
+                    StartCoroutine(LoadScene(nextSceneId));
+                }
+                else
+                {
+                    nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextLevel);
+                    StartCoroutine(LoadScene(nextSceneId));
+                }
             }
         }
     }

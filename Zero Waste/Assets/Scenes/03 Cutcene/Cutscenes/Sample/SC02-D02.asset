@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4339a6ba8249b134db7c16e4a4cc5c5c, type: 3}
   m_Name: SC02-D02
   m_EditorClassIdentifier: 
-  dialogueId: 0
+  dialogueId: 1
   characterName: Ryleigh
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}

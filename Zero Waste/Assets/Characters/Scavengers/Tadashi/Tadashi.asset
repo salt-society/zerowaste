@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 5
   characterName: Tadashi
-  characterThumb: {fileID: 0}
-  characterHalf: {fileID: 0}
-  characterFull: {fileID: 0}
-  prefab: {fileID: 0}
-  scale: {x: 0, y: 0, z: 0}
+  characterThumb: {fileID: 21300000, guid: 20ccc2f31a0849340b54f9c7c7a12cb5, type: 3}
+  characterHalf: {fileID: 21300000, guid: 0b931cd7abc270d43b4dbdc55cee20f0, type: 3}
+  characterFull: {fileID: 21300000, guid: b5161e7ab408f9f4283b729d2eeb8380, type: 3}
+  prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
+  scale: {x: 1, y: 1, z: 0}
   baseSpd: 2
   currentSpd: 0
   abilities:

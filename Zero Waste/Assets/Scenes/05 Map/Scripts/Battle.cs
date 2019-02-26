@@ -19,10 +19,7 @@ public class Battle : ScriptableObject {
     public WastePool wastePool;
 
     [Space]
-    public bool isCutscene;
-    public Cutscene mainCutscene;
-
-    [Space]
+    public bool isMajorCutscene;
     public bool cutsceneAtStart;
     public Cutscene startCutscene;
 

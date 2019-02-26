@@ -1143,6 +1143,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fade Transition
       objectReference: {fileID: 0}
+    - target: {fileID: 6110327564203136262, guid: 9e051a4ba88ccd24c9c5ae50af2fac79,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6110327564203136263, guid: 9e051a4ba88ccd24c9c5ae50af2fac79,
         type: 3}
       propertyPath: m_LocalPosition.x

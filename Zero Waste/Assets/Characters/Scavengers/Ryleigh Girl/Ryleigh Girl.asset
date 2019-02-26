@@ -17,8 +17,8 @@ MonoBehaviour:
   characterThumb: {fileID: 21300000, guid: 5af44208b71c7cb43b94d2708573bffa, type: 3}
   characterHalf: {fileID: 21300000, guid: 4d8e86de402ece9448cebec2da6bedf2, type: 3}
   characterFull: {fileID: 21300000, guid: de58bf6e01c20a149b67fdfee4593494, type: 3}
-  prefab: {fileID: 1566735176780554641, guid: f71499b25fb68124784592889522347d, type: 3}
-  scale: {x: 1, y: 1, z: 0}
+  prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
+  scale: {x: 1.05, y: 1.05, z: 0}
   baseSpd: 3
   currentSpd: 34
   abilities:

@@ -1,0 +1,656 @@
+fileFormatVersion: 2
+guid: 5922e43d48689d648b2e51d1cc21cd0f
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: Anthony_GO/Anthony_GO
+    100002: Anthony_GO/Anthony_GO/flannel
+    100004: Anthony_GO/Anthony_GO/flannel back
+    100006: Anthony_GO/Anthony_GO/head
+    100008: Anthony_GO/Anthony_GO/hoodie collar
+    100010: Anthony_GO/Anthony_GO/left arm
+    100012: Anthony_GO/Anthony_GO/left arm lower
+    100014: Anthony_GO/Anthony_GO/left foot
+    100016: Anthony_GO/Anthony_GO/left hand
+    100018: Anthony_GO/Anthony_GO/left leg lower
+    100020: Anthony_GO/Anthony_GO/left leg upper
+    100022: Anthony_GO/Anthony_GO/right arm
+    100024: Anthony_GO/Anthony_GO/right arm lower
+    100026: Anthony_GO/Anthony_GO/right foot
+    100028: Anthony_GO/Anthony_GO/right hand
+    100030: Anthony_GO/Anthony_GO/right leg lower
+    100032: Anthony_GO/Anthony_GO/right leg upper
+    100034: Anthony_GO/Anthony_GO/torso
+    400000: Anthony_GO/Anthony_GO/Transform
+    400002: Anthony_GO/Anthony_GO/flannel/Transform
+    400004: Anthony_GO/Anthony_GO/flannel back/Transform
+    400006: Anthony_GO/Anthony_GO/head/Transform
+    400008: Anthony_GO/Anthony_GO/hoodie collar/Transform
+    400010: Anthony_GO/Anthony_GO/left arm/Transform
+    400012: Anthony_GO/Anthony_GO/left arm lower/Transform
+    400014: Anthony_GO/Anthony_GO/left foot/Transform
+    400016: Anthony_GO/Anthony_GO/left hand/Transform
+    400018: Anthony_GO/Anthony_GO/left leg lower/Transform
+    400020: Anthony_GO/Anthony_GO/left leg upper/Transform
+    400022: Anthony_GO/Anthony_GO/right arm/Transform
+    400024: Anthony_GO/Anthony_GO/right arm lower/Transform
+    400026: Anthony_GO/Anthony_GO/right foot/Transform
+    400028: Anthony_GO/Anthony_GO/right hand/Transform
+    400030: Anthony_GO/Anthony_GO/right leg lower/Transform
+    400032: Anthony_GO/Anthony_GO/right leg upper/Transform
+    400034: Anthony_GO/Anthony_GO/torso/Transform
+    2800000: Anthony
+    21200000: Anthony_GO/Anthony_GO/flannel/SpriteRenderer
+    21200002: Anthony_GO/Anthony_GO/flannel back/SpriteRenderer
+    21200004: Anthony_GO/Anthony_GO/head/SpriteRenderer
+    21200006: Anthony_GO/Anthony_GO/hoodie collar/SpriteRenderer
+    21200008: Anthony_GO/Anthony_GO/left arm/SpriteRenderer
+    21200010: Anthony_GO/Anthony_GO/left arm lower/SpriteRenderer
+    21200012: Anthony_GO/Anthony_GO/left foot/SpriteRenderer
+    21200014: Anthony_GO/Anthony_GO/left hand/SpriteRenderer
+    21200016: Anthony_GO/Anthony_GO/left leg lower/SpriteRenderer
+    21200018: Anthony_GO/Anthony_GO/left leg upper/SpriteRenderer
+    21200020: Anthony_GO/Anthony_GO/right arm/SpriteRenderer
+    21200022: Anthony_GO/Anthony_GO/right arm lower/SpriteRenderer
+    21200024: Anthony_GO/Anthony_GO/right foot/SpriteRenderer
+    21200026: Anthony_GO/Anthony_GO/right hand/SpriteRenderer
+    21200028: Anthony_GO/Anthony_GO/right leg lower/SpriteRenderer
+    21200030: Anthony_GO/Anthony_GO/right leg upper/SpriteRenderer
+    21200032: Anthony_GO/Anthony_GO/torso/SpriteRenderer
+    21300000: head
+    21300002: flannel
+    21300004: hoodie collar
+    21300006: right arm lower
+    21300008: right arm
+    21300010: right hand
+    21300012: torso
+    21300014: left arm lower
+    21300016: left arm
+    21300018: left hand
+    21300020: right leg lower
+    21300022: left leg upper
+    21300024: left leg lower
+    21300026: right leg upper
+    21300028: right foot
+    21300030: left foot
+    21300032: flannel back
+    100100000: Anthony_GO
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 413
+      height: 366
+    spriteID: 9a37a83c4e49b714389ad85f62a3b23e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -68, y: -635}
+  - name: flannel
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 378
+      width: 293
+      height: 224
+    spriteID: b760f9c27ba1e7c4aa781b4e1327cb9f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -301, y: 368}
+  - name: hoodie collar
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 425
+      y: 824
+      width: 182
+      height: 119
+    spriteID: 4d226b4eb114dff4c8421ffcad9b9ca7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 287, y: 191}
+  - name: right arm lower
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 96
+      y: 842
+      width: 81
+      height: 149
+    spriteID: 3f1fa24201b5b6c4d869996b338bfc1d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -228, y: 499}
+  - name: right arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 185
+      y: 842
+      width: 63
+      height: 155
+    spriteID: bb54d3dd20f5e1d47bb9858fcd815304
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -109, y: 338}
+  - name: right hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 303
+      y: 963
+      width: 70
+      height: 53
+    spriteID: f587aa9a0f215aa458b22d6535f12837
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -35, y: 680}
+  - name: torso
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 425
+      y: 4
+      width: 203
+      height: 291
+    spriteID: 7bec8cb08b26eb441a5b2bfae1f74582
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 334, y: -372}
+  - name: left arm lower
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 303
+      y: 801
+      width: 91
+      height: 154
+    spriteID: 57e8e8ebe5950fe48bd27b37ac2f5246
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 303, y: 451}
+  - name: left arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 842
+      width: 84
+      height: 148
+    spriteID: ef57ce85b0701f04fb0d25112dc91201
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -47, y: 328}
+  - name: left hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 425
+      y: 951
+      width: 50
+      height: 49
+    spriteID: 59fa44b1d8a4b0f4980cadb4d8481a35
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 416, y: 657}
+  - name: right leg lower
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 538
+      y: 303
+      width: 67
+      height: 128
+    spriteID: b6cfc5b89f0874f48911284e6892b6a3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 322, y: 194}
+  - name: left leg upper
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 303
+      y: 610
+      width: 88
+      height: 183
+    spriteID: 4137e0417d5d61045a9048a81e6da751
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 212, y: 390}
+  - name: left leg lower
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 538
+      y: 439
+      width: 60
+      height: 134
+    spriteID: 1fe02aa893ec83843b4a351e997de99c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 428, y: 330}
+  - name: right leg upper
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 305
+      y: 378
+      width: 109
+      height: 200
+    spriteID: e2710fa8a336d5c46a99011f5e1538ec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 140, y: 169}
+  - name: right foot
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 425
+      y: 303
+      width: 105
+      height: 513
+    spriteID: 79d97d40a9be31d4ba4219ed59a83f17
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 224, y: 281}
+  - name: left foot
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 636
+      y: 4
+      width: 96
+      height: 82
+    spriteID: 55f7ceb4cbc90bd40a2dc08228d10d76
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 561, y: -36}
+  - name: flannel back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 610
+      width: 291
+      height: 224
+    spriteID: 1ba7e135f9f23f54e9510ab817292a7b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -43, y: 439}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
+  documentSize: {x: 600, y: 1015}
+  textureActualWidth: 1024
+  textureActualHeight: 1024
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9a37a83c4e49b714389ad85f62a3b23e
+    layerID: 94
+    mosaicPosition: {x: 4, y: 4}
+  - name: flannel
+    spriteName: flannel
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b760f9c27ba1e7c4aa781b4e1327cb9f
+    layerID: 80
+    mosaicPosition: {x: 4, y: 378}
+  - name: hoodie collar
+    spriteName: hoodie collar
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4d226b4eb114dff4c8421ffcad9b9ca7
+    layerID: 64
+    mosaicPosition: {x: 425, y: 824}
+  - name: right arm lower
+    spriteName: right arm lower
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 3f1fa24201b5b6c4d869996b338bfc1d
+    layerID: 60
+    mosaicPosition: {x: 96, y: 842}
+  - name: right arm
+    spriteName: right arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: bb54d3dd20f5e1d47bb9858fcd815304
+    layerID: 56
+    mosaicPosition: {x: 185, y: 842}
+  - name: right hand
+    spriteName: right hand
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f587aa9a0f215aa458b22d6535f12837
+    layerID: 52
+    mosaicPosition: {x: 303, y: 963}
+  - name: torso
+    spriteName: torso
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7bec8cb08b26eb441a5b2bfae1f74582
+    layerID: 48
+    mosaicPosition: {x: 425, y: 4}
+  - name: left arm lower
+    spriteName: left arm lower
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 57e8e8ebe5950fe48bd27b37ac2f5246
+    layerID: 40
+    mosaicPosition: {x: 303, y: 801}
+  - name: left arm
+    spriteName: left arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ef57ce85b0701f04fb0d25112dc91201
+    layerID: 44
+    mosaicPosition: {x: 4, y: 842}
+  - name: left hand
+    spriteName: left hand
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 59fa44b1d8a4b0f4980cadb4d8481a35
+    layerID: 36
+    mosaicPosition: {x: 425, y: 951}
+  - name: right leg lower
+    spriteName: right leg lower
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b6cfc5b89f0874f48911284e6892b6a3
+    layerID: 32
+    mosaicPosition: {x: 538, y: 303}
+  - name: left leg upper
+    spriteName: left leg upper
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4137e0417d5d61045a9048a81e6da751
+    layerID: 28
+    mosaicPosition: {x: 303, y: 610}
+  - name: left leg lower
+    spriteName: left leg lower
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1fe02aa893ec83843b4a351e997de99c
+    layerID: 24
+    mosaicPosition: {x: 538, y: 439}
+  - name: right leg upper
+    spriteName: right leg upper
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e2710fa8a336d5c46a99011f5e1538ec
+    layerID: 20
+    mosaicPosition: {x: 305, y: 378}
+  - name: right foot
+    spriteName: right foot
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 79d97d40a9be31d4ba4219ed59a83f17
+    layerID: 16
+    mosaicPosition: {x: 425, y: 303}
+  - name: left foot
+    spriteName: left foot
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 55f7ceb4cbc90bd40a2dc08228d10d76
+    layerID: 12
+    mosaicPosition: {x: 636, y: 4}
+  - name: flannel back
+    spriteName: flannel back
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1ba7e135f9f23f54e9510ab817292a7b
+    layerID: 8
+    mosaicPosition: {x: 4, y: 610}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  firstCreate: 0
+  generateGOHierarchy: 0
