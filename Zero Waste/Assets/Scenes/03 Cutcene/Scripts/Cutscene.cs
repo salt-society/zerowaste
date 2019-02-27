@@ -15,9 +15,13 @@ public class Cutscene : ScriptableObject {
     public Sprite firstBackground;
 
     [Space]
-    public string nextLevel;
-
-    [Space]
     [Header("Dialogue")]
     public List<Dialogue> dialogues;
+
+    [Space]
+    public List<string> nextLevels;
+    public List<int> levelIds;
+
+    [Space]
+    public string nextScene;
 }

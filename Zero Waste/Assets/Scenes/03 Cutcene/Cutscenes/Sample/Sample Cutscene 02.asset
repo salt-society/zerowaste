@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Sample Cutscene 02
   m_EditorClassIdentifier: 
   cutsceneId: 1
-  chapter: 
-  title: 
+  chapter: First Node
+  title: Will Unlock a Node
   firstBackground: {fileID: 0}
-  nextLevel: Map
   dialogues:
   - {fileID: 11400000, guid: ea399980537cd814caf7978d200f68fa, type: 2}
   - {fileID: 11400000, guid: b703f8d01e20cd544a5154e1c1ed8b31, type: 2}
+  nextLevels:
+  - Node
+  - Battle
+  levelIds: 0100000005000000
+  nextScene: Map

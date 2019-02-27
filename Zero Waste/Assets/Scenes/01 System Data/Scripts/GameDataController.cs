@@ -25,8 +25,8 @@ public class GameDataController : MonoBehaviour
             {
                 dataController.ReadGameData();
                 dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
-                dataController.currentSaveData.playCount++;
-                PrintSave();
+                dataController.currentSaveData.ChangePlayDetails();
+                PrintSaveDetails();
             }
             else
             {
@@ -37,6 +37,7 @@ public class GameDataController : MonoBehaviour
                 dataController.NewSaveData();
             }
 
+            // Load next scene
             StartCoroutine(LoadScene());
         }
     }
@@ -44,10 +45,10 @@ public class GameDataController : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene(dataController.currentGameData.NextSceneId("Title Screen"));
+        SceneManager.LoadScene(dataController.GetNextSceneId("Title Screen"));
     }
 
-    void PrintSave()
+    void PrintSaveDetails()
     {
         Debug.Log("Save File: " + dataController.currentSaveData.fileName);
         Debug.Log("Date Last Acessed: " + dataController.currentSaveData.dateLastAccessed);
@@ -55,9 +56,9 @@ public class GameDataController : MonoBehaviour
         Debug.Log("Game Progress");
         Debug.Log("");
         Debug.Log("Scavenger Count: " + dataController.currentSaveData.scavengerList.Count);
-        Debug.Log("Current Area: " + dataController.currentSaveData.currentAreaId);
-        Debug.Log("Current Node: " + dataController.currentSaveData.currentNodeId);
-        Debug.Log("Current Battle: " + dataController.currentSaveData.currentBattleId);
+        Debug.Log("Area Count: " + dataController.currentSaveData.areas.Count);
+        Debug.Log("Node Count: " + dataController.currentSaveData.nodes.Count);
+        Debug.Log("Battle Count: " + dataController.currentSaveData.battles.Count);
     }
 
 }

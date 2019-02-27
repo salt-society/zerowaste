@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce43060f1c15ef242ab1d97538ee708c, type: 3}
-  m_Name: Terre Battle 01
+  m_Name: Terre Battle 06
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  battleId: 0
-  battleName: Terre 1
+  battleId: 5
+  battleName: Terre 6
   info: 
   threatLevel: {r: 0, g: 0, b: 0, a: 0}
   node: {fileID: 0}
   wastePool: {fileID: 0}
   isMajorCutscene: 1
   cutsceneAtStart: 0
-  startCutscene: {fileID: 11400000, guid: 832d5b330cf848f4f8a6db404968d3d9, type: 2}
+  startCutscene: {fileID: 11400000, guid: ebd547eadee1de547a1a82c16393f5ef, type: 2}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
-  nextLevels:
-  - Node
-  - Battle
-  levelIds: 0100000005000000
+  nextLevels: []
+  levelIds: 
   nextScene: Cutscene

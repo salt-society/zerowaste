@@ -15,11 +15,8 @@ public class LevelList : MonoBehaviour
     public Color finishedColor;
     public Color currentColor;
 
-    [Space]
+    [SerializeField]
     public Node nodeData;
-    public int tempUnlockedBattleCount;
-
-    private int maxNoCells;
 
     private MapController mapController;
     private NodeManager nodeManager;
@@ -28,6 +25,12 @@ public class LevelList : MonoBehaviour
     private GameObject levelList;
 
     private GameObject cellToUnlock;
+    private List<GameObject> cellsToUnlock;
+
+    public void SetNodeData(Node nodeData)
+    {
+        this.nodeData = nodeData;
+    }
 
     public void SendBattleComponents(GameObject nodeDetails, GameObject levelList)
     {
@@ -70,61 +73,86 @@ public class LevelList : MonoBehaviour
 
     public void PopulateGrid()
     {
-        GameObject levelCell;
-        maxNoCells = nodeData.battles.Count;
+        GameObject battleCell;
+        cellsToUnlock = new List<GameObject>();
 
-        for (int i = 0; i < maxNoCells; i++)
+        int nodeDataIndex = 0;
+        for (int battleIndex = nodeData.battleStartIndex; battleIndex <= nodeData.battleEndIndex; battleIndex++)
         {
-            levelCell = Instantiate(levelCellPrefab, transform);
-            levelCell.GetComponent<LevelManager>().SetBattleData(nodeData.battles[i], levelCell);
-            levelCell.GetComponent<LevelManager>().SetMapController(mapController);
-            levelCell.GetComponent<LevelManager>().SetNodeManager(nodeManager);
-            levelCell.GetComponent<LevelManager>().SendNodeDetailComponents(nodeDetails);
-            levelCell.GetComponent<LevelManager>().SendLevelListComponents(levelList);
+            Debug.Log("Loop " + (nodeDataIndex + 1));
 
-            levelCell.transform.GetChild(0).transform.gameObject.
-                GetComponent<TextMeshProUGUI>().text = i.ToString();
+            battleCell = Instantiate(levelCellPrefab, transform);
+            battleCell.GetComponent<LevelManager>().SetBattleData(nodeData.battles[nodeDataIndex], battleCell);
+            Debug.Log("Current Data: nodeData.battles[" + nodeDataIndex + "]");
+            nodeDataIndex++;
+
+            battleCell.GetComponent<LevelManager>().SetMapController(mapController);
+            battleCell.GetComponent<LevelManager>().SetNodeManager(nodeManager);
+            battleCell.GetComponent<LevelManager>().SendNodeDetailComponents(nodeDetails);
+            battleCell.GetComponent<LevelManager>().SendLevelListComponents(levelList);
+
+            battleCell.transform.GetChild(0).transform.gameObject.
+                GetComponent<TextMeshProUGUI>().text = battleIndex.ToString();
 
             if (dataController != null)
-            {
-                if (dataController.currentSaveData.currentBattleId == -1)
+            { 
+                // Battle is unlocked if Battle Id is already in Battle Dictionary
+                // Make cell interactable if Battle is unlocked
+                if (dataController.currentSaveData.battles.ContainsKey(battleIndex))
                 {
-                    dataController.currentSaveData.currentBattleId++;
-                    dataController.currentSaveData.UnlockedBattle();
-                }
+                    battleCell.GetComponent<Button>().interactable = true;
 
-                if (i <= dataController.currentSaveData.currentBattleId)
-                {
-                    levelCell.GetComponent<Button>().interactable = true;
-
-                    if (dataController.currentSaveData.unlockedBattles[i]) 
+                    // Battle unlock doesn't mean its finished
+                    // Check if battle is done and mark it green
+                    if (dataController.currentSaveData.battles[battleIndex])
                     {
-                        levelCell.GetComponent<Image>().color = finishedColor;
-                        levelCell.transform.GetChild(0).transform.gameObject.SetActive(true);
-                        levelCell.transform.GetChild(1).transform.gameObject.SetActive(false);
+                        battleCell.GetComponent<Image>().color = finishedColor;
+                        battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
+                        battleCell.transform.GetChild(1).transform.gameObject.SetActive(false);
                     }
+                    // If not finished, show unlocked animation
+                    // Its possible to unlock more than 1 battle inside a node
                     else
                     {
-                        cellToUnlock = levelCell;
+                        // Check if battle is already played
+                        // If yes, do not repeat unlock animation
+                        if (dataController.currentSaveData.isBattlePlayed[battleIndex])
+                        {
+                            battleCell.GetComponent<Image>().color = currentColor;
+                            battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
+                            battleCell.transform.GetChild(1).transform.gameObject.SetActive(false);
+
+                            Debug.Log("Battle " + battleIndex + ": Played but not yet finished.");
+                        }
+                        else
+                        {
+                            Debug.Log("Battle " + battleIndex + ": Not played.");
+                            cellsToUnlock.Add(battleCell);
+                        }
                     }
                 }
+                // Cell is not interactable if battle isn't unlocked
                 else
                 {
-                    levelCell.GetComponent<Button>().interactable = false;
+                    battleCell.GetComponent<Button>().interactable = false;
                 }
             }
         }
     }
 
-    public IEnumerator UnlockLevel()
+    public IEnumerator UnlockBattles()
     {
-        yield return new WaitForSeconds(.5f);
-        cellToUnlock.transform.GetComponent<Animator>().SetBool("Unlock", true);
-        yield return new WaitForSeconds(1f);
-        cellToUnlock.transform.GetComponent<Animator>().SetBool("Unlock", false);
-        cellToUnlock.transform.GetChild(1).gameObject.SetActive(false);
+        foreach (GameObject cellToUnlock in cellsToUnlock)
+        {
+            yield return new WaitForSeconds(.5f);
 
-        cellToUnlock.transform.GetChild(0).transform.gameObject.SetActive(true);
-        cellToUnlock.GetComponent<Image>().color = currentColor;
+            cellToUnlock.transform.GetComponent<Animator>().SetBool("Unlock", true);
+            yield return new WaitForSeconds(1f);
+            cellToUnlock.transform.GetComponent<Animator>().SetBool("Unlock", false);
+            cellToUnlock.transform.GetChild(1).gameObject.SetActive(false);
+
+            cellToUnlock.transform.GetChild(0).transform.gameObject.SetActive(true);
+            cellToUnlock.GetComponent<Image>().color = currentColor;
+        }
     }
 }

@@ -18,7 +18,7 @@ MonoBehaviour:
   characterHalf: {fileID: 0}
   characterSprites: []
   isCharacterLive2D: 0
-  content: This cutscene intends to show game progress... Hopefully.
+  content: This cutscene intends to show game progress...
   isNarration: 1
   canSkip: 0
   BGM: []

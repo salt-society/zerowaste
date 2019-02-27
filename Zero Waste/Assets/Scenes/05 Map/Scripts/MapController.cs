@@ -9,6 +9,7 @@ public class MapController : MonoBehaviour
 {
     public DataController dataController;
     public TeamSelect teamSelectManager;
+    public LevelList levelListManager;
 
     [Space]
     public Camera mainCamera;
@@ -45,10 +46,7 @@ public class MapController : MonoBehaviour
 
     [Space]
     public List<GameObject> nodes;
-    public List<GameObject> nodeParents;
-
-    private int currentAreaId;
-    private int currentNodeId;
+    public List<GameObject> nodeContainers;
 
     private bool canSelectMap;
     private bool focusArea;
@@ -61,7 +59,7 @@ public class MapController : MonoBehaviour
     private Vector2 camDefaultPosition;
     private Vector2 destination;
 
-    private Areas currentSelectMapData;
+    private Areas currentSelectedArea;
 
     private GameObject currentSelectedNode;
     private GameObject currentSelectedBattle;
@@ -74,7 +72,9 @@ public class MapController : MonoBehaviour
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Monsters Underground");
 
             SetDefaultValues();
-            if (dataController.currentSaveData.currentAreaId == -1)
+            StartCoroutine(LoadGameProgress());
+
+            /*if (dataController.currentSaveData.currentAreaId == -1)
             {
                 dataController.currentSaveData.currentAreaId++;
                 currentAreaId = dataController.currentSaveData.currentAreaId;
@@ -87,7 +87,7 @@ public class MapController : MonoBehaviour
             else
             {
                 StartCoroutine(LoadGameProgress());
-            }
+            }*/
         }
     }
 
@@ -103,76 +103,168 @@ public class MapController : MonoBehaviour
 
     IEnumerator LoadGameProgress()
     {
+        Debug.Log("@LoadGameProgress()");
+
+        // If currentArea, currentNode, and currentBattle are null, it means player
+        // just got to Map Screen and haven't played any battles
         if((dataController.currentArea == null) && (dataController.currentNode == null) &&
             (dataController.currentBattle == null))
         {
-            AssignNodeData();
-            UnlockMaps();
+            // To prevent unlock animation from being repeated every time game is played,
+            // I didn't based the unlock animation on area count
+
+            // At start, area unlock will always be 1 thus if the condition is base on it
+            // unlock animation will always play. By Default, whenever there's a new game
+            // ids, like currentAreaId, is equal to -1 which acts as a condition if unlock 
+            // animation should be play upon entering Map Screen
+            if (dataController.currentSaveData.currentAreaCount == -1)
+            {
+                // Increment so unlock animation of first area won't happen again
+                dataController.currentSaveData.currentAreaCount += 2;
+
+                // Save progress
+                dataController.SaveSaveData();
+                dataController.SaveGameData();
+
+                // Create all nodes, assign each with data then unlock first area
+                CreateNodes();
+                StartCoroutine(UnlockAreaWithAnimation(areaData[0]));
+            }
+            // Doesn't play map unlock animation again cause been there, done that
+            else
+            {
+                // Create all nodes, assign each with and unlock maps
+                CreateNodes();
+                UnlockAreaMaps(false);
+            }
         }
         else
         {
+            // Hide map screen by showing loading panel
             loadingPanel.SetActive(true);
-            if (dataController.currentArea.areaId == (dataController.currentSaveData.currentAreaId - 1))
-            {
 
+            // Check if there is a level need to unlock
+            // Checking should be in this order -> Area (Map), Node, Battle
+            // If there is a change in Area, unlock it with animation
+            // NOTE: Area can only be unlocked one at a time
+            if (dataController.currentArea.areaId < dataController.currentSaveData.areas.Count - 1)
+            {
+                // Increase area count
+                dataController.currentSaveData.currentAreaCount++;
+
+                // Save progress
+                dataController.SaveSaveData();
+                dataController.SaveGameData();
+
+                // Create all nodes, assign each with data the unlock first area
+                CreateNodes();
+                UnlockAreaMaps(false);
+                StartCoroutine(UnlockAreaWithAnimation(areaData[dataController.currentSaveData.areas.Count - 1]));
             }
+            // If no changes, check nodes in current area
             else
             {
-                if (dataController.currentNode.nodeId == (dataController.currentSaveData.currentNodeId - 1))
+                // If there is a change in Node inside current area, unlock it with animation
+                // NOTE: Node can only be unlocked one at a time
+                if (dataController.currentNode.nodeId < dataController.currentSaveData.nodes.Count - 1)
                 {
+                    // Create all nodes and unlock maps that can be unlocked
+                    CreateNodes();
+                    UnlockAreaMaps(false);
 
+                    // Make sure that map and node selection isn't enabled
+                    canSelectMap = false;
+                    // nodes[dataController.currentSaveData.nodes.Count - 1].GetComponent<NodeManager>().AllowNodeSelection(0);
+
+                    // Set which area to focus in, the area of current node
+                    // Then start focusing
+                    dataController.currentArea = dataController.currentNode.area;
+                    dataController.currentSaveData.currentAreaId = dataController.currentArea.areaId;
+
+                    ExploreMap();
+                    EnableNodeColliders(false);
+                    RemoveAllPointers();
+
+                    // Show unlock animation/sign
+                    yield return null;
+
+                    // If unlocking is finished, make map interactable again
+                    // nodes[dataController.currentSaveData.nodes.Count - 1].GetComponent<NodeManager>().AllowNodeSelection(1);
                 }
+                // If no changes, check battles in current node
                 else
                 {
-                    if (dataController.currentBattle.battleId == (dataController.currentSaveData.currentBattleId - 1))
-                    {
-                        AssignNodeData();
-                        UnlockMaps();
+                    // Since ZWA is not yet finished, create a temporary bool
+                    // that states that there isn't a ZWA Cutscene unlocked
+                    bool toZWA = false;
 
+                    // Check if a ZWA Cutscene is unlocked
+                    if (toZWA)
+                    {
+
+                    }
+                    else
+                    {
+                        // Always zoom to current node even if there's no new battle
+                        CreateNodes();
+                        UnlockAreaMaps(false);
+
+                        // Make sure that map and node selection isn't enabled
+                        canSelectMap = false;
+
+                        // Set which area to focus in, the area of current node
+                        // Then start focusing
                         dataController.currentArea = dataController.currentNode.area;
+                        dataController.currentSaveData.currentAreaId = dataController.currentArea.areaId;
 
                         ExploreMap();
                         EnableNodeColliders(false);
                         RemoveAllPointers();
 
-                        int nodeId = dataController.currentSaveData.currentNodeId;
+                        // Delay
+                        yield return new WaitForSeconds(3f);
 
-                        yield return new WaitForSeconds(5f);
-
-                        loadingPanel.SetActive(false);
-                        StartCoroutine(nodes[nodeId].GetComponent<NodeManager>().ShowListOfLevels());
-
-                        dataController.currentBattle = null;
-                    }
-                    else
-                    {
-                        AssignNodeData();
-                        UnlockMaps();
-
-                        loadingPanel.SetActive(false);
+                        // Get nodeId of current node and show list of battles
+                        int nodeId = dataController.currentNode.nodeId;
+                        StartCoroutine(nodes[nodeId].GetComponent<NodeManager>().ShowListOfBattles());
+                        
                     }
                 }
             }
         }
     }
 
-    void AssignNodeData()
+    void CreateNodes()
     {
+        Debug.Log("@CreateNodes()");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // Creates all nodes upon entering Map though not visible
         int i = 0;
         foreach (Areas area in areaData)
         {
-            GameObject parent = nodeParents[area.areaId];
+            // Get container of nodes in and node itself in each area
+            GameObject nodeContainer = nodeContainers[area.areaId];
             List<Node> nodes = area.nodes;
 
+            // Check if there's a node in current area
             if (nodes.Count > 0)
             {
+                // Loop through node data
                 foreach (Node node in nodes)
                 {
-                    GameObject nodeObj = Instantiate(nodePrefab, parent.transform);
-                    nodeObj.transform.localPosition = area.positions[i];
+                    // Create a node
+                    GameObject nodeObj = Instantiate(nodePrefab, nodeContainer.transform);
+                    nodeObj.transform.localPosition = area.nodePositions[i];
 
+                    // Check if node has a path
+                    // End nodes, very last node in area, doesn't have path attached to it
                     if (node.hasPath)
                     {
+                        // Create path
                         GameObject path = Instantiate(pathPrefab, nodeObj.transform);
                         path.transform.localScale = node.pathScale;
                         path.transform.localPosition = node.pathPosition;
@@ -180,358 +272,512 @@ public class MapController : MonoBehaviour
 
                         path.SetActive(false);
                     }
-
                     nodeObj.SetActive(false);
-                    this.nodes.Add(nodeObj);
+                    nodeObj.GetComponent<NodeManager>().SetNodeData(Instantiate(node), nodeObj);
 
-                    this.nodes[i].GetComponent<NodeManager>().SetNodeData(Instantiate(node), nodeObj);
+                    // Add to node list so that node can be accessed later
+                    this.nodes.Add(nodeObj);
                     i++;
                 }
-            }
-            else
-            {
-                i += area.maxNodes;
+
+                // Reset counter
+                i = 0;
             }
         }
     }
 
-    public void UnlockMaps()
+    public void UnlockAreaMaps(bool unlockAreaWithAnimation)
     {
-        foreach (Areas area in areaData)
+        Debug.Log("@UnlockAreaMaps()");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController != null)
         {
-            if (area.areaId <= currentAreaId)
+            // Loop through each area
+            foreach (Areas area in areaData)
             {
-                areaMap[area.areaId].GetComponent<BoxCollider2D>().enabled = true;
-                locks[area.areaId].SetActive(false);
+                // Unlock area only if its less than or equal current areas unlocked
+                if (dataController.currentSaveData.areas.ContainsKey(area.areaId))
+                {
+                    // Check if area's going to be unlocked with animation
+                    if (area.areaId == (dataController.currentSaveData.areas.Count - 1))
+                    {
+                        if (!unlockAreaWithAnimation)
+                        {
+                            // Enable collider so in can be clicked, remove lock, and show area name
+                            areaMap[area.areaId].GetComponent<BoxCollider2D>().enabled = true;
+                            locks[area.areaId].SetActive(false);
+                            areaNames[area.areaId].SetActive(true);
 
-                areaNames[area.areaId].SetActive(true);
-            }  
-        }
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        // Enable collider so in can be clicked, remove lock, and show area name
+                        areaMap[area.areaId].GetComponent<BoxCollider2D>().enabled = true;
+                        locks[area.areaId].SetActive(false);
+                        areaNames[area.areaId].SetActive(true);
 
-        canSelectMap = true;
-    }
+                        Debug.Log("Unlocked" + area.areaName + ".");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Area " + area.areaName + " not in list of unlocked areas");
+                }
+            }
 
-    IEnumerator UnlockMapWithAnimation(Areas area)
-    {
-        if (currentAreaId == 0)
-        {
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        if (area.areaId <= currentAreaId)
-        {
-            locks[area.areaId].GetComponent<Animator>().SetBool("Unlock Map", true);
-            yield return new WaitForSeconds(1.5f);
-            locks[area.areaId].GetComponent<Animator>().SetBool("Unlock Map", false);
-            locks[area.areaId].SetActive(false);
-
-            yield return new WaitForSeconds(0.2f);
-
-            areaNames[area.areaId].SetActive(true);
-            areaMap[area.areaId].GetComponent<BoxCollider2D>().enabled = true;
+            // Change flag to enable map selection (raycast, on Update method)
             canSelectMap = true;
         }
     }
 
-    public void UnlockNodes()
+    IEnumerator UnlockAreaWithAnimation(Areas area)
     {
-        foreach (Areas area in areaData)
+        Debug.Log("@UnlockedAreaWithAnimation()");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController != null)
         {
-            if (area.areaId <= currentAreaId)
+            // Delay to give way for transition to finish before unlocking Map
+            if (dataController.currentSaveData.currentAreaCount == 0)
+                yield return new WaitForSeconds(0.5f);
+
+            // Unlock area only if its less than or equal current areas unlocked
+            if (area.areaId <= (dataController.currentSaveData.areas.Count -1))
             {
-                foreach (Node node in area.nodes)
-                {
-                    if (node.nodeId <= currentNodeId)
-                    {
-                        nodes[node.nodeId].SetActive(true);
+                locks[area.areaId].GetComponent<Animator>().SetBool("Unlock Map", true);
+                yield return new WaitForSeconds(1.5f);
+                locks[area.areaId].GetComponent<Animator>().SetBool("Unlock Map", false);
+                locks[area.areaId].SetActive(false);
 
-                        if (node.hasPath && (node.nodeId < currentNodeId))
-                        {
-                            Transform pathTransform = nodes[node.nodeId].transform.GetChild(1);
-                            GameObject path = pathTransform.gameObject;
-                            path.SetActive(true);
-                        }
+                yield return new WaitForSeconds(0.2f);
 
-                        if (node.nodeId == currentNodeId)
-                            PointCurrentNode(node.nodeId);
-                    }
-                }
-
-                nodeParents[area.areaId].SetActive(true);
-                Debug.Log("Unlocked Nodes");
+                areaNames[area.areaId].SetActive(true);
+                areaMap[area.areaId].GetComponent<BoxCollider2D>().enabled = true;
+                canSelectMap = true;
             }
         }
     }
 
-    public void LockNodes()
+    public void ShowUnlockedNodes(bool unlockLastNodeWithAnimation)
     {
-        foreach (Areas area in areaData)
+        Debug.Log("@ShowNodesUnlocked()");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // If an area is selected, unlock its nodes
+        // Just to be sure check if there's a current area in data controller
+        if (dataController.currentArea != null)
         {
-            if (area.areaId <= currentAreaId)
+            // Loop through each node data
+            foreach (Node node in dataController.currentArea.nodes)
             {
-                foreach (Node node in area.nodes)
+                // If node id is in node dictionary, its unlocked
+                if (dataController.currentSaveData.nodes.ContainsKey(node.nodeId))
                 {
-                    if (node.nodeId <= currentNodeId)
+                    // Point to latest node unlocked
+                    if (node.nodeId == (dataController.currentSaveData.nodes.Count - 1))
                     {
-                        nodes[node.nodeId].SetActive(false);
+                        // Point pointer to last node unlocked
+                        PointCurrentNode(node.nodeId);
 
-                        if (node.hasPath && (node.nodeId < currentNodeId))
-                        {
-                            Transform pathTransform = nodes[node.nodeId].transform.GetChild(1);
-                            GameObject path = pathTransform.gameObject;
-                            path.SetActive(false);
-                        }
+                        // Plays unlock animation if true
+                        if (unlockLastNodeWithAnimation)
+                            StartCoroutine(UnlockNodeWithAnimation(node));
+                    }
+                        
+                    // Show node
+                    // nodes is a list of node gameObjects, not the data
+                    nodes[node.nodeId].SetActive(true);
 
-                        if (node.nodeId == currentNodeId)
-                            PointCurrentNode(node.nodeId);
+                    // Check if node has path
+                    // Only check if node preceeds/second to the latest unlocked node
+                    if (node.hasPath && (node.nodeId == (dataController.currentSaveData.nodes.Count - 2)))
+                    {
+                        // Get path gameObject and set it to true
+                        nodes[node.nodeId].transform.GetChild(1).gameObject.SetActive(true);
                     }
                 }
-
-                nodeParents[area.areaId].SetActive(false);
-                Debug.Log("Unlocked Nodes");
             }
+
+            // Activate node container
+            nodeContainers[dataController.currentArea.areaId].SetActive(true);
+        }
+    }
+
+    public void HideNodes()
+    {
+        Debug.Log("@HideNodes()");
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // If an area is selected, hide its nodes
+        // Just to be sure check if there's a current area in data controller
+        if (dataController.currentArea != null)
+        {
+            // Loop through each node data
+            foreach (Node node in dataController.currentArea.nodes)
+            {
+                // If node id is in node dictionary, its unlocked
+                if (dataController.currentSaveData.nodes.ContainsKey(node.nodeId))
+                {
+                    // Remove all pointes
+                    RemoveAllPointers();
+
+                    // Hide node
+                    // nodes is a list of node gameObjects, not the data
+                    nodes[node.nodeId].SetActive(false);
+
+                    // Check if node has path
+                    // Only check if node preceeds/second to the latest unlocked node
+                    if (node.hasPath)
+                    {
+                        // Get path gameObject and set it to true
+                        nodes[node.nodeId].transform.GetChild(1).gameObject.SetActive(false);
+                    }
+                }
+            }
+
+            // Activate node container
+            nodeContainers[dataController.currentArea.areaId].SetActive(false);
         }
     }
 
     public void PointCurrentNode(int nodeId)
     {
+        Debug.Log("@PointCurrentNode()");
+        // Gets pointer of node and activates it
         Transform pointerTransform = nodes[nodeId].transform.GetChild(0);
         pointerTransform.gameObject.SetActive(true);
     }
 
     public void RemovePointer(int nodeId)
     {
+        Debug.Log("@RemovePointer()");
+        // Gets pointer of node and hides it
         Transform pointerTransform = nodes[nodeId].transform.GetChild(0);
         pointerTransform.gameObject.SetActive(false);
     }
 
     public void RemoveAllPointers()
     {
-        for (int i = 0; i < nodes.Count; i++)
-        {
-            Transform pointerTransform = nodes[i].transform.GetChild(0);
-            pointerTransform.gameObject.SetActive(false);
-        }
+        Debug.Log("@RemoveAllPointers()");
+        // Get all pointers in all nodes and hide
+        foreach (GameObject node in nodes)
+            node.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     IEnumerator UnlockNodeWithAnimation(Node node)
     {
-        if (currentNodeId == 0)
+        Debug.Log("@UnlockNodeWithAnimation()");
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController != null)
         {
-            yield return new WaitForSeconds(1.5f);
-        }
+            // Delay
+            yield return new WaitForSeconds(0.5f);
 
-        if (node.nodeId <= currentNodeId)
-        {
-            if (node.nodeId != 0)
+            // Only unlock node if its id is in dictionary
+            if (dataController.currentSaveData.nodes.ContainsKey(node.nodeId))
             {
-                Node previousNode = areaData[currentAreaId].nodes[node.nodeId - 1];
-                if (previousNode.hasPath)
-                {
-                    Transform pathTransform = nodes[previousNode.nodeId].transform.GetChild(1);
-                    GameObject path = pathTransform.gameObject;
-                    path.SetActive(true);
+                // Point to latest node unlocked
+                if (node.nodeId == (dataController.currentSaveData.nodes.Count - 1))
+                    PointCurrentNode(node.nodeId);
 
-                    RemovePointer(previousNode.nodeId);
+                // Check if node is not the very first node in area
+                // to activate previous node's path
+                if (node.nodeId != node.area.startNodeIndex)
+                {
+                    // Get previous node
+                    Node previousNode = areaData[dataController.currentArea.areaId].nodes[node.nodeId - 1];
+
+                    // If previous node has path, activate it
+                    if (previousNode.hasPath)
+                    {
+                        nodes[previousNode.nodeId].transform.GetChild(1).gameObject.SetActive(true);
+                        RemovePointer(previousNode.nodeId);
+                    }
+
+                    // Delay
+                    yield return new WaitForSeconds(0.5f);
                 }
 
+                // Show latest node by activating node and its container
+                nodes[node.nodeId].SetActive(true);
+                nodeContainers[dataController.currentSaveData.areas.Count - 1].SetActive(true);
+            }
+        }
+    }
+
+    IEnumerator ShowAreaTooltip(GameObject hitObj)
+    {
+        Debug.Log("@ShowAreaTooltip(GameObject hitObj)");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController != null)
+        {
+            foreach (Areas area in areaData)
+            {
+                if (area.areaName.Equals(hitObj.transform.parent.gameObject.name))
+                {
+                    areaTooltips[area.areaId].SetActive(true);
+                    yield return new WaitForSeconds(2f);
+                    areaTooltips[area.areaId].SetActive(false);
+                    break;
+                }
+            }
+        }
+    }
+
+    IEnumerator ShowAreaTooltip()
+    {
+        Debug.Log("@ShowAreaTooltip()");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController != null)
+        {
+            areaTooltips[dataController.currentArea.areaId].SetActive(true);
+            yield return new WaitForSeconds(2f);
+            areaTooltips[dataController.currentArea.areaId].SetActive(false);
+        }
+    }
+
+    IEnumerator ShowAreaThreatLevel(GameObject hitObj)
+    {
+        Debug.Log("@ShowAreaThreatLevel(GameObject hitObj)");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController != null)
+        {
+            // If an area is already selected, remove threat level and tooltip
+            if (dataController.currentArea != null)
+            {
+                StartCoroutine(HideAreaThreatLevel());
                 yield return new WaitForSeconds(.5f);
             }
 
-            nodes[node.nodeId].SetActive(true);
-            nodeParents[currentAreaId].SetActive(true);
-
-            if (node.nodeId == currentNodeId)
-                PointCurrentNode(node.nodeId);
-
-            yield return null;
-        }
-    }
-
-    IEnumerator ShowAreaTooltip(GameObject obj)
-    {
-        foreach (Areas area in areaData)
-        {
-            if (area.areaName.Equals(obj.transform.parent.gameObject.name))
+            // Loop through each area in areaData list
+            foreach (Areas area in areaData)
             {
-                areaTooltips[area.areaId].SetActive(true);
-                yield return new WaitForSeconds(2f);
-                areaTooltips[area.areaId].SetActive(false);
-                break;
+                // Check which area should threat level be shown by
+                // comparing if name of object and area is the same
+                if (area.areaName.Equals(hitObj.transform.gameObject.name))
+                {
+                    // Show threat level and explore button
+                    exploreButton.gameObject.SetActive(true);
+                    areaHover[area.areaId].SetActive(true);
+
+                    // Set currently selected area/map
+                    currentSelectedArea = area;
+                    dataController.currentArea = area;
+                    
+                    // Temporary set text of tooltip for this area
+                    TextMeshProUGUI tooltipText = areaTooltips[area.areaId].transform.GetChild(0)
+                        .gameObject.GetComponent<TextMeshProUGUI>();
+                    tooltipText.text = "Doctor Cooper allowed you to explore this area.";
+                    StartCoroutine(ShowAreaTooltip());
+
+                    break;
+                }
+
             }
-        }
-    }
-
-    IEnumerator ShowAreaTooltip(int areaId)
-    {
-        areaTooltips[areaId].SetActive(true);
-        yield return new WaitForSeconds(2f);
-        areaTooltips[areaId].SetActive(false);
-    }
-
-    IEnumerator ShowAreaThreatLevel(GameObject obj)
-    {
-        if (dataController.currentArea != null)
-            StartCoroutine(HideAreaThreatLevel());
-
-        yield return new WaitForSeconds(.5f);
-
-        foreach (Areas area in areaData)
-        {
-            if(area.areaName.Equals(obj.transform.gameObject.name))
-            {
-                areaHover[area.areaId].SetActive(true);
-                exploreButton.gameObject.SetActive(true);
-
-                TextMeshProUGUI tooltipText = areaTooltips[area.areaId].transform.GetChild(0)
-                    .gameObject.GetComponent<TextMeshProUGUI>();
-                tooltipText.text = "Doctor Cooper allowed this area to be explored. " +
-                    " Still, be careful Scavenger!";
-                StartCoroutine(ShowAreaTooltip(area.areaId));
-                
-                currentSelectMapData = area;
-                dataController.currentArea = area;
-
-                break;
-            }
-                
         }
     }
 
     IEnumerator HideAreaThreatLevel()
     {
-        foreach (Areas area in areaData)
-        {
-            if (area.Equals(dataController.currentArea))
-            {
-                areaHover[area.areaId].GetComponent<Animator>().SetBool("Fade Out", true);
-                exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", true);
-                yield return new WaitForSeconds(.2f);
-                areaHover[area.areaId].GetComponent<Animator>().SetBool("Fade Out", false);
-                exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", false);
-                areaHover[area.areaId].SetActive(false);
-                exploreButton.gameObject.SetActive(false);
+        Debug.Log("@HideAreaThreatLevel()");
 
-                break;
-            }
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController != null)
+        {
+            // If unselected, hide area threat level and select button
+            // This will happen when player clicks anywhere on screen or clicks another area
+            areaHover[dataController.currentArea.areaId].GetComponent<Animator>().SetBool("Fade Out", true);
+            exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", true);
+            yield return new WaitForSeconds(.2f);
+            areaHover[dataController.currentArea.areaId].GetComponent<Animator>().SetBool("Fade Out", false);
+            exploreButton.gameObject.GetComponent<Animator>().SetBool("Exit", false);
+            areaHover[dataController.currentArea.areaId].SetActive(false);
+            exploreButton.gameObject.SetActive(false);
         }
     }
 
     private void ExploreMap()
     {
+        Debug.Log("@ExploreMap()");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // Play SFX
         GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
 
+        // Prepeare for Zoom In
+        // Get camera's default position and destination coordinates
         camDefaultPosition = mainCamera.transform.position;
-        if (dataController != null)
-        {
-            destination = dataController.currentArea.coordinates;
+        destination = dataController.currentArea.coordinates;
 
-            canSelectMap = false;
-            focusArea = true;
-            move = true;
+        // Trigger Zoom In function (which is in Update method) by
+        // changing the flags focusArea and move to true
+        focusArea = true;
+        move = true;
 
-            infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
-            zwaButton.gameObject.SetActive(false);
+        // While zooming in, make sure to disable click function (raycast)
+        canSelectMap = false;
 
-            foreach (GameObject areaName in areaNames)
-                areaName.SetActive(false);
-        }
-        else
-        {
-            destination = currentSelectMapData.coordinates;
+        // Hide signs and ZWA Button
+        infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
+        zwaButton.gameObject.SetActive(false);
 
-            canSelectMap = false;
-            focusArea = true;
-            move = true;
-
-            infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
-            zwaButton.gameObject.SetActive(false);
-
-            foreach (GameObject areaName in areaNames)
-                areaName.SetActive(false);
-        }
+        // Hide all area names
+        foreach (GameObject areaName in areaNames)
+            areaName.SetActive(false);
     }
 
     private void ZoomOutOfMap()
     {
+        Debug.Log("@ZommOutOfMap");
+
+        // Placed coroutine in another function so it can to called
+        // from button click/added as listener
         StartCoroutine(ZoomOutAnimation());
     }
 
     IEnumerator ZoomOutAnimation()
     {
-        for (int i = 0; i <= currentNodeId; i++)
-            StartCoroutine(nodes[i].GetComponent<NodeManager>().HideNode());   
-            
-        yield return new WaitForSeconds(1f);
-
-        camDefaultPosition = mainCamera.transform.position;
-        destination = new Vector3(0, 0, -10);
-
-        canSelectMap = true;
-        focusArea = true;
-        move = true;
-        zoomOut = true;
-
-        yield return new WaitForSeconds(1f);
-
+        Debug.Log("@ZoomOutAnimation()");
+        // Just to be safe, always check if there's a data controller before execution
         if (dataController != null)
         {
-            areaNames[dataController.currentArea.areaId].SetActive(true);
+            // Hide all nodes in current area
+            for (int i = 0; i < dataController.currentArea.maxNodes; i++)
+                StartCoroutine(nodes[i].GetComponent<NodeManager>().HideNode());
+
+            // Delay
+            yield return new WaitForSeconds(1f);
+
+            // Prepare for Zoom Out
+            // Get camera's current position and destination coordinates
+            camDefaultPosition = mainCamera.transform.position;
+            destination = new Vector3(0, 0, -10);
+
+            // Trigger Zoom Out function (which is in Update method) 
+            // by changing flags to false
+            focusArea = true;
+            move = true;
+            zoomOut = true;
+
+            // While zooming out, make sure to disable click function (raycast)
+            canSelectMap = false;
+
+            // Delay
+            yield return new WaitForSeconds(1f);
+
+            // Display names of unlocked areas
+            foreach (Areas area in areaData)
+            {
+                if (dataController.currentSaveData.areas.ContainsKey(area.areaId))
+                {
+                    areaNames[area.areaId].SetActive(true);
+                }
+            }
+
+            // Map is interactable once zooming out is done
+            canSelectMap = true;
         }
-        else
-        {
-            areaNames[currentSelectMapData.areaId].SetActive(true);
-        }
-        
     }
 
-    private void ShowFocusedAreaContent()
+    private void ShowAreaContent()
     {
-        infectedAreasSign.SetActive(false);
-        zoomOutButton.gameObject.SetActive(true);
+        Debug.Log("@ShowAreaContent()");
 
-        focusedAreaName.text = dataController.currentArea.areaName;
-        focusedAreaName.gameObject.SetActive(true);
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
 
-        focusedSubname.text = dataController.currentArea.subtitle;
-        focusedSubname.gameObject.SetActive(true);
+        // If loading panel is open, hide it
+        if (loadingPanel.activeInHierarchy)
+            loadingPanel.SetActive(!loadingPanel.activeInHierarchy);
 
-        if(dataController != null) 
+        // Unlock Nodes
+        // Check currentNodeId to determine if its a new game
+        if (dataController.currentSaveData.currentNodeCount == -1)
         {
-            Debug.Log(dataController.currentSaveData.currentNodeId);
-            if (dataController.currentSaveData.currentNodeId == -1)
-            {
-                dataController.currentSaveData.currentNodeId++;
-                currentNodeId = dataController.currentSaveData.currentNodeId;
+            // Increment so unlock animation wont happend again for the first node
+            dataController.currentSaveData.currentNodeCount += 2;
+            StartCoroutine(UnlockNodeWithAnimation(dataController.currentArea.nodes[0]));
 
-                StartCoroutine(UnlockNodeWithAnimation(dataController.currentArea.nodes[currentNodeId]));
+            // Save progress
+            dataController.SaveSaveData();
+            dataController.SaveGameData();
+        }
+        // If there's a need to unlock a node
+        else if (dataController.currentNode != null)
+        {
+            if (dataController.currentNode.nodeId < (dataController.currentSaveData.nodes.Count - 1))
+            {
+                // Remove current selected node because players are allowed
+                // to choose another node other than previous nodes
+                dataController.currentNode = null;
+
+                // By passing true, unlock animation for latest node will play
+                ShowUnlockedNodes(true);
+
+                // Allow node selection
+                dataController.currentSaveData.currentNodeCount++;
+                nodes[dataController.currentSaveData.nodes.Count
+                    - 1].GetComponent<NodeManager>().AllowNodeSelection(1);
+
+                // Save progress
+                dataController.SaveSaveData();
+                dataController.SaveGameData();
             }
             else
             {
-                UnlockNodes();
+                ShowUnlockedNodes(false);
             }
+            
         }
+        // If there's no change in nodes or game just started,
+        // continued where player left off
         else
         {
-            UnlockNodes();
+            ShowUnlockedNodes(false);
         }
 
+        // Set up all node managers, since all nodes are created, just hidden
         foreach (GameObject node in nodes)
         {
             node.GetComponent<NodeManager>().SetMapController(this);
             node.GetComponent<NodeManager>().AllowNodeSelection(1);
             node.GetComponent<NodeManager>().SetPreviousNodeData(dataController.currentArea.
-                nodes[currentNodeId], nodes[currentNodeId]);
+                nodes[dataController.currentSaveData.currentNodeId], nodes[dataController.currentSaveData.currentNodeId]);
             node.GetComponent<NodeManager>().SendAreaNameComponents(focusedAreaName, focusedSubname);
             node.GetComponent<NodeManager>().SendNodeDetailComponents(nodeDetails);
             node.GetComponent<NodeManager>().SendLevelListComponents(levelList);
         }
-            
+
+        // Hide signs and show zoom out button
+        infectedAreasSign.SetActive(false);
+        zoomOutButton.gameObject.SetActive(true);
+
+        // Show name of focused area as well as its subname
+        focusedAreaName.text = dataController.currentArea.areaName;
+        focusedAreaName.gameObject.SetActive(true);
+
+        focusedSubname.text = dataController.currentArea.subtitle;
+        focusedSubname.gameObject.SetActive(true);
     }
 
-    private void HideFocusedAreaContent()
+    private void HideAreaContent()
     {
-        LockNodes();
+        HideNodes();
 
         zoomOutButton.gameObject.SetActive(false);
         focusedAreaName.gameObject.SetActive(false);
@@ -549,11 +795,15 @@ public class MapController : MonoBehaviour
 
     public void HideListOfLevels()
     {
+        Debug.Log("@HuntListOfLevels()");
+
+        // Just to be safe, always check if there's a data controller before execution
         if (dataController != null)
         {
+            // Play SFX
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Whoosh 06");
-            StartCoroutine(dataController.currentNodeObject.
-                GetComponent<NodeManager>().HideListOfLevels());
+
+            StartCoroutine(nodes[dataController.currentNode.nodeId].GetComponent<NodeManager>().HideListOfBattles());
         }
         
     }
@@ -570,8 +820,39 @@ public class MapController : MonoBehaviour
 
     public void HuntNode()
     {
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
-        StartCoroutine(ShowTeamSelect());
+        Debug.Log("@HuntNode()");
+
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // Check if battle is not null, just to avoid errors if its null
+        if (dataController.currentBattle != null)
+        {
+            // If major cutscene, no need to select team. Go straight to cutscene
+            if (dataController.currentBattle.isMajorCutscene)
+            {
+                // Play SFX and stop BGM
+                StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Monsters Underground", 2f));
+                GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                GameObject.FindObjectOfType<AudioManager>().PlaySound("Whoosh 06");
+
+                // Disable button for Hunt Node
+                nodeDetails.transform.GetChild(4).GetComponent<Button>().interactable = false;
+
+                // Load next scene
+                int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
+                dataController.currentCutscene = dataController.currentBattle.startCutscene;
+                StartCoroutine(LoadScene(nextSceneId));
+            }
+            // If not and has a battle, show team selection panel
+            else
+            {
+                // Play SFX
+                GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                StartCoroutine(ShowTeamSelect());
+            }
+        }
     }
 
     IEnumerator ShowTeamSelect()
@@ -623,13 +904,13 @@ public class MapController : MonoBehaviour
                 int nextSceneId = 0;
                 if (dataController.currentBattle.cutsceneAtStart || dataController.currentBattle.isMajorCutscene)
                 {
-                    nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextLevel);
+                    nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
                     dataController.currentCutscene = dataController.currentBattle.startCutscene;
                     StartCoroutine(LoadScene(nextSceneId));
                 }
                 else
                 {
-                    nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextLevel);
+                    nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
                     StartCoroutine(LoadScene(nextSceneId));
                 }
             }
@@ -648,70 +929,92 @@ public class MapController : MonoBehaviour
 
     void Update()
     {
-        // Map Selection through Raycast
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // Prevents unecessary click that may cause errors
+        // Only executes when all components of map are set up
         if (canSelectMap)
         {
-            if (Input.touchCount == 1)
+            // Only register click/touch when its only one
+            // and at beggining of the touch phase
+            if (Input.touchCount == 1 && (TouchPhase.Began == Input.GetTouch(0).phase))
             {
-                if (TouchPhase.Began == Input.GetTouch(0).phase)
+                // Convert touch position to world point
+                Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+
+                // Get whatever is hit/collided by touch
+                RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
+
+                // If hit collided with something and is not empty, check what it is
+                if (hit.collider != null)
                 {
-                    Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-                    RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
+                    // Get gameObject
+                    GameObject obj = hit.transform.gameObject;
 
-                    if (hit.collider != null)
+                    // Check if its a lock and show tooltip
+                    if (obj.name.Equals("Lock"))
                     {
-                        GameObject obj = hit.transform.gameObject;
-                        if (obj.name.Equals("Lock"))
-                        {
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Beep Denied");
-                            StartCoroutine(ShowAreaTooltip(obj));
-                        }
-
-                        if (obj.name.Equals("Terre") || obj.name.Equals("Mare")
-                            || obj.name.Equals("Atmos"))
-                        {
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
-                            StartCoroutine(ShowAreaThreatLevel(obj));
-                        }
-
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Beep Denied");
+                        StartCoroutine(ShowAreaTooltip(obj));
                     }
-                    else
+
+                    // Check if its any of the three areas, show tooltip and threat level
+                    if (obj.name.Equals("Terre") || obj.name.Equals("Mare")
+                        || obj.name.Equals("Atmos"))
                     {
-                        if (dataController.currentArea != null)
-                            StartCoroutine(HideAreaThreatLevel());
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                        StartCoroutine(ShowAreaThreatLevel(obj));
                     }
+
+                }
+                else
+                {
+                    // If nothing is hit and there is a current seletced area, unselect it
+                    if (dataController.currentArea != null)
+                        StartCoroutine(HideAreaThreatLevel());
                 }
             }
         }
 
-        // Focus on Area
+        // If set to true, focuses on selected area
+        // 2 parts: (1) moves to current coordinates of map, (2) zoom in
         if (focusArea)
         {
+            // First, move cam to current area's coordinates
             if (move)
             {
+                // Always get position of camera to determine if camera
+                // has reached its destination
                 Vector2 camPosition = mainCamera.transform.position;
+
                 if (destination.x > 0)
                 {
                     if (camPosition.x <= destination.x)
                     {
                         Vector2 offset, direction;
 
+                        // If zoom in, move camera to destination coordinates
                         if (!zoomOut)
                         {
-                            offset = destination - camDefaultPosition; ;
+                            offset = destination - camDefaultPosition;
                             direction = Vector2.ClampMagnitude(offset, 1.0f);
                         }
+                        // If zooming out, go back to default position of cam
                         else
                         {
-                            offset = destination + camDefaultPosition; ;
+                            offset = destination + camDefaultPosition;
                             direction = Vector2.ClampMagnitude(offset, 1.0f);
                         }
 
+                        // Move all cameras, not just Main Camera
                         mainCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
                         fxCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
                     }
                     else
                     {
+                        // Set flags to trigger focus animation
                         focus = true;
                         move = false;
                     }
@@ -720,7 +1023,7 @@ public class MapController : MonoBehaviour
                 {
                     if (camPosition.x >= destination.x)
                     {
-                        Vector2 offset = destination - camDefaultPosition; ;
+                        Vector2 offset = destination - camDefaultPosition;
                         Vector2 direction = Vector2.ClampMagnitude(offset, 1.0f);
 
                         mainCamera.transform.Translate((direction) * dataController.currentArea.moveSpeed * Time.deltaTime);
@@ -734,17 +1037,22 @@ public class MapController : MonoBehaviour
                 }
             }
 
+            // Now, decrement camera size to create an illusion of zooming in
             if (focus)
             {
+                // Get orthographics sizes of all cameras
                 float mainCamSize = mainCamera.orthographicSize;
                 float fxCamSize = fxCamera.orthographicSize;
 
+                // Zoom SFX
                 if (!zoomSfxDone)
                 {
                     GameObject.FindObjectOfType<AudioManager>().PlaySound("Whoosh 02");
                     zoomSfxDone = true;
                 }
 
+                // Check if animation is Zoom In/Out
+                // If zoom in, decrease size of cameras according to area's zoom size
                 if (!zoomOut)
                 {
                     if (mainCamSize >= dataController.currentArea.zoomSize && fxCamSize >= dataController.currentArea.zoomSize)
@@ -754,13 +1062,16 @@ public class MapController : MonoBehaviour
                     }
                     else
                     {
+                        // When animation is done, set flgas to false
                         focus = false;
                         focusArea = false;
                         zoomSfxDone = false;
 
-                        ShowFocusedAreaContent();
+                        // Show Nodes
+                        ShowAreaContent();
                     }
                 }
+                // If zoom out, increase camera size to default size
                 else
                 {
                     if (mainCamSize <= 200 && fxCamSize <= 200)
@@ -770,12 +1081,14 @@ public class MapController : MonoBehaviour
                     }
                     else
                     {
+                        // When animation is done, set flgas to false
                         focus = false;
                         focusArea = false;
                         zoomOut = false;
                         zoomSfxDone = false;
 
-                        HideFocusedAreaContent();
+                        // Hide Nodes
+                        HideAreaContent();
                     }
                 }
 

@@ -27,13 +27,17 @@ public class Areas : ScriptableObject {
 
     [Space]
     [Header("Nodes")]
+    public int startNodeIndex;
     public int maxNodes;
 
     [Space]
     public List<Node> nodes;
-    public List<Vector3> positions;
-    
+    public List<Vector3> nodePositions;
+
     [Header("Progess")]
-    public string nextLevel;
-    
+    public List<string> nextLevels;
+    public List<int> levelIds;
+
+    [Space]
+    public string nextScene;
 }

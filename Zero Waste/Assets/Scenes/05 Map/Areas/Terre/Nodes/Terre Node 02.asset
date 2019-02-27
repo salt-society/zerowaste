@@ -17,10 +17,16 @@ MonoBehaviour:
   nodeName: Node 02
   info: 
   threatLevel: {r: 0, g: 0, b: 0, a: 0}
+  area: {fileID: 11400000, guid: a54a40b72df378248b174c3778b402aa, type: 2}
+  battleStartIndex: 5
+  battleEndIndex: 6
   hasPath: 1
   pathPosition: {x: 4.76, y: -6.6, z: 0}
   pathRotation: {x: 0, y: 0, z: -54.6}
   pathScale: {x: 1.98, y: 1.3, z: 0}
-  area: {fileID: 11400000, guid: a54a40b72df378248b174c3778b402aa, type: 2}
-  battles: []
-  nextLevel: 
+  battles:
+  - {fileID: 11400000, guid: e1d7710c154d8354589ca8bf739e7a60, type: 2}
+  - {fileID: 11400000, guid: 8610888ecc171bd4f952e6245b582bd6, type: 2}
+  nextLevels: []
+  levelIds: 
+  nextScene: 

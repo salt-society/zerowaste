@@ -316,4 +316,34 @@ public class DataController : MonoBehaviour
                 }
         }
     }
+
+    public void UnlockLevels(List<string> nextLevels, List<int> levelIds)
+    {
+        int index = 0;
+        foreach (string level in nextLevels)
+        {
+            if (level.Equals("Area"))
+            {
+                currentSaveData.UnlockArea(levelIds[index], false);
+                index++;
+            }
+
+            if (level.Equals("Node"))
+            {
+                currentSaveData.UnlockNode(levelIds[index], false);
+                index++;
+            }
+
+            if (level.Equals("Battle"))
+            {
+                currentSaveData.UnlockBattle(levelIds[index], false);
+                currentSaveData.currentBattleCount = currentSaveData.battles.Count;
+
+                index++;
+            }
+        }
+
+        SaveSaveData();
+        SaveGameData();
+    }
 }

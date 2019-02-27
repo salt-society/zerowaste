@@ -28,5 +28,9 @@ public class Battle : ScriptableObject {
     public Cutscene endCutscene;
 
     [Header("Progess")]
-    public string nextLevel;
+    public List<string> nextLevels;
+    public List<int> levelIds;
+
+    [Space]
+    public string nextScene;
 }

@@ -219,11 +219,11 @@ public class StatusManager : MonoBehaviour {
         pollutionLevels[position].GetComponent<Image>().fillAmount += (float)additionalHealth;
     }
 
-    public void DecrementPollutionBar(double currentPollution, int position)
+    public void DecrementPollutionBar(double damage, int position)
     {
-        currentPollution = currentPollution / mutantMaxPollutionLvl[position];
-        pollutionLevels[position].GetComponent<Image>().fillAmount = (float)currentPollution;
-        Debug.Log(currentPollution + " : " + pollutionLevels[position].GetComponent<Image>().fillAmount);
+        damage = damage / mutantMaxPollutionLvl[position];
+        pollutionLevels[position].GetComponent<Image>().fillAmount -= (float)damage;
+        Debug.Log(damage + " : " + pollutionLevels[position].GetComponent<Image>().fillAmount);
     }
 
     public void DisplayEffects(string appliedTo, Effect effect)

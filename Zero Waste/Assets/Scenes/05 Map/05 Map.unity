@@ -1418,7 +1418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 213059811}
   m_Layer: 9
-  m_Name: Nodes
+  m_Name: Terre Node Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1558,7 +1558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238241375}
   m_Layer: 9
-  m_Name: Nodes
+  m_Name: Mare Node Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1791,6 +1791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataController: {fileID: 0}
   teamSelectManager: {fileID: 2041446676}
+  levelListManager: {fileID: 1316781948}
   mainCamera: {fileID: 160190841}
   fxCamera: {fileID: 1521282347}
   fadeTransition: {fileID: 1332483559}
@@ -1834,7 +1835,7 @@ MonoBehaviour:
   pathPrefab: {fileID: 3763291629057517620, guid: a2657074cd34e7146b6baeee2c0b9b0e,
     type: 3}
   nodes: []
-  nodeParents:
+  nodeContainers:
   - {fileID: 213059810}
   - {fileID: 238241374}
   - {fileID: 1495375065}
@@ -10477,7 +10478,6 @@ MonoBehaviour:
   finishedColor: {r: 0.44705886, g: 0.5921569, b: 0.21960786, a: 0.8627451}
   currentColor: {r: 1, g: 0, b: 0, a: 0.8627451}
   nodeData: {fileID: 11400000, guid: 385719f75d227cd4e83ba83a540632db, type: 2}
-  tempUnlockedBattleCount: 1
 --- !u!1001 &1332483557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11722,7 +11722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1495375066}
   m_Layer: 9
-  m_Name: Nodes
+  m_Name: Atmos Node Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

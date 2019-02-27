@@ -20,7 +20,7 @@ MonoBehaviour:
   isCharacterLive2D: 0
   content: After this cutscene, the map should load straight to the current node and
     unlock next scene.
-  isNarration: 0
+  isNarration: 1
   canSkip: 0
   BGM: []
   startSFX: []

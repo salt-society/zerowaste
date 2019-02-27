@@ -15,17 +15,25 @@ public class Node : ScriptableObject
     public Color threatLevel;
 
     [Space]
+    public Areas area;
+
+    [Space]
+    public int battleStartIndex;
+    public int battleEndIndex;
+
+    [Space]
     public bool hasPath;
     public Vector3 pathPosition;
     public Vector3 pathRotation;
     public Vector3 pathScale;
 
     [Space]
-    public Areas area;
-
-    [Space]
     public List<Battle> battles;
 
     [Header("Progess")]
-    public string nextLevel;
+    public List<string> nextLevels;
+    public List<int> levelIds;
+
+    [Space]
+    public string nextScene;
 }

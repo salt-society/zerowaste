@@ -19,7 +19,9 @@ public class SaveData {
     public string gender;
 
     [Header("Game Progress")]
-    public string nextLevel;
+    public bool battleTutorial;
+    public bool zwaTutorial;
+    public bool mapTutorial;
 
     [Space]
     public int currentCutsceneId;
@@ -28,10 +30,22 @@ public class SaveData {
     public int currentBattleId;
 
     [Space]
+    public int currentCutsceneCount;
+    public int currentAreaCount;
+    public int currentNodeCount;
+    public int currentBattleCount;
+
+    [Space]
     public List<bool> unlockedCutscenes;
     public List<bool> unlockedAreas;
     public List<bool> unlockedNodes;
     public List<bool> unlockedBattles;
+
+    public Dictionary<int, bool> cutscenes;
+    public Dictionary<int, bool> areas;
+    public Dictionary<int, bool> nodes;
+    public Dictionary<int, bool> battles;
+    public Dictionary<int, bool> isBattlePlayed;
 
     [Header("Character Roster")]
     public List<int> scavengerList;
@@ -52,19 +66,30 @@ public class SaveData {
     public void SetDefaultValues()
     {
         currentCutsceneId = 0;
-        currentAreaId = -1;
+        currentAreaCount = -1;
         currentBattleId = -1;
-        currentNodeId = -1;
+        currentNodeCount = -1;
 
         unlockedCutscenes = new List<bool>();
         unlockedAreas = new List<bool>();
         unlockedNodes = new List<bool>();
         unlockedBattles = new List<bool>();
 
+        cutscenes = new Dictionary<int, bool>();
+        areas = new Dictionary<int, bool>();
+        nodes = new Dictionary<int, bool>();
+        battles = new Dictionary<int, bool>();
+        isBattlePlayed = new Dictionary<int, bool>();
+
         scavengerList = new List<int>();
         boosterList = new Dictionary<int, int>();
+    }
 
-        nextLevel = "Cutscene";
+    public void ChangePlayDetails()
+    {
+        dateLastAccessed = DateTime.Now;
+        launchDates.Add(dateLastAccessed);
+        playCount++;
     }
 
     public void UnlockCutscene()
@@ -72,10 +97,21 @@ public class SaveData {
         unlockedCutscenes.Add(false);
     }
 
+    public void UnlockCutscene(int key, bool value)
+    {
+        cutscenes.Add(key, value);
+        currentCutsceneId = key;
+    }
+
     public void FinishedCutscene()
     {
         unlockedCutscenes[currentCutsceneId] = true;
         currentCutsceneId++;
+    }
+
+    public void FinishedCutscene(int cutsceneId)
+    {
+        cutscenes[cutsceneId] = true;
     }
 
     public void UnlockScavenger(int scavengerId)
@@ -96,9 +132,19 @@ public class SaveData {
         unlockedAreas.Add(false);
     }
 
-    public void FinishedArea(int areaId)
+    public void UnlockArea(int key, bool value)
+    {
+        areas.Add(key, value);
+    }
+
+    /*public void FinishedArea(int areaId)
     {
         unlockedAreas[areaId] = true;
+    }*/
+
+    public void FinishedArea(int areaId)
+    {
+        areas[areaId] = true;
     }
 
     public void UnlockedNode()
@@ -106,9 +152,19 @@ public class SaveData {
         unlockedNodes.Add(false);
     }
 
-    public void FinishedNode(int nodeId)
+    public void UnlockNode(int key, bool value)
+    {
+        nodes.Add(key, value);
+    }
+
+    /*public void FinishedNode(int nodeId)
     {
         unlockedNodes[nodeId] = true;
+    }*/
+
+    public void FinishedNode(int nodeId)
+    {
+        nodes[nodeId] = true;
     }
 
     public void UnlockedBattle()
@@ -116,8 +172,24 @@ public class SaveData {
         unlockedBattles.Add(false);
     }
 
-    public void FinishedBattle(int battleId) 
+    public void UnlockBattle(int key, bool value)
+    {
+        battles.Add(key, value);
+        isBattlePlayed.Add(key, value);
+    }
+
+    /*public void FinishedBattle(int battleId) 
     {
         unlockedBattles[battleId] = true;
+    }*/
+
+    public void PlayBattle(int battleId)
+    {
+        isBattlePlayed[battleId] = true;
+    }
+
+    public void FinishedBattle(int battleId)
+    {
+        battles[battleId] = true;
     }
 }

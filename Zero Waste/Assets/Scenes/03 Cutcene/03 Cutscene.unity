@@ -241,7 +241,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 40
-  m_Depth: -1
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -781,6 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataController: {fileID: 0}
+  audioManager: {fileID: 0}
   backgroundManager: {fileID: 1850297556}
   historyGrid: {fileID: 1786108375}
   dialogueBox: {fileID: 742114421}
