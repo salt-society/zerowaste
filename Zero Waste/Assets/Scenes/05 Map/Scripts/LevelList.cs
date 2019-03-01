@@ -21,7 +21,7 @@ public class LevelList : MonoBehaviour
     private MapController mapController;
     private NodeManager nodeManager;
 
-    private GameObject nodeDetails;
+    private GameObject battleDetails;
     private GameObject levelList;
 
     private GameObject cellToUnlock;
@@ -34,7 +34,7 @@ public class LevelList : MonoBehaviour
 
     public void SendBattleComponents(GameObject nodeDetails, GameObject levelList)
     {
-        this.nodeDetails = nodeDetails;
+        this.battleDetails = nodeDetails;
         this.levelList = levelList;
     }
 
@@ -48,100 +48,120 @@ public class LevelList : MonoBehaviour
 
     public void RemoveCellsfFromGrid()
     {
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // Reason for doing this is that the game makes use of one battle
+        // grid view that will be called every node is clicked to show
+        // list of battles at the same time, cells created on grid view stays
+
+        // Check if there's a child, battle cell, first to destroy
         if (transform.childCount > 0)
         {
+            // Get all the transforms
             foreach (Transform cell in transform)
             {
-                if (dataController != null)
-                {
-                    if (cell != dataController.currentBattleObject)
-                    {
-                        Debug.Log("Destroying " + cell.gameObject.name);
-                        Destroy(cell.gameObject);
-                    }
-                }
-                else
+                // Destroy cell if its not the current battle object
+                if (cell != dataController.currentBattleObject)
                 {
                     Debug.Log("Destroying " + cell.gameObject.name);
                     Destroy(cell.gameObject);
                 }
             }
 
+            // Deactivates grid view so if called again
+            // cells will repopulate base on the new node data
             gameObject.SetActive(false);
         }
+
+        // [NOTE]
+        // Will try object pooling as creating objects and destroying
+        // can take too much resource especially on mobile devices
     }
 
     public void PopulateGrid()
     {
+        // Just to be safe, always check if there's a data controller before execution
+        if (dataController == null)
+            return;
+
+        // Create one gameObject that will serve as container of the prefab
+        // and initialize list of gameObject where battles to be unlocked will be stored
         GameObject battleCell;
         cellsToUnlock = new List<GameObject>();
 
+        // Since battle id increment from first to last area, index in the loop 
+        // should start with the starting index of a battle within each node
+        // and end with the last battle's index. Use another counter for getting battles
         int nodeDataIndex = 0;
         for (int battleIndex = nodeData.battleStartIndex; battleIndex <= nodeData.battleEndIndex; battleIndex++)
         {
-            Debug.Log("Loop " + (nodeDataIndex + 1));
-
+            // Create prefab instance
             battleCell = Instantiate(levelCellPrefab, transform);
-            battleCell.GetComponent<LevelManager>().SetBattleData(nodeData.battles[nodeDataIndex], battleCell);
-            Debug.Log("Current Data: nodeData.battles[" + nodeDataIndex + "]");
+
+            // Set every the battle object needs to know so it can handle itself
+            battleCell.GetComponent<LevelManager>().Battle = nodeData.battles[nodeDataIndex];
             nodeDataIndex++;
 
-            battleCell.GetComponent<LevelManager>().SetMapController(mapController);
-            battleCell.GetComponent<LevelManager>().SetNodeManager(nodeManager);
-            battleCell.GetComponent<LevelManager>().SendNodeDetailComponents(nodeDetails);
-            battleCell.GetComponent<LevelManager>().SendLevelListComponents(levelList);
+            battleCell.GetComponent<LevelManager>().BattleObject = battleCell; 
+            battleCell.GetComponent<LevelManager>().MapController = mapController;
+            battleCell.GetComponent<LevelManager>().NodeManager = nodeManager;
+            battleCell.GetComponent<LevelManager>().BattleDetails = battleDetails;
+            battleCell.GetComponent<LevelManager>().LevelList = levelList;
 
+            // Set battle/level number
             battleCell.transform.GetChild(0).transform.gameObject.
-                GetComponent<TextMeshProUGUI>().text = battleIndex.ToString();
+                GetComponent<TextMeshProUGUI>().text = (battleIndex + 1).ToString();
 
-            if (dataController != null)
-            { 
-                // Battle is unlocked if Battle Id is already in Battle Dictionary
-                // Make cell interactable if Battle is unlocked
-                if (dataController.currentSaveData.battles.ContainsKey(battleIndex))
+            // Battle is unlocked if Battle Id is already in Battle Dictionary
+            // Make cell interactable if Battle is unlocked
+            if (dataController.currentSaveData.battles.ContainsKey(battleIndex))
+            {
+                battleCell.GetComponent<Button>().interactable = true;
+
+                // Battle unlock doesn't mean its finished
+                // Check if battle is done and mark it green
+                if (dataController.currentSaveData.battles[battleIndex])
                 {
-                    battleCell.GetComponent<Button>().interactable = true;
-
-                    // Battle unlock doesn't mean its finished
-                    // Check if battle is done and mark it green
-                    if (dataController.currentSaveData.battles[battleIndex])
-                    {
-                        battleCell.GetComponent<Image>().color = finishedColor;
-                        battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
-                        battleCell.transform.GetChild(1).transform.gameObject.SetActive(false);
-                    }
-                    // If not finished, show unlocked animation
-                    // Its possible to unlock more than 1 battle inside a node
-                    else
-                    {
-                        // Check if battle is already played
-                        // If yes, do not repeat unlock animation
-                        if (dataController.currentSaveData.isBattlePlayed[battleIndex])
-                        {
-                            battleCell.GetComponent<Image>().color = currentColor;
-                            battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
-                            battleCell.transform.GetChild(1).transform.gameObject.SetActive(false);
-
-                            Debug.Log("Battle " + battleIndex + ": Played but not yet finished.");
-                        }
-                        else
-                        {
-                            Debug.Log("Battle " + battleIndex + ": Not played.");
-                            cellsToUnlock.Add(battleCell);
-                        }
-                    }
+                    battleCell.GetComponent<Image>().color = finishedColor;
+                    battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
+                    battleCell.transform.GetChild(1).transform.gameObject.SetActive(false);
                 }
-                // Cell is not interactable if battle isn't unlocked
+                // If not finished, show unlock animation
+                // Its possible to unlock more than 1 battle inside a node
                 else
                 {
-                    battleCell.GetComponent<Button>().interactable = false;
+                    // Check if battle is already played
+                    // If yes, do not repeat unlock animation
+                    if (dataController.currentSaveData.isBattlePlayed[battleIndex])
+                    {
+                        battleCell.GetComponent<Image>().color = currentColor;
+                        battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
+                        battleCell.transform.GetChild(1).transform.gameObject.SetActive(false);
+
+                        Debug.Log("Battle " + battleIndex + ": Played but not yet finished.");
+                    }
+                    // Always play unlock animation to remind players
+                    // that that battle is still untouched
+                    else
+                    {
+                        Debug.Log("Battle " + battleIndex + ": Not played.");
+                        cellsToUnlock.Add(battleCell);
+                    }
                 }
+            }
+            // Cell is not interactable if battle isn't unlocked
+            else
+            {
+                battleCell.GetComponent<Button>().interactable = false;
             }
         }
     }
 
     public IEnumerator UnlockBattles()
     {
+        // Loops through all battles to unlock and unlocks one at a time
         foreach (GameObject cellToUnlock in cellsToUnlock)
         {
             yield return new WaitForSeconds(.5f);

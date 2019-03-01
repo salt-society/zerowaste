@@ -319,9 +319,14 @@ public class DataController : MonoBehaviour
 
     public void UnlockLevels(List<string> nextLevels, List<int> levelIds)
     {
+        // Unlock different levels at a single time
+
         int index = 0;
         foreach (string level in nextLevels)
         {
+            // Check what to unlock, get its corresponding id and unlock it
+            // using the functions written on save data
+
             if (level.Equals("Area"))
             {
                 currentSaveData.UnlockArea(levelIds[index], false);
@@ -337,12 +342,11 @@ public class DataController : MonoBehaviour
             if (level.Equals("Battle"))
             {
                 currentSaveData.UnlockBattle(levelIds[index], false);
-                currentSaveData.currentBattleCount = currentSaveData.battles.Count;
-
                 index++;
             }
         }
 
+        // Save every time levels are unlocked
         SaveSaveData();
         SaveGameData();
     }

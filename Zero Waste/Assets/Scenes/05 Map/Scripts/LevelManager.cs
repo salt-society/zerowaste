@@ -1,25 +1,69 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
     private DataController dataController;
-    private Battle battle;
 
-    private GameObject level;
+    public DataController DataController
+    {
+        get { return dataController; }
+        set { dataController = value; }
+    }
+
     private MapController mapController;
+
+    public MapController MapController
+    {
+        get { return mapController; }
+        set { mapController = value; }
+    }
+
     private NodeManager nodeManager;
 
-    private GameObject nodeDetails;
+    public NodeManager NodeManager
+    {
+        get { return nodeManager; }
+        set { nodeManager = value; }
+    }
+
+    private Battle battle;
+
+    public Battle Battle
+    {
+        get { return battle; }
+        set { battle = value; }
+    }
+
+    private GameObject battleObject;
+
+    public GameObject BattleObject
+    {
+        get { return battleObject; }
+        set { battleObject = value; }
+    }
+
+    private GameObject battleDetails;
+
+    public GameObject BattleDetails
+    {
+        get { return battleDetails; }
+        set { battleDetails = value; }
+    }
+
     private GameObject levelList;
+
+    public GameObject LevelList
+    {
+        get { return levelList; }
+        set { levelList = value; }
+    }
 
     public void SetBattleData(Battle battle, GameObject level)
     {
         this.battle = battle;
-        this.level = level;
+        this.battleObject = level;
     }
 
     public Battle GetBattleData()
@@ -40,7 +84,7 @@ public class LevelManager : MonoBehaviour
 
     public void SendNodeDetailComponents(GameObject nodeDetails)
     {
-        this.nodeDetails = nodeDetails;
+        this.battleDetails = nodeDetails;
     }
 
     public void SendLevelListComponents(GameObject levelList)
@@ -48,48 +92,59 @@ public class LevelManager : MonoBehaviour
         this.levelList = levelList;
     }
 
-    public void SelectLevel()
+    public void SelectBattle()
     {
+        // Just to be safe, always check if there's a data controller before execution
         if (dataController != null)
         {
+            // Play SFX
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
 
+            // Set current battle selected and its gameObject
             dataController.currentBattle = battle;
             dataController.currentBattleObject = gameObject;
-        }
 
-        StartCoroutine(ShowBattleDetails());
+            // Show players details of battle
+            StartCoroutine(ShowBattleDetails());
+        } 
     }
 
     public void SetBattleDetails()
     {
-        TextMeshProUGUI nodeName = nodeDetails.transform.GetChild(2).
+        // Set battle name
+        TextMeshProUGUI nodeName = battleDetails.transform.GetChild(2).
             gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         nodeName.text = battle.battleName;
 
-        TextMeshProUGUI description = nodeDetails.transform.GetChild(3).
+        // Set battle description
+        TextMeshProUGUI description = battleDetails.transform.GetChild(3).
             gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
     IEnumerator ShowBattleDetails()
     {
+        // Set details of battle
         SetBattleDetails();
 
+        // Hide list of battles
         levelList.GetComponent<Animator>().SetBool("Exit", true);
         yield return new WaitForSeconds(1f);
         levelList.GetComponent<Animator>().SetBool("Exit", false);
         levelList.SetActive(false);
 
-        nodeDetails.SetActive(true);
+        // Show battle details
+        battleDetails.SetActive(true);
     }
 
     public IEnumerator HideBattleDetails()
     {
-        nodeDetails.GetComponent<Animator>().SetBool("Exit", true);
+        // Hide battle details
+        battleDetails.GetComponent<Animator>().SetBool("Exit", true);
         yield return new WaitForSeconds(1f);
-        nodeDetails.GetComponent<Animator>().SetBool("Exit", false);
-        nodeDetails.SetActive(false);
+        battleDetails.GetComponent<Animator>().SetBool("Exit", false);
+        battleDetails.SetActive(false);
 
+        // Show list of levels again
         levelList.SetActive(true);
     }
 }

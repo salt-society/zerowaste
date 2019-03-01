@@ -47,8 +47,6 @@ public class TitleScreenController : MonoBehaviour
 
                 // Unlock prologue, set cutscene details
                 dataController.currentSaveData.UnlockCutscene(0, false);
-                dataController.currentSaveData.currentCutsceneCount = 1;
-                dataController.currentSaveData.currentCutsceneId = 0;
 
                 // Then save changes made in save file
                 dataController.SaveSaveData();
@@ -93,7 +91,7 @@ public class TitleScreenController : MonoBehaviour
                     else
                     {
                         nextSceneId = dataController.GetNextSceneId("Cutscene");
-                        dataController.currentSaveData.currentCutsceneId = 0;
+                        dataController.currentSaveData.UnlockCutscene(0, false);
                         StartCoroutine(LoadScene());
                     }
                 }

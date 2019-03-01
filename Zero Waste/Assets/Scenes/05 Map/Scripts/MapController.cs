@@ -48,57 +48,53 @@ public class MapController : MonoBehaviour
     public List<GameObject> nodes;
     public List<GameObject> nodeContainers;
 
-    private bool canSelectMap;
-    private bool focusArea;
-    private bool move;
-    private bool focus;
-    private bool zoomOut;
-    private bool zoomSfxDone;
+    private bool mapSelectionState;
+    private bool focusOnSpecificArea;
+    private bool cameraMoveState;
+    private bool cameraFocusState;
+    private bool zoomOutState;
+    private bool zoomSfxState;
     private bool canSelectNode;
 
     private Vector2 camDefaultPosition;
     private Vector2 destination;
-
-    private Areas currentSelectedArea;
 
     private GameObject currentSelectedNode;
     private GameObject currentSelectedBattle;
     
     void Start()
     {
+        // Find data controller
         dataController = GameObject.FindObjectOfType<DataController>();
+
+        // Just to be safe, always check if there's a data controller before execution
         if (dataController != null)
         {
+            // Play BGM
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Monsters Underground");
 
-            SetDefaultValues();
+            // Set default values of bools/flags and start loading game progess
+            SetFlags();
             StartCoroutine(LoadGameProgress());
-
-            /*if (dataController.currentSaveData.currentAreaId == -1)
-            {
-                dataController.currentSaveData.currentAreaId++;
-                currentAreaId = dataController.currentSaveData.currentAreaId;
-
-                dataController.currentSaveData.UnlockArea();
-
-                AssignNodeData();
-                StartCoroutine(UnlockMapWithAnimation(areaData[currentAreaId]));
-            }
-            else
-            {
-                StartCoroutine(LoadGameProgress());
-            }*/
         }
     }
 
-    void SetDefaultValues()
+    void SetFlags()
     {
-        canSelectMap = false;
-        focusArea = false;
-        move = false;
-        focus = false;
-        zoomOut = false;
-        zoomSfxDone = false;
+        // States if map can be clicked
+        mapSelectionState = false;
+
+        // States if an area should be focused
+        // Will be triggered when ExploreButton() is called
+        focusOnSpecificArea = false;
+        cameraMoveState = false;
+        cameraFocusState = false;
+
+        // This one's for reversing emphasis on area
+        zoomOutState = false;
+
+        // Able to play sfx every zoom in and out
+        zoomSfxState = false;
     }
 
     IEnumerator LoadGameProgress()
@@ -117,10 +113,10 @@ public class MapController : MonoBehaviour
             // unlock animation will always play. By Default, whenever there's a new game
             // ids, like currentAreaId, is equal to -1 which acts as a condition if unlock 
             // animation should be play upon entering Map Screen
-            if (dataController.currentSaveData.currentAreaCount == -1)
+            if (dataController.currentSaveData.currentAreaId == -1)
             {
                 // Increment so unlock animation of first area won't happen again
-                dataController.currentSaveData.currentAreaCount += 2;
+                dataController.currentSaveData.currentAreaId++;
 
                 // Save progress
                 dataController.SaveSaveData();
@@ -149,9 +145,6 @@ public class MapController : MonoBehaviour
             // NOTE: Area can only be unlocked one at a time
             if (dataController.currentArea.areaId < dataController.currentSaveData.areas.Count - 1)
             {
-                // Increase area count
-                dataController.currentSaveData.currentAreaCount++;
-
                 // Save progress
                 dataController.SaveSaveData();
                 dataController.SaveGameData();
@@ -173,7 +166,7 @@ public class MapController : MonoBehaviour
                     UnlockAreaMaps(false);
 
                     // Make sure that map and node selection isn't enabled
-                    canSelectMap = false;
+                    mapSelectionState = false;
                     // nodes[dataController.currentSaveData.nodes.Count - 1].GetComponent<NodeManager>().AllowNodeSelection(0);
 
                     // Set which area to focus in, the area of current node
@@ -210,7 +203,7 @@ public class MapController : MonoBehaviour
                         UnlockAreaMaps(false);
 
                         // Make sure that map and node selection isn't enabled
-                        canSelectMap = false;
+                        mapSelectionState = false;
 
                         // Set which area to focus in, the area of current node
                         // Then start focusing
@@ -329,7 +322,7 @@ public class MapController : MonoBehaviour
             }
 
             // Change flag to enable map selection (raycast, on Update method)
-            canSelectMap = true;
+            mapSelectionState = true;
         }
     }
 
@@ -341,7 +334,7 @@ public class MapController : MonoBehaviour
         if (dataController != null)
         {
             // Delay to give way for transition to finish before unlocking Map
-            if (dataController.currentSaveData.currentAreaCount == 0)
+            if (dataController.currentSaveData.currentAreaId == 0)
                 yield return new WaitForSeconds(0.5f);
 
             // Unlock area only if its less than or equal current areas unlocked
@@ -356,7 +349,7 @@ public class MapController : MonoBehaviour
 
                 areaNames[area.areaId].SetActive(true);
                 areaMap[area.areaId].GetComponent<BoxCollider2D>().enabled = true;
-                canSelectMap = true;
+                mapSelectionState = true;
             }
         }
     }
@@ -572,8 +565,8 @@ public class MapController : MonoBehaviour
                     areaHover[area.areaId].SetActive(true);
 
                     // Set currently selected area/map
-                    currentSelectedArea = area;
                     dataController.currentArea = area;
+                    dataController.currentSaveData.currentAreaId = area.areaId;
                     
                     // Temporary set text of tooltip for this area
                     TextMeshProUGUI tooltipText = areaTooltips[area.areaId].transform.GetChild(0)
@@ -625,11 +618,11 @@ public class MapController : MonoBehaviour
 
         // Trigger Zoom In function (which is in Update method) by
         // changing the flags focusArea and move to true
-        focusArea = true;
-        move = true;
+        focusOnSpecificArea = true;
+        cameraMoveState = true;
 
         // While zooming in, make sure to disable click function (raycast)
-        canSelectMap = false;
+        mapSelectionState = false;
 
         // Hide signs and ZWA Button
         infectedAreasSign.GetComponent<Animator>().SetBool("Fade Out", true);
@@ -669,12 +662,12 @@ public class MapController : MonoBehaviour
 
             // Trigger Zoom Out function (which is in Update method) 
             // by changing flags to false
-            focusArea = true;
-            move = true;
-            zoomOut = true;
+            focusOnSpecificArea = true;
+            cameraMoveState = true;
+            zoomOutState = true;
 
             // While zooming out, make sure to disable click function (raycast)
-            canSelectMap = false;
+            mapSelectionState = false;
 
             // Delay
             yield return new WaitForSeconds(1f);
@@ -689,7 +682,7 @@ public class MapController : MonoBehaviour
             }
 
             // Map is interactable once zooming out is done
-            canSelectMap = true;
+            mapSelectionState = true;
         }
     }
 
@@ -707,10 +700,10 @@ public class MapController : MonoBehaviour
 
         // Unlock Nodes
         // Check currentNodeId to determine if its a new game
-        if (dataController.currentSaveData.currentNodeCount == -1)
+        if (dataController.currentSaveData.currentNodeId == -1)
         {
             // Increment so unlock animation wont happend again for the first node
-            dataController.currentSaveData.currentNodeCount += 2;
+            dataController.currentSaveData.currentAreaId++;
             StartCoroutine(UnlockNodeWithAnimation(dataController.currentArea.nodes[0]));
 
             // Save progress
@@ -730,7 +723,6 @@ public class MapController : MonoBehaviour
                 ShowUnlockedNodes(true);
 
                 // Allow node selection
-                dataController.currentSaveData.currentNodeCount++;
                 nodes[dataController.currentSaveData.nodes.Count
                     - 1].GetComponent<NodeManager>().AllowNodeSelection(1);
 
@@ -935,7 +927,7 @@ public class MapController : MonoBehaviour
 
         // Prevents unecessary click that may cause errors
         // Only executes when all components of map are set up
-        if (canSelectMap)
+        if (mapSelectionState)
         {
             // Only register click/touch when its only one
             // and at beggining of the touch phase
@@ -980,10 +972,10 @@ public class MapController : MonoBehaviour
 
         // If set to true, focuses on selected area
         // 2 parts: (1) moves to current coordinates of map, (2) zoom in
-        if (focusArea)
+        if (focusOnSpecificArea)
         {
             // First, move cam to current area's coordinates
-            if (move)
+            if (cameraMoveState)
             {
                 // Always get position of camera to determine if camera
                 // has reached its destination
@@ -996,7 +988,7 @@ public class MapController : MonoBehaviour
                         Vector2 offset, direction;
 
                         // If zoom in, move camera to destination coordinates
-                        if (!zoomOut)
+                        if (!zoomOutState)
                         {
                             offset = destination - camDefaultPosition;
                             direction = Vector2.ClampMagnitude(offset, 1.0f);
@@ -1015,8 +1007,8 @@ public class MapController : MonoBehaviour
                     else
                     {
                         // Set flags to trigger focus animation
-                        focus = true;
-                        move = false;
+                        cameraFocusState = true;
+                        cameraMoveState = false;
                     }
                 }
                 else
@@ -1031,29 +1023,29 @@ public class MapController : MonoBehaviour
                     }
                     else
                     {
-                        focus = true;
-                        move = false;
+                        cameraFocusState = true;
+                        cameraMoveState = false;
                     }
                 }
             }
 
             // Now, decrement camera size to create an illusion of zooming in
-            if (focus)
+            if (cameraFocusState)
             {
                 // Get orthographics sizes of all cameras
                 float mainCamSize = mainCamera.orthographicSize;
                 float fxCamSize = fxCamera.orthographicSize;
 
                 // Zoom SFX
-                if (!zoomSfxDone)
+                if (!zoomSfxState)
                 {
                     GameObject.FindObjectOfType<AudioManager>().PlaySound("Whoosh 02");
-                    zoomSfxDone = true;
+                    zoomSfxState = true;
                 }
 
                 // Check if animation is Zoom In/Out
                 // If zoom in, decrease size of cameras according to area's zoom size
-                if (!zoomOut)
+                if (!zoomOutState)
                 {
                     if (mainCamSize >= dataController.currentArea.zoomSize && fxCamSize >= dataController.currentArea.zoomSize)
                     {
@@ -1063,9 +1055,9 @@ public class MapController : MonoBehaviour
                     else
                     {
                         // When animation is done, set flgas to false
-                        focus = false;
-                        focusArea = false;
-                        zoomSfxDone = false;
+                        cameraFocusState = false;
+                        focusOnSpecificArea = false;
+                        zoomSfxState = false;
 
                         // Show Nodes
                         ShowAreaContent();
@@ -1082,10 +1074,10 @@ public class MapController : MonoBehaviour
                     else
                     {
                         // When animation is done, set flgas to false
-                        focus = false;
-                        focusArea = false;
-                        zoomOut = false;
-                        zoomSfxDone = false;
+                        cameraFocusState = false;
+                        focusOnSpecificArea = false;
+                        zoomOutState = false;
+                        zoomSfxState = false;
 
                         // Hide Nodes
                         HideAreaContent();
