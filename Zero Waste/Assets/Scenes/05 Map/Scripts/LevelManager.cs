@@ -4,6 +4,7 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
+    #region Properties
     private DataController dataController;
 
     public DataController DataController
@@ -59,6 +60,7 @@ public class LevelManager : MonoBehaviour
         get { return levelList; }
         set { levelList = value; }
     }
+    #endregion
 
     public void SetBattleData(Battle battle, GameObject level)
     {

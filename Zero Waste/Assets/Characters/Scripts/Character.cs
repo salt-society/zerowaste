@@ -6,7 +6,7 @@ public class Character : ScriptableObject {
 
     [Header("Basic Information")]
     public int characterId;
-
+    public string characterType;
 
     [Space]
     public string characterName;

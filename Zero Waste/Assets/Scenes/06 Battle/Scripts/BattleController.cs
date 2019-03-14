@@ -14,6 +14,11 @@ public class BattleController : MonoBehaviour {
     public ItemManager itemManager;
     public AttackController attackController;
 
+    [Space]
+    public float[] scavengerEntranceDelay;
+    public float[] mutantEntranceDelay;
+    public float[] renderDelay;
+
     private string battleNo;
     private string nodeName;
 
@@ -32,21 +37,29 @@ public class BattleController : MonoBehaviour {
     private bool firstLoop;
     private bool loopDone;
     
-    //
-    // Called from the moment the scene loaded.
-    //
     void Start()
     {
+        // Get reference to data controller
         dataController = GameObject.FindObjectOfType<DataController>();
+        // MarkAsPlayed();
 
+        // Get all details needed for battle and set it up
         GetBattleData();
-        SetupBattle();
+        BattleSetup();
     }
 
-    //
+    void MarkAsPlayed()
+    {
+        if (dataController != null)
+        {
+            dataController.currentSaveData.PlayBattle(dataController.currentBattle.battleId);
+            dataController.SaveSaveData();
+            dataController.SaveGameData();
+        }
+    }
+
     // Gets data from previous scene, which is the Map Screen,
     // that has the Team Select function.
-    // 
     void GetBattleData()
     {
         if (dataController != null)
@@ -80,19 +93,15 @@ public class BattleController : MonoBehaviour {
         }
     }
 
-    // 
     // Sets up the Battle Environment by changing info,
     // background, sprites, stats, etc.
-    // 
-    void SetupBattle()
+    void BattleSetup()
     {
         if (dataController != null)
         {
             turnCount = 0;
             firstLoop = true;
             loopDone = true;
-
-            statusManager.SetCharacterCount(scavengerTeamArray.Length, mutantTeamArray.Length);
 
             environmentManager.SetBackground(backgroundSprite);
 
@@ -101,8 +110,8 @@ public class BattleController : MonoBehaviour {
 
             battleInfoManager.SetBattleDetails(battleNo, nodeName);
 
-            statusManager.SetCharactersStatistics(scavengerTeamArray, mutantTeamArray);
             statusManager.SetScavengerDetails(scavengerTeamArray);
+            statusManager.SetMutantDetails(mutantTeamArray);
 
             ProcessTurn();
         } 
@@ -118,25 +127,24 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(BattleLoop());
     }
 
-    IEnumerator RenderVisuals()
+    IEnumerator RenderBattleComponents()
     {
         battleInfoManager.ShowStartAnimation(1);
         yield return new WaitForSeconds(1f);
         battleInfoManager.ShowStartAnimation(0);
 
         StartCoroutine(characterManager.ScavengersEntrance());
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(scavengerEntranceDelay[dataController.scavengerCount - 1]);
         StartCoroutine(characterManager.MutantEntrance());
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(mutantEntranceDelay[dataController.wasteCount - 1]);
 
         battleInfoManager.DisplayBattleDetails(1);
         yield return new WaitForSeconds(1.5f);
 
-        StartCoroutine(statusManager.DisplayScavengerDetails());
-        yield return new WaitForSeconds(.5f);
+        StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeamArray));
+        StartCoroutine(statusManager.DisplayMutantStatusSection(mutantTeamArray));
+        yield return new WaitForSeconds(3f);
 
-        statusManager.DisplayPollutionBars(1);
-        // itemManager.DisplayTrashcanBox(1);
         attackController.DisplayAttackButtons(1);
         attackController.EnableAttackButtons(0);
 
@@ -148,8 +156,8 @@ public class BattleController : MonoBehaviour {
     {
         if (firstLoop)
         {
-            StartCoroutine(RenderVisuals());
-            yield return new WaitForSeconds(6.5f);
+            StartCoroutine(RenderBattleComponents());
+            yield return new WaitForSeconds(renderDelay[dataController.scavengerCount - 1]);
         }
 
         if(turnCount < 6)
@@ -170,44 +178,78 @@ public class BattleController : MonoBehaviour {
                 loopDone = false;
             }
 
-            battleInfoManager.SetCurrentTurn(characterQueue[turnCount].characterThumb, 
-                characterQueue[turnCount].characterName);
-
-            battleInfoManager.DisplayNextTurnPanel(1);
-            yield return new WaitForSeconds(.5f);
-            battleInfoManager.DisplayNextTurnSign(1);
-            yield return new WaitForSeconds(1f);
-
-            battleInfoManager.DisplayNextTurnSign(0);
-            battleInfoManager.DisplayNextTurnPanel(0);
-
-            turnQueueManager.ShowPointer(1);
-            turnQueueManager.PointCurrentCharacter(turnCount);
-
+            // See if character is still alive to proceed or skip
+            bool continueLoop = false;
             if (characterQueue[turnCount] is Player)
             {
-                Debug.Log("Player's Turn");
-
-                turnQueueManager.SetCurrentCharacter(turnCount);
-                attackController.PlayerAttackSetup();
-
-                //turnCount++;
-                //yield return new WaitForSeconds(3f);
-
-                //StartCoroutine(BattleLoop());
-            } 
+                GameObject scavengerPrefab = characterManager.
+                    GetScavengerPrefab(characterQueue[turnCount] as Player);
+                continueLoop = scavengerPrefab.GetComponent<CharacterMonitor>().IsAlive;
+            }
             else
             {
-                Debug.Log("Enemy's Turn");
-
-                attackController.EnableAttackButtons(0);
-                turnQueueManager.SetCurrentCharacter(turnCount);
-
-                //turnCount++;
-                //yield return new WaitForSeconds(3f);
-
-                //StartCoroutine(BattleLoop());
+                GameObject mutantPrefab = characterManager.
+                    GetMutantPrefab(characterQueue[turnCount] as Enemy);
+                continueLoop = mutantPrefab.GetComponent<CharacterMonitor>().IsAlive;
             }
+
+            if (continueLoop)
+            {
+                battleInfoManager.SetCurrentTurn(characterQueue[turnCount].characterThumb,
+                characterQueue[turnCount].characterName);
+
+                battleInfoManager.DisplayNextTurnPanel(1);
+                yield return new WaitForSeconds(.5f);
+                battleInfoManager.DisplayNextTurnSign(1);
+                yield return new WaitForSeconds(1f);
+
+                battleInfoManager.DisplayNextTurnSign(0);
+                battleInfoManager.DisplayNextTurnPanel(0);
+
+                turnQueueManager.ShowPointer(1);
+                turnQueueManager.PointCurrentCharacter(turnCount);
+
+                if (characterQueue[turnCount] is Player)
+                {
+                    Debug.Log("Player's Turn");
+
+                    // Get scavenger prefab
+                    GameObject scavengerPrefab = characterManager.
+                        GetScavengerPrefab(characterQueue[turnCount] as Player);
+
+                    // If not null, trigger its fight instance
+                    if (scavengerPrefab != null)
+                    {
+                        scavengerPrefab.GetComponent<CharacterMonitor>().CharacterBattleStance();
+                    }
+
+                    turnQueueManager.SetCurrentCharacter(turnCount);
+                    attackController.PlayerAttackSetup();
+
+                    //turnCount++;
+                    //yield return new WaitForSeconds(3f);
+
+                    //StartCoroutine(BattleLoop());
+                }
+                else
+                {
+                    Debug.Log("Enemy's Turn");
+
+                    attackController.EnableAttackButtons(0);
+                    turnQueueManager.SetCurrentCharacter(turnCount);
+
+                    //turnCount++;
+                    //yield return new WaitForSeconds(3f);
+
+                    //StartCoroutine(BattleLoop());
+                }
+            }
+            else
+            {
+                turnCount++;
+                StartCoroutine(BattleLoop());
+            }
+            
         }
         else
         {

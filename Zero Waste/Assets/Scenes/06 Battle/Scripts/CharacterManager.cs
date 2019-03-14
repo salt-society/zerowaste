@@ -17,6 +17,16 @@ public class CharacterManager : MonoBehaviour {
     private GameObject[] scavengerPrefabs;
     private GameObject[] mutantPrefabs;
 
+    private CharacterManager instance;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(this);
+    }
+
     public Player[] CloneCharacters(Player[] scavengers)
     {
         Player[] clonedScavengers = (Player[])scavengers.Clone();
@@ -97,21 +107,29 @@ public class CharacterManager : MonoBehaviour {
         }
     }
 
+    // <summary>
+    // Instantiate each scavenger's prefab on respective positions.
+    // </summary>
     public void InstantiateCharacterPrefab(Player[] scavengers) 
     {
         scavengerPrefabs = new GameObject[scavengers.Length];
+        GameObject scavengerObject;
 
         int i = 0;
         foreach (Player scavenger in scavengers)
         {
+            // For extra caution, check if scavenger is not null before performing function
             if (scavenger != null)
             {
-                GameObject scavengerObject = Instantiate(scavenger.prefab, this.scavengers[i].transform);
-                scavengerObject.GetComponent<CharacterMonitor>().SetCharacter(scavenger);
-                scavengerObject.GetComponent<CharacterMonitor>().SetPosition(i);
-                scavengerObject.GetComponent<CharacterMonitor>().SetStatusManager(statusManager);
+                // Instantiate
+                scavengerObject = Instantiate(scavenger.prefab, this.scavengers[i].transform);
+                scavengerObject.GetComponent<CharacterMonitor>().InitializeMonitor();
+                scavengerObject.GetComponent<CharacterMonitor>().Scavenger = scavenger;
+                scavengerObject.GetComponent<CharacterMonitor>().Position = i;
+                scavengerObject.GetComponent<CharacterMonitor>().SetCharacter();
                 scavengerObject.transform.localScale = scavenger.scale;
 
+                // Store scavenger prefabs for later access
                 scavengerPrefabs[i] = scavengerObject;
                 i++;
             }
@@ -120,37 +138,41 @@ public class CharacterManager : MonoBehaviour {
 
     public void InstantiateCharacterPrefab(Enemy[] mutants)
     {
-        statusManager.SetPollutionLevelBarCount();
         mutantPrefabs = new GameObject[mutants.Length];
+        GameObject mutantObject;
 
         int i = 0;
         foreach (Enemy mutant in mutants)
         {
-            GameObject mutantObject = Instantiate(mutant.prefab, this.mutants[i].transform);
-            mutantObject.GetComponent<CharacterMonitor>().SetCharacter(mutant);
-            mutantObject.GetComponent<CharacterMonitor>().SetPosition(i);
-            mutantObject.GetComponent<CharacterMonitor>().SetStatusManager(statusManager);
+            // Instantiate
+            mutantObject = Instantiate(mutant.prefab, this.mutants[i].transform);
+            mutantObject.GetComponent<CharacterMonitor>().InitializeMonitor();
+            mutantObject.GetComponent<CharacterMonitor>().Mutant = mutant;
+            mutantObject.GetComponent<CharacterMonitor>().Position = i;
+            mutantObject.GetComponent<CharacterMonitor>().SetCharacter();
             mutantObject.transform.localScale = mutant.scale;
 
-            float minX = mutantObject.GetComponent<BoxCollider2D>().bounds.min.x;
-            float minY = mutantObject.GetComponent<BoxCollider2D>().bounds.min.y;
-            float extentY = mutantObject.GetComponent<BoxCollider2D>().size.y * 3;
-            statusManager.AddPollutionLevelBar(minX, 10, i);
-
+            // Store mutant prefab for later access
             mutantPrefabs[i] = mutantObject;
             i++;
         }
     }
 
+    // <summary>
+    // Gets scavenger prefab, existing on battle, through scavenger data
+    // </summary>
     public GameObject GetScavengerPrefab(Player scavengerData)
     {
-        GameObject scavengerPrefab = new GameObject();
+        GameObject scavengerPrefab = null;
 
+        // Loop through the prefabs list of scavengers
         foreach (GameObject scavengerObject in scavengerPrefabs)
         {
-            int instanceId = scavengerObject.GetComponent<CharacterMonitor>().GetCharacterInstance(1);
+            // Get scavenger data's instance id
+            int instanceId = scavengerObject.GetComponent<CharacterMonitor>().InstanceId;
 
-            if (instanceId.Equals(scavengerData.GetInstanceID())) 
+            // Check if it matches
+            if (instanceId.Equals(scavengerData.GetInstanceID()))
             {
                 scavengerPrefab = scavengerObject;
                 break;
@@ -166,11 +188,11 @@ public class CharacterManager : MonoBehaviour {
 
         for (int i = 0; i < scavengerPrefabs.Length; i++)
         {
-            int instanceId = scavengerPrefabs[i].GetComponent<CharacterMonitor>().GetCharacterInstance(1);
+            int instanceId = scavengerPrefabs[i].GetComponent<CharacterMonitor>().InstanceId;
 
             if (instanceId.Equals(scavengerData.GetInstanceID()))
             {
-                position = i;
+                position = scavengerPrefabs[i].GetComponent<CharacterMonitor>().Position;
                 break;
             }
         }
@@ -178,13 +200,13 @@ public class CharacterManager : MonoBehaviour {
         return position;
     }
 
-    public GameObject GetMutantPrefab(Player mutantData)
+    public GameObject GetMutantPrefab(Enemy mutantData)
     {
         GameObject mutantPrefab = new GameObject();
 
         foreach (GameObject mutantObject in mutantPrefabs)
         {
-            int instanceId = mutantObject.GetComponent<CharacterMonitor>().GetCharacterInstance(0);
+            int instanceId = mutantObject.GetComponent<CharacterMonitor>().InstanceId;
 
             if (instanceId.Equals(mutantData.GetInstanceID()))
             {
@@ -202,11 +224,11 @@ public class CharacterManager : MonoBehaviour {
 
         for (int i = 0; i < mutantPrefabs.Length; i++)
         {
-            int instanceId = mutantPrefabs[i].GetComponent<CharacterMonitor>().GetCharacterInstance(0);
+            int instanceId = mutantPrefabs[i].GetComponent<CharacterMonitor>().InstanceId;
 
             if (instanceId.Equals(mutantData.GetInstanceID()))
             {
-                position = i;
+                position = mutantPrefabs[i].GetComponent<CharacterMonitor>().Position;
                 break;
             }
         }

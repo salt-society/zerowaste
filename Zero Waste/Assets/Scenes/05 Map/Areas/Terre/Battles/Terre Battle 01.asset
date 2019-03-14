@@ -17,9 +17,9 @@ MonoBehaviour:
   battleName: Terre 1
   info: 
   threatLevel: {r: 0, g: 0, b: 0, a: 0}
-  node: {fileID: 0}
-  wastePool: {fileID: 0}
-  isMajorCutscene: 1
+  node: {fileID: 11400000, guid: 385719f75d227cd4e83ba83a540632db, type: 2}
+  wastePool: {fileID: 11400000, guid: 1acacc314d99ee64b95d0866fa8067f9, type: 2}
+  isMajorCutscene: 0
   cutsceneAtStart: 0
   startCutscene: {fileID: 11400000, guid: 832d5b330cf848f4f8a6db404968d3d9, type: 2}
   cutsceneAtEnd: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
   - Node
   - Battle
   levelIds: 0100000005000000
-  nextScene: Cutscene
+  nextScene: Battle

@@ -439,20 +439,14 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (dataController == null)
+            return;
+
         if (!canSkipDialogue)
         {
-            if (currentDialogue.withChoices)
-            {
-                StartCoroutine(ShowNotification());
-            }
-
-            if (currentDialogue.withItem)
-            {
-                
-            }
-
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 4");
             return;
-        }
+        }     
 
         if (Input.touchCount > 0)
         {
@@ -462,8 +456,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (dialogueFinished)
                     {
-                        if (dataController != null)
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
 
                         dialogueIndex++;
                         currentDialogue = dialogues[dialogueIndex];
@@ -473,13 +466,10 @@ public class DialogueManager : MonoBehaviour
                     }
                     else
                     {
-                        if (dataController != null)
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 4");
-
-                        if (dialogueIndex == 0)
-                            GameObject.FindObjectOfType<CustceneController>().StopAllCoroutines();
-
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 4");
+                        GameObject.FindObjectOfType<CustceneController>().StopAllCoroutines();
                         StopAllCoroutines();
+
                         DisplayFullDialogue();
                     }
                 }
@@ -487,19 +477,17 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (!dialogueFinished)
                     {
-                        if (dataController != null)
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                       GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
 
                         StopAllCoroutines();
                         DisplayFullDialogue();
                     }
                     else
                     {
-                        if (dataController != null)
-                        {
-                            GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
-                            GameObject.FindObjectOfType<CustceneController>().CutsceneFinished();
-                        }
+                        canSkipDialogue = false;
+
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
+                        GameObject.FindObjectOfType<CustceneController>().CutsceneFinished();
                     }
                 }
             }

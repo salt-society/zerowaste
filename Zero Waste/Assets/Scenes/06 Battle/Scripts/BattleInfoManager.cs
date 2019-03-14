@@ -22,20 +22,17 @@ public class BattleInfoManager : MonoBehaviour {
     public Image currentCharacter;
     public TextMeshProUGUI turnNumber;
 
-    // Shows start animation upon battle load
     public void ShowStartAnimation(int visibility)
     {
         bool showComponent = (visibility > 0) ? true : false;
         battleStart.SetActive(showComponent);
     }
 
-    // Sets message to display on middle box
     public void SetMiddleMessage(string message)
     {
         turnProcessSign.GetComponentInChildren<TextMeshProUGUI>().text = message;
     }
 
-    // Shows or hide message on top center
     public void DisplayMiddleMessage(int visibility)
     {
         bool showComponent = (visibility > 0) ? true : false;
@@ -60,14 +57,12 @@ public class BattleInfoManager : MonoBehaviour {
         return visible;
     }
 
-    // Sets battle details that can be seen on the top left
     public void SetBattleDetails(string battleNo, string nodeName)
     {
         this.battleNo.text = battleNo;
         this.nodeName.text = nodeName;
     }
 
-    // Displays or hide battle details
     public void DisplayBattleDetails(int visibility)
     {
         bool showComponent = (visibility > 0) ? true : false;

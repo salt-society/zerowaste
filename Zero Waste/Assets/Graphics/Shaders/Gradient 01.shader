@@ -41,7 +41,7 @@
 			sampler2D_half _MainTex;
 
 			float4 frag(v2f i): SV_Target {
-				float4 color = tex2D(_MainTex, i.uv) * float4(i.uv.x, i.uv.x, 1, 1);
+				float4 color = tex2D(_MainTex, i.uv) * float4(1, i.uv.y, 1, 1);
 				return color;
 			}
 

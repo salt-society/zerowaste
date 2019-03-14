@@ -355,7 +355,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4086884370005203787}
-        m_MethodName: SelectLevel
+        m_MethodName: SelectBattle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -4,6 +4,7 @@
 public class Enemy : Character {
 
     [Header("Enemy Statistics")]
+    public int mutantLevel;
     public int maxPollutionLevel;
     public int maxAtk;
     public int maxDef;

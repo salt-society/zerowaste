@@ -13,6 +13,10 @@ public class TitleScreenController : MonoBehaviour
     public GameObject genderPanel;
     public GameObject[] genderImages;
     public Button[] genderButtons;
+    public Button continueButton;
+
+    [Space]
+    public Color clickedColor;
 
     [Header("Transition")]
     public GameObject fadeTransition;
@@ -28,6 +32,9 @@ public class TitleScreenController : MonoBehaviour
             // Play Sound
             GameObject.FindObjectOfType<AudioManager>().PlaySound("RPG Theme Looping");
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Burning");
+
+            // Disable continue button
+            continueButton.enabled = false;
         }
     }
 
@@ -39,8 +46,8 @@ public class TitleScreenController : MonoBehaviour
         {
             // Check how many cutscenes are unlocked
             // No cutscenes = New Game
-            int cutsceneCount = dataController.currentSaveData.cutscenes.Count;
-            if (cutsceneCount == 0)
+            int cutsceneId = dataController.currentSaveData.currentCutsceneId;
+            if (cutsceneId == -1)
             {
                 // Get next scene id
                 nextSceneId = dataController.GetNextSceneId("Cutscene");
@@ -62,7 +69,7 @@ public class TitleScreenController : MonoBehaviour
                 // Check again how many cutscenes are unlocked
                 // If its not more than one (3 if game is complete), check if that cutscene is finished
                 // because most likely the very first scene is Prologue
-                if (cutsceneCount > 1)
+                if (dataController.currentSaveData.cutscenes.Count > 1)
                 {
                     // NOTE: INSET CHECKING OF TUTORIALS HERE
 
@@ -109,6 +116,9 @@ public class TitleScreenController : MonoBehaviour
 
             // Gender button animation
             StartCoroutine(ChangeGender(chosenGender));
+
+            // Enable continue button
+            continueButton.enabled = true;
         } 
     }
 
@@ -174,8 +184,11 @@ public class TitleScreenController : MonoBehaviour
         // Just to be safe, always check if there's a data controller before execution
         if(dataController != null) 
         {
+            // Disable button to avoid multiple calls of function
+            continueButton.enabled = false;
+            continueButton.GetComponent<Image>().color = clickedColor;
+
             // Stop SFX
-            GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
             StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
             StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
 
@@ -186,6 +199,14 @@ public class TitleScreenController : MonoBehaviour
 
             // Load next scene
             StartCoroutine(LoadScene());
+        }
+    }
+
+    public void ContinueSFX()
+    {
+        if (dataController != null)
+        {
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
         }
     }
 

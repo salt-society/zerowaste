@@ -106,6 +106,7 @@ public class LevelList : MonoBehaviour
 
             battleCell.GetComponent<LevelManager>().BattleObject = battleCell; 
             battleCell.GetComponent<LevelManager>().MapController = mapController;
+            battleCell.GetComponent<LevelManager>().DataController = mapController.dataController;
             battleCell.GetComponent<LevelManager>().NodeManager = nodeManager;
             battleCell.GetComponent<LevelManager>().BattleDetails = battleDetails;
             battleCell.GetComponent<LevelManager>().LevelList = levelList;

@@ -31,7 +31,7 @@ public class AbilityManager : MonoBehaviour
     public void SetCurrentCharacterPrefab(GameObject characterPrefab)
     {
         this.scavengerPrefab = characterPrefab;
-        scavenger = characterPrefab.GetComponent<CharacterMonitor>().GetCharacterData(1) as Player;
+        scavenger = characterPrefab.GetComponent<CharacterMonitor>().Scavenger;
     }
 
     public void SetUpAbility(int index)
@@ -54,7 +54,7 @@ public class AbilityManager : MonoBehaviour
     {
         // Decrement scavenger's antidote
         scavenger.currentAnt = scavenger.CheckMin(scavenger.currentAnt - ability.antRequirement);
-        statusManager.DecrementAntidote(ability.antRequirement, scavengerPosition);
+        // statusManager.DecrementAntidote(ability.antRequirement, scavengerPosition);
 
         // Apply effects if there's any on selected mutant
         StartCoroutine(ApplyEffects(selectedTarget, targetType));
@@ -65,12 +65,12 @@ public class AbilityManager : MonoBehaviour
     IEnumerator ApplyEffects(GameObject characterPrefab, string targetType)
     {
         // Get target character's position on screen
-        int targetPosition = characterPrefab.GetComponent<CharacterMonitor>().GetPosition();
+        int targetPosition = characterPrefab.GetComponent<CharacterMonitor>().Position;
 
         // Player to Player
         if (targetType.Equals("Scavenger")) 
         {
-            Player target = characterPrefab.GetComponent<CharacterMonitor>().GetCharacterData(1) as Player;
+            Player target = characterPrefab.GetComponent<CharacterMonitor>().Scavenger;
             foreach (Effect effect in ability.effects)
             {
                 if (effect.effectType.Equals("Direct")) 
@@ -109,7 +109,7 @@ public class AbilityManager : MonoBehaviour
         } 
         // Player to Enemy
         else {
-            Enemy mutant = characterPrefab.GetComponent<CharacterMonitor>().GetCharacterData(0) as Enemy;
+            Enemy mutant = characterPrefab.GetComponent<CharacterMonitor>().Mutant;
             foreach (Effect effect in ability.effects)
             {
                 if (effect.effectType.Equals("Direct"))
@@ -120,7 +120,7 @@ public class AbilityManager : MonoBehaviour
                     double currentHealth = mutant.currentPollutionLevel;
                     double damage = previousHealth - currentHealth;
 
-                    statusManager.DecrementPollutionBar(currentHealth, targetPosition);
+                    // statusManager.DecrementPollutionBar(currentHealth, targetPosition);
                     statusManager.ShowDamage(damage.ToString(), characterPrefab, true);
 
                     characterPrefab.GetComponent<Animator>().SetBool("Damaged 01", true);
@@ -139,7 +139,7 @@ public class AbilityManager : MonoBehaviour
                         double currentHealth = mutant.currentPollutionLevel;
                         double damage = previousHealth - currentHealth;
 
-                        statusManager.DecrementPollutionBar(damage, targetPosition);
+                        // statusManager.DecrementPollutionBar(damage, targetPosition);
                         statusManager.ShowDamage(damage.ToString(), characterPrefab, true);
                     }
                     else

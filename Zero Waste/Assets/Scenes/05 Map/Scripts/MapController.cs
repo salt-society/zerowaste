@@ -703,7 +703,7 @@ public class MapController : MonoBehaviour
         if (dataController.currentSaveData.currentNodeId == -1)
         {
             // Increment so unlock animation wont happend again for the first node
-            dataController.currentSaveData.currentAreaId++;
+            dataController.currentSaveData.currentNodeId++;
             StartCoroutine(UnlockNodeWithAnimation(dataController.currentArea.nodes[0]));
 
             // Save progress

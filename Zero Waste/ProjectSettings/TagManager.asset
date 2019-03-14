@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Controller
-  - Effects
-  - CurrentSaveBadge
+  - Ground
+  - Scavenger
+  - Mutants
   layers:
   - Default
   - TransparentFX
@@ -17,12 +17,12 @@ TagManager:
   - 
   - 
   - Background
+  - Background Particles
+  - Mutants
+  - Scavengers
   - Foreground
-  - Player
-  - Particles
-  - OverlayUI
-  - 
-  - 
+  - Foreground Particles
+  - Foreground Particles
   - 
   - 
   - 

@@ -102,7 +102,6 @@ public class TurnQueueManager : MonoBehaviour {
             }
         }
        
-
         yield return null;
     }
 
@@ -142,10 +141,25 @@ public class TurnQueueManager : MonoBehaviour {
         pointer.SetActive(showComponent);
     }
 
-    // 
-
     public List<Character> GetCharacterQueue()
     {
         return characterQueue;
+    }
+
+    // <summary>
+    // Dims character's queue icon to emphasize remaining characters
+    // that will still attack
+    // </summary>
+    public void FinishedTurn()
+    {
+
+    }
+
+    // <summary>
+    // Crosses character out from the queue
+    // </summary>
+    public void CharacterDead()
+    {
+
     }
 }

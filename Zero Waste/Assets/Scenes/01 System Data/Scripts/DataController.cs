@@ -37,7 +37,9 @@ public class DataController : MonoBehaviour
 
     [Space]
     public Player[] scavengerTeam;
+    public int scavengerCount;
     public Enemy[] wasteTeam;
+    public int wasteCount;
 
     void Awake()
     {
