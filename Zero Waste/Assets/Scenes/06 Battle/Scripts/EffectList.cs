@@ -26,6 +26,12 @@ public class EffectList : MonoBehaviour
     // </summary>
     public void AddEffect(Effect effect, Sprite originOfEffect)
     {
+        // Disble no status effect label when adding effects on list
+        if (transform.childCount == 1)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+
         // Instantiate effectCell prefab
         GameObject newEffectCell = Instantiate(effectCellPrefab, transform);
 
@@ -60,13 +66,18 @@ public class EffectList : MonoBehaviour
     // </summary>
     public void RemoveAllEffects()
     {
-        if (transform.childCount > 0)
+        if (transform.childCount > 1)
         {
             foreach (Transform cell in transform)
             {
-                Destroy(cell);
+                if (transform.childCount != 1)
+                {
+                    Destroy(cell);
+                }
             }
         }
+        
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     // <summary>
@@ -83,6 +94,11 @@ public class EffectList : MonoBehaviour
                 break;
             }
         }
+
+        if (transform.childCount == 1)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     // <summary>
@@ -98,6 +114,11 @@ public class EffectList : MonoBehaviour
                 Destroy(cell);
                 break;
             }
+        }
+
+        if (transform.childCount == 1)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

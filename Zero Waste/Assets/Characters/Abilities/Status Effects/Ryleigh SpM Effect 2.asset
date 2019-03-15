@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 0}
   effectName: Group Slow
-  effectType: Status
-  effectType2: Debuff
+  effectDescription: 
   effectTarget: Spd
+  effectType: Status
+  effectState: Debuff
   effectStrength: 1
   effectDuration: 3
   turnsRemaining: 3

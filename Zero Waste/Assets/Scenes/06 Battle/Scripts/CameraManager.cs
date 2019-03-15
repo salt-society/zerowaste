@@ -4,27 +4,40 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-    [Header("Cameras")]
-    public Camera mainCamera;
-    public Camera uiCamera;
-    public Camera fxCamera;
+    [SerializeField] private Camera particleFxCam;
+    [SerializeField] private Camera mainCam;
 
-    public void ScavengerFocus(int focus)
+    [Space]
+    public Material[] imageEffectMaterials;
+
+    private Animator mainCamAnimator;
+    private Animator particleFxCamAnimator;
+
+    void Start()
     {
-        bool focusCam = (focus > 0) ? true : false;
-        mainCamera.GetComponent<Animator>().SetBool("Scavenger Focus", focusCam);
+        // Get animators of both cam
+        mainCamAnimator = mainCam.GetComponent<Animator>();
+        // particleFxCamAnimator = particleFxCam.GetComponent<Animator>();
     }
 
-    public void MutantFocus(int focus)
+    // <summary>
+    // Functions to trigger Camera animation and effects
+    // </summary>
+    public void Shake(bool shake)
     {
-        bool focusCam = (focus > 0) ? true : false;
-        mainCamera.GetComponent<Animator>().SetBool("Mutant Focus", focusCam);
+        mainCamAnimator.SetBool("Shake", shake);
     }
 
-    public void BackToNormalCamera(int focus)
+    public void FocusOnScavengers(bool focus)
     {
-        bool focusCam = (focus > 0) ? true : false;
-        mainCamera.GetComponent<Animator>().SetBool("Normal Camera", focusCam);
+        mainCamAnimator.SetBool("Scavenger Focus", focus);
     }
+
+    public void FocusOnMutants(bool focus)
+    {
+        mainCamAnimator.SetBool("Mutant Focus", focus);
+    }
+
+    
     
 }

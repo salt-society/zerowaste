@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 0}
   effectName: ATK Buff
-  effectType: Status
-  effectType2: Buff
+  effectDescription: 
   effectTarget: Atk
+  effectType: Status
+  effectState: Buff
   effectStrength: 2
   effectDuration: 3
   turnsRemaining: 3

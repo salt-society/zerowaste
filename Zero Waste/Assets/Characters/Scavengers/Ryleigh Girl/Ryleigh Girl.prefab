@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4037603318949846859}
   - component: {fileID: 6869494350434066073}
   - component: {fileID: 5425057054410635584}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Ryleigh Girl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.24, y: 7.68}
+    oldSize: {x: 3.7, y: 6.92}
     newSize: {x: 10.24, y: 7.68}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

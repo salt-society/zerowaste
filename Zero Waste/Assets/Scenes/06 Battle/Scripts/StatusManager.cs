@@ -4,24 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class StatusManager : MonoBehaviour {
-
+public class StatusManager : MonoBehaviour
+{
+    #region Battle Managers
     private DataController dataController;
     private StatusManager instance;
-    
+    private CharacterManager characterManager;
+    #endregion
+
+    #region Public
     [Space]
     public GameObject scavengerStatusSection;
     public GameObject[] scavengerStatusPanel;
     public GameObject[] detailedScavengerStatusPanel;
 
     [Space]
+    public GameObject[] healthBars;
+    public GameObject[] antBars;
+
+    [Space]
     public GameObject mutantStatusSection;
     public GameObject[] mutantStatusPanel;
 
     [Space]
-    public GameObject damageCounter;
+    public GameObject pollutionBar;
+    public TextMeshProUGUI pollutionValue;
 
+    [Space]
+    public GameObject damageCounter;
+    #endregion
+
+    #region Private
     private int combinedPL;
+    #endregion
 
     // <summary>
     // Destroy any other instance of this script
@@ -40,7 +55,8 @@ public class StatusManager : MonoBehaviour {
     void Start()
     {
         // Find and get Data Controller
-        dataController = GameObject.FindObjectOfType<DataController>();
+        dataController = FindObjectOfType<DataController>();
+        characterManager = FindObjectOfType<CharacterManager>();
     }
 
     // <summary>
@@ -56,19 +72,21 @@ public class StatusManager : MonoBehaviour {
             if (scavengerData[i] != null)
             {
                 // Scavenger Icon
-                scavengerStatusPanel[i].transform.GetChild(0).GetChild(0).
+                scavengerStatusPanel[i].transform.GetChild(1).GetChild(0).
+                    gameObject.GetComponent<Image>().sprite = scavengerData[i].characterHalf;
+                detailedScavengerStatusPanel[i].transform.GetChild(0).GetChild(1).
                     gameObject.GetComponent<Image>().sprite = scavengerData[i].characterHalf;
 
                 // Name
-                scavengerStatusPanel[i].transform.GetChild(1).gameObject.
+                scavengerStatusPanel[i].transform.GetChild(2).gameObject.
                     GetComponent<TextMeshProUGUI>().text = scavengerData[i].characterName;
 
                 // Class Icon
-                scavengerStatusPanel[i].transform.GetChild(2).gameObject.
+                scavengerStatusPanel[i].transform.GetChild(3).gameObject.
                     GetComponent<Image>().sprite = scavengerData[i].characterClass.roleLogo;
 
                 // Level
-                scavengerStatusPanel[i].transform.GetChild(3).gameObject.
+                scavengerStatusPanel[i].transform.GetChild(4).gameObject.
                     GetComponent<TextMeshProUGUI>().text += scavengerData[i].currentLevel;
 
                 // HP, ANT, SPD, DEF values on detailed status
@@ -80,6 +98,12 @@ public class StatusManager : MonoBehaviour {
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].currentSpd.ToString();
                 detailedScavengerStatusPanel[i].transform.GetChild(4).GetChild(1).
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].currentDef.ToString();
+
+                // Ult and Skill description
+                detailedScavengerStatusPanel[i].transform.GetChild(7).GetChild(1).
+                    gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].abilities[3].abilityDescription;
+                detailedScavengerStatusPanel[i].transform.GetChild(8).GetChild(1).
+                    gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].abilities[2].abilityDescription;
             }
         }
     }
@@ -98,19 +122,22 @@ public class StatusManager : MonoBehaviour {
         {
             if (scavenger != null)
             {
-                // Display panel
+                // Scavenger Status Panel
                 scavengerStatusPanel[i].SetActive(true);
 
-                // Wait for one and a half second
-                // yield return new WaitForSeconds(0.5f);
-
-                // HP
-                scavengerStatusPanel[i].transform.GetChild(5).
-                    GetChild(0).gameObject.SetActive(true);
-
-                // ANT
+                // HP and ANT Bars
                 scavengerStatusPanel[i].transform.GetChild(6).
                     GetChild(0).gameObject.SetActive(true);
+                scavengerStatusPanel[i].transform.GetChild(7).
+                    GetChild(0).gameObject.SetActive(true);
+
+                yield return new WaitForSeconds(1f);
+
+                // Disable HP and ANT animator after
+                scavengerStatusPanel[i].transform.GetChild(6).
+                    GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
+                scavengerStatusPanel[i].transform.GetChild(7).
+                    GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
             }
 
             i++;
@@ -137,9 +164,9 @@ public class StatusManager : MonoBehaviour {
                         {
                             for (int j = 0; j < 3; j++)
                             {
-                                scavengerStatusPanel[i].transform.GetChild(7).GetChild(j).
+                                scavengerStatusPanel[i].transform.GetChild(8).GetChild(j).
                                     GetChild(1).gameObject.GetComponent<Image>().sprite = dataController.battleModifiers[j].effectIcon;
-                                scavengerStatusPanel[i].transform.GetChild(7).gameObject.SetActive(true);
+                                scavengerStatusPanel[i].transform.GetChild(8).gameObject.SetActive(true);
                                 yield return new WaitForSeconds(0.3f);
                             }
                         }
@@ -149,10 +176,9 @@ public class StatusManager : MonoBehaviour {
                             int effectCount = 0;
                             foreach (Effect effect in dataController.battleModifiers)
                             {
-                                Debug.Log(effect.name);
-                                scavengerStatusPanel[i].transform.GetChild(7).GetChild(effectCount).
+                                scavengerStatusPanel[i].transform.GetChild(8).GetChild(effectCount).
                                     GetChild(1).gameObject.GetComponent<Image>().sprite = effect.effectIcon;
-                                scavengerStatusPanel[i].transform.GetChild(7).GetChild(effectCount).
+                                scavengerStatusPanel[i].transform.GetChild(8).GetChild(effectCount).
                                     gameObject.SetActive(true);
                                 effectCount++;
                                 yield return new WaitForSeconds(0.3f);
@@ -281,54 +307,124 @@ public class StatusManager : MonoBehaviour {
         // Display status section for waste mutants
         mutantStatusSection.SetActive(true);
 
-        // Display PL bar
-        mutantStatusSection.transform.GetChild(0).gameObject.SetActive(true);
+        // Display PL Bar
+        pollutionBar.transform.parent.gameObject.SetActive(true);
+        pollutionBar.GetComponent<Animator>().enabled = false;
 
         // Display combined PL of all mutants
         int i = 0;
         int increment = (combinedPL / dataController.wasteCount) / 5;
         for (i = 0; i <= combinedPL; i+=increment)
         {
+            // Activate text before iterating value
             if (i == 0)
-            {
-                mutantStatusSection.transform.GetChild(1).gameObject.SetActive(true);
-            }
+                pollutionValue.gameObject.SetActive(true);
 
-            mutantStatusSection.transform.GetChild(1).gameObject.
-                GetComponent<TextMeshProUGUI>().text = i.ToString();
+            // Create an increasing effect by constantly changing value of
+            // text until it reaches combine PL value
+            pollutionValue.GetComponent<TextMeshProUGUI>().text = i.ToString();
             yield return null;
         }
 
+        // Show mutant icons near PL Bar
         i = 0;
         foreach (Enemy mutant in mutantData)
         {
             // Make sure there's mutant in position
             if (mutant != null)
             {
-                Debug.Log(mutant.characterName);
                 mutantStatusPanel[i].SetActive(true);
                 i++;
-
-                yield return new WaitForSeconds(0.5f);
+                yield return null;
             }
         }
-
     }
 
     // <summary>
     // Shows damage taken by Scavenger or Mutant
     // </summary>
-    public void ShowDamage(string damagePoints, GameObject characterObject, bool visibility)
+    public void ShowDamagePoints(string damagePoints, GameObject characterObject)
     {
+        // Set value damage counter
         damageCounter.GetComponent<TextMeshProUGUI>().text = damagePoints;
 
+        // Get box collider of target so damage counter can be positioned
         BoxCollider2D collider = characterObject.GetComponent<BoxCollider2D>();
         float midpoint = collider.bounds.center.x;
         Vector2 damageCounterPosition = Camera.main.WorldToScreenPoint(new Vector3(midpoint, 8, 0));
 
         damageCounter.transform.position = damageCounterPosition;
-        damageCounter.SetActive(visibility);
+        damageCounter.SetActive(true);
     }
-    
 
+    // <summary>
+    // Hide damage points
+    // </summary>
+    public IEnumerator HideDamagePoints()
+    {
+        damageCounter.GetComponent<Animator>().SetBool("Hide", true);
+        yield return null;
+        damageCounter.SetActive(false);
+        damageCounter.GetComponent<Animator>().SetBool("Hide", false);
+    }
+
+    public IEnumerator DecrementAntidote(float currentAnt, float maxAnt, int position)
+    {
+        float antidoteLeft = currentAnt / maxAnt;
+        float antBarValue = antBars[position].GetComponent<Image>().fillAmount;
+
+        while (antBarValue > antidoteLeft)
+        {
+            antBarValue -= 0.1f;
+            if (antBarValue < 0)
+                antBarValue = 0;
+
+            antBars[position].GetComponent<Image>().fillAmount -= antBarValue;
+
+            Debug.Log("Ant Bar Value: " + antBarValue);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    // <summary>
+    // Decrement pollution bar
+    // </summary>
+    public IEnumerator DecrementPollutionBar(int damageTaken) 
+    {
+        GameObject[] mutantPrefabs = characterManager.GetAllCharacterPrefabs(0);
+
+        int currentCombinedPL = 0;
+        int maxCombinedPL = 0;
+        foreach (GameObject mutantPrefab in mutantPrefabs) 
+        {
+            currentCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().CurrentHealth;
+            maxCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().GetMutantMaxHealth();
+        }
+
+        Debug.Log(currentCombinedPL);
+
+
+        float combinedPLLeft = (float)currentCombinedPL / (float)maxCombinedPL;
+        float pollutionBarValue = pollutionBar.GetComponent<Image>().fillAmount;
+
+        Debug.Log(combinedPLLeft);
+
+        while (pollutionBarValue > combinedPLLeft)
+        {
+            pollutionBarValue -= 0.01f;
+            if (pollutionBarValue < 0)
+                pollutionBarValue = 0;
+
+            pollutionBar.GetComponent<Image>().fillAmount = pollutionBarValue;
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        for (int i = 4; i <= damageTaken; i+=4)
+        {
+            pollutionValue.text = ((currentCombinedPL + damageTaken) - i).ToString();
+            yield return null;
+        }
+
+        pollutionValue.text = currentCombinedPL.ToString();
+    }
 }

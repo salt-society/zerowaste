@@ -146,13 +146,15 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 
         attackController.DisplayAttackButtons(1);
-        attackController.EnableAttackButtons(0);
+        // attackController.EnableAttackButtons(0);
 
         firstLoop = false;
         yield return null;
     }
 
-    IEnumerator BattleLoop()
+    // <summary>
+    // </summary>
+    public IEnumerator BattleLoop()
     {
         if (firstLoop)
         {
@@ -173,7 +175,7 @@ public class BattleController : MonoBehaviour {
                 StartCoroutine(turnQueueManager.DisplayTurnQueue(1));
 
                 if (turnCount == 0)
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(2f);
 
                 loopDone = false;
             }
@@ -192,6 +194,7 @@ public class BattleController : MonoBehaviour {
                     GetMutantPrefab(characterQueue[turnCount] as Enemy);
                 continueLoop = mutantPrefab.GetComponent<CharacterMonitor>().IsAlive;
             }
+            Debug.Log(continueLoop);
 
             if (continueLoop)
             {
@@ -199,7 +202,7 @@ public class BattleController : MonoBehaviour {
                 characterQueue[turnCount].characterName);
 
                 battleInfoManager.DisplayNextTurnPanel(1);
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSeconds(0.5f);
                 battleInfoManager.DisplayNextTurnSign(1);
                 yield return new WaitForSeconds(1f);
 
@@ -224,12 +227,7 @@ public class BattleController : MonoBehaviour {
                     }
 
                     turnQueueManager.SetCurrentCharacter(turnCount);
-                    attackController.PlayerAttackSetup();
-
-                    //turnCount++;
-                    //yield return new WaitForSeconds(3f);
-
-                    //StartCoroutine(BattleLoop());
+                    attackController.ScavengerAttackSetup();
                 }
                 else
                 {
@@ -261,5 +259,15 @@ public class BattleController : MonoBehaviour {
         }
 
         yield return null;
+    }
+
+    // <summer>
+    // </summer>
+    public void NextTurn()
+    {
+        StopAllCoroutines();
+
+        turnCount++;
+        StartCoroutine(BattleLoop());
     }
 }

@@ -45,33 +45,33 @@ public class CharacterMonitor : MonoBehaviour
         set { instanceId = value; }
     }
 
-    private double currentMaxHealth;
+    private int currentMaxHealth;
 
-    public double MaxHealth
+    public int MaxHealth
     {
         get { return currentMaxHealth; }
         set { currentMaxHealth = value; }
     }
 
-    private double currentHealth;
+    private int currentHealth;
 
-    public double CurrentHealth
+    public int CurrentHealth
     {
         get { return currentHealth; }
         set { currentHealth = value; }
     }
 
-    private double currentMaxAnt;
+    private int currentMaxAnt;
 
-    public double MaxAnt
+    public int MaxAnt
     {
         get { return currentMaxAnt; }
         set { currentMaxAnt = value; }
     }
 
-    private double currentAnt;
+    private int currentAnt;
 
-    public double CurrentAnt
+    public int CurrentAnt
     {
         get { return currentAnt; }
         set { currentAnt = value; }
@@ -88,7 +88,6 @@ public class CharacterMonitor : MonoBehaviour
 
     #region Private Variables
     private bool characterInitialized;
-    private bool characterTurn;
     #endregion
 
     #region Battle Managers
@@ -161,21 +160,13 @@ public class CharacterMonitor : MonoBehaviour
         }
     }
 
-    // <summary>
-    // Transition from idle to fight when its character's turn
-    // </summary>
-    public void CharacterBattleStance()
-    {
-        // Get animator and trigger fight stance animation
-        gameObject.GetComponent<Animator>().SetBool("Turn", true);
-        characterTurn = true;
-    }
+    
 
     // <summary>
     // Gets scavengers max health, instead of the max health variable
     // which can be changed on runtime
     // </summary>
-    public double GetScavengerMaxHealth()
+    public int GetScavengerMaxHealth()
     {
         return scavenger.baseHP + (int)((scavenger.currentLevel - 1) * scavenger.hpModifier);
     }
@@ -184,7 +175,7 @@ public class CharacterMonitor : MonoBehaviour
     // Gets mutants max health, instead of the max health variable
     // which can be changed on runtime
     // </summary>
-    public double GetMutantMaxHealth()
+    public int GetMutantMaxHealth()
     {
         return mutant.maxPollutionLevel;
     }
@@ -205,13 +196,116 @@ public class CharacterMonitor : MonoBehaviour
         return (characterType.Equals(targetType)) ? true : false;
     }
 
-    public void IsHurt()
+    #region Animations
+
+    // <summary>
+    // Transition from idle to fight when its character's turn
+    // </summary>
+    public void CharacterBattleStance()
+    {
+        // Trigger fight stance animation
+        gameObject.GetComponent<Animator>().SetBool("Turn", true);
+    }
+
+    public void CharacterAbilityAnimation(int abilityIndex)
+    {
+        switch (abilityIndex)
+        {
+            case 0:
+                {
+                    StartCoroutine(Attack01());
+                    break;
+                }
+            case 1:
+                {
+                    StartCoroutine(Charge());
+                    break;
+                }
+            case 2:
+                {
+                    StartCoroutine(CharacterSkill());
+                    break;
+                }
+            case 3:
+                {
+                    StartCoroutine(SpecialMove());
+                    break;
+                }
+
+        }
+    }
+
+    public IEnumerator Attack01()
+    {
+        gameObject.GetComponent<Animator>().SetBool("Attack 01", true);
+        gameObject.GetComponent<Animator>().SetBool("Turn", false);
+        yield return new WaitForSeconds(1.2f);
+        gameObject.GetComponent<Animator>().SetBool("Attack 01", false);
+    }
+
+    public IEnumerator Attack02()
+    {
+        yield return null;
+    }
+
+    public IEnumerator Charge()
+    {
+        yield return null;
+    }
+
+    public IEnumerator CharacterSkill()
+    {
+        yield return null;
+    }
+
+    public IEnumerator SpecialMove()
+    {
+        yield return null;
+    }
+
+    public IEnumerator Damaged01()
+    {
+        gameObject.GetComponent<Animator>().SetBool("Damaged 01", true);
+        yield return new WaitForSeconds(1.2f);
+        gameObject.GetComponent<Animator>().SetBool("Damaged 01", false);
+    }
+
+    #endregion
+
+    #region Scavenger Status Update Functions
+
+    // <summary>
+    // Decrement antidote value and updates antidote bar
+    // </summary>
+    public void DecrementAntidote(int antRequirement)
+    {
+        scavenger.currentAnt = scavenger.CheckMin(scavenger.currentAnt - antRequirement);
+        StartCoroutine(statusManager.DecrementAntidote(scavenger.currentAnt, scavenger.baseAnt, position));
+    }
+
+    #endregion
+
+    #region Mutant Status Update Functions
+
+    // <summary>
+    // Decrement mutant's pollution level
+    // </summary>
+    public int MutantDamaged(int effectStrength, Player scavenger)
+    {
+        // Calculate damage taken from Scavenger's attack
+        int previousHealth = currentHealth;
+        mutant.IsAttacked(effectStrength, scavenger);
+
+        currentHealth = mutant.currentPollutionLevel;
+        int damage = previousHealth - currentHealth;
+
+        return damage;
+    }
+
+    public void MutantHealed()
     {
 
     }
 
-    public void IsHealed()
-    {
-
-    }
+    #endregion
 }

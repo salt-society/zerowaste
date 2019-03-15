@@ -10,10 +10,11 @@ public class Effect : ScriptableObject {
     public string effectDescription;
 
     [Space]
-    public string effectType;
-    public string effectType2;
     public string effectTarget;
-
+    public string effectType;
+    public string effectState;
+    public string application;
+    
     [Space]
     public int effectStrength;
     public int effectDuration;

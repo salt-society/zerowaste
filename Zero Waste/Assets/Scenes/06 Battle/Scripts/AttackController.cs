@@ -14,87 +14,118 @@ public class AttackController : MonoBehaviour
     public CharacterManager characterManager;
 
     private PlayerAbility chosenAbility;
+    private bool switchedAbility;
 
+    public bool SwitchedAbility
+    {
+        get { return switchedAbility; }
+        set { switchedAbility = value; }
+    }
+
+    // <summary>
+    // Displays attack buttons
+    // </summary>
     public void DisplayAttackButtons(int visibility)
     {
         bool showComponent = (visibility > 0) ? true : false;
         attackButtonPanel.SetActive(showComponent);
     }
 
+
+    // <summary>
+    // Displays attack buttons
+    // </summary>
     public void EnableAttackButtons(int enable)
     {
         bool showComponent = (enable > 0) ? true : false;
-
         foreach (Button attackButton in attackButtons)
         {
+            attackButton.transform.GetChild(1).gameObject.SetActive(!showComponent);
             attackButton.enabled = showComponent;
-            Image[] buttons = attackButton.GetComponentsInChildren<Image>();
-
-            foreach (Image button in buttons)
-            {
-                if (button.name.Equals("Overlay"))
-                {
-                    Debug.Log(button.GetInstanceID());
-                    button.gameObject.SetActive(!showComponent);
-                }
-            }
         }
     }
 
     public void EnableAttackButton(int enable, int buttonNo)
     {
         bool showComponent = (enable > 0) ? true : false;
-        Image[] buttons = attackButtons[buttonNo].GetComponentsInChildren<Image>();
-
-        foreach (Image button in buttons)
-        {
-            if (button.name.Equals("Overlay"))
-            {
-                button.gameObject.SetActive(!showComponent);
-                break;
-            }
-        }
-
+        attackButtons[buttonNo].transform.GetChild(1).gameObject.SetActive(!showComponent);
         attackButtons[buttonNo].enabled = showComponent;
     }
 
-    public void PlayerAttackSetup()
+    // <summary>
+    // Sets up scavenger abilities by calling each ability's manger script
+    // to pass current character's ability set
+    // </summary>
+    public void ScavengerAttackSetup()
     {
+        // Get current Scavenger, his data, prefab, and position
         Player currentCharacter = turnQueueManager.GetCurrentCharacter() as Player;
         GameObject currentCharacterPrefab = characterManager.GetScavengerPrefab(currentCharacter);
         int position = characterManager.GetScavengerPosition(currentCharacter);
 
+        // Set up ability
         int i = 0;
         foreach (Button attackButton in attackButtons)
         {
+            // Booster is part of the attack buttons array, but is not an ability
+            // therefore it should be isolated from the rest, always first on array, and be enabled
             if (i == attackButtons.Length - 1)
             {
                 EnableAttackButton(1, i);
             }
+            // Rest of buttons in array are the ability or attack buttons
             else
             {
-                attackButton.GetComponent<AbilityManager>().SetCurrentCharacterPrefab(currentCharacterPrefab);
-                attackButton.GetComponent<AbilityManager>().SetUpAbility(i);
+                // Get ability manager attached to each button and send scavenger's prefab,
+                // ability, check if ability is available, and send position of scavenger
+                attackButton.GetComponent<AbilityManager>().Scavenger = currentCharacter;
+                attackButton.GetComponent<AbilityManager>().ScavengerPrefab = currentCharacterPrefab;
+                attackButton.GetComponent<AbilityManager>().SetupAbility(i);
                 attackButton.GetComponent<AbilityManager>().IsAbilityAvailable();
-                attackButton.GetComponent<AbilityManager>().SetScavengerPosition(position);
+                attackButton.GetComponent<AbilityManager>().Position = position;
             }
             
             i++;
         }
-
     }
 
+    // <summary>
+    // Sets current ability chosen by user to execute
+    // </summary>
     public void SetCurrentAbility(PlayerAbility chosenAbility)
     {
+        // Set ability if empty
         if (this.chosenAbility == null)
+        {
             this.chosenAbility = chosenAbility;
+            switchedAbility = false;
+        }
+        // Selecting same ability cancels its execution
+        // if that ability requires target selection
         else if (this.chosenAbility.Equals(chosenAbility))
+        {
             this.chosenAbility = null;
-        else
+            switchedAbility = false;
+        }
+        // Switch from one ability to another
+        else if (this.chosenAbility != null)
+        {
             this.chosenAbility = chosenAbility;
+            switchedAbility = true;
+        }
     }
 
+    // <summary>
+    // Removes chosen ability
+    // </summary>
+    public void ClearCurrentAbility()
+    {
+        chosenAbility = null;
+    }
 
+    // <summary>
+    // Returns whether there's already an ability chosen or none
+    // </summary>
     public bool IsCurrentAttackNull()
     {
         return (chosenAbility == null) ? true: false;

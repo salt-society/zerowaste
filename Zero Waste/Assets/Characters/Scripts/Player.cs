@@ -15,11 +15,11 @@ public class Player : Character {
     [Range(1, 5)] public int threatLevel;
 
     [Header("Level Modifiers")]
-    [Range(1f, 2f)] public double hpModifier;
-    [Range(0.5f, 1f)] public double atkModifier;
-    [Range(0.5f, 1f)] public double defModifier;
-    [Range(1f, 2f)] public double spdModifier;
-
+    [Range(1f, 2f)] public int hpModifier;
+    [Range(0.5f, 1f)] public int atkModifier;
+    [Range(0.5f, 1f)] public int defModifier;
+    [Range(1f, 2f)] public int spdModifier;
+    
     [HideInInspector] public int currentHP;
     [HideInInspector] public int currentAnt;
     [HideInInspector] public int currentAtk;

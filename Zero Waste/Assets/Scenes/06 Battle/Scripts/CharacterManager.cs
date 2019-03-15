@@ -67,24 +67,40 @@ public class CharacterManager : MonoBehaviour {
 
     public Player[] InitializeScavengers(Player[] scavengers)
     {
+        Player[] initScavengers = new Player[scavengers.Length];
+
+        int i = 0;
         foreach (Player scavenger in scavengers)
         {
-            if(scavenger != null)
+            if (scavenger != null)
+            {
                 scavenger.OnInitialize();
+                initScavengers[i] = scavenger;
+            }
+
+            i++;
         }
             
-        return scavengers;
+        return initScavengers;
     }
 
     public Enemy[] InitializeMutants(Enemy[] mutants)
     {
+        Enemy[] initMutants = new Enemy[mutants.Length];
+
+        int i = 0;
         foreach (Enemy mutant in mutants)
         {
-            if(mutant != null)
+            if (mutant != null)
+            {
                 mutant.OnInitialize();
+                initMutants[i] = mutant;
+            }
+
+            i++;
         }
             
-        return mutants;
+        return initMutants;
     }
 
     public void ChangeSprite(Player[] scavengers)
@@ -243,10 +259,6 @@ public class CharacterManager : MonoBehaviour {
 
     public IEnumerator ScavengersEntrance()
     {
-        /*cameraManager.ScavengerFocus(1);
-        yield return new WaitForSeconds(1f);
-        cameraManager.ScavengerFocus(0);*/
-
         foreach (GameObject scavenger in scavengers)
         {
             scavenger.SetActive(true);
@@ -258,19 +270,11 @@ public class CharacterManager : MonoBehaviour {
 
     public IEnumerator MutantEntrance()
     {
-        /*cameraManager.MutantFocus(1);
-        yield return new WaitForSeconds(.5f);
-        cameraManager.MutantFocus(0);*/
-
         foreach (GameObject mutant in mutants)
         {
             mutant.SetActive(true);
             yield return new WaitForSeconds(.5f);
         }
-
-        cameraManager.BackToNormalCamera(1);
-        yield return new WaitForSeconds(1f);
-        cameraManager.BackToNormalCamera(0);
 
         yield return null;
     }

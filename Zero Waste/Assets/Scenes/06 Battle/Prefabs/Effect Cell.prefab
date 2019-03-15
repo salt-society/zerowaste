@@ -397,16 +397,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4518618480175459341}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0.9080034, w: 0.41896284}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12187225, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.26757053, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 6075521901655290972}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -130.462}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -137.4, y: -10.9}
+  m_AnchoredPosition: {x: -158.3, y: -14.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8560768120842229123
@@ -473,7 +473,7 @@ RectTransform:
   m_GameObject: {fileID: 4871170683550384732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.22, y: 1.22, z: 1.22}
+  m_LocalScale: {x: 0.99534917, y: 0.99534917, z: 0.99534917}
   m_Children:
   - {fileID: 8667416391420180338}
   - {fileID: 2088305933264693487}
@@ -482,7 +482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -137.7, y: -27.8}
+  m_AnchoredPosition: {x: -166.5, y: -21.8}
   m_SizeDelta: {x: 26.564, y: 26.561}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2253964565559138158
@@ -717,7 +717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 211.05, y: -23.52}
+  m_AnchoredPosition: {x: 211.05, y: -17.8}
   m_SizeDelta: {x: 268.36, y: 19.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6075521900349973647
@@ -750,8 +750,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Name of Effect
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a07a45117119434396d347434f034ca, type: 2}
-  m_sharedMaterial: {fileID: 21217762672264400, guid: 2a07a45117119434396d347434f034ca,
+  m_fontAsset: {fileID: 11400000, guid: d4e988e86563abc458e76dfa187cf1cd, type: 2}
+  m_sharedMaterial: {fileID: 21787219898366996, guid: d4e988e86563abc458e76dfa187cf1cd,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -912,8 +912,8 @@ MonoBehaviour:
   m_text: This is the effect description. The left side shows the icon while the number
     inside the circle shows duration of effect.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ab3244bdd1e5b8540bbfa6837425a040, type: 2}
-  m_sharedMaterial: {fileID: 21415760006888344, guid: ab3244bdd1e5b8540bbfa6837425a040,
+  m_fontAsset: {fileID: 11400000, guid: 4da6dcd8729553547ab885bef702de91, type: 2}
+  m_sharedMaterial: {fileID: 21295118186959122, guid: 4da6dcd8729553547ab885bef702de91,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -985,7 +985,7 @@ MonoBehaviour:
     spaceCount: 20
     wordCount: 21
     linkCount: 0
-    lineCount: 3
+    lineCount: 4
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

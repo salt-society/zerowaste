@@ -19,4 +19,4 @@ MonoBehaviour:
   abilityDescription: A basic action to ward off toxic mutants
   effects:
   - {fileID: 11400000, guid: 5a1e5f1487f8dac47aa06863b544d177, type: 2}
-  antRequirement: 0
+  antRequirement: 1

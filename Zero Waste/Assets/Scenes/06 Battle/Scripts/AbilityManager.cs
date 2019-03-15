@@ -6,149 +6,251 @@ public class AbilityManager : MonoBehaviour
 {
     public int abilityIndex;
 
-    [Space]
-    [Header("Managers")]
-    public AttackController attackController;
-    public TargetManager targetManager;
-    public StatusManager statusManager;
+    #region Battle Managers
+    private BattleController battleController;
+    private AttackController attackController;
+    private TargetManager targetManager;
+    private StatusManager statusManager;
+    private CameraManager cameraManager;
+    #endregion
+
+    #region Properties
+    private Player scavenger;
+
+    public Player Scavenger
+    {
+        get { return scavenger; }
+        set { scavenger = value; }
+    }
 
     private PlayerAbility ability;
 
-    private Player scavenger;
-    private GameObject scavengerPrefab;
-    private int scavengerPosition;
+    public PlayerAbility Ability
+    {
+        get { return ability; }
+        set { ability = value; }
+    }
 
+    private GameObject scavengerPrefab;
+
+    public GameObject ScavengerPrefab
+    {
+        get { return scavengerPrefab; }
+        set { scavengerPrefab = value; }
+    }
+
+    private int position;
+
+    public int Position
+    {
+        get { return position; }
+        set { position = value; }
+    }
+    #endregion
+
+    void Start()
+    {
+        battleController = FindObjectOfType<BattleController>();
+        attackController = FindObjectOfType<AttackController>();
+        targetManager = FindObjectOfType<TargetManager>();
+        statusManager = FindObjectOfType<StatusManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
+    }
+
+    // <summary>
+    // Each ability has an ability manager, when player selects
+    // an ability, other abilities are not aware of it
+    // The attack controller binds all the abilities, so the system
+    // knows when there is already a selected ability
+    // </summary>
     public void ChooseAbility()
     {
+        // Let attack controller know that player has chosen an ability
+        // Note that you can't choose an ability that doesn't meet
+        // ant requirement, in example Character Skill and Ultimate Move
         attackController.SetCurrentAbility(ability);
 
+        // Checks if there's an ability to execute and cancels if none
         if (!attackController.IsCurrentAttackNull())
+        {
+            // If ability is switched, "Cancel Attack" message shouldn't be shown
+            if (attackController.SwitchedAbility)
+                targetManager.CancelTargetSelection(attackController.SwitchedAbility);
+
             targetManager.SelectTarget(ability, this);
+        }
         else
-            targetManager.CancelTargetSelection();
+            targetManager.CancelTargetSelection(attackController.SwitchedAbility);
     }
 
-    public void SetCurrentCharacterPrefab(GameObject characterPrefab)
-    {
-        this.scavengerPrefab = characterPrefab;
-        scavenger = characterPrefab.GetComponent<CharacterMonitor>().Scavenger;
-    }
-
-    public void SetUpAbility(int index)
+    // <summary>
+    // Set up ability by getting ability in scavenger data through index
+    // </summary>
+    public void SetupAbility(int index)
     {
         ability = scavenger.abilities[index] as PlayerAbility;
     }
 
-    public void SetScavengerPosition(int position)
-    {
-        this.scavengerPosition = position;
-    }
-
+    // <summary>
+    // Checks if ability can be used base on Ant, then enables button for that ability
+    // </summary>
     public void IsAbilityAvailable()
     {
         if (scavenger.currentAnt >= ability.antRequirement)
-            attackController.EnableAttackButton(1, abilityIndex);     
+            attackController.EnableAttackButton(1, abilityIndex);
+
+        Debug.Log(scavenger.currentAnt + " >= " + ability.antRequirement + " : " + (scavenger.currentAnt >= ability.antRequirement));
     }
 
+    // <summary>
+    // </summary>
     public IEnumerator ExecuteAbility(GameObject selectedTarget, string targetType)
     {
-        // Decrement scavenger's antidote
-        scavenger.currentAnt = scavenger.CheckMin(scavenger.currentAnt - ability.antRequirement);
-        // statusManager.DecrementAntidote(ability.antRequirement, scavengerPosition);
+        // Decrement antidote used by ability and update antidote bar
+        scavengerPrefab.GetComponent<CharacterMonitor>().DecrementAntidote(ability.antRequirement);
+        
+        yield return null;
 
         // Apply effects if there's any on selected mutant
-        StartCoroutine(ApplyEffects(selectedTarget, targetType));
+        ApplyEffects(selectedTarget, targetType);
+    }
+
+    // <summary>
+    // </summary>
+    void ApplyEffects(GameObject targetPrefab, string targetType)
+    {
+        // Scavenger to Scavenger
+        if (targetType.Equals("Scavenger")) 
+        {
+            ScavengerToScavenger(targetPrefab);
+        } 
+        // Scavenger to Mutant
+        else if(targetType.Equals("Mutant"))
+        {
+            StartCoroutine(ScavengerToMutant(targetPrefab));
+        }
+    }
+
+    IEnumerator ScavengerToScavenger(GameObject targetPrefab)
+    {
+        // Data of target and it's position on battle ground
+        Player target = targetPrefab.GetComponent<CharacterMonitor>().Scavenger;
+        int position = targetPrefab.GetComponent<CharacterMonitor>().Position;
+        
+        // Apply each effect chosen ability have
+        foreach (Effect effect in ability.effects)
+        {
+            if (effect.effectType.Equals("Direct"))
+            {
+                target.IsHealed(effect.effectTarget, effect.effectStrength);
+
+                if (effect.effectTarget.Equals("HP"))
+                {
+
+                }
+
+                if (effect.effectTarget.Equals("Ant"))
+                {
+
+                }
+            }
+            else if (effect.effectType.Equals("Status"))
+            {
+                target.IsBuffed(Instantiate(effect));
+
+                if (effect.effectTarget.Equals("HP"))
+                {
+
+                }
+                else if (effect.effectTarget.Equals("Ant"))
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+
+        }
 
         yield return null;
     }
 
-    IEnumerator ApplyEffects(GameObject characterPrefab, string targetType)
+    IEnumerator ScavengerToMutant(GameObject targetPrefab)
     {
-        // Get target character's position on screen
-        int targetPosition = characterPrefab.GetComponent<CharacterMonitor>().Position;
+        // Data of target is needed to update changes as well as its position
+        Enemy mutant = targetPrefab.GetComponent<CharacterMonitor>().Mutant;
+        int position = targetPrefab.GetComponent<CharacterMonitor>().Position;
 
-        // Player to Player
-        if (targetType.Equals("Scavenger")) 
+        // Loop through effects ability have and apply each one of it
+        int totalDamage = 0;
+        int noOfDirectEffects = 0;
+        foreach (Effect effect in ability.effects)
         {
-            Player target = characterPrefab.GetComponent<CharacterMonitor>().Scavenger;
-            foreach (Effect effect in ability.effects)
+            // There are two kinds of Effect Type, Direct and Status
+            // Apply effects according to their type
+            if (effect.effectType.Equals("Direct"))
             {
-                if (effect.effectType.Equals("Direct")) 
-                {
-                    target.IsHealed(effect.effectTarget, effect.effectStrength);
 
-                    if (effect.effectTarget.Equals("HP"))
-                    {
-                        
-                    }
-
-                    if (effect.effectTarget.Equals("Ant"))
-                    {
-
-                    }
-                }
-                else if (effect.effectType.Equals("Status"))
-                {
-                    target.IsBuffed(Instantiate(effect));
-
-                    if (effect.effectTarget.Equals("HP"))
-                    {
-                        
-                    }
-                    else if (effect.effectTarget.Equals("Ant"))
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-
+                // Calculate damage of effect
+                int damage = targetPrefab.GetComponent<CharacterMonitor>().
+                    MutantDamaged(effect.effectStrength, scavenger);
+                noOfDirectEffects++;
+                totalDamage += damage;
             }
-        } 
-        // Player to Enemy
-        else {
-            Enemy mutant = characterPrefab.GetComponent<CharacterMonitor>().Mutant;
-            foreach (Effect effect in ability.effects)
+            else if (effect.effectType.Equals("Status"))
             {
-                if (effect.effectType.Equals("Direct"))
+                Debug.Log("Status");
+
+                int previousHealth = mutant.currentPollutionLevel;
+                mutant.IsDebuffed(Instantiate(effect));
+
+                if (effect.effectTarget.Equals("PL"))
                 {
-                    double previousHealth = mutant.currentPollutionLevel;
+                    int currentHealth = mutant.currentPollutionLevel;
+                    int damage = previousHealth - currentHealth;
 
-                    mutant.IsAttacked(effect.effectStrength, scavenger);
-                    double currentHealth = mutant.currentPollutionLevel;
-                    double damage = previousHealth - currentHealth;
-
-                    // statusManager.DecrementPollutionBar(currentHealth, targetPosition);
-                    statusManager.ShowDamage(damage.ToString(), characterPrefab, true);
-
-                    characterPrefab.GetComponent<Animator>().SetBool("Damaged 01", true);
-                    yield return new WaitForSeconds(2f);
-
-                    statusManager.ShowDamage(damage.ToString(), characterPrefab, false);
-                    characterPrefab.GetComponent<Animator>().SetBool("Damaged 01", false);
+                   
                 }
-                else if (effect.effectType.Equals("Status"))
+                else
                 {
-                    double previousHealth = mutant.currentPollutionLevel;
-                    mutant.IsDebuffed(Instantiate(effect));
 
-                    if (effect.effectTarget.Equals("PL"))
-                    {
-                        double currentHealth = mutant.currentPollutionLevel;
-                        double damage = previousHealth - currentHealth;
-
-                        // statusManager.DecrementPollutionBar(damage, targetPosition);
-                        statusManager.ShowDamage(damage.ToString(), characterPrefab, true);
-                    }
-                    else
-                    {
-
-                    }
                 }
-
             }
+
         }
+
+        // Unfocus camera
+        cameraManager.FocusOnScavengers(false);
+        cameraManager.FocusOnMutants(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        // Only apply this animation if there is a Direct
+        if (noOfDirectEffects > 0)
+        {
+            // Effects to show simultaneously are the following
+            // Damage Points, Attack Animation, Target Damage Animation, Camera Shake
+            scavengerPrefab.GetComponent<CharacterMonitor>().CharacterAbilityAnimation(abilityIndex);
+            StartCoroutine(targetPrefab.GetComponent<CharacterMonitor>().Damaged01());
+            cameraManager.Shake(true);
+            statusManager.ShowDamagePoints(totalDamage.ToString(), targetPrefab);
+            StartCoroutine(statusManager.DecrementPollutionBar(totalDamage));
+
+            // Delay
+            yield return new WaitForSeconds(1f);
+
+            // End effects and animations
+            StartCoroutine(statusManager.HideDamagePoints());
+            cameraManager.Shake(false);
+        }
+       
+
+        // End battle loop and start again
+        attackController.ClearCurrentAbility();
+        attackController.EnableAttackButtons(0);
+        yield return null;
+        battleController.NextTurn();
     }
 }
