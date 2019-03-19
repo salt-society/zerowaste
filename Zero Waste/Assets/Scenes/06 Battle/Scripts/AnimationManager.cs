@@ -39,5 +39,31 @@ public class AnimationManager : MonoBehaviour
         cameraManager.Shake(false);
     }
 
+    public IEnumerator HealScavenger(GameObject target, int healPoints, int abilityIndex)
+    {
+        // Increment HP
+        StartCoroutine(statusManager.IncrementHealth(target.GetComponent<CharacterMonitor>().CurrentHealth, 
+            target.GetComponent<CharacterMonitor>().MaxHealth, target.GetComponent<CharacterMonitor>().Position));
 
+        // Show scavenger's heal animation
+        target.GetComponent<CharacterMonitor>().CharacterAbilityAnimation(abilityIndex);
+
+        // Show heal points taken
+        StartCoroutine(statusManager.ShowHealPoints(healPoints.ToString(), target));
+        yield return new WaitForSeconds(1f);
+    }
+
+    public IEnumerator GenerateAntidote(GameObject target, int antGen, int abilityIndex)
+    {
+        // Increment HP
+        StartCoroutine(statusManager.IncrementAntidote(target.GetComponent<CharacterMonitor>().CurrentAnt,
+            target.GetComponent<CharacterMonitor>().MaxAnt, target.GetComponent<CharacterMonitor>().Position));
+
+        // Show scavenger's heal animation
+        target.GetComponent<CharacterMonitor>().CharacterAbilityAnimation(abilityIndex);
+
+        // Show ant points taken
+        StartCoroutine(statusManager.ShowHealPoints(antGen.ToString(), target));
+        yield return new WaitForSeconds(1f);
+    }
 }

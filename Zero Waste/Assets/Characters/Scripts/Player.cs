@@ -110,14 +110,10 @@ public class Player : Character {
         switch(effect.effectTarget)
         {
             case "HP":
-                estimatedStat = CheckMax(currentHP + effect.effectStrength, "HP");
-                currentHP = estimatedStat;
                 effects.Add(effect);
                 break;
 
             case "Ant":
-                estimatedStat = CheckMax(currentAnt + effect.effectStrength, "Ant");
-                currentAnt = estimatedStat;
                 effects.Add(effect);
                 break;
 
@@ -156,14 +152,10 @@ public class Player : Character {
         switch (effect.effectTarget)
         {
             case "HP":
-                estimatedStat = CheckMin(currentHP - effect.effectStrength);
-                currentHP = estimatedStat;
                 effects.Add(effect);
                 break;
 
             case "Ant":
-                estimatedStat = CheckMin(currentAnt - effect.effectStrength);
-                currentAnt = estimatedStat;
                 effects.Add(effect);
                 break;
 

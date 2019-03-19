@@ -171,13 +171,23 @@ public class AbilityManager : MonoBehaviour
             }
             else
             {
-                targetPrefab.GetComponent<CharacterMonitor>().ScavengerBuffed(effect);
+                
+                targetPrefab.GetComponent<CharacterMonitor>().ScavengerBuffed(Instantiate(effect));
             }
         }
 
         if (regainedValue > 0)
         {
-            StartCoroutine(statusManager.ShowHealPoints(regainedValue.ToString(), targetPrefab));
+            // StartCoroutinestatusManager.ShowHealPoints(regainedValue.ToString(), targetPrefab));
+            if(targetStat.Equals("HP"))
+            {
+                StartCoroutine(animationManager.HealScavenger(targetPrefab, regainedValue, abilityIndex));
+            }
+            else
+            {
+                //StartCoroutine(animationManager.GenerateAntidote(targetPrefab, regainedValue, abilityIndex));
+                StartCoroutine(statusManager.ShowHealPoints(regainedValue.ToString(), targetPrefab));
+            }
             yield return new WaitForSeconds(1.5f);
         }
 
@@ -239,7 +249,7 @@ public class AbilityManager : MonoBehaviour
             else
             {
                 // Status effects for mutants are debuff
-                targetPrefab.GetComponent<CharacterMonitor>().MutantDebuffed(effect);
+                targetPrefab.GetComponent<CharacterMonitor>().MutantDebuffed(Instantiate(effect));
             }
         }
 

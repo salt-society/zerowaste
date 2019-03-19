@@ -161,7 +161,6 @@ public class StatusManager : MonoBehaviour
             // Make sure there's a scavenger in position to avoid errors
             if (scavengerData[i] != null)
             {
-                // Effects, if there's any at start
                 dataController = FindObjectOfType<DataController>();
                 if (dataController != null)
                 {
@@ -202,6 +201,7 @@ public class StatusManager : MonoBehaviour
                     }*/
                     #endregion
 
+                    // Go through all effects and apply each one of it
                     if (dataController.battleModifiers.Length > 0)
                     {
                         foreach (Effect effect in dataController.battleModifiers)
@@ -215,10 +215,13 @@ public class StatusManager : MonoBehaviour
                                 scavengerData[i].IsDebuffed(effect);
                             }
 
+                            // Adds effect icon in status panel
+                            // Status panel can only show up to 3 icons
                             AddEffectToStatusPanel(dataController.targetParty, i, effect);
                         }
                             
-
+                        // Add effects to status list
+                        // Battle modifiers should be status effects only
                         AddEffectsToStatusList(dataController.targetParty, i, null);
                     }
                 }
@@ -461,6 +464,60 @@ public class StatusManager : MonoBehaviour
         Destroy(buffArrow);
     }
 
+    public IEnumerator IncrementHealth(float currentHealth, float maxHealth, int position)
+    {
+        float hpLeft = currentHealth / maxHealth;
+        float hpBarValue = healthBars[position].GetComponent<Image>().fillAmount;
+
+        while (hpBarValue < hpLeft)
+        {
+            hpBarValue += 0.1f;
+            if (hpBarValue > maxHealth)
+                hpBarValue = maxHealth;
+
+            healthBars[position].GetComponent<Image>().fillAmount += hpBarValue;
+
+            Debug.Log("Ant Bar Value: " + hpBarValue);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public IEnumerator DecrementHealth(float currentHealth, float maxHealth, int position)
+    {
+        float hpLeft = currentHealth / maxHealth;
+        float hpBarValue = healthBars[position].GetComponent<Image>().fillAmount;
+
+        while (hpBarValue > hpLeft)
+        {
+            hpBarValue -= 0.1f;
+            if (hpBarValue < 0)
+                hpBarValue = 0;
+
+            healthBars[position].GetComponent<Image>().fillAmount -= hpBarValue;
+
+            Debug.Log("Ant Bar Value: " + hpBarValue);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public IEnumerator IncrementAntidote(float currentAnt, float maxAnt, int position)
+    {
+        float antidoteLeft = currentAnt / maxAnt;
+        float antBarValue = antBars[position].GetComponent<Image>().fillAmount;
+
+        while (antBarValue < antidoteLeft)
+        {
+            antBarValue += 0.1f;
+            if (antBarValue > maxAnt)
+                antBarValue = maxAnt;
+
+            antBars[position].GetComponent<Image>().fillAmount += antBarValue;
+
+            Debug.Log("Ant Bar Value: " + antBarValue);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     public IEnumerator DecrementAntidote(float currentAnt, float maxAnt, int position)
     {
         float antidoteLeft = currentAnt / maxAnt;
@@ -495,7 +552,6 @@ public class StatusManager : MonoBehaviour
         }
 
         Debug.Log(currentCombinedPL);
-
 
         float combinedPLLeft = (float)currentCombinedPL / (float)maxCombinedPL;
         float pollutionBarValue = pollutionBar.GetComponent<Image>().fillAmount;

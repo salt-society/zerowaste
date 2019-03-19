@@ -290,7 +290,12 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator ChargeAnimation()
     {
-        yield return null;
+        gameObject.GetComponent<Animator>().SetBool("Idle", true);
+        gameObject.GetComponent<Animator>().SetBool("Heal", true);
+        gameObject.GetComponent<Animator>().SetBool("Turn", false);
+        yield return new WaitForSeconds(1.2f);
+        gameObject.GetComponent<Animator>().SetBool("Idle", false);
+        gameObject.GetComponent<Animator>().SetBool("Heal", false);
     }
 
     public IEnumerator CharacterSkillAnimation()
@@ -344,7 +349,7 @@ public class CharacterMonitor : MonoBehaviour
         
     }
 
-    public int  ScavengerHealed(string targetStat, int statModifier)
+    public int ScavengerHealed(string targetStat, int statModifier)
     {
         scavenger.IsHealed(targetStat, statModifier);
 

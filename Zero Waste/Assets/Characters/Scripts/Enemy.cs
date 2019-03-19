@@ -76,7 +76,6 @@ public class Enemy : Character {
         switch (effect.effectTarget)
         {
             case "PL":
-                currentPollutionLevel = CheckMax(currentPollutionLevel + effect.effectStrength);
                 effects.Add(effect);
                 break;
 
@@ -103,7 +102,6 @@ public class Enemy : Character {
         switch (effect.effectTarget)
         {
             case "PL":
-                currentPollutionLevel = CheckMin(currentPollutionLevel - effect.effectStrength);
                 effects.Add(effect);
                 break;
 
