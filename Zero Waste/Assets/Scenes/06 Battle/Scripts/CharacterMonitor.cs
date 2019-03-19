@@ -88,10 +88,12 @@ public class CharacterMonitor : MonoBehaviour
 
     #region Private Variables
     private bool characterInitialized;
+    private bool endOfTurn;
     #endregion
 
     #region Battle Managers
     private StatusManager statusManager;
+    private ParticleManager particleManager;
     #endregion
 
     // <summary>
@@ -101,11 +103,13 @@ public class CharacterMonitor : MonoBehaviour
     public void InitializeMonitor()
     {
         // Set character init flag to false, since there isn't
-        // any data yet the moment this function is  called
+        // any data yet the moment this function is called
         characterInitialized = false;
+        endOfTurn = false;
 
         // Get Managers
         statusManager = FindObjectOfType<StatusManager>();
+        particleManager = FindObjectOfType<ParticleManager>();
     }
 
     // <summary>
@@ -115,13 +119,22 @@ public class CharacterMonitor : MonoBehaviour
     {
         // Constantly check players health so it could be pronounced
         // dead and ignored in queue
-        if (currentHealth <= 0) 
+        if (isAlive)
         {
-            isAlive = false;
+            if (currentHealth <= 0)
+            {
+                isAlive = false;
+                StartCoroutine(MutantDead());
+            }
         }
-        else
+
+        string characterName = (scavenger != null) ? scavenger.characterName : mutant.characterName;
+        // Debug.Log(characterName + ": " + isAlive + " | Health: " + currentHealth);
+
+        // Check DOT effects every end of turn
+        if (endOfTurn)
         {
-            // Update values
+            endOfTurn = false;
         }
     }
 
@@ -135,7 +148,7 @@ public class CharacterMonitor : MonoBehaviour
         if (scavenger != null)
         {
             instanceId = scavenger.GetInstanceID();
-            characterType = scavenger.characterType;
+            characterType = "Scavenger";
 
             currentMaxHealth = GetScavengerMaxHealth();
             currentHealth = scavenger.currentHP;
@@ -150,7 +163,7 @@ public class CharacterMonitor : MonoBehaviour
         if (mutant != null)
         {
             instanceId = mutant.GetInstanceID();
-            characterType = mutant.characterType;
+            characterType = "Mutant";
 
             currentMaxHealth = mutant.maxPollutionLevel;
             currentHealth = mutant.currentPollutionLevel;
@@ -159,8 +172,6 @@ public class CharacterMonitor : MonoBehaviour
             isAlive = true;
         }
     }
-
-    
 
     // <summary>
     // Gets scavengers max health, instead of the max health variable
@@ -207,35 +218,69 @@ public class CharacterMonitor : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("Turn", true);
     }
 
+    // <summary>
+    // Play character's skeletal animation base on its ability index
+    // So far function only works for Scavengers
+    // </summary>
     public void CharacterAbilityAnimation(int abilityIndex)
     {
         switch (abilityIndex)
         {
+                // Basic Attack
             case 0:
                 {
-                    StartCoroutine(Attack01());
+                    StartCoroutine(BasicAttackAnimation());
                     break;
                 }
+                // Charge
             case 1:
                 {
-                    StartCoroutine(Charge());
+                    StartCoroutine(ChargeAnimation());
                     break;
                 }
+                // Character Skill
             case 2:
                 {
-                    StartCoroutine(CharacterSkill());
+                    StartCoroutine(CharacterSkillAnimation());
                     break;
                 }
+                // Special Move
             case 3:
                 {
-                    StartCoroutine(SpecialMove());
+                    StartCoroutine(SpecialMoveAnimation());
                     break;
                 }
 
         }
     }
 
-    public IEnumerator Attack01()
+    // <summary>
+    // Play character's skeletal animation base on its status index
+    // So far function only works for Scavengers
+    // </summary>
+    public void CharacterStatusChangeAnimation(int statusIndex)
+    {
+        switch (statusIndex)
+        {
+            // Direct Damage
+            case 0:
+                {
+                    StartCoroutine(Damage());
+                    break;
+                }
+            case 1:
+                {
+                    break;
+                }
+        }
+    }
+
+    public void Idle()
+    {
+        gameObject.GetComponent<Animator>().SetBool("Turn", false);
+    }
+
+    public IEnumerator BasicAttackAnimation()
     {
         gameObject.GetComponent<Animator>().SetBool("Attack 01", true);
         gameObject.GetComponent<Animator>().SetBool("Turn", false);
@@ -243,27 +288,22 @@ public class CharacterMonitor : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("Attack 01", false);
     }
 
-    public IEnumerator Attack02()
+    public IEnumerator ChargeAnimation()
     {
         yield return null;
     }
 
-    public IEnumerator Charge()
+    public IEnumerator CharacterSkillAnimation()
     {
         yield return null;
     }
 
-    public IEnumerator CharacterSkill()
+    public IEnumerator SpecialMoveAnimation()
     {
         yield return null;
     }
 
-    public IEnumerator SpecialMove()
-    {
-        yield return null;
-    }
-
-    public IEnumerator Damaged01()
+    public IEnumerator Damage()
     {
         gameObject.GetComponent<Animator>().SetBool("Damaged 01", true);
         yield return new WaitForSeconds(1.2f);
@@ -281,6 +321,61 @@ public class CharacterMonitor : MonoBehaviour
     {
         scavenger.currentAnt = scavenger.CheckMin(scavenger.currentAnt - antRequirement);
         StartCoroutine(statusManager.DecrementAntidote(scavenger.currentAnt, scavenger.baseAnt, position));
+    }
+
+    public int ScavengerDamaged(string targetStat, int statModifier, Enemy mutant)
+    {
+        scavenger.IsAttacked(targetStat, statModifier, mutant);
+
+        if (targetStat.Equals("HP"))
+        {
+            int previousHealth = currentHealth;
+            currentHealth = scavenger.currentHP;
+            int damage = previousHealth - currentHealth;
+            return damage;
+        }
+        else
+        {
+            int previousAnt = currentAnt;
+            currentAnt = scavenger.currentAnt;
+            int antLoss = previousAnt - currentAnt;
+            return antLoss;
+        }
+        
+    }
+
+    public int  ScavengerHealed(string targetStat, int statModifier)
+    {
+        scavenger.IsHealed(targetStat, statModifier);
+
+        if (targetStat.Equals("HP"))
+        {
+            int previousHealth = currentHealth;
+            currentHealth = scavenger.currentHP;
+            int healValue = currentHealth - previousHealth;
+            return healValue;
+        }
+        else
+        {
+            int previousAnt = currentAnt;
+            currentAnt = scavenger.currentAnt;
+            int antGain = currentAnt - previousAnt;
+            return antGain;
+        }
+    }
+
+    public void ScavengerBuffed(Effect effect)
+    {
+        scavenger.IsBuffed(effect);
+        currentHealth = scavenger.currentHP;
+        currentAnt = scavenger.currentAnt;
+    }
+
+    public void ScavengerDebuffed(Effect effect)
+    {
+        scavenger.IsBuffed(effect);
+        currentHealth = scavenger.currentHP;
+        currentAnt = scavenger.currentAnt;
     }
 
     #endregion
@@ -307,5 +402,42 @@ public class CharacterMonitor : MonoBehaviour
 
     }
 
+    public IEnumerator MutantDead()
+    {
+        // Show dying animation
+        yield return new WaitForSeconds(2f);
+        GetComponent<Animator>().SetBool("Dead", true);
+        yield return new WaitForSeconds(0.75f);
+        GetComponent<Animator>().SetBool("Dead", false);
+        gameObject.SetActive(false);
+
+        // We need to turn off the box collider for this mutant
+        // to not be part of the target selection but
+        // turning off the box collider will make make mutant fall
+        // indefinitely so we need to disable the rigidbody too
+        // Another easy way is to just destroy the gameObject
+        // but we will do this just in case of revive function
+        /*Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.isKinematic = true;
+        GetComponent<BoxCollider2D>().enabled = false;*/
+    }
+
+    public void MutantBuffed(Effect effect)
+    {
+        // Apply debuff and update values
+        mutant.IsDebuffed(effect);
+        currentHealth = mutant.currentPollutionLevel;
+    }
+
+    // <summary>
+    // Decreases a mutant's stat
+    // </summary>
+    public void MutantDebuffed(Effect effect)
+    {
+        // Apply debuff and update values
+        mutant.IsDebuffed(effect);
+        currentHealth = mutant.currentPollutionLevel;
+    }
+    
     #endregion
 }

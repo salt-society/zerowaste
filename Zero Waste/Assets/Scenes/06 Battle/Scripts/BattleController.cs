@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BattleController : MonoBehaviour {
 
-    [Header("Managers")]
-    public DataController dataController;
-    public BattleInfoManager battleInfoManager;
-    public EnvironmentManager environmentManager;
-    public StatusManager statusManager;
-    public TurnQueueManager turnQueueManager;
-    public CharacterManager characterManager;
-    public ItemManager itemManager;
-    public AttackController attackController;
+    private DataController dataController;
+    private AudioManager audioManager;
+    private BattleInfoManager battleInfoManager;
+    private EnvironmentManager environmentManager;
+    private StatusManager statusManager;
+    private TurnQueueManager turnQueueManager;
+    private CharacterManager characterManager;
+    private ItemManager itemManager;
+    private AttackController attackController;
 
     [Space]
     public float[] scavengerEntranceDelay;
@@ -39,8 +39,17 @@ public class BattleController : MonoBehaviour {
     
     void Start()
     {
-        // Get reference to data controller
-        dataController = GameObject.FindObjectOfType<DataController>();
+        // Get references to battle managers
+        dataController = FindObjectOfType<DataController>();
+        audioManager = FindObjectOfType<AudioManager>();
+        battleInfoManager = FindObjectOfType<BattleInfoManager>();
+        environmentManager = FindObjectOfType<EnvironmentManager>();
+        statusManager = FindObjectOfType<StatusManager>();
+        turnQueueManager = FindObjectOfType<TurnQueueManager>();
+        characterManager = FindObjectOfType<CharacterManager>();
+        itemManager = FindObjectOfType<ItemManager>();
+        attackController = FindObjectOfType<AttackController>();
+
         // MarkAsPlayed();
 
         // Get all details needed for battle and set it up
@@ -48,6 +57,8 @@ public class BattleController : MonoBehaviour {
         BattleSetup();
     }
 
+    // <summary>
+    // </summary>
     void MarkAsPlayed()
     {
         if (dataController != null)

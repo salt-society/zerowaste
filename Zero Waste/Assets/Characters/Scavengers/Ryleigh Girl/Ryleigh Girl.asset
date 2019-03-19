@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ryleigh Girl
   m_EditorClassIdentifier: 
   characterId: 1
+  characterType: 
   characterName: Ryleigh
   characterThumb: {fileID: 21300000, guid: 5af44208b71c7cb43b94d2708573bffa, type: 3}
   characterHalf: {fileID: 21300000, guid: 4d8e86de402ece9448cebec2da6bedf2, type: 3}
@@ -28,17 +29,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a91431911db14b45ad69310b09006e9, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 1
+  currentLevel: 30
   baseHP: 8
   baseAnt: 5
   baseAtk: 4
   baseDef: 3
   antGen: 1
   threatLevel: 4
-  hpModifier: 1.75
+  hpModifier: 2
   atkModifier: 1
-  defModifier: 0.699999988079071
-  spdModifier: 1.5
+  defModifier: 0
+  spdModifier: 1
   currentHP: 44
   currentAnt: 4
   currentAtk: 24

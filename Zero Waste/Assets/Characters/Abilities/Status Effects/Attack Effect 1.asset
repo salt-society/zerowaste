@@ -15,9 +15,12 @@ MonoBehaviour:
   effectIcon: {fileID: 21300000, guid: 9599c9885c77bf946ad39b3fb11778bc, type: 3}
   effectName: Basic Damage
   effectDescription: Basic Damage of 2.
-  effectType: Direct
-  effectType2: 
   effectTarget: PL
+  effectType: Direct
+  effectState: 
+  effectApplication: 
+  animationParameter: 
+  particleNo: 0
   effectStrength: 2
   effectDuration: 0
   turnsRemaining: 0

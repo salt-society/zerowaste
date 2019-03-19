@@ -6,9 +6,6 @@ using TMPro;
 
 public class BattleInfoManager : MonoBehaviour {
 
-    // This class will handle battle details such as
-    // battle name, damage points, number of turns
-
     [Header("Battle Information")]
     public TextMeshProUGUI battleNo;
     public TextMeshProUGUI nodeName;

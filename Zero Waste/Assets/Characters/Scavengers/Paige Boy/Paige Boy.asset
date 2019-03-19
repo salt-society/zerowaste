@@ -36,10 +36,10 @@ MonoBehaviour:
   baseDef: 3
   antGen: 3
   threatLevel: 2
-  hpModifier: 0
-  atkModifier: 0
-  defModifier: 0
-  spdModifier: 0
+  hpModifier: 2
+  atkModifier: 1
+  defModifier: 1
+  spdModifier: 2
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

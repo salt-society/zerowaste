@@ -1,0 +1,270 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2810225230553798002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2810225230553798000}
+  - component: {fileID: 2810225230553798003}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2810225230553798000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2810225230553798002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2810225230553798003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2810225230553798002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30102d2c3562e8c4d9a9c85fbb8b7dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - audioClip: {fileID: 8300000, guid: 8edf3969e5e7ef4478b527624f42cdeb, type: 3}
+    soundName: Button Click 1
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: bc0259a9483348c47b092659af8cfb22, type: 3}
+    soundName: Button Click 2
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 1cb0a04159d5d284eba87a0a8a1d6d2e, type: 3}
+    soundName: Rotating Button
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 15e8dae1fdfd38f4fa31e2f0679cef2b, type: 3}
+    soundName: Hazy Darkness
+    source: {fileID: 0}
+    volume: 0.6
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: ff70777932f2dd348b0afeb014caf7df, type: 3}
+    soundName: Amulet Absorption
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 4e43bfee417348a44bf3dc38b8fcd483, type: 3}
+    soundName: Astral Journey
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: b2a04e3d746a2d849a713c77c5048658, type: 3}
+    soundName: Bells of Weirdness
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 8280853636c4e454f851f1fb3513f9bb, type: 3}
+    soundName: Monsters Underground
+    source: {fileID: 0}
+    volume: 0.8
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: c0246cb12d507d54ba76c84cdf1f0500, type: 3}
+    soundName: Walled City of Doom
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 0cebb47013a6fbd4bb5762f7457066f9, type: 3}
+    soundName: Nightime Escape
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 892726f245bd59141b79ed374cdfd89c, type: 3}
+    soundName: RPG Battle Climax
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 6afff1696f746fb4aa747bcef245eb21, type: 3}
+    soundName: Burning
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: a0595aafc8eeb404b8937eeaaf731e91, type: 3}
+    soundName: Game Menu
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 78b6416bd09662140a9279e356e6a1ba, type: 3}
+    soundName: Horror Game Menu
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: fa157f1e93689114eb1de398d55426e1, type: 3}
+    soundName: Into Battle
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 2dd1831c66987ce40afb6d96162f51cb, type: 3}
+    soundName: Our Mountain
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: d86bc7de8ec89e64eb9a547362faea51, type: 3}
+    soundName: RPG Intro
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 5d72f84baff14ee45888a40ce07915ca, type: 3}
+    soundName: RPG Theme Looping
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 8f783bfea3f3ad44092f137d2129bf5e, type: 3}
+    soundName: Button Click 3
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: ff413628b21e80b40af5a2d2de968f4a, type: 3}
+    soundName: Button Click 4
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: e20d665f373f55b48b4555ef10e1a5d5, type: 3}
+    soundName: Rain
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: b8cbd76661724ea47ba3d7c2b9b20db7, type: 3}
+    soundName: Heavy Thunder
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 74dd3a28ca30d1e4e9fcaf4580d87021, type: 3}
+    soundName: Distant Thunder
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 5ce0784c6b4b0694288e5cc150c128cf, type: 3}
+    soundName: Crumpling Paper
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 8c88976ba00419a4eb6179cbb30d8fd3, type: 3}
+    soundName: Whoosh 02
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 52fadc2f212d1ff469282e705840daa5, type: 3}
+    soundName: Whoosh 06
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: b18bc9ef1d24ba441adce5df8358571a, type: 3}
+    soundName: Beep Denied
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: e83ab9d2017ec5f4bad958829444d0aa, type: 3}
+    soundName: Prrrt
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0

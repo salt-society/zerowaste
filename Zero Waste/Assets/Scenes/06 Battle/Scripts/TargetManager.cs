@@ -82,7 +82,9 @@ public class TargetManager : MonoBehaviour
             } 
             else if (ability.abilityRange.Equals("Self"))
             {
-
+                Debug.Log("Range: Self");
+                PrepareForAbilityExecution(abilityManager.ScavengerPrefab);
+                Debug.Log(abilityManager.ScavengerPrefab.GetComponent<CharacterMonitor>().Scavenger.characterName);
             }
             // If range is Single, player needs to choose target
             else if (ability.abilityRange.Equals("Single"))
@@ -140,13 +142,17 @@ public class TargetManager : MonoBehaviour
     // </summary>
     void PrepareForAbilityExecution(GameObject targetObject)
     {
+        Debug.Log("Target: " + targetType);
         bool characterTypeMatch = targetObject.
             GetComponent<CharacterMonitor>().CheckCharacterType(targetType);
+        Debug.Log(targetObject.GetComponent<CharacterMonitor>().CharacterType);
+        Debug.Log("Matched: " + characterTypeMatch);
 
         // Make sure that the target chosen by player matches where
         // ability can be applied, if its offensive or defensive
         if (characterTypeMatch)
         {
+            Debug.Log("Character Matched.");
             // After user has chosen a target, disable target selection
             canSelectTarget = false;
             

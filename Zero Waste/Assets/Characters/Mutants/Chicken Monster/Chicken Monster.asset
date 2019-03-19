@@ -20,7 +20,7 @@ MonoBehaviour:
   characterFull: {fileID: 21300000, guid: ff31d4358f54fb5418254fc25b9a118b, type: 3}
   prefab: {fileID: 874135886, guid: b4ed6f57f36e31a43a8c4ca8f20079ac, type: 3}
   scale: {x: 1.5, y: 1.5, z: 0}
-  baseSpd: 1
+  baseSpd: 3
   currentSpd: 0
   abilities: []
   effects: []

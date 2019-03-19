@@ -10,6 +10,7 @@ public class StatusManager : MonoBehaviour
     private DataController dataController;
     private StatusManager instance;
     private CharacterManager characterManager;
+    private ParticleManager particleManager;
     #endregion
 
     #region Public
@@ -31,7 +32,11 @@ public class StatusManager : MonoBehaviour
     public TextMeshProUGUI pollutionValue;
 
     [Space]
-    public GameObject damageCounter;
+    public Transform canvasTransform;
+    public TextMeshProUGUI healPointsPrefab;
+    public TextMeshProUGUI damagePointsPrefab;
+    public GameObject debuffArrowPrefab;
+    public GameObject buffArrowPrefab;
     #endregion
 
     #region Private
@@ -57,6 +62,7 @@ public class StatusManager : MonoBehaviour
         // Find and get Data Controller
         dataController = FindObjectOfType<DataController>();
         characterManager = FindObjectOfType<CharacterManager>();
+        particleManager = FindObjectOfType<ParticleManager>();
     }
 
     // <summary>
@@ -131,22 +137,26 @@ public class StatusManager : MonoBehaviour
                 scavengerStatusPanel[i].transform.GetChild(7).
                     GetChild(0).gameObject.SetActive(true);
 
-                yield return new WaitForSeconds(1f);
-
-                // Disable HP and ANT animator after
-                scavengerStatusPanel[i].transform.GetChild(6).
-                    GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
-                scavengerStatusPanel[i].transform.GetChild(7).
-                    GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
+                yield return new WaitForSeconds(0.3f);
             }
 
             i++;
         }
 
-        yield return null;
+        yield return new WaitForSeconds(1f);
 
-        // Display status effects
-        for(i = 0; i < scavengerData.Length; i++)
+        // Disable HP and ANT bar animator after so we can
+        // manipulate the fill value of the bar
+        for (i = 0; i < scavengerData.Length; i++)
+        {
+            scavengerStatusPanel[i].transform.GetChild(6).
+                GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
+            scavengerStatusPanel[i].transform.GetChild(7).
+                GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
+        }
+
+        // Apply and display status effects if there's any
+        for (i = 0; i < scavengerData.Length; i++)
         {
             // Make sure there's a scavenger in position to avoid errors
             if (scavengerData[i] != null)
@@ -155,7 +165,8 @@ public class StatusManager : MonoBehaviour
                 dataController = FindObjectOfType<DataController>();
                 if (dataController != null)
                 {
-                    // Can only show 3 effects on status panel
+                    #region old code
+                    /*// Can only show 3 effects on status panel
                     if (dataController.targetParty.Equals("Scavenger"))
                     {
                         scavengerStatusPanel[i].transform.GetChild(7).gameObject.SetActive(true);
@@ -188,6 +199,27 @@ public class StatusManager : MonoBehaviour
                         // Show details of all effects
                         detailedScavengerStatusPanel[i].transform.GetChild(5).
                             GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffects(dataController.battleModifiers, null);
+                    }*/
+                    #endregion
+
+                    if (dataController.battleModifiers.Length > 0)
+                    {
+                        foreach (Effect effect in dataController.battleModifiers)
+                        {
+                            if (effect.effectState.Equals("Buff")) 
+                            {
+                                scavengerData[i].IsBuffed(effect);
+                            }
+                            else
+                            {
+                                scavengerData[i].IsDebuffed(effect);
+                            }
+
+                            AddEffectToStatusPanel(dataController.targetParty, i, effect);
+                        }
+                            
+
+                        AddEffectsToStatusList(dataController.targetParty, i, null);
                     }
                 }
             }
@@ -228,7 +260,7 @@ public class StatusManager : MonoBehaviour
     // <summary>
     // Display status effect icon
     // </summary>
-    public void AddEffect(string appliedTo, int position, Effect effect)
+    public void AddEffectToStatusPanel(string appliedTo, int position, Effect effect)
     {
         if (appliedTo.Equals("Scavenger"))
         {
@@ -244,9 +276,17 @@ public class StatusManager : MonoBehaviour
                 }
             }
         }
-        else
-        {
+    }
 
+    // <summary>
+    // Display info about status effects on a character
+    // </summary>
+    public void AddEffectsToStatusList(string appliedTo, int position, Sprite originOfEffect)
+    {
+        if (appliedTo.Equals("Scavenger"))
+        {
+            detailedScavengerStatusPanel[position].transform.GetChild(5).
+                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffects(dataController.battleModifiers, originOfEffect);
         }
     }
 
@@ -343,18 +383,45 @@ public class StatusManager : MonoBehaviour
     // <summary>
     // Shows damage taken by Scavenger or Mutant
     // </summary>
-    public void ShowDamagePoints(string damagePoints, GameObject characterObject)
+    public IEnumerator ShowDamagePoints(string damagePoints, GameObject characterObject)
     {
-        // Set value damage counter
-        damageCounter.GetComponent<TextMeshProUGUI>().text = damagePoints;
+        TextMeshProUGUI newDamagePoints = Instantiate(damagePointsPrefab, canvasTransform);
+        newDamagePoints.text = damagePoints;
 
         // Get box collider of target so damage counter can be positioned
         BoxCollider2D collider = characterObject.GetComponent<BoxCollider2D>();
         float midpoint = collider.bounds.center.x;
-        Vector2 damageCounterPosition = Camera.main.WorldToScreenPoint(new Vector3(midpoint, 8, 0));
+        float maxY = collider.bounds.max.y;
+        Vector2 damageCounterPosition = Camera.main.WorldToScreenPoint(new Vector3(midpoint, maxY, 0));
 
-        damageCounter.transform.position = damageCounterPosition;
-        damageCounter.SetActive(true);
+        newDamagePoints.transform.position = damageCounterPosition;
+        newDamagePoints.gameObject.SetActive(true);
+        StartCoroutine(particleManager.CircleBurst(new Vector3(midpoint, 8, 0)));
+
+        yield return new WaitForSeconds(2f);
+        Destroy(newDamagePoints);
+    }
+
+    // <summary>
+    // Shows damage taken by Scavenger or Mutant
+    // </summary>
+    public IEnumerator ShowHealPoints(string healPoints, GameObject characterObject)
+    {
+        TextMeshProUGUI newHealPoints = Instantiate(healPointsPrefab, canvasTransform);
+        newHealPoints.text = healPoints;
+
+        // Get box collider of target so damage counter can be positioned
+        BoxCollider2D collider = characterObject.GetComponent<BoxCollider2D>();
+        float midpoint = collider.bounds.center.x;
+        float maxY = collider.bounds.max.y;
+        Vector2 healCounterPosition = Camera.main.WorldToScreenPoint(new Vector3(midpoint, maxY, 0));
+
+        newHealPoints.transform.position = healCounterPosition;
+        newHealPoints.gameObject.SetActive(true);
+        StartCoroutine(particleManager.CircleBurst(new Vector3(midpoint, 8, 0)));
+
+        yield return new WaitForSeconds(2f);
+        Destroy(newHealPoints);
     }
 
     // <summary>
@@ -362,10 +429,36 @@ public class StatusManager : MonoBehaviour
     // </summary>
     public IEnumerator HideDamagePoints()
     {
-        damageCounter.GetComponent<Animator>().SetBool("Hide", true);
-        yield return null;
-        damageCounter.SetActive(false);
-        damageCounter.GetComponent<Animator>().SetBool("Hide", false);
+         yield return new WaitForSeconds(5f);
+    }
+
+    // <summary>
+    //
+    // </summary>
+    public IEnumerator ShowBuff(GameObject characterObject, int statusEffectType)
+    {
+        GameObject buffArrow = Instantiate((statusEffectType > 0) ? buffArrowPrefab : debuffArrowPrefab, canvasTransform);
+        BoxCollider2D collider = characterObject.GetComponent<BoxCollider2D>();
+
+        bool isScav = characterObject.GetComponent<CharacterMonitor>().CheckCharacterType("Scavenger");
+
+        float xPos = 0;
+
+        if (isScav)
+            xPos = collider.bounds.min.x - 12f;
+        else
+            xPos = collider.bounds.max.x + 12;
+
+        float yPos = collider.bounds.max.y - 5f;
+        Vector2 arrowPos = Camera.main.WorldToScreenPoint(new Vector3(xPos, yPos, 0));
+
+        buffArrow.transform.position = arrowPos;
+        buffArrow.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        buffArrow.SetActive(false);
+        Destroy(buffArrow);
     }
 
     public IEnumerator DecrementAntidote(float currentAnt, float maxAnt, int position)
