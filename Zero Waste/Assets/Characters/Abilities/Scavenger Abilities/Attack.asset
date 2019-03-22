@@ -15,10 +15,8 @@ MonoBehaviour:
   abilityIcon: {fileID: 0}
   abilityName: Attack
   abilityType: Offensive
-  abilityRange: Single
+  abilityRange: AOE
   abilityDescription: A basic action to ward off toxic mutants
   effects:
-  - {fileID: 11400000, guid: 5a1e5f1487f8dac47aa06863b544d177, type: 2}
-  - {fileID: 11400000, guid: 9e912056cd0e3dd46b35db1e08ce25ae, type: 2}
   - {fileID: 11400000, guid: 5a1e5f1487f8dac47aa06863b544d177, type: 2}
   antRequirement: 1

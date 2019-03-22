@@ -19,6 +19,9 @@ public class BattleInfoManager : MonoBehaviour {
     public Image currentCharacter;
     public TextMeshProUGUI turnNumber;
 
+    [Space]
+    public GameObject battleResult;
+
     public void ShowStartAnimation(int visibility)
     {
         bool showComponent = (visibility > 0) ? true : false;
@@ -84,5 +87,8 @@ public class BattleInfoManager : MonoBehaviour {
         turnSignInnerBox.SetActive(showComponent);
     }
 
-
+    public void DisplayBattleResult()
+    {
+        battleResult.SetActive(true);
+    }
 }

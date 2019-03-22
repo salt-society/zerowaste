@@ -31,6 +31,10 @@ public class AttackController : MonoBehaviour
         attackButtonPanel.SetActive(showComponent);
     }
 
+    public void HideAttackButtons()
+    {
+        attackButtonPanel.GetComponent<Animator>().SetBool("Exit", true);
+    }
 
     // <summary>
     // Displays attack buttons
@@ -78,11 +82,11 @@ public class AttackController : MonoBehaviour
             {
                 // Get ability manager attached to each button and send scavenger's prefab,
                 // ability, check if ability is available, and send position of scavenger
-                attackButton.GetComponent<AbilityManager>().Scavenger = currentCharacter;
-                attackButton.GetComponent<AbilityManager>().ScavengerPrefab = currentCharacterPrefab;
-                attackButton.GetComponent<AbilityManager>().SetupAbility(i);
-                attackButton.GetComponent<AbilityManager>().IsAbilityAvailable();
-                attackButton.GetComponent<AbilityManager>().Position = position;
+                attackButton.GetComponent<PlayerAbilityManager>().Scavenger = currentCharacter;
+                attackButton.GetComponent<PlayerAbilityManager>().ScavengerPrefab = currentCharacterPrefab;
+                attackButton.GetComponent<PlayerAbilityManager>().SetupAbility(i);
+                attackButton.GetComponent<PlayerAbilityManager>().IsAbilityAvailable();
+                attackButton.GetComponent<PlayerAbilityManager>().Position = position;
             }
             
             i++;

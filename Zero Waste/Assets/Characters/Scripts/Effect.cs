@@ -13,10 +13,13 @@ public class Effect : ScriptableObject {
     public string effectTarget; // HP, ANT, ATK, DEF, SPD, PL
     public string effectType; // Direct | Status
     public string effectState; // Buff | Debuff
-    public string effectApplication; // Variable (HP, ANT, ATK, DEF, SPD, PL up or down) | Condition (Poison)
+    public string effectApplication; // Variable (HP, ANT, ATK, DEF, SPD) | Condition (Poison)
 
     [Space]
-    public string animationParameter;
+    public bool iterateEffect;
+
+    [Space]
+    public int animationParameter;
     public int particleNo;
     
     [Space]

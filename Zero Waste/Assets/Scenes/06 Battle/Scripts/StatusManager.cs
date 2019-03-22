@@ -149,10 +149,9 @@ public class StatusManager : MonoBehaviour
         // manipulate the fill value of the bar
         for (i = 0; i < scavengerData.Length; i++)
         {
-            scavengerStatusPanel[i].transform.GetChild(6).
-                GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
-            scavengerStatusPanel[i].transform.GetChild(7).
-                GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
+            healthBars[i].GetComponent<Animator>().enabled = false;
+            antBars[i].GetComponent<Animator>().enabled = false;
+            antBars[i].GetComponent<Image>().fillAmount = 0.5f;
         }
 
         // Apply and display status effects if there's any
@@ -164,70 +163,42 @@ public class StatusManager : MonoBehaviour
                 dataController = FindObjectOfType<DataController>();
                 if (dataController != null)
                 {
-                    #region old code
-                    /*// Can only show 3 effects on status panel
-                    if (dataController.targetParty.Equals("Scavenger"))
-                    {
-                        scavengerStatusPanel[i].transform.GetChild(7).gameObject.SetActive(true);
-
-                        if (dataController.battleModifiers.Length > 3)
-                        {
-                            for (int j = 0; j < 3; j++)
-                            {
-                                scavengerStatusPanel[i].transform.GetChild(8).GetChild(j).
-                                    GetChild(1).gameObject.GetComponent<Image>().sprite = dataController.battleModifiers[j].effectIcon;
-                                scavengerStatusPanel[i].transform.GetChild(8).gameObject.SetActive(true);
-                                yield return new WaitForSeconds(0.3f);
-                            }
-                        }
-                        else
-                        {
-                            // Won't execute if 0
-                            int effectCount = 0;
-                            foreach (Effect effect in dataController.battleModifiers)
-                            {
-                                scavengerStatusPanel[i].transform.GetChild(8).GetChild(effectCount).
-                                    GetChild(1).gameObject.GetComponent<Image>().sprite = effect.effectIcon;
-                                scavengerStatusPanel[i].transform.GetChild(8).GetChild(effectCount).
-                                    gameObject.SetActive(true);
-                                effectCount++;
-                                yield return new WaitForSeconds(0.3f);
-                            }
-                        }
-
-                        // Show details of all effects
-                        detailedScavengerStatusPanel[i].transform.GetChild(5).
-                            GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffects(dataController.battleModifiers, null);
-                    }*/
-                    #endregion
-
                     // Go through all effects and apply each one of it
                     if (dataController.battleModifiers.Length > 0)
                     {
                         foreach (Effect effect in dataController.battleModifiers)
                         {
-                            if (effect.effectState.Equals("Buff")) 
+                            if (effect.effectType.Equals("Status"))
                             {
-                                scavengerData[i].IsBuffed(effect);
-                            }
-                            else
-                            {
-                                scavengerData[i].IsDebuffed(effect);
-                            }
+                                if (effect.effectState.Equals("Buff"))
+                                {
+                                    scavengerData[i].IsBuffed(Instantiate(effect));
+                                }
+                                else
+                                {
+                                    scavengerData[i].IsDebuffed(Instantiate(effect));
+                                }
 
-                            // Adds effect icon in status panel
-                            // Status panel can only show up to 3 icons
-                            AddEffectToStatusPanel(dataController.targetParty, i, effect);
+                                // Adds effect icon in status panel
+                                // Status panel can only show up to 3 icons
+                                AddEffectToStatusPanel(dataController.targetParty, i, effect);
+                            }
                         }
                             
                         // Add effects to status list
                         // Battle modifiers should be status effects only
-                        AddEffectsToStatusList(dataController.targetParty, i, null);
+                        AddEffectsToStatusList(dataController.targetParty, i, dataController.battleModifiers, null);
                     }
                 }
             }
         }
         
+    }
+
+    public void HideScavengerStatusSection()
+    {
+        scavengerStatusSection.GetComponent<Animator>().SetBool("Status Up", false);
+        scavengerStatusSection.GetComponent<Animator>().SetBool("Status Down", true);
     }
 
     // <summary>
@@ -267,7 +238,7 @@ public class StatusManager : MonoBehaviour
     {
         if (appliedTo.Equals("Scavenger"))
         {
-            GameObject effectPanel = scavengerStatusPanel[position].transform.GetChild(7).gameObject;
+            GameObject effectPanel = scavengerStatusPanel[position].transform.GetChild(8).gameObject;
             for (int i = 0; i < effectPanel.transform.childCount; i++)
             {
                 if (!effectPanel.transform.GetChild(i).gameObject.activeInHierarchy)
@@ -284,12 +255,24 @@ public class StatusManager : MonoBehaviour
     // <summary>
     // Display info about status effects on a character
     // </summary>
-    public void AddEffectsToStatusList(string appliedTo, int position, Sprite originOfEffect)
+    public void AddEffectsToStatusList(string appliedTo, int position, Effect effect, Sprite originOfEffect)
     {
         if (appliedTo.Equals("Scavenger"))
         {
             detailedScavengerStatusPanel[position].transform.GetChild(5).
-                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffects(dataController.battleModifiers, originOfEffect);
+                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffect(effect, originOfEffect);
+        }
+    }
+
+    // <summary>
+    // Display info about status effects on a character
+    // </summary>
+    public void AddEffectsToStatusList(string appliedTo, int position, Effect[] effects, Sprite originOfEffect)
+    {
+        if (appliedTo.Equals("Scavenger"))
+        {
+            detailedScavengerStatusPanel[position].transform.GetChild(5).
+                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffects(effects, originOfEffect);
         }
     }
 
@@ -383,6 +366,11 @@ public class StatusManager : MonoBehaviour
         }
     }
 
+    public void HideMutantStatusSection()
+    {
+        mutantStatusSection.SetActive(false);
+    }
+
     // <summary>
     // Shows damage taken by Scavenger or Mutant
     // </summary>
@@ -401,8 +389,8 @@ public class StatusManager : MonoBehaviour
         newDamagePoints.gameObject.SetActive(true);
         StartCoroutine(particleManager.CircleBurst(new Vector3(midpoint, 8, 0)));
 
-        yield return new WaitForSeconds(2f);
-        Destroy(newDamagePoints);
+        yield return new WaitForSeconds(1.8f);
+        Destroy(newDamagePoints.gameObject);
     }
 
     // <summary>
@@ -421,10 +409,36 @@ public class StatusManager : MonoBehaviour
 
         newHealPoints.transform.position = healCounterPosition;
         newHealPoints.gameObject.SetActive(true);
-        StartCoroutine(particleManager.CircleBurst(new Vector3(midpoint, 8, 0)));
+        StartCoroutine(particleManager.HealBurst(new Vector3(midpoint, 8, 0)));
 
-        yield return new WaitForSeconds(2f);
-        Destroy(newHealPoints);
+        yield return new WaitForSeconds(1.8f);
+        Destroy(newHealPoints.gameObject);
+    }
+
+    public IEnumerator ShowTotalPoints(string totalPoints, string pointsType, int targetType)
+    {
+        TextMeshProUGUI newPoints = Instantiate((pointsType.Equals("Offensive") ? damagePointsPrefab : healPointsPrefab), canvasTransform);
+        newPoints.text = totalPoints;
+
+        BoxCollider2D collider = characterManager.GetCharacterSection(targetType).GetComponent<BoxCollider2D>();
+        float maxX = (targetType == 0) ? collider.bounds.max.x : collider.bounds.min.x;
+        float maxY = collider.bounds.max.y - 5f;
+        Vector2 totalPointsPosition = Camera.main.WorldToScreenPoint(new Vector3(maxX, maxY, 0));
+
+        newPoints.transform.position = totalPointsPosition;
+        newPoints.gameObject.SetActive(true);
+
+        if (pointsType.Equals("Offensive"))
+        {
+            StartCoroutine(particleManager.CircleBurst(new Vector3(maxX, 0, 0)));
+        }
+        else if (pointsType.Equals("Defensive"))
+        {
+            StartCoroutine(particleManager.HealBurst(new Vector3(maxX, 0, 0)));
+        }
+        
+        yield return new WaitForSeconds(1.8f);
+        Destroy(newPoints.gameObject);
     }
 
     // <summary>
@@ -475,9 +489,8 @@ public class StatusManager : MonoBehaviour
             if (hpBarValue > maxHealth)
                 hpBarValue = maxHealth;
 
-            healthBars[position].GetComponent<Image>().fillAmount += hpBarValue;
+            healthBars[position].GetComponent<Image>().fillAmount = hpBarValue;
 
-            Debug.Log("Ant Bar Value: " + hpBarValue);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -493,9 +506,8 @@ public class StatusManager : MonoBehaviour
             if (hpBarValue < 0)
                 hpBarValue = 0;
 
-            healthBars[position].GetComponent<Image>().fillAmount -= hpBarValue;
+            healthBars[position].GetComponent<Image>().fillAmount = hpBarValue;
 
-            Debug.Log("Ant Bar Value: " + hpBarValue);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -511,9 +523,8 @@ public class StatusManager : MonoBehaviour
             if (antBarValue > maxAnt)
                 antBarValue = maxAnt;
 
-            antBars[position].GetComponent<Image>().fillAmount += antBarValue;
+            antBars[position].GetComponent<Image>().fillAmount = antBarValue;
 
-            Debug.Log("Ant Bar Value: " + antBarValue);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -529,9 +540,8 @@ public class StatusManager : MonoBehaviour
             if (antBarValue < 0)
                 antBarValue = 0;
 
-            antBars[position].GetComponent<Image>().fillAmount -= antBarValue;
+            antBars[position].GetComponent<Image>().fillAmount = antBarValue;
 
-            Debug.Log("Ant Bar Value: " + antBarValue);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -551,21 +561,17 @@ public class StatusManager : MonoBehaviour
             maxCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().GetMutantMaxHealth();
         }
 
-        Debug.Log(currentCombinedPL);
-
         float combinedPLLeft = (float)currentCombinedPL / (float)maxCombinedPL;
         float pollutionBarValue = pollutionBar.GetComponent<Image>().fillAmount;
 
-        Debug.Log(combinedPLLeft);
-
         while (pollutionBarValue > combinedPLLeft)
         {
-            pollutionBarValue -= 0.01f;
+            pollutionBarValue -= 0.05f;
             if (pollutionBarValue < 0)
                 pollutionBarValue = 0;
 
             pollutionBar.GetComponent<Image>().fillAmount = pollutionBarValue;
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.05f);
         }
 
         for (int i = 4; i <= damageTaken; i+=4)

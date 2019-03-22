@@ -84,16 +84,24 @@ public class CharacterMonitor : MonoBehaviour
         get { return isAlive; }
         set { isAlive = value; }
     }
+
+    private bool endOfLoop;
+
+    public bool EndOfLoop
+    {
+        get { return endOfLoop; }
+        set { endOfLoop = value; }
+    }
     #endregion
 
     #region Private Variables
     private bool characterInitialized;
-    private bool endOfTurn;
     #endregion
 
     #region Battle Managers
     private StatusManager statusManager;
     private ParticleManager particleManager;
+    private AnimationManager animationManager;
     #endregion
 
     // <summary>
@@ -105,11 +113,12 @@ public class CharacterMonitor : MonoBehaviour
         // Set character init flag to false, since there isn't
         // any data yet the moment this function is called
         characterInitialized = false;
-        endOfTurn = false;
+        endOfLoop = false;
 
         // Get Managers
         statusManager = FindObjectOfType<StatusManager>();
         particleManager = FindObjectOfType<ParticleManager>();
+        animationManager = FindObjectOfType<AnimationManager>();
     }
 
     // <summary>
@@ -124,17 +133,21 @@ public class CharacterMonitor : MonoBehaviour
             if (currentHealth <= 0)
             {
                 isAlive = false;
-                StartCoroutine(MutantDead());
+
+                // Play death animation for mutant
+                if (characterType.Equals("Mutant"))
+                {
+                    StartCoroutine(MutantDead());
+                }
+                
             }
-        }
 
-        string characterName = (scavenger != null) ? scavenger.characterName : mutant.characterName;
-        // Debug.Log(characterName + ": " + isAlive + " | Health: " + currentHealth);
-
-        // Check DOT effects every end of turn
-        if (endOfTurn)
-        {
-            endOfTurn = false;
+            // Check dot effects every end of loop
+            if (endOfLoop)
+            {
+                endOfLoop = false;
+                // UpdateEffects();
+            }
         }
     }
 
@@ -207,6 +220,135 @@ public class CharacterMonitor : MonoBehaviour
         return (characterType.Equals(targetType)) ? true : false;
     }
 
+    public void UpdateScavengerEffects()
+    {
+        List<Effect> effectsToRemove = new List<Effect>();
+
+        // Check if there are effects applied to scavenger to update
+        if (scavenger.effects.Count > 0)
+        {
+            // Loop through effect list, which are all status
+            // so there is no need to check type
+            foreach (Effect effect in scavenger.effects)
+            {
+                // There are two ways or timing to apply an effect
+                // Effects applied every end of loop (eol)
+                // Effects applied on cast (oc), lasts for n loops
+
+                // Always check first effects applied every end of loop
+                if (effect.effectTarget.Equals("HP"))
+                {
+                    // Check state of effect, if its buff (positive, +)
+                    // or debuff (negative, -)
+                    if (effect.effectState.Equals("Buff"))
+                    {
+                        currentHealth = scavenger.CheckMax(currentHealth + effect.effectStrength, "HP");
+                        scavenger.currentHP = currentHealth;
+                        StartCoroutine(statusManager.IncrementHealth(currentHealth, currentMaxHealth, position));
+                        
+                    }
+                    else
+                    {
+                        currentHealth = scavenger.CheckMin(currentHealth - effect.effectStrength);
+                        scavenger.currentHP = currentHealth;
+                        StartCoroutine(statusManager.DecrementHealth(currentHealth, currentMaxHealth, position));
+                    }
+                }
+                else if (effect.effectTarget.Equals("ANT"))
+                {
+                    // Check state of effect, if its buff (positive, +)
+                    // or debuff (negative, -)
+                    if (effect.effectState.Equals("Buff"))
+                    {
+                        currentAnt = scavenger.CheckMax(currentHealth + effect.effectStrength, "ANT");
+                        scavenger.currentAnt = currentAnt;
+                        StartCoroutine(animationManager.ChargeAntidote(gameObject, effect.animationParameter, null));
+                    }
+                    else
+                    {
+                        currentAnt = scavenger.CheckMin(currentHealth - effect.effectStrength);
+                        scavenger.currentAnt = currentAnt;
+                        StartCoroutine(statusManager.DecrementAntidote(currentAnt, currentMaxAnt, position));
+                    }
+                }
+
+                // Next to do is to decrement effect duration, whether its eol or oc
+                // Before that, see first if character is still alive as damage over time effects
+                // (previously check effect that targets hp) could've killed him/her
+                if (isAlive)
+                {
+                    // If character is still alive, reduce duration of effect
+                    if (effect.effectDuration > 0)
+                        effect.effectDuration--;
+
+                    // Revert back character stats to its original value if
+                    // effects duration is finished
+                    // Effects that are negative are infinite, stays as long as battle isn't over
+                    if (effect.effectDuration == 0)
+                    {
+                        switch (effect.effectTarget)
+                        {
+                            case "ATK":
+                                {
+                                    if (effect.effectState == "Buff")
+                                        scavenger.currentAtk = scavenger.CheckMin(scavenger.currentAtk - effect.effectStrength);
+                                    else
+                                        scavenger.currentAtk = scavenger.currentAtk + effect.effectStrength;
+                                    break;
+                                }
+                            case "DEF":
+                                {
+                                    if (effect.effectState == "Buff")
+                                        scavenger.currentDef = scavenger.CheckMin(scavenger.currentDef - effect.effectStrength);
+                                    else
+                                        scavenger.currentDef = scavenger.currentDef + effect.effectStrength;
+                                    break;
+                                }
+                            case "SPD":
+                                {
+                                    if (effect.effectState == "Buff")
+                                        scavenger.currentSpd = scavenger.CheckMin(scavenger.currentSpd - effect.effectStrength);
+                                    else
+                                        scavenger.currentSpd = scavenger.currentSpd + effect.effectStrength;
+                                    break;
+                                }
+                            case "ANTGEN":
+                                {
+                                    if (effect.effectState == "Buff")
+                                        scavenger.currentAntGen = scavenger.CheckMin(scavenger.currentAntGen - effect.effectStrength);
+                                    else
+                                        scavenger.currentAntGen = scavenger.currentAntGen + effect.effectStrength;
+                                    break;
+                                }
+                            case "TL":
+                                {
+                                    if (effect.effectState == "Buff")
+                                        scavenger.currentThreatLevel = scavenger.CheckMin(scavenger.currentThreatLevel - effect.effectStrength);
+                                    else
+                                        scavenger.currentThreatLevel = scavenger.currentThreatLevel + effect.effectStrength;
+                                    break;
+                                }
+                        }
+
+                        // Then add it to effects that should be removed
+                        effectsToRemove.Add(effect);
+                    }
+                }
+            }
+        }
+
+        // Just to be sure that character is still alive
+        if (isAlive)
+        {
+            // Every end of loop, ant of scavengers generate
+            IncrementAntidote(scavenger.currentAntGen);
+
+            // Remove effects
+            foreach (Effect effect in effectsToRemove)
+                scavenger.effects.Remove(effect);
+        }
+    }
+
     #region Animations
 
     // <summary>
@@ -222,7 +364,7 @@ public class CharacterMonitor : MonoBehaviour
     // Play character's skeletal animation base on its ability index
     // So far function only works for Scavengers
     // </summary>
-    public void CharacterAbilityAnimation(int abilityIndex)
+    public void CharacterAbilityAnimation(int abilityIndex, string range)
     {
         switch (abilityIndex)
         {
@@ -241,16 +383,15 @@ public class CharacterMonitor : MonoBehaviour
                 // Character Skill
             case 2:
                 {
-                    StartCoroutine(CharacterSkillAnimation());
+                    StartCoroutine(CharacterSkillAnimation(range));
                     break;
                 }
                 // Special Move
             case 3:
                 {
-                    StartCoroutine(SpecialMoveAnimation());
+                    StartCoroutine(SpecialMoveAnimation(range));
                     break;
                 }
-
         }
     }
 
@@ -290,21 +431,22 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator ChargeAnimation()
     {
-        gameObject.GetComponent<Animator>().SetBool("Idle", true);
-        gameObject.GetComponent<Animator>().SetBool("Heal", true);
         gameObject.GetComponent<Animator>().SetBool("Turn", false);
-        yield return new WaitForSeconds(1.2f);
-        gameObject.GetComponent<Animator>().SetBool("Idle", false);
-        gameObject.GetComponent<Animator>().SetBool("Heal", false);
+        gameObject.GetComponent<Animator>().SetBool("Charge", true);
+        gameObject.GetComponent<Animator>().SetBool("Turn", false);
+        yield return new WaitForSeconds(1.6f);
+        gameObject.GetComponent<Animator>().SetBool("Charge", false);
     }
 
-    public IEnumerator CharacterSkillAnimation()
+    public IEnumerator CharacterSkillAnimation(string range)
     {
+        float duration = (range.Equals("AOE")) ? 2f : 1.2f;
         yield return null;
     }
 
-    public IEnumerator SpecialMoveAnimation()
+    public IEnumerator SpecialMoveAnimation(string range)
     {
+        float duration = (range.Equals("AOE")) ? 2f : 1.2f;
         yield return null;
     }
 
@@ -315,16 +457,32 @@ public class CharacterMonitor : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("Damaged 01", false);
     }
 
+    public IEnumerator Heal()
+    {
+        gameObject.GetComponent<Animator>().SetBool("Heal", true);
+        gameObject.GetComponent<Animator>().SetBool("Turn", false);
+        yield return new WaitForSeconds(1.2f);
+        gameObject.GetComponent<Animator>().SetBool("Heal", false);
+    }
+
     #endregion
 
     #region Scavenger Status Update Functions
 
+    public void IncrementAntidote(int antGen)
+    {
+        scavenger.currentAnt = scavenger.CheckMax(scavenger.currentAnt + antGen, "ANT");
+        currentAnt = scavenger.currentAnt;
+        StartCoroutine(statusManager.DecrementAntidote(scavenger.currentAnt, scavenger.baseAnt, position));
+    }
+
     // <summary>
     // Decrement antidote value and updates antidote bar
     // </summary>
-    public void DecrementAntidote(int antRequirement)
+    public void DecrementAntidote(int antReq)
     {
-        scavenger.currentAnt = scavenger.CheckMin(scavenger.currentAnt - antRequirement);
+        scavenger.currentAnt = scavenger.CheckMin(scavenger.currentAnt - antReq);
+        currentAnt = scavenger.currentAnt;
         StartCoroutine(statusManager.DecrementAntidote(scavenger.currentAnt, scavenger.baseAnt, position));
     }
 

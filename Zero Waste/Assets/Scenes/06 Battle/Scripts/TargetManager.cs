@@ -10,10 +10,13 @@ public class TargetManager : MonoBehaviour
     private TurnQueueManager turnQueueManager;
     private CharacterManager characterManager;
     private AttackController attackController;
+    private StatusManager statusManager;
     #endregion
 
-    private AbilityManager abilityManager;
+    private PlayerAbilityManager abilityManager;
     private string targetType;
+    private string range;
+
     private bool canSelectTarget = false;
 
     void Start()
@@ -23,16 +26,18 @@ public class TargetManager : MonoBehaviour
         turnQueueManager = FindObjectOfType<TurnQueueManager>();
         characterManager = FindObjectOfType<CharacterManager>();
         attackController = FindObjectOfType<AttackController>();
+        statusManager = FindObjectOfType<StatusManager>();
     }
    
     // <summary>
     // Deciphers ability to know if player needs to choose target or not
     // </summary>
-    public void SelectTarget(PlayerAbility ability, AbilityManager abilityManager)
+    public void SelectTarget(PlayerAbility ability, PlayerAbilityManager abilityManager)
     {
         // Since abilities have their own managers, always need to
         // set the ability manager everytime player attacks
         this.abilityManager = abilityManager;
+        range = ability.abilityRange;
 
         // Determine which set of characters are possible targets base on range and ability type
         if (ability.abilityType.Equals("Offensive"))
@@ -44,7 +49,16 @@ public class TargetManager : MonoBehaviour
             // If range is AOE, no need to target a specific mutant
             if (ability.abilityRange.Equals("AOE"))
             {
-                Debug.Log("AOE");
+                // Repeat single target animation to all mutants
+                if (ability.repeatAnimation)
+                {
+                    StartCoroutine(ExecuteAbilityOnEveryone(ability.abilityType, 0));
+                }
+                // Animations are simultaneous
+                else
+                {
+                    PrepareForAbilityExecution();
+                }
             }
             // If range is Single, player needs to choose target
             else if(ability.abilityRange.Equals("Single"))
@@ -78,13 +92,21 @@ public class TargetManager : MonoBehaviour
             // If range is AOE, no need to target a specific enemy
             if (ability.abilityRange.Equals("AOE"))
             {
-                Debug.Log("AOE");
+                // Repeat single target animation to all mutants
+                if (ability.repeatAnimation)
+                {
+                    StartCoroutine(ExecuteAbilityOnEveryone(ability.abilityType, 1));
+                }
+                // Animations are simultaneous
+                else
+                {
+                    abilityManager.ScavengerPrefab.GetComponent<CharacterMonitor>().Idle();
+                    PrepareForAbilityExecution();
+                }
             } 
             else if (ability.abilityRange.Equals("Self"))
             {
-                Debug.Log("Range: Self");
                 PrepareForAbilityExecution(abilityManager.ScavengerPrefab);
-                Debug.Log(abilityManager.ScavengerPrefab.GetComponent<CharacterMonitor>().Scavenger.characterName);
             }
             // If range is Single, player needs to choose target
             else if (ability.abilityRange.Equals("Single"))
@@ -142,17 +164,13 @@ public class TargetManager : MonoBehaviour
     // </summary>
     void PrepareForAbilityExecution(GameObject targetObject)
     {
-        Debug.Log("Target: " + targetType);
         bool characterTypeMatch = targetObject.
             GetComponent<CharacterMonitor>().CheckCharacterType(targetType);
-        Debug.Log(targetObject.GetComponent<CharacterMonitor>().CharacterType);
-        Debug.Log("Matched: " + characterTypeMatch);
 
         // Make sure that the target chosen by player matches where
         // ability can be applied, if its offensive or defensive
         if (characterTypeMatch)
         {
-            Debug.Log("Character Matched.");
             // After user has chosen a target, disable target selection
             canSelectTarget = false;
             
@@ -162,8 +180,7 @@ public class TargetManager : MonoBehaviour
             turnQueueManager.ShowTurnQueue(1);
 
             // Execute ability by calling the function at it's own manager
-            StartCoroutine(abilityManager.ExecuteAbility(targetObject, targetType));
-            Debug.Log("Target: " + targetObject.name);
+            StartCoroutine(abilityManager.ExecuteSingleRangeAbility(targetObject, targetType));
         }
         // Just in case, ask player to choose again
         // Though this might not happen as camera is focused to possible targets
@@ -171,6 +188,48 @@ public class TargetManager : MonoBehaviour
         {
 
         }
+    }
+
+    // <summary>
+    // Everything that happens after a target is selected and before ability
+    // is done such as checking if target selected is applicable
+    // </summary>
+    void PrepareForAbilityExecution()
+    {
+        // After user has chosen a target, disable target selection
+        canSelectTarget = false;
+
+        // Hide message and show turn queue
+        battleInfoManager.HideMiddleMessage(1);
+        turnQueueManager.HideTurnQueue(0);
+        turnQueueManager.ShowTurnQueue(1);
+
+        // Execute ability by calling the function at it's own manager
+        StartCoroutine(abilityManager.ExecuteAOERangeAbility(targetType));
+    }
+
+    IEnumerator ExecuteAbilityOnEveryone(string abilityType, int characterType)
+    {
+        int totalChangeApplied = 0;
+        foreach (GameObject targetObject in characterManager.GetAllCharacterPrefabs(characterType))
+        {
+            PrepareForAbilityExecution(targetObject);
+            yield return new WaitForSeconds(2f);
+            totalChangeApplied += abilityManager.ChangeApplied;
+        }
+
+        abilityManager.ChangeApplied = 0;
+        yield return new WaitForSeconds(1.5f);
+
+        if (abilityType.Equals("Offensive")) 
+        {
+            StartCoroutine(statusManager.ShowTotalPoints(totalChangeApplied.ToString(), 
+                abilityType, characterType));
+        }
+
+        yield return null;
+
+        StartCoroutine(abilityManager.EndOfTurn());
     }
 
     // <summary>

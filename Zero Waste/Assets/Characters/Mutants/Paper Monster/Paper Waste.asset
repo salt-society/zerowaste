@@ -25,9 +25,9 @@ MonoBehaviour:
   abilities: []
   effects: []
   mutantLevel: 3
-  maxPollutionLevel: 100
+  maxPollutionLevel: 80
   maxAtk: 5
-  maxDef: 5
+  maxDef: 0
   baseScrapReward: 30
   baseEXPReward: 60
   instanceAbilities: []

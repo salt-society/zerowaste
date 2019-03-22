@@ -114,6 +114,8 @@ public class EffectList : MonoBehaviour
                 Destroy(cell);
                 break;
             }
+
+            position++;
         }
 
         if (transform.childCount == 1)
@@ -133,6 +135,8 @@ public class EffectList : MonoBehaviour
                     GetComponent<TextMeshProUGUI>().text = duration.ToString();
                 break;
             }
+
+            position++;
         }
     }
 }

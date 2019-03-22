@@ -15,6 +15,33 @@ public class ParticleManager : MonoBehaviour
         newParticle.transform.position = instantiatePos;
 
         yield return new WaitForSeconds(duration);
-        Destroy(newParticle);
+        Destroy(newParticle.gameObject);
+    }
+
+    public IEnumerator PollutionBubbles()
+    {
+        yield return null;
+    }
+
+    public IEnumerator HealBurst(Vector3 instantiatePos)
+    {
+        float duration = particles[2].main.duration;
+
+        ParticleSystem newParticle = Instantiate(particles[2], canvasTransform);
+        newParticle.transform.position = instantiatePos;
+
+        yield return new WaitForSeconds(duration);
+        Destroy(newParticle.gameObject);
+    }
+
+    public IEnumerator AntBurst(Vector3 instantiatePos)
+    {
+        float duration = particles[3].main.duration;
+
+        ParticleSystem newParticle = Instantiate(particles[3], canvasTransform);
+        newParticle.transform.position = instantiatePos;
+
+        yield return new WaitForSeconds(duration);
+        Destroy(newParticle.gameObject);
     }
 }

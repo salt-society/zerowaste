@@ -6,8 +6,12 @@ using UnityEngine.UI;
 public class CharacterManager : MonoBehaviour {
 
     [Header("Character Holder")]
+    public GameObject scavengerGroup;
     public GameObject[] scavengers;
+    public GameObject mutantGroup;
     public GameObject[] mutants;
+
+    
 
     [Header("Managers")]
     public StatusManager statusManager;
@@ -17,6 +21,24 @@ public class CharacterManager : MonoBehaviour {
     private GameObject[] scavengerPrefabs;
     private GameObject[] mutantPrefabs;
 
+    #region Properties
+    private bool allScavengersAlive;
+
+    public bool AllScavengersAlive
+    {
+        get { return allScavengersAlive; }
+        set { allScavengersAlive = value; }
+    }
+
+    private bool allMutantsAlive;
+
+    public bool AllMutantsAlive
+    {
+        get { return allMutantsAlive; }
+        set { allMutantsAlive = value; }
+    }
+    #endregion
+
     private CharacterManager instance;
 
     void Awake()
@@ -25,6 +47,12 @@ public class CharacterManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(this);
+    }
+
+    void Start()
+    {
+        allScavengersAlive = true;
+        allMutantsAlive = true;
     }
 
     public Player[] CloneCharacters(Player[] scavengers)
@@ -257,6 +285,14 @@ public class CharacterManager : MonoBehaviour {
         return (characterType > 0) ? scavengerPrefabs : mutantPrefabs;
     }
 
+    // <summary>
+    // Gets character section, gameObject that holds each character type
+    // </summary>
+    public GameObject GetCharacterSection(int characterType)
+    {
+        return (characterType > 0) ? scavengerGroup : mutantGroup;
+    }
+
     public IEnumerator ScavengersEntrance()
     {
         foreach (GameObject scavenger in scavengers)
@@ -277,5 +313,67 @@ public class CharacterManager : MonoBehaviour {
         }
 
         yield return null;
+    }
+
+    IEnumerator CheckIfCharactersAreAlive(int targetCharacter) 
+    {
+        // Get all prefabs of certain character type
+        GameObject[] characterPrefabs = (targetCharacter == 0) ? mutantPrefabs : scavengerPrefabs;
+
+        // Loop throught the prefabs, get character monitor, and check if character is alive
+        foreach (GameObject characterObject in characterPrefabs)
+        {
+            // If a character is alive, break loop
+            // This means that battle must go on as both scavengers and mutants
+            // still has alive characters
+            if (characterObject.GetComponent<CharacterMonitor>().IsAlive)
+            {
+                if (targetCharacter == 1)
+                    allScavengersAlive = true;
+
+                if (targetCharacter == 0)
+                    allMutantsAlive = true;
+
+                break;
+            }
+            // This condition is reached if a character is dead
+            else
+            {
+                // This condition won't be reached if loop haven't gone through
+                // all prefabs, which just means all characters in a team is dead
+                if (characterObject.GetInstanceID() == 
+                    characterPrefabs[characterPrefabs.Length - 1].GetInstanceID())
+                {
+                    if (targetCharacter == 1)
+                        allScavengersAlive = false;
+
+                    if (targetCharacter == 0)
+                        allMutantsAlive = false;
+                }
+            }
+        }
+
+        yield return null;
+    }
+
+    public void CheckStatusEffects()
+    {
+        foreach (GameObject scavengerPrefab in scavengerPrefabs)
+        {
+            scavengerPrefab.GetComponent<CharacterMonitor>().EndOfLoop = true;
+        }
+
+        foreach (GameObject mutantPrefab in mutantPrefabs)
+        {
+            mutantPrefab.GetComponent<CharacterMonitor>().EndOfLoop = true;
+        }
+    }
+
+    void Update()
+    {
+        // Constantly check lives of characters per team
+        // If all characters in a team, Scavenger or Mutant, are dead, battle should end
+        StartCoroutine(CheckIfCharactersAreAlive(0));
+        StartCoroutine(CheckIfCharactersAreAlive(1));
     }
 }

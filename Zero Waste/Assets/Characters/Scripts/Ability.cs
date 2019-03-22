@@ -7,6 +7,11 @@ public class Ability : ScriptableObject {
     public string abilityName;
     public string abilityType;
     public string abilityRange;
+
+    [Space]
+    public bool repeatAnimation;
+
+    [Space]
     [Multiline]public string abilityDescription;
 
     [Header("Ability Effects")]

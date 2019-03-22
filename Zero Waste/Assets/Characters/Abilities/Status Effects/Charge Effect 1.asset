@@ -15,9 +15,12 @@ MonoBehaviour:
   effectIcon: {fileID: 21300000, guid: 8a56ac8c131a37d4cb3b560fb43d4595, type: 3}
   effectName: Recharge ANT
   effectDescription: Charges antidote by 3.
-  effectType: Direct
-  effectType2: 
   effectTarget: Ant
-  effectStrength: 3
+  effectType: Direct
+  effectState: 
+  effectApplication: 
+  animationParameter: 0
+  particleNo: 0
+  effectStrength: 1
   effectDuration: 0
   turnsRemaining: 0
