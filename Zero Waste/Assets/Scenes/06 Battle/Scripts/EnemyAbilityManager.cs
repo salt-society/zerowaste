@@ -4,21 +4,33 @@ using UnityEngine;
 
 public class EnemyAbilityManager : MonoBehaviour
 {
-    private EnemyAbility chosenAbility;
+    private EnemyAbility ability;
     private Enemy mutant;
+    private GameObject mutantObj;
+    private int changeApplied;
+
     private GameObject threatPlayer;
 
+    private BattleController battleController;
     private CharacterManager characterManager;
+    private AnimationManager animationManager;
+    private StatusManager statusManager;
+    private ParticleManager particleManager;
 
     void Start()
     {
         characterManager = FindObjectOfType<CharacterManager>();
+        animationManager = FindObjectOfType<AnimationManager>();
+        statusManager = FindObjectOfType<StatusManager>();
+        particleManager = FindObjectOfType<ParticleManager>();
+        battleController = FindObjectOfType<BattleController>();
     }
 
-    public void SetupEnemyAttack(Enemy mutant)
+    public void SetupEnemyAttack(Enemy mutant, GameObject mutantObj)
     {
         // Set current enemy to attack
         this.mutant = mutant;
+        this.mutantObj = mutantObj;
 
         // Get all available abilities of mutant to attack
         List<EnemyAbility> availableAbilities = new List<EnemyAbility>();
@@ -32,30 +44,29 @@ public class EnemyAbilityManager : MonoBehaviour
 
         // Decide what ability to use
         int chosenAbilityIndex = Random.Range(0, availableAbilities.Count);
-        chosenAbility = availableAbilities[chosenAbilityIndex];
+        this.ability = availableAbilities[1];
 
         // Cool down chosen ability so mutants wouldn't be able to spam it
-        chosenAbility.turnTillActive = chosenAbility.cooldown;
+        /// this.ability.turnTillActive = this.ability.cooldown;
 
-        
+        ExecuteAbility();
     }
 
     void ExecuteAbility()
     {
-        if (chosenAbility.abilityType.Equals("Offensive"))
+        if (ability.type.Equals("Offensive"))
         {
-            
+            StartCoroutine(MutantToScavenger());
         }
         else
         {
-
+            StartCoroutine(MutantToMutant());
         }
     }
 
-    GameObject SelectTarget()
+    GameObject SelectTargetScavenger()
     {
         List<GameObject> aliveScavengers = new List<GameObject>();
-        int scavCount = 0;
 
         foreach (GameObject scavengerObject in characterManager.GetAllCharacterPrefabs(1))
         {
@@ -107,42 +118,201 @@ public class EnemyAbilityManager : MonoBehaviour
         return sortByThreat[targetIndex];
     }
 
+    GameObject SelectTargetMutant()
+    {
+        List<GameObject> aliveMutants = new List<GameObject>();
+
+        foreach (GameObject mutantObject in characterManager.GetAllCharacterPrefabs(0))
+        {
+            if (mutantObject.GetComponent<CharacterMonitor>().IsAlive)
+                aliveMutants.Add(mutantObject);
+        }
+
+        int mutantIndex = Random.Range(0, aliveMutants.Count);
+
+        return aliveMutants[mutantIndex];
+    }
+
     IEnumerator MutantToScavenger()
     {
-        if (chosenAbility.abilityRange.Equals("Single"))
+        yield return new WaitForSeconds(0.5f);
+
+        changeApplied = 0;
+
+        if (ability.range.Equals("Single"))
         {
-            GameObject targetObject = SelectTarget();
-            int totalDamage = 0;
-
-            foreach (Effect effect in chosenAbility.effects)
-            {
-                if (effect.effectType.Equals("Direct"))
-                {
-
-                }
-                else
-                {
-                    if (effect.effectApplication.Equals("Variable"))
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-            }
+            GameObject targetObj = SelectTargetScavenger();
+            StartCoroutine(ToScavenger(targetObj));
+            yield return new WaitForSeconds(3f);
         }
-        else if (chosenAbility.abilityRange.Equals("AOE"))
+        else if (ability.range.Equals("AOE"))
         {
+            List<GameObject> aliveScavengers = new List<GameObject>();
 
+            foreach (GameObject scavengerObject in characterManager.GetAllCharacterPrefabs(1))
+            {
+                if (scavengerObject.GetComponent<CharacterMonitor>().IsAlive)
+                    aliveScavengers.Add(scavengerObject);
+            }
+
+            foreach (GameObject targetObj in aliveScavengers)
+            {
+                StartCoroutine(ToScavenger(targetObj));
+
+                if (ability.repeatAnimation)
+                    yield return new WaitForSeconds(1f);
+            }
+
+            yield return new WaitForSeconds(3f);
         }
 
         yield return null;
+
+        StartCoroutine(EndTurn());
     }
 
-    void MutantToMutant()
+    IEnumerator ToScavenger(GameObject targetObj)
     {
+        animationManager.PlayAnimation(ability, mutantObj, targetObj, mutant.characterType);
 
+        yield return new WaitForSeconds(1f);
+
+        foreach (Effect effect in ability.effects)
+        {
+            if (effect.type.Equals("Direct"))
+            {
+                int valueChanged = targetObj.GetComponent<CharacterMonitor>().ScavengerDamaged(effect.target, effect.strength, mutant);
+                changeApplied += valueChanged;
+
+                if (effect.target.Equals("HP"))
+                {
+                    CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
+                    StartCoroutine(statusManager.DecrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                if (effect.target.Equals("ANT"))
+                {
+                    CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
+                    StartCoroutine(statusManager.DecrementAntidoteBar(scavMonitor.CurrentAnt, scavMonitor.MaxAnt, scavMonitor.Position));
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+
+            if (effect.type.Equals("Status"))
+            {
+                targetObj.GetComponent<CharacterMonitor>().ScavengerDebuffed(effect);
+
+                if (effect.application.Equals("CharStats"))
+                {
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    yield return new WaitForSeconds(1f);
+                    StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                if (effect.application.Equals("Condition"))
+                {
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    yield return new WaitForSeconds(1f);
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                statusManager.AddEffectToStatusPanel("Scavenger", targetObj.GetComponent<CharacterMonitor>().Position, effect);
+                statusManager.AddEffectsToStatusList("Scavenger", targetObj.GetComponent<CharacterMonitor>().Position, effect, ability.icon);
+                yield return new WaitForSeconds(1f);
+
+            }
+        }
+    }
+
+    IEnumerator MutantToMutant()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        changeApplied = 0;
+
+        if (ability.range.Equals("Self") || ability.range.Equals("Single"))
+        {
+            GameObject targetObj = (ability.range.Equals("Self")) ? mutantObj : SelectTargetMutant();
+            StartCoroutine(ToMutant(targetObj));
+            yield return new WaitForSeconds(3f);
+        }
+        else if (ability.range.Equals("AOE"))
+        {
+            List<GameObject> aliveMutants = new List<GameObject>();
+
+            foreach (GameObject mutantObject in characterManager.GetAllCharacterPrefabs(0))
+            {
+                if (mutantObject.GetComponent<CharacterMonitor>().IsAlive)
+                    aliveMutants.Add(mutantObject);
+            }
+
+            foreach (GameObject targetObj in aliveMutants)
+            {
+                StartCoroutine(ToMutant(targetObj));
+
+                if (ability.repeatAnimation)
+                    yield return new WaitForSeconds(1f);
+            }
+
+            yield return new WaitForSeconds(3f);
+            // StartCoroutine(statusManager.ShowValues(changeApplied.ToString(), ability.type, aliveMutants[0], ability.particleIndex));
+        }
+
+        yield return null;
+        StartCoroutine(EndTurn());
+    }
+
+    IEnumerator ToMutant(GameObject targetObj)
+    {
+        animationManager.PlayAnimation(ability, mutantObj, targetObj, mutant.characterType);
+
+        yield return new WaitForSeconds(1f);
+
+        foreach (Effect effect in ability.effects)
+        {
+            if (effect.type.Equals("Direct"))
+            {
+                int valueChanged = targetObj.GetComponent<CharacterMonitor>().MutantHealed(effect.strength);
+                changeApplied += valueChanged;
+
+                StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
+                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+                yield return new WaitForSeconds(1f);
+            }
+
+            if (effect.type.Equals("Status"))
+            {
+                targetObj.GetComponent<CharacterMonitor>().MutantBuffed(effect);
+
+                if (effect.application.Equals("CharStats"))
+                {
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    yield return new WaitForSeconds(1f);
+                    StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                if (effect.application.Equals("Condition"))
+                {
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    yield return new WaitForSeconds(1f);
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+        }
+    }
+
+    IEnumerator EndTurn()
+    {
+        yield return new WaitForSeconds(1f);
+        battleController.NextTurn();
     }
 }

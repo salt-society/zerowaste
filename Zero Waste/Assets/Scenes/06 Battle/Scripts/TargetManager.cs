@@ -37,31 +37,22 @@ public class TargetManager : MonoBehaviour
         // Since abilities have their own managers, always need to
         // set the ability manager everytime player attacks
         this.abilityManager = abilityManager;
-        range = ability.abilityRange;
+        range = ability.range;
 
         // Determine which set of characters are possible targets base on range and ability type
-        if (ability.abilityType.Equals("Offensive"))
+        if (ability.type.Equals("Offensive"))
         {
             // Set what type of character should be the target
             targetType = "Mutant";
 
             // Check range of ability
             // If range is AOE, no need to target a specific mutant
-            if (ability.abilityRange.Equals("AOE"))
+            if (ability.range.Equals("AOE"))
             {
-                // Repeat single target animation to all mutants
-                if (ability.repeatAnimation)
-                {
-                    StartCoroutine(ExecuteAbilityOnEveryone(ability.abilityType, 0));
-                }
-                // Animations are simultaneous
-                else
-                {
-                    PrepareForAbilityExecution();
-                }
+                PrepareForAbilityExecution(null);
             }
             // If range is Single, player needs to choose target
-            else if(ability.abilityRange.Equals("Single"))
+            else if(ability.range.Equals("Single"))
             {
                 // Disable player's ability to use booster
                 attackController.EnableAttackButton(0, 4);
@@ -83,33 +74,23 @@ public class TargetManager : MonoBehaviour
                 canSelectTarget = true;
             }
         }  
-        else if (ability.abilityType.Equals("Defensive"))
+        else if (ability.type.Equals("Defensive"))
         {
             // Set what type of character should be the target
             targetType = "Scavenger";
 
             // Check range of ability
             // If range is AOE, no need to target a specific enemy
-            if (ability.abilityRange.Equals("AOE"))
+            if (ability.range.Equals("AOE"))
             {
-                // Repeat single target animation to all mutants
-                if (ability.repeatAnimation)
-                {
-                    StartCoroutine(ExecuteAbilityOnEveryone(ability.abilityType, 1));
-                }
-                // Animations are simultaneous
-                else
-                {
-                    abilityManager.ScavengerPrefab.GetComponent<CharacterMonitor>().Idle();
-                    PrepareForAbilityExecution();
-                }
+                PrepareForAbilityExecution(null);
             } 
-            else if (ability.abilityRange.Equals("Self"))
+            else if (ability.range.Equals("Self"))
             {
                 PrepareForAbilityExecution(abilityManager.ScavengerPrefab);
             }
             // If range is Single, player needs to choose target
-            else if (ability.abilityRange.Equals("Single"))
+            else if (ability.range.Equals("Single"))
             {
                 // Disable player's ability to use booster
                 attackController.EnableAttackButton(0, 4);
@@ -167,6 +148,9 @@ public class TargetManager : MonoBehaviour
         bool characterTypeMatch = targetObject.
             GetComponent<CharacterMonitor>().CheckCharacterType(targetType);
 
+        if (abilityManager.Ability.range.Equals("AOE"))
+            characterTypeMatch = true;
+
         // Make sure that the target chosen by player matches where
         // ability can be applied, if its offensive or defensive
         if (characterTypeMatch)
@@ -180,7 +164,7 @@ public class TargetManager : MonoBehaviour
             turnQueueManager.ShowTurnQueue(1);
 
             // Execute ability by calling the function at it's own manager
-            StartCoroutine(abilityManager.ExecuteSingleRangeAbility(targetObject, targetType));
+            StartCoroutine(abilityManager.ExecuteAbility(targetObject, targetType));
         }
         // Just in case, ask player to choose again
         // Though this might not happen as camera is focused to possible targets
@@ -188,48 +172,6 @@ public class TargetManager : MonoBehaviour
         {
 
         }
-    }
-
-    // <summary>
-    // Everything that happens after a target is selected and before ability
-    // is done such as checking if target selected is applicable
-    // </summary>
-    void PrepareForAbilityExecution()
-    {
-        // After user has chosen a target, disable target selection
-        canSelectTarget = false;
-
-        // Hide message and show turn queue
-        battleInfoManager.HideMiddleMessage(1);
-        turnQueueManager.HideTurnQueue(0);
-        turnQueueManager.ShowTurnQueue(1);
-
-        // Execute ability by calling the function at it's own manager
-        StartCoroutine(abilityManager.ExecuteAOERangeAbility(targetType));
-    }
-
-    IEnumerator ExecuteAbilityOnEveryone(string abilityType, int characterType)
-    {
-        int totalChangeApplied = 0;
-        foreach (GameObject targetObject in characterManager.GetAllCharacterPrefabs(characterType))
-        {
-            PrepareForAbilityExecution(targetObject);
-            yield return new WaitForSeconds(2f);
-            totalChangeApplied += abilityManager.ChangeApplied;
-        }
-
-        abilityManager.ChangeApplied = 0;
-        yield return new WaitForSeconds(1.5f);
-
-        if (abilityType.Equals("Offensive")) 
-        {
-            StartCoroutine(statusManager.ShowTotalPoints(totalChangeApplied.ToString(), 
-                abilityType, characterType));
-        }
-
-        yield return null;
-
-        StartCoroutine(abilityManager.EndOfTurn());
     }
 
     // <summary>
@@ -258,6 +200,7 @@ public class TargetManager : MonoBehaviour
                     {
                         // Get object caught by RaycastHit and prepare for ability execution
                         GameObject targetObject = hit.transform.gameObject;
+                        Debug.Log(targetObject.name);
                         PrepareForAbilityExecution(targetObject);
                     }
                 }

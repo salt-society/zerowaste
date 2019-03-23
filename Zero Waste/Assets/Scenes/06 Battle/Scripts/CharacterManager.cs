@@ -246,7 +246,7 @@ public class CharacterManager : MonoBehaviour {
 
     public GameObject GetMutantPrefab(Enemy mutantData)
     {
-        GameObject mutantPrefab = new GameObject();
+        GameObject mutantPrefab = null;
 
         foreach (GameObject mutantObject in mutantPrefabs)
         {

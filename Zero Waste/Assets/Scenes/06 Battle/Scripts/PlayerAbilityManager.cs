@@ -34,20 +34,20 @@ public class PlayerAbilityManager : MonoBehaviour
         set { ability = value; }
     }
 
-    private int damageApplied;
+    private int changeApplied;
 
     public int ChangeApplied
     {
-        get { return damageApplied; }
-        set { damageApplied = value; }
+        get { return changeApplied; }
+        set { changeApplied = value; }
     }
 
-    private GameObject scavengerPrefab;
+    private GameObject scavengerObj;
 
     public GameObject ScavengerPrefab
     {
-        get { return scavengerPrefab; }
-        set { scavengerPrefab = value; }
+        get { return scavengerObj; }
+        set { scavengerObj = value; }
     }
 
     private int position;
@@ -123,33 +123,20 @@ public class PlayerAbilityManager : MonoBehaviour
 
     // <summary>
     // </summary>
-    public IEnumerator ExecuteSingleRangeAbility(GameObject selectedTarget, string targetType)
+    public IEnumerator ExecuteAbility(GameObject selectedTarget, string targetType)
     {
         // Decrement antidote used by ability and update antidote bar
-        scavengerPrefab.GetComponent<CharacterMonitor>().DecrementAntidote(ability.antRequirement);
+        scavengerObj.GetComponent<CharacterMonitor>().DecrementAntidote(ability.antRequirement);
         
         yield return null;
 
         // Apply effects if there's any on selected mutant
-        ApplySingleRangeAbilityEffects(selectedTarget, targetType);
+        ApplyAbilityEffects(selectedTarget, targetType);
     }
 
     // <summary>
     // </summary>
-    public IEnumerator ExecuteAOERangeAbility(string targetType)
-    {
-        // Decrement antidote used by ability and update antidote bar
-        scavengerPrefab.GetComponent<CharacterMonitor>().DecrementAntidote(ability.antRequirement);
-
-        yield return null;
-
-        // Apply effects if there's any on selected mutant
-        ApplyAOERangeAbilityEffects(targetType);
-    }
-
-    // <summary>
-    // </summary>
-    void ApplySingleRangeAbilityEffects(GameObject targetPrefab, string targetType)
+    void ApplyAbilityEffects(GameObject targetPrefab, string targetType)
     {
         // Scavenger to Scavenger
         if (targetType.Equals("Scavenger")) 
@@ -165,386 +152,184 @@ public class PlayerAbilityManager : MonoBehaviour
 
     // <summary>
     // </summary>
-    void ApplyAOERangeAbilityEffects(string targetType)
+    IEnumerator ScavengerToScavenger(GameObject targetObj)
     {
-        // Scavenger to Scavenger
-        if (targetType.Equals("Scavenger"))
+        changeApplied = 0;
+
+        cameraManager.FocusOnScavengers(false);
+        cameraManager.FocusOnMutants(false);
+        yield return new WaitForSeconds(0.3f);
+
+        if (ability.range.Equals("Self") || ability.range.Equals("Single"))
         {
-            StartCoroutine(ScavengerToAllScavenger());
+            StartCoroutine(ToScavenger(targetObj));
+            yield return new WaitForSeconds(1f);
         }
-        // Scavenger to Mutant
-        else if (targetType.Equals("Mutant"))
+        else if (ability.range.Equals("AOE"))
         {
-            StartCoroutine(ScavengerToAllMutant());
+            List<GameObject> aliveScavengers = new List<GameObject>();
+
+            foreach (GameObject scavengerObject in characterManager.GetAllCharacterPrefabs(1))
+            {
+                if (scavengerObject.GetComponent<CharacterMonitor>().IsAlive)
+                    aliveScavengers.Add(scavengerObject);
+            }
+
+            foreach (GameObject scavengerObj in aliveScavengers)
+            {
+                StartCoroutine(ToScavenger(scavengerObj));
+
+                if (ability.repeatAnimation)
+                    yield return new WaitForSeconds(1f);
+            }
+
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(statusManager.ShowTotalValue(changeApplied.ToString(), ability.type, 1, ability.particleIndex));
+        }
+
+        yield return null;
+        StartCoroutine(EndTurn());
+    }
+
+    IEnumerator ToScavenger(GameObject targetObj)
+    {
+        animationManager.PlayAnimation(ability, scavengerObj, targetObj, scavenger.characterType);
+
+        foreach (Effect effect in ability.effects)
+        {
+            if (effect.type.Equals("Direct"))
+            {
+                int valueChanged = targetObj.GetComponent<CharacterMonitor>().ScavengerHealed(effect.target, effect.strength);
+                changeApplied += valueChanged;
+
+                // HP - Skill, Ult | ANT - Charge, Skill, Ult
+                if (effect.target.Equals("HP"))
+                {
+                    CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
+                    StartCoroutine(statusManager.IncrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+                    yield return new WaitForSeconds(1f);
+                }
+                else
+                {
+                    CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
+                    StartCoroutine(statusManager.IncrementAntidoteBar(scavMonitor.CurrentAnt, scavMonitor.MaxAnt, scavMonitor.Position));
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+
+                    if (ability.showValue)
+                        StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+
+                    yield return new WaitForSeconds(1f);
+                }
+            }
+            else
+            {
+                // Buff Scavengers
+                targetObj.GetComponent<CharacterMonitor>().ScavengerBuffed(Instantiate(effect));
+
+                if (effect.application.Equals("CharStats"))
+                {
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                if (effect.application.Equals("Condition"))
+                {
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    yield return new WaitForSeconds(1f);
+                }
+
+                statusManager.AddEffectToStatusPanel("Scavenger", targetObj.GetComponent<CharacterMonitor>().Position, effect);
+                statusManager.AddEffectsToStatusList("Scavenger", targetObj.GetComponent<CharacterMonitor>().Position, effect, ability.icon);
+                yield return new WaitForSeconds(1f);
+            }
         }
     }
 
     // <summary>
     // </summary>
-    IEnumerator ScavengerToScavenger(GameObject targetPrefab)
+    IEnumerator ScavengerToMutant(GameObject targetObj)
     {
-        // Data of target is needed to update changes
-        Player target = targetPrefab.GetComponent<CharacterMonitor>().Scavenger;
+        changeApplied = 0;
 
-        // Bring back camera to its default position first
-        // This avoids animation being out of place, like the position
-        // of damage points and debuff/buff arrows
         cameraManager.FocusOnScavengers(false);
         cameraManager.FocusOnMutants(false);
         yield return new WaitForSeconds(0.3f);
 
-        // 
-        int regainedValue = 0;
-        string targetStat = string.Empty;
-
-        // This part is where we will apply changes on data
-        // Just loop through all effects, differentiate if its direct or not,
-        // then apply corresponding changes
-        foreach (Effect effect in ability.effects)
+        if (ability.range.Equals("Single"))
         {
-            if (effect.effectType.Equals("Direct")) 
+            StartCoroutine(ToMutant(targetObj));
+            yield return new WaitForSeconds(3f);
+
+        }
+        else if (ability.range.Equals("AOE"))
+        {
+            List<GameObject> aliveMutants = new List<GameObject>();
+
+            foreach (GameObject mutantObject in characterManager.GetAllCharacterPrefabs(0))
             {
-                regainedValue = targetPrefab.GetComponent<CharacterMonitor>().
-                    ScavengerHealed(effect.effectTarget, effect.effectStrength);
-                targetStat = effect.effectTarget;
+                if (mutantObject.GetComponent<CharacterMonitor>().IsAlive)
+                    aliveMutants.Add(mutantObject);
             }
-            else
-            {     
-                targetPrefab.GetComponent<CharacterMonitor>().ScavengerBuffed(Instantiate(effect));
-            }
-        }
 
-        if (regainedValue > 0)
-        {
-            if(targetStat.Equals("HP"))
+            int totalChangeApplied = 0;
+            foreach (GameObject mutantObj in aliveMutants)
             {
-                StartCoroutine(animationManager.HealScavenger(targetPrefab, regainedValue, 
-                    abilityIndex, ability.abilityRange));
-            }
-            else
-            {
-                StartCoroutine(animationManager.ChargeAntidote(targetPrefab, 
-                    abilityIndex, ability.abilityRange));
+                StartCoroutine(ToMutant(mutantObj));
+                totalChangeApplied += changeApplied;
+
+                if (ability.repeatAnimation)
+                    yield return new WaitForSeconds(1f);
             }
 
-            yield return new WaitForSeconds(1.5f);
-        }
-
-        foreach (Effect effect in ability.effects)
-        {
-            if (effect.effectType.Equals("Status"))
-            {
-                // Status effect that alters variables or stats of player
-                if (effect.effectApplication.Equals("Variable"))
-                {
-                    StartCoroutine(statusManager.ShowBuff(targetPrefab, 1));
-                }
-                // Status effect that subjects character into a condition
-                else
-                {
-                    // Each condition has different kind of effects
-                    // Temporary use burst particles
-                    StartCoroutine(particleManager.CircleBurst(targetPrefab.transform.position));
-                }
-
-                // Add status change to panel and list
-                statusManager.AddEffectToStatusPanel("Scavenger", 
-                    targetPrefab.GetComponent<CharacterMonitor>().Position, effect);
-                statusManager.AddEffectsToStatusList("Scavenger",
-                    targetPrefab.GetComponent<CharacterMonitor>().Position, effect, ability.abilityIcon);
-                yield return new WaitForSeconds(0.75f);
-            }
-        }
-
-        // If there isn't damage, only status effects, make scavenger go back
-        // from fight stance to its default idle animation
-        if (regainedValue == 0)
-        {
-            scavengerPrefab.GetComponent<CharacterMonitor>().Idle();
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-
-    IEnumerator ScavengerToAllScavenger()
-    {
-        GameObject[] targetPrefabs = characterManager.GetAllCharacterPrefabs(1);
-
-        // Bring back camera to its default position first
-        // This avoids animation being out of place, like the position
-        // of damage points and debuff/buff arrows
-        cameraManager.FocusOnScavengers(false);
-        cameraManager.FocusOnMutants(false);
-        yield return new WaitForSeconds(0.3f);
-
-        int totalRegainedValue = 0;
-        string targetStat = string.Empty;
-
-        foreach (GameObject targetPrefab in targetPrefabs)
-        {
-            // This part is where we will apply changes on data
-            // Just loop through all effects, differentiate if its direct or not,
-            // then apply corresponding changes
-            foreach (Effect effect in ability.effects)
-            {
-                if (effect.effectType.Equals("Direct"))
-                {
-                    totalRegainedValue += targetPrefab.GetComponent<CharacterMonitor>().
-                        ScavengerHealed(effect.effectTarget, effect.effectStrength);
-                    targetStat = effect.effectTarget;
-                }
-                else
-                {
-                    targetPrefab.GetComponent<CharacterMonitor>().ScavengerBuffed(Instantiate(effect));
-                }
-            }
-        }
-
-        if (totalRegainedValue > 0)
-        {
-            if (targetStat.Equals("HP"))
-            {
-                StartCoroutine(animationManager.HealAllScavengers(targetPrefabs, totalRegainedValue,
-                    abilityIndex, ability.abilityRange));
-            }
-            else
-            {
-                StartCoroutine(animationManager.ChargeAllAntidote(targetPrefabs,
-                    abilityIndex, ability.abilityRange));
-            }
-
-            yield return new WaitForSeconds(1.5f);
-        }
-
-        foreach (GameObject targetPrefab in targetPrefabs)
-        {
-            foreach (Effect effect in ability.effects)
-            {
-                if (effect.effectType.Equals("Status"))
-                {
-                    // Status effect that alters variables or stats of player
-                    if (effect.effectApplication.Equals("Variable"))
-                    {
-                        StartCoroutine(statusManager.ShowBuff(targetPrefab, 1));
-                    }
-                    // Status effect that subjects character into a condition
-                    else
-                    {
-                        // Each condition has different kind of effects
-                        // Temporary use burst particles
-                        StartCoroutine(particleManager.CircleBurst(targetPrefab.transform.position));
-                    }
-
-                    // Add status change to panel and list
-                    statusManager.AddEffectToStatusPanel("Scavenger",
-                        targetPrefab.GetComponent<CharacterMonitor>().Position, effect);
-                    statusManager.AddEffectsToStatusList("Scavenger",
-                        targetPrefab.GetComponent<CharacterMonitor>().Position, effect, ability.abilityIcon);
-                    yield return new WaitForSeconds(0.75f);
-                }
-            }
-        }
-
-        // If there isn't damage, only status effects, make scavenger go back
-        // from fight stance to its default idle animation
-        if (totalRegainedValue == 0)
-        {
-            scavengerPrefab.GetComponent<CharacterMonitor>().Idle();
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(EndOfTurn());
-    }
-
-    // <summary>
-    // </summary>
-    IEnumerator ScavengerToMutant(GameObject targetPrefab)
-    {
-        // Data of target is needed to update changes
-        Enemy mutant = targetPrefab.GetComponent<CharacterMonitor>().Mutant;
-
-        // Bring back camera to its default position first
-        // This avoids animation being out of place, like the position
-        // of damage points and debuff/buff arrows
-        cameraManager.FocusOnScavengers(false);
-        cameraManager.FocusOnMutants(false);
-        yield return new WaitForSeconds(0.3f);
-
-        // Direct effect animations only play once that's why we need
-        // to know the total damage taken by mutant to show later
-        int totalDamage = 0;
-
-        // This part is where we will apply changes on data
-        // Just loop through all effects, differentiate if its direct or not,
-        // then apply corresponding changes
-        foreach (Effect effect in ability.effects)
-        {
-            // There are two kinds of Effect Type, Direct and Status
-            // Usually, direct effects for mutants are damage
-            if (effect.effectType.Equals("Direct"))
-            {
-                // Calculate damage of effect and add to total damage
-                // Definitely there are no double direct effect
-                // But just to be safe, this condition gets total to show later
-                totalDamage += targetPrefab.GetComponent<CharacterMonitor>().
-                    MutantDamaged(effect.effectStrength, scavenger);
-                damageApplied = totalDamage;
-            }
-            // If its not a direct effect, its a status change
-            else
-            {
-                // Status effects for mutants are debuff
-                targetPrefab.GetComponent<CharacterMonitor>().MutantDebuffed(Instantiate(effect));
-            }
-        }
-
-        // After data's handled, its time to play animations
-        // Avoid showing damage points if there's none
-        if (totalDamage > 0)
-        {
-            StartCoroutine(animationManager.AttackMutant(scavengerPrefab, targetPrefab, 
-                abilityIndex, totalDamage, ability.abilityRange));
-            yield return new WaitForSeconds(1.5f);
-        }
-            
-        // Unlike direct effects which animations will only play once,
-        // each animation of status effect will be displayed
-        foreach (Effect effect in ability.effects)
-        {
-            // Only do somehing if effect type is status
-            if (effect.effectType.Equals("Status"))
-            {
-                // There are two ways to apply a status effect, one is through
-                // variable and the other is condition
-                // Variable is where a change directly in Stat happens like Atk Down
-                if (effect.effectApplication.Equals("Variable"))
-                {
-                    StartCoroutine(statusManager.ShowBuff(targetPrefab, 0));
-                }
-                // Condition is where a character is subject to, ie. poisoned
-                else
-                {
-                    StartCoroutine(particleManager.CircleBurst(targetPrefab.transform.position));
-                }
-
-                yield return new WaitForSeconds(0.75f);
-            }
-        }
-        
-        // If there isn't damage, only status effects, make scavenger go back
-        // from fight stance to its default idle animation
-        if (totalDamage == 0)
-        {
-            scavengerPrefab.GetComponent<CharacterMonitor>().Idle();
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        // Make way for dying animation if character is already dead
-        if (!targetPrefab.GetComponent<CharacterMonitor>().IsAlive)
-        {
             yield return new WaitForSeconds(1f);
+            StartCoroutine(statusManager.ShowTotalValue(changeApplied.ToString(), ability.type, 0, ability.particleIndex));
         }
 
-        // StartCoroutine(EndOfTurn());
+        yield return null;
+        StartCoroutine(EndTurn());
     }
 
-    IEnumerator ScavengerToAllMutant()
+    IEnumerator ToMutant(GameObject targetObj)
     {
-        GameObject[] targetPrefabs = characterManager.GetAllCharacterPrefabs(0);
-
-        // Bring back camera to its default position first
-        // This avoids animation being out of place, like the position
-        // of damage points and debuff/buff arrows
-        cameraManager.FocusOnScavengers(false);
-        cameraManager.FocusOnMutants(false);
-        yield return new WaitForSeconds(0.3f);
-
-        // Direct effect animations only play once that's why we need
-        // to know the total damage taken by mutant to show later
-        int totalDamage = 0;
-
-        foreach (GameObject targetPrefab in targetPrefabs)
+        animationManager.PlayAnimation(ability, scavengerObj, targetObj, scavenger.characterType);
+        foreach (Effect effect in ability.effects)
         {
-            // This part is where we will apply changes on data
-            // Just loop through all effects, differentiate if its direct or not,
-            // then apply corresponding changes
-            foreach (Effect effect in ability.effects)
+            // PL
+            if (effect.type.Equals("Direct"))
             {
-                // There are two kinds of Effect Type, Direct and Status
-                // Usually, direct effects for mutants are damage
-                if (effect.effectType.Equals("Direct"))
+                int valueChanged = targetObj.GetComponent<CharacterMonitor>().MutantDamaged(effect.strength, scavenger);
+                changeApplied += valueChanged;
+
+                StartCoroutine(statusManager.DecrementPollutionBar(valueChanged));
+                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+                yield return new WaitForSeconds(1f);
+            }
+
+            if (effect.type.Equals("Status"))
+            {
+                // Debuff Mutants
+                targetObj.GetComponent<CharacterMonitor>().MutantDebuffed(Instantiate(effect));
+
+                if (effect.application.Equals("CharStats"))
                 {
-                    // Calculate damage of effect and add to total damage
-                    // Definitely there are no double direct effect
-                    // But just to be safe, this condition gets total to show later
-                    totalDamage += targetPrefab.GetComponent<CharacterMonitor>().
-                        MutantDamaged(effect.effectStrength, scavenger);
-                    damageApplied = totalDamage;
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
                 }
-                // If its not a direct effect, its a status change
-                else
+
+                if (effect.application.Equals("Condition"))
                 {
-                    // Status effects for mutants are debuff
-                    targetPrefab.GetComponent<CharacterMonitor>().MutantDebuffed(Instantiate(effect));
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
                 }
+                yield return new WaitForSeconds(1f);
             }
         }
-
-        // After data's handled, its time to play animations
-        // Avoid showing damage points if there's none
-        if (totalDamage > 0)
-        {
-            StartCoroutine(animationManager.AttackAllMutants(scavengerPrefab, targetPrefabs,
-                abilityIndex, totalDamage, ability.abilityRange));
-            yield return new WaitForSeconds(1.5f);
-        }
-
-        foreach (GameObject targetPrefab in targetPrefabs)
-        {
-            // Unlike direct effects which animations will only play once,
-            // each animation of status effect will be displayed
-            foreach (Effect effect in ability.effects)
-            {
-                // Only do somehing if effect type is status
-                if (effect.effectType.Equals("Status"))
-                {
-                    // There are two ways to apply a status effect, one is through
-                    // variable and the other is condition
-                    // Variable is where a change directly in Stat happens like Atk Down
-                    if (effect.effectApplication.Equals("Variable"))
-                    {
-                        StartCoroutine(statusManager.ShowBuff(targetPrefab, 0));
-                    }
-                    // Condition is where a character is subject to, ie. poisoned
-                    else
-                    {
-                        StartCoroutine(particleManager.CircleBurst(targetPrefab.transform.position));
-                    }
-
-                    yield return new WaitForSeconds(0.75f);
-                }
-            }
-        }
-
-        // If there isn't damage, only status effects, make scavenger go back
-        // from fight stance to its default idle animation
-        if (totalDamage == 0)
-        {
-            scavengerPrefab.GetComponent<CharacterMonitor>().Idle();
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        // Make way for dying animation if character is already dead
-        if (!characterManager.AllMutantsAlive)
-        {
-            yield return new WaitForSeconds(1f);
-        }
-
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(EndOfTurn());
     }
 
-    public IEnumerator EndOfTurn()
+    public IEnumerator EndTurn()
     {
         // End loop and start again
         attackController.ClearCurrentAbility();

@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: Charge Effect 1
   m_EditorClassIdentifier: 
-  effectIcon: {fileID: 21300000, guid: 8a56ac8c131a37d4cb3b560fb43d4595, type: 3}
+  icon: {fileID: 0}
   effectName: Recharge ANT
-  effectDescription: Charges antidote by 3.
-  effectTarget: Ant
-  effectType: Direct
-  effectState: 
-  effectApplication: 
-  animationParameter: 0
-  particleNo: 0
-  effectStrength: 1
-  effectDuration: 0
+  description: 
+  target: ANT
+  type: Direct
+  particleIndex: 2
+  strength: 1
+  duration: 0
   turnsRemaining: 0
+  state: 
+  application: 
+  effectIndex: 0
+  iterate: 0

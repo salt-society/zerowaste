@@ -8,7 +8,7 @@ public class EffectList : MonoBehaviour
 {
     public GameObject effectCellPrefab;
     public List<Sprite> effectsOrigin;
-
+    private List<Effect> effectsOnList;
 
     // <summary>
     // Add array of effects on list
@@ -26,22 +26,34 @@ public class EffectList : MonoBehaviour
     // </summary>
     public void AddEffect(Effect effect, Sprite originOfEffect)
     {
+        if (effectsOnList == null)
+        {
+            effectsOnList = new List<Effect>();
+            effectsOnList.Add(effect);
+        }
+        else
+        {
+            effectsOnList.Add(effect);
+        }
+
         // Disble no status effect label when adding effects on list
         if (transform.childCount == 1)
         {
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
+        
+
         // Instantiate effectCell prefab
         GameObject newEffectCell = Instantiate(effectCellPrefab, transform);
 
         // Effect Icon
         newEffectCell.transform.GetChild(1).GetChild(1).
-            GetComponent<Image>().sprite = effect.effectIcon;
+            GetComponent<Image>().sprite = effect.icon;
 
         // Duration
         newEffectCell.transform.GetChild(3).GetChild(0).gameObject.
-           GetComponent<TextMeshProUGUI>().text = effect.effectDuration.ToString();
+           GetComponent<TextMeshProUGUI>().text = effect.duration.ToString();
 
         // Name
         newEffectCell.transform.GetChild(2).gameObject.
@@ -49,7 +61,7 @@ public class EffectList : MonoBehaviour
 
         // Description
         newEffectCell.transform.GetChild(4).gameObject.
-            GetComponent<TextMeshProUGUI>().text = effect.effectDescription;
+            GetComponent<TextMeshProUGUI>().text = effect.description;
 
         // Origin
         if (originOfEffect != null)
@@ -124,19 +136,40 @@ public class EffectList : MonoBehaviour
         }
     }
 
-    public void UpdateEffectDuration(int duration, int effectPosition)
+    public void UpdateEffectDuration(Effect effect)
     {
         int position = 0;
-        foreach (Transform cell in transform)
+        bool foundEffect = false;
+
+        int i = 0;
+        foreach (Effect effectOnList in effectsOnList)
         {
-            if (position == effectPosition)
+            if (effectOnList.GetInstanceID().Equals(effect.GetInstanceID()))
             {
-                cell.GetChild(3).GetChild(0).gameObject.
-                    GetComponent<TextMeshProUGUI>().text = duration.ToString();
+                position = i;
+                foundEffect = true;
                 break;
             }
 
-            position++;
+            i++;
+        }
+
+        Debug.Log(foundEffect);
+
+        if (foundEffect)
+        {
+            i = 0;
+            foreach (Transform cell in transform)
+            {
+                if (i == position)
+                {
+                    Debug.Log(cell.gameObject.name);
+                        //GetComponent<TextMeshProUGUI>().text = effect.duration.ToString();
+                    break;
+                }
+
+                i++;
+            }
         }
     }
 }

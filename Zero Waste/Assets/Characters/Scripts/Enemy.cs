@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Character/Enemy")]
 public class Enemy : Character {
@@ -11,7 +13,7 @@ public class Enemy : Character {
     public int baseScrapReward;
     public int baseEXPReward;
 
-    [HideInInspector] public Ability[] instanceAbilities;
+    [HideInInspector] public List<Ability> instanceAbilities;
 
     [HideInInspector] public int currentPollutionLevel;
     [HideInInspector] public int currentAtk;
@@ -35,8 +37,11 @@ public class Enemy : Character {
     // Initialize each ability so that changes made will not be saved
     private void InitializeAbilities()
     {
-        for(int CTR = 0; CTR < abilities.Length; CTR++)
-            instanceAbilities[CTR] = Instantiate(abilities[CTR]);
+        foreach (Ability ability in abilities)
+        {
+            instanceAbilities.Add(Instantiate(ability));
+        }
+
     }
 
     // Check max so values do not go beyond max
@@ -73,24 +78,24 @@ public class Enemy : Character {
     // Call if enemy has been buffed
     public void IsBuffed(Effect effect)
     {
-        switch (effect.effectTarget)
+        switch (effect.target)
         {
             case "PL":
                 effects.Add(effect);
                 break;
 
-            case "Atk":
-                currentAtk += effect.effectStrength;
+            case "ATK":
+                currentAtk += effect.strength;
                 effects.Add(effect);
                 break;
 
-            case "Def":
-                currentDef += effect.effectStrength;
+            case "DEF":
+                currentDef += effect.strength;
                 effects.Add(effect);
                 break;
 
-            case "Spd":
-                currentSpd += effect.effectStrength;
+            case "SPD":
+                currentSpd += effect.strength;
                 effects.Add(effect);
                 break;
         }
@@ -99,34 +104,34 @@ public class Enemy : Character {
     // Call if enemy has been debuffed()
     public void IsDebuffed(Effect effect)
     {
-        switch (effect.effectTarget)
+        switch (effect.target)
         {
             case "PL":
                 effects.Add(effect);
                 break;
 
-            case "Atk":
-                currentAtk = CheckMin(currentAtk - effect.effectStrength);
+            case "ATK":
+                currentAtk = CheckMin(currentAtk - effect.strength);
                 effects.Add(effect);
                 break;
 
-            case "Def":
-                currentDef  = CheckMin(currentDef - effect.effectStrength);
+            case "DEF":
+                currentDef  = CheckMin(currentDef - effect.strength);
                 effects.Add(effect);
                 break;
 
-            case "Spd":
-                currentSpd = CheckMin(currentSpd - effect.effectStrength);
+            case "SPD":
+                currentSpd = CheckMin(currentSpd - effect.strength);
                 effects.Add(effect);
                 break;
 
-            case "Scrap Reward":
-                currentScrapReward += effect.effectStrength;
+            case "SCRAP":
+                currentScrapReward += effect.strength;
                 effects.Add(effect);
                 break;
 
-            case "Exp Reward":
-                currentEXPReward += effect.effectStrength;
+            case "EXP":
+                currentEXPReward += effect.strength;
                 effects.Add(effect);
                 break;
         }

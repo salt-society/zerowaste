@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: Paige Boy
   m_EditorClassIdentifier: 
   characterId: 2
-  characterType: 
+  characterType: Scavenger
   characterName: Paige
   characterThumb: {fileID: 21300000, guid: 5585309e09bb45f409709170881760be, type: 3}
   characterHalf: {fileID: 21300000, guid: b03de0c0ec9248040a2c2b5e9a1ae021, type: 3}
   characterFull: {fileID: 21300000, guid: 98d02b82f78115643989bb1628884341, type: 3}
   prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
   scale: {x: 1.05, y: 1.05, z: 0}
-  baseSpd: 4
+  baseSpd: 1
   currentSpd: 0
   abilities:
-  - {fileID: 11400000, guid: 62173e364b6454d45b17f1dc9d2e5e5c, type: 2}
-  - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
-  - {fileID: 11400000, guid: b164f5efdfb8cfd469dfe65b54af699e, type: 2}
-  - {fileID: 11400000, guid: 3a91431911db14b45ad69310b09006e9, type: 2}
+  - {fileID: 11400000, guid: 8b87f12dc98acfc48a74bc5331b65587, type: 2}
+  - {fileID: 11400000, guid: 8be3a441781843542b8a8045b71facfc, type: 2}
+  - {fileID: 11400000, guid: 41f4bb97297a1064db3482fe25830957, type: 2}
+  - {fileID: 11400000, guid: b84da9e4a89cba742ae5388bcf5744ae, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 20
+  currentLevel: 1
   baseHP: 6
   baseAnt: 5
   baseAtk: 5
@@ -39,7 +39,7 @@ MonoBehaviour:
   hpModifier: 2
   atkModifier: 1
   defModifier: 1
-  spdModifier: 2
+  spdModifier: 1
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

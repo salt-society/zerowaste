@@ -13,6 +13,7 @@ public class BattleController : MonoBehaviour {
     private CharacterManager characterManager;
     private ItemManager itemManager;
     private AttackController attackController;
+    private EnemyAbilityManager enemyAbilityManager;
     private CameraManager cameraManager;
 
     [Space]
@@ -37,6 +38,8 @@ public class BattleController : MonoBehaviour {
     private int turnCount;
     private bool firstLoop;
     private bool loopDone;
+    private bool endOfLoop;
+    private bool battleEnd;
     
     void Start()
     {
@@ -51,6 +54,7 @@ public class BattleController : MonoBehaviour {
         itemManager = FindObjectOfType<ItemManager>();
         attackController = FindObjectOfType<AttackController>();
         cameraManager = FindObjectOfType<CameraManager>();
+        enemyAbilityManager = FindObjectOfType<EnemyAbilityManager>();
 
         // MarkAsPlayed();
 
@@ -115,6 +119,8 @@ public class BattleController : MonoBehaviour {
             turnCount = 0;
             firstLoop = true;
             loopDone = true;
+            battleEnd = false;
+            endOfLoop = false;
 
             environmentManager.SetBackground(backgroundSprite);
 
@@ -126,7 +132,6 @@ public class BattleController : MonoBehaviour {
             statusManager.SetScavengerDetails(scavengerTeamArray);
             statusManager.SetMutantDetails(mutantTeamArray);
 
-            //ProcessTurn();
             StartCoroutine(BattleLoop());
         } 
     }
@@ -137,8 +142,6 @@ public class BattleController : MonoBehaviour {
 
         characterQueue = new List<Character>();
         characterQueue = turnQueueManager.GetCharacterQueue();
-
-        //StartCoroutine(BattleLoop());
     }
 
     IEnumerator RenderBattleComponents()
@@ -197,7 +200,7 @@ public class BattleController : MonoBehaviour {
 
             // See if character is still alive to decide if you should skip this turn
             bool continueLoop = IsCurrentCharacterAlive();
-            if (continueLoop)
+            if (continueLoop && !battleEnd)
             {
                 battleInfoManager.SetCurrentTurn(characterQueue[turnCount].characterThumb,
                 characterQueue[turnCount].characterName);
@@ -234,18 +237,23 @@ public class BattleController : MonoBehaviour {
                 {
                     Debug.Log("Enemy's Turn");
 
+                    GameObject mutantObject = characterManager.GetMutantPrefab(characterQueue[turnCount] as Enemy);
+
+                    if (mutantObject != null)
+                    {
+                        mutantObject.GetComponent<CharacterMonitor>().CharacterBattleStance();
+                        yield return new WaitForSeconds(1f);
+                    }
+
                     attackController.EnableAttackButtons(0);
                     turnQueueManager.SetCurrentCharacter(turnCount);
-
-                    //turnCount++;
-                    //yield return new WaitForSeconds(3f);
-
-                    //StartCoroutine(BattleLoop());
+                    enemyAbilityManager.SetupEnemyAttack(characterQueue[turnCount] as Enemy, mutantObject);
                 }
             }
             else
             {
                 turnCount++;
+                StopAllCoroutines();
                 StartCoroutine(BattleLoop());
             }
             
@@ -253,7 +261,10 @@ public class BattleController : MonoBehaviour {
         else
         {
             loopDone = true;
+            endOfLoop = true;
             turnCount = 0;
+
+            StartCoroutine(BattleLoop());
         }
 
         yield return null;
@@ -309,18 +320,27 @@ public class BattleController : MonoBehaviour {
         // Here all mutants are dead
         if (!characterManager.AllMutantsAlive)
         {
+            battleEnd = true;
             StartCoroutine(DisplayBattleResult());
         }
         // All scavengers are dead
         else if (!characterManager.AllScavengersAlive)
         {
+            battleEnd = true;
             StartCoroutine(DisplayBattleResult());
         }
         // Neither are dead so check dot effects
-        else {
-            if (loopDone)
+        else 
+        {
+            if (endOfLoop)
             {
-
+                endOfLoop = false;
+                foreach (GameObject scavengerObj in characterManager.GetAllCharacterPrefabs(1))
+                {
+                    if (scavengerObj.GetComponent<CharacterMonitor>().IsAlive)
+                        StartCoroutine(scavengerObj.GetComponent<CharacterMonitor>().UpdateScavengerEffects());
+                }
+                return;
             }
         }
 

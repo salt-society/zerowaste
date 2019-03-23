@@ -1,47 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
     public Transform canvasTransform;
-    public List<ParticleSystem> particles;
+    public List<ParticleSystem> particleList;
+    public List<ParticleSystem> particlesOnLoop;
 
-    public IEnumerator CircleBurst(Vector3 instantiatePos)
+    public IEnumerator PlayParticles(int particleIndex, Vector3 instantiatePos)
     {
-        float duration = particles[0].main.duration;
+        float duration = particleList[particleIndex].main.duration;
 
-        ParticleSystem newParticle = Instantiate(particles[0], canvasTransform);
+        ParticleSystem newParticle = Instantiate(particleList[particleIndex], canvasTransform);
         newParticle.transform.position = instantiatePos;
 
         yield return new WaitForSeconds(duration);
+        Destroy(newParticle);
         Destroy(newParticle.gameObject);
     }
 
-    public IEnumerator PollutionBubbles()
+    public void PlayLoopingParticles(int particleIndex, Vector3 instantiatePos)
     {
-        yield return null;
-    }
+        float duration = particleList[particleIndex].main.duration;
 
-    public IEnumerator HealBurst(Vector3 instantiatePos)
-    {
-        float duration = particles[2].main.duration;
-
-        ParticleSystem newParticle = Instantiate(particles[2], canvasTransform);
+        ParticleSystem newParticle = Instantiate(particleList[particleIndex], canvasTransform);
         newParticle.transform.position = instantiatePos;
-
-        yield return new WaitForSeconds(duration);
-        Destroy(newParticle.gameObject);
+        particlesOnLoop.Add(newParticle);
     }
 
-    public IEnumerator AntBurst(Vector3 instantiatePos)
-    {
-        float duration = particles[3].main.duration;
-
-        ParticleSystem newParticle = Instantiate(particles[3], canvasTransform);
-        newParticle.transform.position = instantiatePos;
-
-        yield return new WaitForSeconds(duration);
-        Destroy(newParticle.gameObject);
-    }
 }

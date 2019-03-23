@@ -23,9 +23,21 @@ public class CameraManager : MonoBehaviour {
     // <summary>
     // Functions to trigger Camera animation and effects
     // </summary>
-    public void Shake(bool shake)
+    public void Shake(bool shake, int intensity)
     {
-        mainCamAnimator.SetBool("Shake", shake);
+        switch (intensity)
+        {
+            case 1:
+                {
+                    mainCamAnimator.SetBool("Light Shake", shake);
+                    break;
+                }
+            case 2:
+                {
+                    mainCamAnimator.SetBool("Shake", shake);
+                    break;
+                }
+        }
     }
 
     public void FocusOnScavengers(bool focus)

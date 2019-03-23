@@ -3,28 +3,27 @@
 [CreateAssetMenu(fileName = "Effect", menuName = "Abilities/Effect")]
 public class Effect : ScriptableObject {
 
-    public Sprite effectIcon;
+    public Sprite icon;
     public string effectName;
 
     [TextArea(1, 3)]
-    public string effectDescription;
+    public string description;
 
     [Space]
-    public string effectTarget; // HP, ANT, ATK, DEF, SPD, PL
-    public string effectType; // Direct | Status
-    public string effectState; // Buff | Debuff
-    public string effectApplication; // Variable (HP, ANT, ATK, DEF, SPD) | Condition (Poison)
+    public string target; // HP, ANT, ATK, DEF, SPD, PL
+    public string type; // Direct | Status
+    public int particleIndex;
 
     [Space]
-    public bool iterateEffect;
+    public int strength;
 
-    [Space]
-    public int animationParameter;
-    public int particleNo;
-    
-    [Space]
-    public int effectStrength;
-    public int effectDuration;
+    [Header("If Status")]
+    public string state; // Buff | Debuff
+    public string application; // Variable (HP, ANT, ATK, DEF, SPD) | Condition (Poison)
+    public int duration;
     public int turnsRemaining;
+
+    [Space]
+    public int effectIndex;
 
 }

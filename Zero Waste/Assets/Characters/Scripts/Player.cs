@@ -52,7 +52,7 @@ public class Player : Character {
                 else
                     return endStat;
 
-            case "Ant":
+            case "ANT":
                 if (endStat > baseAnt)
                     return baseAnt;
                 else
@@ -76,7 +76,7 @@ public class Player : Character {
                 currentHP = estimatedStat;
                 break;
 
-            case "Ant":
+            case "ANT":
                 estimatedStat = CheckMin(currentAnt - statModifier);
                 currentAnt = estimatedStat;
                 break;
@@ -91,12 +91,12 @@ public class Player : Character {
         switch (targetStat)
         {
             case "HP":
-                estimatedStat = CheckMax(currentHP + statModifier, "HP");
+                estimatedStat = CheckMax(currentHP + statModifier, targetStat);
                 currentHP = estimatedStat;
                 break;
 
-            case "Ant":
-                estimatedStat = CheckMax(currentAnt + statModifier, "Ant");
+            case "ANT":
+                estimatedStat = CheckMax(currentAnt + statModifier, targetStat);
                 currentAnt = estimatedStat;
                 break;
         }
@@ -105,40 +105,38 @@ public class Player : Character {
     // Call if player has been buffed
     public void IsBuffed(Effect effect)
     {
-        int estimatedStat = 0;
-
-        switch(effect.effectTarget)
+        switch(effect.target)
         {
             case "HP":
                 effects.Add(effect);
                 break;
 
-            case "Ant":
+            case "ANT":
                 effects.Add(effect);
                 break;
 
-            case "Atk":
-                currentAtk += effect.effectStrength;
+            case "ATK":
+                currentAtk += effect.strength;
                 effects.Add(effect);
                 break;
 
-            case "Def":
-                currentDef += effect.effectStrength;
+            case "DEF":
+                currentDef += effect.strength;
                 effects.Add(effect);
                 break;
 
-            case "Spd":
-                currentSpd += effect.effectStrength;
+            case "SPD":
+                currentSpd += effect.strength;
                 effects.Add(effect);
                 break;
 
-            case "Ant Gen":
-                currentAntGen += effect.effectStrength;
+            case "ANTGEN":
+                currentAntGen += effect.strength;
                 effects.Add(effect);
                 break;
 
-            case "Threat Level":
-                currentThreatLevel += effect.effectStrength;
+            case "TL":
+                currentThreatLevel += effect.strength;
                 effects.Add(effect);
                 break;
         }
@@ -149,42 +147,42 @@ public class Player : Character {
     {
         int estimatedStat = 0;
 
-        switch (effect.effectTarget)
+        switch (effect.target)
         {
             case "HP":
                 effects.Add(effect);
                 break;
 
-            case "Ant":
+            case "ANT":
                 effects.Add(effect);
                 break;
 
-            case "Atk":
-                estimatedStat = CheckMin(currentAtk - effect.effectStrength);
+            case "ATK":
+                estimatedStat = CheckMin(currentAtk - effect.strength);
                 currentAtk = estimatedStat;
                 effects.Add(effect);
                 break;
 
-            case "Def":
-                estimatedStat = CheckMin(currentDef - effect.effectStrength);
+            case "DEF":
+                estimatedStat = CheckMin(currentDef - effect.strength);
                 currentDef = estimatedStat;
                 effects.Add(effect);
                 break;
 
-            case "Spd":
-                estimatedStat = CheckMin(currentSpd - effect.effectStrength);
+            case "SPD":
+                estimatedStat = CheckMin(currentSpd - effect.strength);
                 currentSpd = estimatedStat;
                 effects.Add(effect);
                 break;
 
-            case "Ant Gen":
-                estimatedStat = CheckMin(currentAntGen - effect.effectStrength);
+            case "ANTGEN":
+                estimatedStat = CheckMin(currentAntGen - effect.strength);
                 currentAntGen = estimatedStat;
                 effects.Add(effect);
                 break;
 
-            case "Threat Level":
-                estimatedStat = CheckMin(currentThreatLevel - effect.effectStrength);
+            case "TL":
+                estimatedStat = CheckMin(currentThreatLevel - effect.strength);
                 currentThreatLevel = estimatedStat;
                 effects.Add(effect);
                 break;

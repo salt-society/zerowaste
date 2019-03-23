@@ -168,9 +168,9 @@ public class StatusManager : MonoBehaviour
                     {
                         foreach (Effect effect in dataController.battleModifiers)
                         {
-                            if (effect.effectType.Equals("Status"))
+                            if (effect.type.Equals("Status"))
                             {
-                                if (effect.effectState.Equals("Buff"))
+                                if (effect.state.Equals("Buff"))
                                 {
                                     scavengerData[i].IsBuffed(Instantiate(effect));
                                 }
@@ -243,8 +243,8 @@ public class StatusManager : MonoBehaviour
             {
                 if (!effectPanel.transform.GetChild(i).gameObject.activeInHierarchy)
                 {
-                    effectPanel.transform.GetChild(i).gameObject.
-                        GetComponent<Image>().sprite = effect.effectIcon;
+                    effectPanel.transform.GetChild(i).GetChild(1).
+                        gameObject.GetComponent<Image>().sprite = effect.icon;
                     effectPanel.transform.GetChild(i).gameObject.SetActive(true);
                     break;
                 }
@@ -276,6 +276,12 @@ public class StatusManager : MonoBehaviour
         }
     }
 
+    public void UpdateEffectDuration(Effect effect, int position)
+    {
+        detailedScavengerStatusPanel[position].transform.GetChild(5).
+                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().UpdateEffectDuration(effect);
+    }
+
     // <summary>
     // Remove status effect icon
     // </summary>
@@ -284,15 +290,14 @@ public class StatusManager : MonoBehaviour
         if (appliedTo.Equals("Scavenger"))
         {
             // Loop through children of effect panel, which are the effect icons
-            GameObject effectPanel = scavengerStatusPanel[position].transform.GetChild(7).gameObject;
+            GameObject effectPanel = scavengerStatusPanel[position].transform.GetChild(8).gameObject;
             for (int i = 0; i < effectPanel.transform.childCount; i++)
             {
                 // Just to be safe, check if effect icon is active
                 if (effectPanel.transform.GetChild(i).gameObject.activeInHierarchy)
                 {
                     // Then see if effect sprite matches effect to be removed
-                    if(effectPanel.transform.GetChild(i).gameObject.
-                        GetComponent<Image>().sprite == effect.effectIcon)
+                    if (effectPanel.transform.GetChild(i).GetChild(1).gameObject.GetComponent<Image>().sprite == effect.icon)
                     {
                         effectPanel.transform.GetChild(i).gameObject.SetActive(false);
                         break;
@@ -374,99 +379,67 @@ public class StatusManager : MonoBehaviour
     // <summary>
     // Shows damage taken by Scavenger or Mutant
     // </summary>
-    public IEnumerator ShowDamagePoints(string damagePoints, GameObject characterObject)
+    public IEnumerator ShowValues(string value, string valueType, GameObject characterObj, int particleIndex)
     {
-        TextMeshProUGUI newDamagePoints = Instantiate(damagePointsPrefab, canvasTransform);
-        newDamagePoints.text = damagePoints;
+        TextMeshProUGUI valuePrefab = (valueType.Equals("Offensive") ? damagePointsPrefab : healPointsPrefab);
+        TextMeshProUGUI valueObj = Instantiate(valuePrefab, canvasTransform);
+        valueObj.text = value;
 
-        // Get box collider of target so damage counter can be positioned
-        BoxCollider2D collider = characterObject.GetComponent<BoxCollider2D>();
+        BoxCollider2D collider = characterObj.GetComponent<BoxCollider2D>();
         float midpoint = collider.bounds.center.x;
         float maxY = collider.bounds.max.y;
-        Vector2 damageCounterPosition = Camera.main.WorldToScreenPoint(new Vector3(midpoint, maxY, 0));
+        Vector2 valuePos = Camera.main.WorldToScreenPoint(new Vector3(midpoint, maxY, 0));
 
-        newDamagePoints.transform.position = damageCounterPosition;
-        newDamagePoints.gameObject.SetActive(true);
-        StartCoroutine(particleManager.CircleBurst(new Vector3(midpoint, 8, 0)));
-
-        yield return new WaitForSeconds(1.8f);
-        Destroy(newDamagePoints.gameObject);
-    }
-
-    // <summary>
-    // Shows damage taken by Scavenger or Mutant
-    // </summary>
-    public IEnumerator ShowHealPoints(string healPoints, GameObject characterObject)
-    {
-        TextMeshProUGUI newHealPoints = Instantiate(healPointsPrefab, canvasTransform);
-        newHealPoints.text = healPoints;
-
-        // Get box collider of target so damage counter can be positioned
-        BoxCollider2D collider = characterObject.GetComponent<BoxCollider2D>();
-        float midpoint = collider.bounds.center.x;
-        float maxY = collider.bounds.max.y;
-        Vector2 healCounterPosition = Camera.main.WorldToScreenPoint(new Vector3(midpoint, maxY, 0));
-
-        newHealPoints.transform.position = healCounterPosition;
-        newHealPoints.gameObject.SetActive(true);
-        StartCoroutine(particleManager.HealBurst(new Vector3(midpoint, 8, 0)));
+        valueObj.transform.position = valuePos;
+        valueObj.gameObject.SetActive(true);
+        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector3(midpoint, 8, 0)));
 
         yield return new WaitForSeconds(1.8f);
-        Destroy(newHealPoints.gameObject);
+        Destroy(valueObj.gameObject);
     }
 
-    public IEnumerator ShowTotalPoints(string totalPoints, string pointsType, int targetType)
+    public IEnumerator ShowTotalValue(string value, string valueType, int targetType, int particleIndex)
     {
-        TextMeshProUGUI newPoints = Instantiate((pointsType.Equals("Offensive") ? damagePointsPrefab : healPointsPrefab), canvasTransform);
-        newPoints.text = totalPoints;
+        TextMeshProUGUI valuePrefab = (valueType.Equals("Offensive") ? damagePointsPrefab : healPointsPrefab);
+        TextMeshProUGUI valueObj = valuePrefab;
+        valueObj.text = value;
 
         BoxCollider2D collider = characterManager.GetCharacterSection(targetType).GetComponent<BoxCollider2D>();
         float maxX = (targetType == 0) ? collider.bounds.max.x : collider.bounds.min.x;
         float maxY = collider.bounds.max.y - 5f;
-        Vector2 totalPointsPosition = Camera.main.WorldToScreenPoint(new Vector3(maxX, maxY, 0));
+        Vector2 valuePos = Camera.main.WorldToScreenPoint(new Vector3(maxX, maxY, 0));
 
-        newPoints.transform.position = totalPointsPosition;
-        newPoints.gameObject.SetActive(true);
-
-        if (pointsType.Equals("Offensive"))
-        {
-            StartCoroutine(particleManager.CircleBurst(new Vector3(maxX, 0, 0)));
-        }
-        else if (pointsType.Equals("Defensive"))
-        {
-            StartCoroutine(particleManager.HealBurst(new Vector3(maxX, 0, 0)));
-        }
+        valueObj.transform.position = valuePos;
+        valueObj.gameObject.SetActive(true);
+        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector3(maxX, maxY, 0)));
         
         yield return new WaitForSeconds(1.8f);
-        Destroy(newPoints.gameObject);
-    }
-
-    // <summary>
-    // Hide damage points
-    // </summary>
-    public IEnumerator HideDamagePoints()
-    {
-         yield return new WaitForSeconds(5f);
+        // Destroy(valueObj.gameObject);
     }
 
     // <summary>
     //
     // </summary>
-    public IEnumerator ShowBuff(GameObject characterObject, int statusEffectType)
+    public IEnumerator ShowBuff(GameObject targetObject, string effectState)
     {
-        GameObject buffArrow = Instantiate((statusEffectType > 0) ? buffArrowPrefab : debuffArrowPrefab, canvasTransform);
-        BoxCollider2D collider = characterObject.GetComponent<BoxCollider2D>();
+        GameObject buffArrow = Instantiate((effectState.Equals("Buff")) ? buffArrowPrefab : debuffArrowPrefab, canvasTransform);
+        BoxCollider2D collider = targetObject.GetComponent<BoxCollider2D>();
 
-        bool isScav = characterObject.GetComponent<CharacterMonitor>().CheckCharacterType("Scavenger");
-
+        bool isScav = targetObject.GetComponent<CharacterMonitor>().CheckCharacterType("Scavenger");
         float xPos = 0;
+        float yPos = 0;
 
-        if (isScav)
-            xPos = collider.bounds.min.x - 12f;
+        if (isScav) 
+        {
+            xPos = collider.bounds.max.x;
+            yPos = collider.bounds.max.y - 15f;
+        }
         else
-            xPos = collider.bounds.max.x + 12;
-
-        float yPos = collider.bounds.max.y - 5f;
+        {
+            xPos = collider.bounds.max.x;
+            yPos = collider.bounds.max.y - 20f;
+        }
+            
         Vector2 arrowPos = Camera.main.WorldToScreenPoint(new Vector3(xPos, yPos, 0));
 
         buffArrow.transform.position = arrowPos;
@@ -478,7 +451,7 @@ public class StatusManager : MonoBehaviour
         Destroy(buffArrow);
     }
 
-    public IEnumerator IncrementHealth(float currentHealth, float maxHealth, int position)
+    public IEnumerator IncrementHealthBar(float currentHealth, float maxHealth, int position)
     {
         float hpLeft = currentHealth / maxHealth;
         float hpBarValue = healthBars[position].GetComponent<Image>().fillAmount;
@@ -495,7 +468,7 @@ public class StatusManager : MonoBehaviour
         }
     }
 
-    public IEnumerator DecrementHealth(float currentHealth, float maxHealth, int position)
+    public IEnumerator DecrementHealthBar(float currentHealth, float maxHealth, int position)
     {
         float hpLeft = currentHealth / maxHealth;
         float hpBarValue = healthBars[position].GetComponent<Image>().fillAmount;
@@ -512,7 +485,7 @@ public class StatusManager : MonoBehaviour
         }
     }
 
-    public IEnumerator IncrementAntidote(float currentAnt, float maxAnt, int position)
+    public IEnumerator IncrementAntidoteBar(float currentAnt, float maxAnt, int position)
     {
         float antidoteLeft = currentAnt / maxAnt;
         float antBarValue = antBars[position].GetComponent<Image>().fillAmount;
@@ -529,7 +502,7 @@ public class StatusManager : MonoBehaviour
         }
     }
 
-    public IEnumerator DecrementAntidote(float currentAnt, float maxAnt, int position)
+    public IEnumerator DecrementAntidoteBar(float currentAnt, float maxAnt, int position)
     {
         float antidoteLeft = currentAnt / maxAnt;
         float antBarValue = antBars[position].GetComponent<Image>().fillAmount;
@@ -577,6 +550,40 @@ public class StatusManager : MonoBehaviour
         for (int i = 4; i <= damageTaken; i+=4)
         {
             pollutionValue.text = ((currentCombinedPL + damageTaken) - i).ToString();
+            yield return null;
+        }
+
+        pollutionValue.text = currentCombinedPL.ToString();
+    }
+
+    public IEnumerator IncrementPollutionBar(int pollutionGained)
+    {
+        GameObject[] mutantPrefabs = characterManager.GetAllCharacterPrefabs(0);
+
+        int currentCombinedPL = 0;
+        int maxCombinedPL = 0;
+        foreach (GameObject mutantPrefab in mutantPrefabs)
+        {
+            currentCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().CurrentHealth;
+            maxCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().GetMutantMaxHealth();
+        }
+
+        float combinedPLLeft = (float)currentCombinedPL / (float)maxCombinedPL;
+        float pollutionBarValue = pollutionBar.GetComponent<Image>().fillAmount;
+
+        while (pollutionBarValue < combinedPLLeft)
+        {
+            pollutionBarValue += 0.05f;
+            if (pollutionBarValue > maxCombinedPL)
+                pollutionBarValue = maxCombinedPL;
+
+            pollutionBar.GetComponent<Image>().fillAmount = pollutionBarValue;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        for (int i = 4; i <= pollutionGained; i += 4)
+        {
+            pollutionValue.text = ((currentCombinedPL - pollutionGained) + i).ToString();
             yield return null;
         }
 
