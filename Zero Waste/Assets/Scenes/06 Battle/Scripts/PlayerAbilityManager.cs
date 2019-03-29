@@ -15,6 +15,7 @@ public class PlayerAbilityManager : MonoBehaviour
     private AnimationManager animationManager;
     private ParticleManager particleManager;
     private CharacterManager characterManager;
+    private TurnQueueManager turnQueueManager;
     #endregion
 
     #region Properties
@@ -69,6 +70,7 @@ public class PlayerAbilityManager : MonoBehaviour
         animationManager = FindObjectOfType<AnimationManager>();
         particleManager = FindObjectOfType<ParticleManager>();
         characterManager = FindObjectOfType<CharacterManager>();
+        turnQueueManager = FindObjectOfType<TurnQueueManager>();
     }
 
     // <summary>
@@ -188,6 +190,7 @@ public class PlayerAbilityManager : MonoBehaviour
         }
 
         yield return null;
+        turnQueueManager.FinishedTurn(scavenger);
         StartCoroutine(EndTurn());
     }
 
@@ -263,6 +266,9 @@ public class PlayerAbilityManager : MonoBehaviour
             StartCoroutine(ToMutant(targetObj));
             yield return new WaitForSeconds(3f);
 
+            if (!targetObj.GetComponent<CharacterMonitor>().IsAlive)
+                yield return new WaitForSeconds(1f);
+
         }
         else if (ability.range.Equals("AOE"))
         {
@@ -289,6 +295,7 @@ public class PlayerAbilityManager : MonoBehaviour
         }
 
         yield return null;
+        turnQueueManager.FinishedTurn(scavenger);
         StartCoroutine(EndTurn());
     }
 

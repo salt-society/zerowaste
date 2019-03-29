@@ -17,7 +17,7 @@ MonoBehaviour:
   selectedIcon: {fileID: 0}
   abilityName: Basic Attack
   abilityDescription: 
-  length: 1
+  length: 1.2
   type: Offensive
   range: Single
   withDirect: 1

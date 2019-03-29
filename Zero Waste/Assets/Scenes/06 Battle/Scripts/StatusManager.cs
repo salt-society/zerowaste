@@ -80,8 +80,6 @@ public class StatusManager : MonoBehaviour
                 // Scavenger Icon
                 scavengerStatusPanel[i].transform.GetChild(1).GetChild(0).
                     gameObject.GetComponent<Image>().sprite = scavengerData[i].characterHalf;
-                detailedScavengerStatusPanel[i].transform.GetChild(0).GetChild(1).
-                    gameObject.GetComponent<Image>().sprite = scavengerData[i].characterHalf;
 
                 // Name
                 scavengerStatusPanel[i].transform.GetChild(2).gameObject.
@@ -96,20 +94,18 @@ public class StatusManager : MonoBehaviour
                     GetComponent<TextMeshProUGUI>().text += scavengerData[i].currentLevel;
 
                 // HP, ANT, SPD, DEF values on detailed status
-                detailedScavengerStatusPanel[i].transform.GetChild(1).GetChild(1).
+                detailedScavengerStatusPanel[i].transform.GetChild(2).GetChild(2).
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].currentHP.ToString();
-                detailedScavengerStatusPanel[i].transform.GetChild(2).GetChild(1).
-                    gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].currentAnt.ToString();
-                detailedScavengerStatusPanel[i].transform.GetChild(3).GetChild(1).
+                detailedScavengerStatusPanel[i].transform.GetChild(3).GetChild(2).
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].currentSpd.ToString();
-                detailedScavengerStatusPanel[i].transform.GetChild(4).GetChild(1).
+                detailedScavengerStatusPanel[i].transform.GetChild(4).GetChild(2).
+                    gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].currentAtk.ToString();
+                detailedScavengerStatusPanel[i].transform.GetChild(5).GetChild(2).
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].currentDef.ToString();
 
-                // Ult and Skill description
-                detailedScavengerStatusPanel[i].transform.GetChild(7).GetChild(1).
+                // Ult description
+                detailedScavengerStatusPanel[i].transform.GetChild(6).GetChild(2).
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].abilities[3].abilityDescription;
-                detailedScavengerStatusPanel[i].transform.GetChild(8).GetChild(1).
-                    gameObject.GetComponent<TextMeshProUGUI>().text = scavengerData[i].abilities[2].abilityDescription;
             }
         }
     }
@@ -132,9 +128,9 @@ public class StatusManager : MonoBehaviour
                 scavengerStatusPanel[i].SetActive(true);
 
                 // HP and ANT Bars
-                scavengerStatusPanel[i].transform.GetChild(6).
+                scavengerStatusPanel[i].transform.GetChild(5).
                     GetChild(0).gameObject.SetActive(true);
-                scavengerStatusPanel[i].transform.GetChild(7).
+                scavengerStatusPanel[i].transform.GetChild(6).
                     GetChild(0).gameObject.SetActive(true);
 
                 yield return new WaitForSeconds(0.3f);
@@ -195,10 +191,24 @@ public class StatusManager : MonoBehaviour
         
     }
 
+    public void ShowScavengerStatusSection()
+    {
+        scavengerStatusSection.GetComponent<Animator>().SetBool("Down", false);
+    }
+
     public void HideScavengerStatusSection()
     {
-        scavengerStatusSection.GetComponent<Animator>().SetBool("Status Up", false);
-        scavengerStatusSection.GetComponent<Animator>().SetBool("Status Down", true);
+        scavengerStatusSection.GetComponent<Animator>().SetBool("Down", true);
+    }
+
+    public void ShowStatusPanel(int position)
+    {
+        scavengerStatusPanel[position].SetActive(true);
+    }
+
+    public void HideStatusPanel(int position)
+    {
+        scavengerStatusPanel[position].SetActive(false);
     }
 
     // <summary>
@@ -231,6 +241,12 @@ public class StatusManager : MonoBehaviour
         }
     }
 
+    public void HideAllDetailedStatusPanels()
+    {
+        foreach (GameObject detailedPanel in detailedScavengerStatusPanel)
+            detailedPanel.SetActive(false);
+    }
+
     // <summary>
     // Display status effect icon
     // </summary>
@@ -238,7 +254,7 @@ public class StatusManager : MonoBehaviour
     {
         if (appliedTo.Equals("Scavenger"))
         {
-            GameObject effectPanel = scavengerStatusPanel[position].transform.GetChild(8).gameObject;
+            GameObject effectPanel = scavengerStatusPanel[position].transform.GetChild(7).gameObject;
             for (int i = 0; i < effectPanel.transform.childCount; i++)
             {
                 if (!effectPanel.transform.GetChild(i).gameObject.activeInHierarchy)
@@ -259,7 +275,7 @@ public class StatusManager : MonoBehaviour
     {
         if (appliedTo.Equals("Scavenger"))
         {
-            detailedScavengerStatusPanel[position].transform.GetChild(5).
+            detailedScavengerStatusPanel[position].transform.GetChild(8).
                 GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffect(effect, originOfEffect);
         }
     }
@@ -271,39 +287,41 @@ public class StatusManager : MonoBehaviour
     {
         if (appliedTo.Equals("Scavenger"))
         {
-            detailedScavengerStatusPanel[position].transform.GetChild(5).
+            detailedScavengerStatusPanel[position].transform.GetChild(8).
                 GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().AddEffects(effects, originOfEffect);
         }
     }
 
-    public void UpdateEffectDuration(Effect effect, int position)
+    public void UpdateEffect(int effectNo, int duration, int listPosition)
     {
-        detailedScavengerStatusPanel[position].transform.GetChild(5).
-                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().UpdateEffectDuration(effect);
+        detailedScavengerStatusPanel[listPosition].transform.GetChild(8).
+                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().UpdateEffect(effectNo, duration.ToString());
     }
 
     // <summary>
     // Remove status effect icon
     // </summary>
-    public void RemoveEffect(string appliedTo, int position, Effect effect)
+    public void RemoveEffect(string appliedTo, int scavPos, int effectPos)
     {
         if (appliedTo.Equals("Scavenger"))
         {
             // Loop through children of effect panel, which are the effect icons
-            GameObject effectPanel = scavengerStatusPanel[position].transform.GetChild(8).gameObject;
+            GameObject effectPanel = scavengerStatusPanel[scavPos].transform.GetChild(7).gameObject;
             for (int i = 0; i < effectPanel.transform.childCount; i++)
             {
-                // Just to be safe, check if effect icon is active
-                if (effectPanel.transform.GetChild(i).gameObject.activeInHierarchy)
+                if (i == effectPos)
                 {
-                    // Then see if effect sprite matches effect to be removed
-                    if (effectPanel.transform.GetChild(i).GetChild(1).gameObject.GetComponent<Image>().sprite == effect.icon)
+                    // Just to be safe, check if effect icon is active
+                    if (effectPanel.transform.GetChild(i).gameObject.activeInHierarchy)
                     {
                         effectPanel.transform.GetChild(i).gameObject.SetActive(false);
                         break;
                     }
                 }
             }
+
+            detailedScavengerStatusPanel[scavPos].transform.GetChild(8).
+                GetChild(0).GetChild(0).gameObject.GetComponent<EffectList>().RemoveEffect(effectPos);
         }
     }
 
@@ -344,7 +362,7 @@ public class StatusManager : MonoBehaviour
 
         // Display combined PL of all mutants
         int i = 0;
-        int increment = (combinedPL / dataController.wasteCount) / 5;
+        int increment = (combinedPL / dataController.mutantCount) / 5;
         for (i = 0; i <= combinedPL; i+=increment)
         {
             // Activate text before iterating value
@@ -466,6 +484,9 @@ public class StatusManager : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+
+        detailedScavengerStatusPanel[position].transform.GetChild(2).GetChild(2).
+                    gameObject.GetComponent<TextMeshProUGUI>().text = currentHealth.ToString();
     }
 
     public IEnumerator DecrementHealthBar(float currentHealth, float maxHealth, int position)
@@ -483,6 +504,9 @@ public class StatusManager : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+
+        detailedScavengerStatusPanel[position].transform.GetChild(2).GetChild(2).
+                    gameObject.GetComponent<TextMeshProUGUI>().text = currentHealth.ToString();
     }
 
     public IEnumerator IncrementAntidoteBar(float currentAnt, float maxAnt, int position)

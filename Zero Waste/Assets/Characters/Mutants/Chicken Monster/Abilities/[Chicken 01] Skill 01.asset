@@ -20,7 +20,7 @@ MonoBehaviour:
   length: 1.5
   type: Offensive
   range: Single
-  withDirect: 1
+  withDirect: 0
   directIndex: 0
   showValue: 0
   repeatAnimation: 0
@@ -28,6 +28,5 @@ MonoBehaviour:
   spawnY: 0
   effects:
   - {fileID: 11400000, guid: 2220955663eeef04d8c2660ebe0b8832, type: 2}
-  - {fileID: 11400000, guid: dcec2c3f79089d142a43e75a9d807e3e, type: 2}
-  cooldown: 0
+  cooldown: 1
   turnTillActive: 0

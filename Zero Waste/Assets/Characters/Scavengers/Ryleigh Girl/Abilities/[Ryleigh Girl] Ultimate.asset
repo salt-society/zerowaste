@@ -16,7 +16,10 @@ MonoBehaviour:
   icon: {fileID: 0}
   selectedIcon: {fileID: 0}
   abilityName: 
-  abilityDescription: 
+  abilityDescription: 'Learn about pass mistakes
+
+    Deals heavy damage to enemies of type toxic and applies poison'
+  length: 0
   type: 
   range: 
   withDirect: 0
@@ -24,5 +27,6 @@ MonoBehaviour:
   showValue: 0
   repeatAnimation: 0
   particleIndex: 0
+  spawnY: 0
   effects: []
   antRequirement: 10

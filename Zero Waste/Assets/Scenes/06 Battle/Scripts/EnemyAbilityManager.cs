@@ -16,6 +16,7 @@ public class EnemyAbilityManager : MonoBehaviour
     private AnimationManager animationManager;
     private StatusManager statusManager;
     private ParticleManager particleManager;
+    private TurnQueueManager turnQueueManager;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class EnemyAbilityManager : MonoBehaviour
         statusManager = FindObjectOfType<StatusManager>();
         particleManager = FindObjectOfType<ParticleManager>();
         battleController = FindObjectOfType<BattleController>();
+        turnQueueManager = FindObjectOfType<TurnQueueManager>();
     }
 
     public void SetupEnemyAttack(Enemy mutant, GameObject mutantObj)
@@ -44,7 +46,7 @@ public class EnemyAbilityManager : MonoBehaviour
 
         // Decide what ability to use
         int chosenAbilityIndex = Random.Range(0, availableAbilities.Count);
-        this.ability = availableAbilities[1];
+        this.ability = availableAbilities[chosenAbilityIndex];
 
         // Cool down chosen ability so mutants wouldn't be able to spam it
         /// this.ability.turnTillActive = this.ability.cooldown;
@@ -143,7 +145,10 @@ public class EnemyAbilityManager : MonoBehaviour
         {
             GameObject targetObj = SelectTargetScavenger();
             StartCoroutine(ToScavenger(targetObj));
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(4f);
+
+            if (!targetObj.GetComponent<CharacterMonitor>().IsAlive)
+                yield return new WaitForSeconds(1f);
         }
         else if (ability.range.Equals("AOE"))
         {
@@ -167,7 +172,7 @@ public class EnemyAbilityManager : MonoBehaviour
         }
 
         yield return null;
-
+        turnQueueManager.FinishedTurn(mutant);
         StartCoroutine(EndTurn());
     }
 
@@ -175,7 +180,7 @@ public class EnemyAbilityManager : MonoBehaviour
     {
         animationManager.PlayAnimation(ability, mutantObj, targetObj, mutant.characterType);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(ability.length);
 
         foreach (Effect effect in ability.effects)
         {
@@ -210,22 +215,20 @@ public class EnemyAbilityManager : MonoBehaviour
                 if (effect.application.Equals("CharStats"))
                 {
                     targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    yield return new WaitForSeconds(1f);
                     StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(effect.animationLength);
                 }
 
                 if (effect.application.Equals("Condition"))
                 {
                     targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    yield return new WaitForSeconds(1f);
                     StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(effect.animationLength);
                 }
 
                 statusManager.AddEffectToStatusPanel("Scavenger", targetObj.GetComponent<CharacterMonitor>().Position, effect);
                 statusManager.AddEffectsToStatusList("Scavenger", targetObj.GetComponent<CharacterMonitor>().Position, effect, ability.icon);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(effect.animationLength);
 
             }
         }
@@ -262,10 +265,10 @@ public class EnemyAbilityManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(3f);
-            // StartCoroutine(statusManager.ShowValues(changeApplied.ToString(), ability.type, aliveMutants[0], ability.particleIndex));
         }
 
         yield return null;
+        turnQueueManager.FinishedTurn(mutant);
         StartCoroutine(EndTurn());
     }
 
@@ -273,7 +276,7 @@ public class EnemyAbilityManager : MonoBehaviour
     {
         animationManager.PlayAnimation(ability, mutantObj, targetObj, mutant.characterType);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(ability.length);
 
         foreach (Effect effect in ability.effects)
         {
@@ -294,7 +297,7 @@ public class EnemyAbilityManager : MonoBehaviour
                 if (effect.application.Equals("CharStats"))
                 {
                     targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(effect.animationLength);
                     StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
                     yield return new WaitForSeconds(1f);
                 }
@@ -302,7 +305,7 @@ public class EnemyAbilityManager : MonoBehaviour
                 if (effect.application.Equals("Condition"))
                 {
                     targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(effect.animationLength);
                     StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
                     yield return new WaitForSeconds(1f);
                 }

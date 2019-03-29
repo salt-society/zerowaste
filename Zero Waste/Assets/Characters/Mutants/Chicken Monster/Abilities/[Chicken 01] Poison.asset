@@ -17,10 +17,13 @@ MonoBehaviour:
   description: 
   target: HP
   type: Status
-  particleIndex: 3
+  particleIndex: 0
+  particleLoop: 0
   strength: 1
   state: Debuff
   application: Condition
-  duration: 3
+  duration: 1
   turnsRemaining: 0
+  receiveAnim: Hurt
   effectIndex: 10
+  animationLength: 1

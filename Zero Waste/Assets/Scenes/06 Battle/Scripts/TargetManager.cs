@@ -15,7 +15,6 @@ public class TargetManager : MonoBehaviour
 
     private PlayerAbilityManager abilityManager;
     private string targetType;
-    private string range;
 
     private bool canSelectTarget = false;
 
@@ -37,7 +36,6 @@ public class TargetManager : MonoBehaviour
         // Since abilities have their own managers, always need to
         // set the ability manager everytime player attacks
         this.abilityManager = abilityManager;
-        range = ability.range;
 
         // Determine which set of characters are possible targets base on range and ability type
         if (ability.type.Equals("Offensive"))
@@ -72,6 +70,7 @@ public class TargetManager : MonoBehaviour
 
                 // Set flag to true to allow target selection
                 canSelectTarget = true;
+                statusManager.HideScavengerStatusSection();
             }
         }  
         else if (ability.type.Equals("Defensive"))
@@ -110,6 +109,7 @@ public class TargetManager : MonoBehaviour
 
                 // Set flag to true to allow target selection
                 canSelectTarget = true;
+                statusManager.HideScavengerStatusSection();
             }
         }
     }
@@ -124,6 +124,7 @@ public class TargetManager : MonoBehaviour
 
         // Prevent players from being able to select a target
         canSelectTarget = false;
+        statusManager.ShowScavengerStatusSection();
 
         // Unfocus camera
         cameraManager.FocusOnScavengers(false);
@@ -157,6 +158,7 @@ public class TargetManager : MonoBehaviour
         {
             // After user has chosen a target, disable target selection
             canSelectTarget = false;
+            statusManager.ShowScavengerStatusSection();
             
             // Hide message and show turn queue
             battleInfoManager.HideMiddleMessage(1);
@@ -200,8 +202,11 @@ public class TargetManager : MonoBehaviour
                     {
                         // Get object caught by RaycastHit and prepare for ability execution
                         GameObject targetObject = hit.transform.gameObject;
-                        Debug.Log(targetObject.name);
-                        PrepareForAbilityExecution(targetObject);
+
+                        if (targetObject.GetComponent<CharacterMonitor>() != null)
+                        {
+                            PrepareForAbilityExecution(targetObject);
+                        }
                     }
                 }
             }

@@ -31,6 +31,11 @@ public class AttackController : MonoBehaviour
         attackButtonPanel.SetActive(showComponent);
     }
 
+    public void ShowAttackButtons()
+    {
+        attackButtonPanel.GetComponent<Animator>().SetBool("Exit", false);
+    }
+
     public void HideAttackButtons()
     {
         attackButtonPanel.GetComponent<Animator>().SetBool("Exit", true);

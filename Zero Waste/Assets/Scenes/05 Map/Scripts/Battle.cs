@@ -5,14 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Battle", menuName = "Map/Battle")]
 public class Battle : ScriptableObject {
 
-    [Header("Details")]
     public Sprite nodeIcon;
+    public Sprite background;
 
     [Space]
     public int battleId;
     public string battleName;
     public string info;
-    public Color threatLevel;
+    public bool isBossBattle;
 
     [Space]
     public Node node;

@@ -42,8 +42,6 @@ public class EffectList : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(false);
         }
 
-        
-
         // Instantiate effectCell prefab
         GameObject newEffectCell = Instantiate(effectCellPrefab, transform);
 
@@ -74,102 +72,37 @@ public class EffectList : MonoBehaviour
     }
 
     // <summary>
-    // Remove all effects
+    // Remove one effect through effect position
     // </summary>
-    public void RemoveAllEffects()
+    public void RemoveEffect(int effectNo)
     {
-        if (transform.childCount > 1)
-        {
-            foreach (Transform cell in transform)
-            {
-                if (transform.childCount != 1)
-                {
-                    Destroy(cell);
-                }
-            }
-        }
-        
-        transform.GetChild(0).gameObject.SetActive(true);
-    }
-
-    // <summary>
-    // Remove one effect through effect name
-    // </summary>
-    public void RemoveEffect(Effect effect)
-    {
-        foreach (Transform cell in transform)
-        {
-            string effectName = cell.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text;
-            if (effectName.Equals(effect.effectName))
-            {
-                Destroy(cell);
-                break;
-            }
-        }
-
-        if (transform.childCount == 1)
-        {
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
-    }
-
-    // <summary>
-    // Remove one effect through effect name
-    // </summary>
-    public void RemoveEffect(int effectPosition)
-    {
-        int position = 0;
-        foreach (Transform cell in transform)
-        {
-            if (position == effectPosition)
-            {
-                Destroy(cell);
-                break;
-            }
-
-            position++;
-        }
-
-        if (transform.childCount == 1)
-        {
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
-    }
-
-    public void UpdateEffectDuration(Effect effect)
-    {
-        int position = 0;
-        bool foundEffect = false;
-
         int i = 0;
-        foreach (Effect effectOnList in effectsOnList)
+        foreach (Transform effectCell in transform)
         {
-            if (effectOnList.GetInstanceID().Equals(effect.GetInstanceID()))
+            if (i == (effectNo + 1))
             {
-                position = i;
-                foundEffect = true;
+                Destroy(effectCell.gameObject);
                 break;
             }
-
             i++;
         }
 
-        Debug.Log(foundEffect);
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
 
-        if (foundEffect)
+    public void UpdateEffect(int effectNo, string duration)
+    {
+        int i = 0;
+        foreach (Transform effectCell in transform)
         {
-            i = 0;
-            foreach (Transform cell in transform)
+            if (i == (effectNo + 1))
             {
-                if (i == position)
-                {
-                    Debug.Log(cell.gameObject.name);
-                        //GetComponent<TextMeshProUGUI>().text = effect.duration.ToString();
-                    break;
-                }
+                effectCell.gameObject.transform.GetChild(3).GetChild(0).
+                    GetComponent<TextMeshProUGUI>().text = duration;
 
-                i++;
+                break;
             }
+            i++;
         }
     }
 }

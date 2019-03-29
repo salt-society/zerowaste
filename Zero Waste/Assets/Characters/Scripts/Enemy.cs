@@ -22,7 +22,7 @@ public class Enemy : Character {
     [HideInInspector] public int currentEXPReward;
 
     // Initialize currentStats to be equal to maxStats
-    public void OnInitialize()
+    public virtual void OnInitialize()
     {
         currentPollutionLevel = maxPollutionLevel;
         currentAtk = maxAtk;
@@ -55,7 +55,7 @@ public class Enemy : Character {
     }
 
     // Call if enemy has been attacked
-    public void IsAttacked(int statModifier, Player attacker)
+    public virtual void IsAttacked(int statModifier, Player attacker)
     {
         int estimatedStat = 0;
         int damage = 0;

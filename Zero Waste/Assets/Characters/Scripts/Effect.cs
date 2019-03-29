@@ -13,6 +13,7 @@ public class Effect : ScriptableObject {
     public string target; // HP, ANT, ATK, DEF, SPD, PL
     public string type; // Direct | Status
     public int particleIndex;
+    public bool particleLoop;
 
     [Space]
     public int strength;
@@ -24,6 +25,8 @@ public class Effect : ScriptableObject {
     public int turnsRemaining;
 
     [Space]
+    public string receiveAnim;
     public int effectIndex;
+    public float animationLength;
 
 }

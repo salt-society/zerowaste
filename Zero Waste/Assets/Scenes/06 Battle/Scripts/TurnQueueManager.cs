@@ -18,9 +18,14 @@ public class TurnQueueManager : MonoBehaviour {
     public StatusManager statusManager;
 
     private List<Character> characterQueue;
+    private List<int> deadCharacterList;
     private Character fastestCharacter;
-
     private Character currentCharacter;
+
+    void Start()
+    {
+        deadCharacterList = new List<int>();
+    }
 
     public void CalculateTurn(Player[] scavengers, Enemy[] mutants)
     {
@@ -74,35 +79,62 @@ public class TurnQueueManager : MonoBehaviour {
         characterQueue = characterQ;
     }
 
-    public IEnumerator DisplayTurnQueue(int visibility)
+    public IEnumerator DisplayTurnQueue()
     {
-        bool showComponent = (visibility > 0) ? true : false;
+        turnQueue.SetActive(true);
 
-        if (showComponent)
-        {
-            // Display turn queue box
-            turnQueue.SetActive(showComponent);
-            yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(0.5f);
 
-            // Display each queue cell one at a time
-            int i = 0;
-            foreach (Character character in characterQueue)
-            {
-                queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
-                queueIcons[i].SetActive(true);
-                i++;
-            }
-        }
-        else
+        int i = 0;
+        int j = 0;
+        foreach (Character character in characterQueue)
         {
-            turnQueue.SetActive(showComponent);
-            foreach (GameObject queueIcon in queueIcons)
+            queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
+            queueIcons[i].SetActive(true);
+
+            if (deadCharacterList != null)
             {
-                queueIcon.SetActive(showComponent);
+                if (deadCharacterList.Count > j)
+                {
+                    if (deadCharacterList[j] == i)
+                    {
+                        queueOverlays[i].SetActive(true);
+                        j++;
+                    }
+                    else
+                    {
+                        queueOverlays[i].SetActive(false);
+                    }
+                }
+                else
+                {
+                    queueOverlays[i].SetActive(false);
+                }
             }
+            else
+            {
+                queueOverlays[i].SetActive(false);
+            }
+
+            i++;
+            yield return null;
         }
-       
-        yield return null;
+    }
+
+    public IEnumerator HideTurnQueue()
+    {
+        int i = 0;
+        foreach (Character character in characterQueue)
+        {
+            queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
+            queueIcons[i].SetActive(false);
+
+            i++;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        turnQueue.SetActive(false);
     }
 
     public void ShowTurnQueue(int visibility)
@@ -150,16 +182,35 @@ public class TurnQueueManager : MonoBehaviour {
     // Dims character's queue icon to emphasize remaining characters
     // that will still attack
     // </summary>
-    public void FinishedTurn()
+    public void FinishedTurn(Character finishedCharacter)
     {
-
+        int i = 0;
+        foreach (Character character in characterQueue)
+        {
+            if (character.GetInstanceID().Equals(finishedCharacter.GetInstanceID()))
+            {
+                queueOverlays[i].SetActive(true);
+                break;
+            }
+            i++;
+        }
     }
 
     // <summary>
     // Crosses character out from the queue
     // </summary>
-    public void CharacterDead()
+    public void CharacterDead(Character deadCharacter)
     {
-
+        int i = 0;
+        foreach (Character character in characterQueue)
+        {
+            if (character.GetInstanceID().Equals(deadCharacter.GetInstanceID()))
+            {
+                queueOverlays[i].SetActive(true);
+                deadCharacterList.Add(i);
+                break;
+            }
+            i++;
+        }
     }
 }

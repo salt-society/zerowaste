@@ -23,4 +23,7 @@ MonoBehaviour:
   application: CharStats
   duration: 1
   turnsRemaining: 0
+  receiveAnim: Debuff
   effectIndex: 1
+  iterate: 0
+  animationLength: 0.5
