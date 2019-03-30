@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player", menuName = "Character/Player")]
 [System.Serializable]
@@ -63,7 +64,7 @@ public class Player : Character {
     }
 
     // Call if player has been attacked
-    public void IsAttacked(string targetStat, int statModifier, Enemy attacker)
+    public int IsAttacked(string targetStat, int statModifier, Enemy attacker)
     {
         int estimatedStat = 0;
 
@@ -71,21 +72,45 @@ public class Player : Character {
         {
             case "HP":
                 int damage = 0;
-                damage = CheckMin((attacker.currentAtk + statModifier) - currentDef);
+
+                if(attacker.currentAtk > 0)
+                {
+                    int projectedStrength = Random.Range((int)(attacker.currentAtk * 0.5), (int)(attacker.currentAtk * 1.5) + 1);
+
+                    if (currentDef > 0)
+                        damage = (projectedStrength + statModifier) - currentDef;
+
+                    else
+                        damage = projectedStrength + statModifier;
+                }
+
+                else
+                {
+                    if (currentDef > 0)
+                        damage = statModifier - currentDef;
+
+                    else
+                        damage = statModifier;
+                }
+
                 estimatedStat = CheckMin(currentHP - damage);
                 currentHP = estimatedStat;
-                break;
+                return damage;
 
             case "ANT":
+                damage = statModifier;
                 estimatedStat = CheckMin(currentAnt - statModifier);
                 currentAnt = estimatedStat;
-                break;
+                return damage;
         }
+
+        return 0;
     }
 
     // Call if player has been healed
-    public void IsHealed(string targetStat, int statModifier)
+    public int IsHealed(string targetStat, int statModifier)
     {
+        int heal = statModifier;
         int estimatedStat = 0;
 
         switch (targetStat)
@@ -93,13 +118,15 @@ public class Player : Character {
             case "HP":
                 estimatedStat = CheckMax(currentHP + statModifier, targetStat);
                 currentHP = estimatedStat;
-                break;
+                return heal;
 
             case "ANT":
                 estimatedStat = CheckMax(currentAnt + statModifier, targetStat);
                 currentAnt = estimatedStat;
-                break;
+                return heal;
         }
+
+        return 0;
     }
 
     // Call if player has been buffed
@@ -158,34 +185,78 @@ public class Player : Character {
                 break;
 
             case "ATK":
-                estimatedStat = CheckMin(currentAtk - effect.strength);
+                estimatedStat = currentAtk - effect.strength;
                 currentAtk = estimatedStat;
                 effects.Add(effect);
                 break;
 
             case "DEF":
-                estimatedStat = CheckMin(currentDef - effect.strength);
+                estimatedStat = currentDef - effect.strength;
                 currentDef = estimatedStat;
                 effects.Add(effect);
                 break;
 
             case "SPD":
-                estimatedStat = CheckMin(currentSpd - effect.strength);
+                estimatedStat = currentSpd - effect.strength;
                 currentSpd = estimatedStat;
                 effects.Add(effect);
                 break;
 
             case "ANTGEN":
-                estimatedStat = CheckMin(currentAntGen - effect.strength);
+                estimatedStat = currentAntGen - effect.strength;
                 currentAntGen = estimatedStat;
                 effects.Add(effect);
                 break;
 
             case "TL":
-                estimatedStat = CheckMin(currentThreatLevel - effect.strength);
+                estimatedStat = currentThreatLevel - effect.strength;
                 currentThreatLevel = estimatedStat;
                 effects.Add(effect);
                 break;
+        }
+    }
+
+    // Clear all debuffs from player
+    public void isCleared()
+    {
+        if (effects.Count > 0)
+        {
+            List<Effect> removedDebuffs = new List<Effect>();
+            
+            foreach (Effect effect in effects)
+                if (effect.state == "Debuff")
+                    removedDebuffs.Add(effect);
+
+            if (removedDebuffs.Count > 0)
+            {
+                foreach (Effect effect in removedDebuffs)
+                { 
+                    switch (effect.target)
+                    {
+                        case "ATK":
+                            currentAtk += effect.strength;
+                            break;
+
+                        case "DEF":
+                            currentDef += effect.strength;
+                            break;
+
+                        case "SPD":
+                            currentSpd += effect.strength;
+                            break;
+
+                        case "ANTGEN":
+                            currentAntGen += effect.strength;
+                            break;
+
+                        case "TL":
+                            currentThreatLevel += effect.strength;
+                            break;
+                    }
+
+                    effects.Remove(effect);
+                }
+            }
         }
     }
 }

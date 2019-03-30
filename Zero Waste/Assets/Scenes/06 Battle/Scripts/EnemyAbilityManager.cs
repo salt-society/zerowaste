@@ -45,7 +45,40 @@ public class EnemyAbilityManager : MonoBehaviour
         }
 
         // Decide what ability to use
-        int chosenAbilityIndex = Random.Range(0, availableAbilities.Count);
+        int chosenAbilityIndex = 0;
+
+        // Decide which ability the enemy will use by taking into account its chance to proc,
+        // and the enemy's current state
+
+        // To make things fast, check first if there's only one in the list. If it is, just send that ability
+        if (availableAbilities.Count == 1)
+            chosenAbilityIndex = 0;
+
+        // For multiple abilities
+        else
+        {
+            // Holder for greatest chance
+            int probableAbility = 0;
+
+            foreach (EnemyAbility ability in availableAbilities)
+            {
+                // First add and subtract the chance to proc with 25% of it
+                float minChance = (float)(ability.chanceToProc - (ability.chanceToProc * .25));
+                float maxChance = (float)(ability.chanceToProc + (ability.chanceToProc * .25));
+
+                // Randomize to check if the monster will do this ability
+                float chance = Random.Range(minChance, maxChance + 1);
+
+                // Add if the ability's state aligns with the enemy's current state
+                if (ability.abilityState == mutant.currentState)
+                    chance += 30;
+
+                // If it's the most probable ability, pick that
+                if (chance > probableAbility)
+                    chosenAbilityIndex = availableAbilities.IndexOf(ability);
+            }
+        }
+
         this.ability = availableAbilities[chosenAbilityIndex];
 
         // Cool down chosen ability so mutants wouldn't be able to spam it

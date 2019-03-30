@@ -12,6 +12,7 @@ public class Enemy : Character {
     public int maxDef;
     public int baseScrapReward;
     public int baseEXPReward;
+    public string baseState;
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
@@ -20,6 +21,10 @@ public class Enemy : Character {
     [HideInInspector] public int currentDef;
     [HideInInspector] public int currentScrapReward;
     [HideInInspector] public int currentEXPReward;
+    [HideInInspector] public string currentState;
+
+    // Used because the isAttacked of enemy is an overrideable function
+    private int damage;
 
     // Initialize currentStats to be equal to maxStats
     public virtual void OnInitialize()
@@ -30,6 +35,7 @@ public class Enemy : Character {
         currentSpd = baseSpd;
         currentScrapReward = baseScrapReward;
         currentEXPReward = baseEXPReward;
+        currentState = baseState;
 
         InitializeAbilities();
     }
@@ -41,7 +47,6 @@ public class Enemy : Character {
         {
             instanceAbilities.Add(Instantiate(ability));
         }
-
     }
 
     // Check max so values do not go beyond max
@@ -58,10 +63,39 @@ public class Enemy : Character {
     public virtual void IsAttacked(int statModifier, Player attacker)
     {
         int estimatedStat = 0;
-        int damage = 0;
-        damage = CheckMin((attacker.currentAtk + statModifier) - currentDef);
-        estimatedStat = CheckMin(currentPollutionLevel - damage);
-        currentPollutionLevel = estimatedStat;
+        damage = 0;
+
+        if (attacker.currentAtk >= 0)
+        {
+            int projectedStrength = Random.Range((int)(attacker.currentAtk * 0.5), (int)(attacker.currentAtk * 1.5) + 1);
+
+            if (currentDef > 0)
+                damage = (projectedStrength + statModifier) - currentDef;
+
+            else
+                damage = projectedStrength + statModifier;
+
+            estimatedStat = CheckMin(currentPollutionLevel - damage);
+            currentPollutionLevel = estimatedStat;
+        }
+
+        else
+        {
+            if (currentDef > 0)
+                damage = statModifier - currentDef;
+
+            else
+                damage = statModifier;
+
+            estimatedStat = CheckMin(currentPollutionLevel - damage);
+            currentPollutionLevel = estimatedStat;
+        }
+
+        if (currentPollutionLevel > maxPollutionLevel * .5)
+            currentState = "Offensive";
+
+        else
+            currentState = "Defensive";
 
         Debug.Log("Current Atk: " + attacker.currentAtk + " Stat Modifier: " + statModifier 
             + " Current Def: " + currentDef + " Damage: " + damage + " | " + estimatedStat);
@@ -111,17 +145,17 @@ public class Enemy : Character {
                 break;
 
             case "ATK":
-                currentAtk = CheckMin(currentAtk - effect.strength);
+                currentAtk = currentAtk - effect.strength;
                 effects.Add(effect);
                 break;
 
             case "DEF":
-                currentDef  = CheckMin(currentDef - effect.strength);
+                currentDef  = currentDef - effect.strength;
                 effects.Add(effect);
                 break;
 
             case "SPD":
-                currentSpd = CheckMin(currentSpd - effect.strength);
+                currentSpd = currentSpd - effect.strength;
                 effects.Add(effect);
                 break;
 
@@ -135,5 +169,11 @@ public class Enemy : Character {
                 effects.Add(effect);
                 break;
         }
+    }
+
+    // Get the damage value
+    public int GetDamage()
+    {
+        return damage;
     }
 }

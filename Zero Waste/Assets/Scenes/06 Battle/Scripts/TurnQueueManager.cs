@@ -37,7 +37,7 @@ public class TurnQueueManager : MonoBehaviour {
 
         // Counters
         int characterCount = 0;
-        int fastestSpeed = -1;
+        int fastestSpeed = -100;
 
         // Add non-null characters to list
         // Separate loop so player is prioritize if speed is the same
