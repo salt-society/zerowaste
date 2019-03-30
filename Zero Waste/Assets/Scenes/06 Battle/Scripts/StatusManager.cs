@@ -34,7 +34,9 @@ public class StatusManager : MonoBehaviour
     [Space]
     public Transform canvasTransform;
     public TextMeshProUGUI healPointsPrefab;
+    public TextMeshProUGUI smallHealPrefab;
     public TextMeshProUGUI damagePointsPrefab;
+    public TextMeshProUGUI smallDamagePrefab;
     public GameObject debuffArrowPrefab;
     public GameObject buffArrowPrefab;
     #endregion
@@ -399,18 +401,34 @@ public class StatusManager : MonoBehaviour
     // </summary>
     public IEnumerator ShowValues(string value, string valueType, GameObject characterObj, int particleIndex)
     {
-        TextMeshProUGUI valuePrefab = (valueType.Equals("Offensive") ? damagePointsPrefab : healPointsPrefab);
+        TextMeshProUGUI valuePrefab;
+        if (valueType.Equals("Offensive"))
+        {
+            if (int.Parse(value) > 100)
+                valuePrefab = damagePointsPrefab;
+            else
+                valuePrefab = smallDamagePrefab;
+        }
+        else
+        {
+            if (int.Parse(value) > 100)
+                valuePrefab = healPointsPrefab;
+            else
+                valuePrefab = smallHealPrefab;
+        }
+
         TextMeshProUGUI valueObj = Instantiate(valuePrefab, canvasTransform);
         valueObj.text = value;
 
         BoxCollider2D collider = characterObj.GetComponent<BoxCollider2D>();
-        float midpoint = collider.bounds.center.x;
-        float maxY = collider.bounds.max.y;
-        Vector2 valuePos = Camera.main.WorldToScreenPoint(new Vector3(midpoint, maxY, 0));
+        float randomX = Random.Range(collider.bounds.min.x - 5, collider.bounds.max.x + 5);
+        float randomY = Random.Range(collider.bounds.center.y + 12, collider.bounds.max.y);
+
+        Vector2 valuePos = Camera.main.WorldToScreenPoint(new Vector3(randomX, randomY, 0));
 
         valueObj.transform.position = valuePos;
         valueObj.gameObject.SetActive(true);
-        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector3(midpoint, 8, 0)));
+        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector3(randomX, randomY, 0)));
 
         yield return new WaitForSeconds(1.8f);
         Destroy(valueObj.gameObject);

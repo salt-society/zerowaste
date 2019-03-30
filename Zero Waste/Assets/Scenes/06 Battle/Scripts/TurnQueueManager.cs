@@ -12,6 +12,7 @@ public class TurnQueueManager : MonoBehaviour {
     [Space]
     public GameObject[] queueIcons;
     public GameObject[] queueOverlays;
+    public GameObject[] queueBars;
     
     [Header("Managers")]
     public BattleInfoManager battleInfoManager;
@@ -116,7 +117,9 @@ public class TurnQueueManager : MonoBehaviour {
                 queueOverlays[i].SetActive(false);
             }
 
+            queueBars[i].SetActive(true);
             i++;
+
             yield return null;
         }
     }

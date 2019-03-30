@@ -20,7 +20,7 @@ MonoBehaviour:
   characterFull: {fileID: 21300000, guid: de58bf6e01c20a149b67fdfee4593494, type: 3}
   prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
   scale: {x: 1.05, y: 1.05, z: 0}
-  baseSpd: 1
+  baseSpd: 5
   currentSpd: 34
   abilities:
   - {fileID: 11400000, guid: 8b87f12dc98acfc48a74bc5331b65587, type: 2}
@@ -29,10 +29,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b84da9e4a89cba742ae5388bcf5744ae, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 1
+  currentLevel: 16
   baseHP: 8
   baseAnt: 5
-  baseAtk: 4
+  baseAtk: 5
   baseDef: 3
   antGen: 1
   threatLevel: 4
@@ -46,5 +46,5 @@ MonoBehaviour:
   currentDef: 16
   currentAntGen: 19
   currentThreatLevel: 0
-  currentExp: 0
-  currentLevelCap: 10
+  currentExp: 30
+  currentLevelCap: 20

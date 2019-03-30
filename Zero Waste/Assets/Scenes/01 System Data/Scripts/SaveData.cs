@@ -18,6 +18,9 @@ public class SaveData {
     public string playerName;
     public string gender;
 
+    [Space]
+    public int scraps;
+
     [Header("Game Progress")]
     public bool battleTutorial;
     public bool zwaTutorial;
@@ -263,5 +266,15 @@ public class SaveData {
         // Make sure key is existing before overriding values
         if(battles.ContainsKey(battleId))
             battles[battleId] = true;
+    }
+
+    public void AddScrap(int scraps)
+    {
+        this.scraps += scraps;
+    }
+
+    public void UseScrap(int scraps)
+    {
+        this.scraps -= scraps;
     }
 }

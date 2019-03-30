@@ -33,17 +33,21 @@ public class BattleInfoManager : MonoBehaviour {
 
     [Space]
     public GameObject scavengerExp;
-    public GameObject[] scavengerExpBars;
+    public GameObject[] scavengerExpObj;
 
     [Space]
     public GameObject victoryLootBox;
     public GameObject defeatLootBox;
+
+    [Space]
+    public GameObject fadeTransition;
 
     void Start()
     {
         dataController = FindObjectOfType<DataController>();
         statusManager = FindObjectOfType<StatusManager>();
         particleManager = FindObjectOfType<ParticleManager>();
+        characterManager = FindObjectOfType<CharacterManager>();
     }
 
     public void ShowStartAnimation(int visibility)
@@ -114,56 +118,282 @@ public class BattleInfoManager : MonoBehaviour {
     {
         if (victory)
         {
-            StartCoroutine(Victory());
+            //dataController.AddScrap(scrapReward);
+
+            GameObject[] scavObjs = characterManager.GetAllCharacterPrefabs(1);
+            StartCoroutine(Victory(scavObjs));
         }
         else 
         {
-            scrapReward = scrapReward - (scrapReward * (int)(0.10f));
-            expReward = expReward - (expReward * (int)(0.10f));
+            if (scrapReward != 0 && expReward != 0)
+            {
+                scrapReward = scrapReward - (scrapReward * (int)(0.10f));
+                expReward = expReward - (expReward * (int)(0.10f));
 
-            StartCoroutine(Defeat());
+                //dataController.AddScrap(scrapReward);
+
+                GameObject[] scavObjs = characterManager.GetAllCharacterPrefabs(1);
+                StartCoroutine(DefeatWithScraps(scavObjs));
+            }
+            else 
+            {
+                StartCoroutine(DefeatWithoutScrap());
+            }
         }
     }
 
-    public IEnumerator Victory()
+    public IEnumerator Victory(GameObject[] scavObjs)
     {
         battleResult.SetActive(true);
         victoryLabel.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.0f);
+
+        scavengerExp.transform.GetChild(2).gameObject.SetActive(true);
+        scavengerExp.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+
+        int i = 0;
+        foreach (GameObject scavObj in scavObjs)
+        {
+            int expReward = this.expReward;
+            if (i < scavengerExpObj.Length)
+            {
+                // Get scavenger data, add exp, then save before the animations
+                CharacterMonitor charMonitor = scavObj.GetComponent<CharacterMonitor>();
+                //dataController.AddExp(charMonitor.Scavenger, expReward);
+
+                // Set scavenger icon, name, current level
+                scavengerExpObj[i].transform.GetChild(0).GetComponent<Image>().sprite = charMonitor.Scavenger.characterThumb;
+                scavengerExpObj[i].transform.GetChild(1).GetComponent<Image>().sprite = charMonitor.Scavenger.characterThumb;
+                scavengerExpObj[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.characterName;
+                scavengerExpObj[i].transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+                scavengerExpObj[i].transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+
+                // Show scavenger data
+                scavengerExpObj[i].SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+
+                // Show acquired exp
+                scavengerExpObj[i].transform.GetChild(5).gameObject.SetActive(true);
+                if (charMonitor.Scavenger.currentLevel < 30)
+                {
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "+" + expReward.ToString() + " EXP";
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "+" + expReward.ToString() + " EXP";
+
+                    LevelRequirements levelReq = new LevelRequirements();
+                    while (expReward > 0)
+                    {
+                        if ((charMonitor.Scavenger.currentExp + expReward) >= levelReq.expReq[charMonitor.Scavenger.currentLevel - 1])
+                        {
+                            int levelUp = charMonitor.Scavenger.currentLevel;
+                            if (levelUp++ <= charMonitor.Scavenger.currentLevelCap)
+                            {
+                                float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
+                                float leftToFill = 1f - currentExp;
+
+                                yield return new WaitForSeconds(0.5f);
+                                for (float k = 0.0f; k <= leftToFill; k += 0.1f)
+                                {
+                                    scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp + k;
+                                    yield return null;
+                                }
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
+
+                                charMonitor.Scavenger.currentExp = 0;
+                                expReward -= levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+
+                                charMonitor.Scavenger.currentLevel++;
+                                scavengerExpObj[i].transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+                                scavengerExpObj[i].transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+                                scavengerExpObj[i].transform.GetChild(6).gameObject.SetActive(true);
+
+                                yield return new WaitForSeconds(1f);
+                            }
+                            else
+                            {
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
+                                scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
+                                scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
+                            }
+                        }
+                        else
+                        {
+                            float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+                            float expRewardFloat = (float)expReward / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+                            scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
+
+                            yield return new WaitForSeconds(0.5f);
+                            for (float k = 0.0f; k <= expRewardFloat; k += 0.1f)
+                            {
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp + k;
+                                yield return null;
+                            }
+
+                            scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp + expRewardFloat;
+                            expReward -= expReward;
+                        }
+                    }
+                }
+                else
+                {
+                    scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
+                }
+            }
+            i++;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+        scavengerExp.GetComponent<Animator>().SetBool("Up", true);
+        yield return new WaitForSeconds(0.5f);
+        scavengerExp.SetActive(false);
 
         StartCoroutine(ShowVictoryLootBox());
+        yield return new WaitForSeconds(5.0f);
+
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
     }
 
     public IEnumerator ShowVictoryLootBox()
     {
         victoryLootBox.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.0f);
 
         victoryLootBox.GetComponent<Animator>().SetBool("Open", true);
-        StartCoroutine(particleManager.PlayParticles(0, Camera.main.ScreenToWorldPoint(victoryLootBox.transform.position)));
+        yield return new WaitForSeconds(1.0f);
 
-        yield return new WaitForSeconds(1f);
+        victoryLootBox.transform.GetChild(1).gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
         victoryLootBox.SetActive(false);
     }
 
-    public IEnumerator Defeat()
+    public IEnumerator DefeatWithScraps(GameObject[] scavObjs)
     {
         battleResult.SetActive(true);
         defeatLabel.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.0f);
 
-        StartCoroutine(ShowDefeatLootBox());
+        scavengerExp.transform.GetChild(1).gameObject.SetActive(true);
+        scavengerExp.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+
+        int i = 0;
+        foreach (GameObject scavObj in scavObjs)
+        {
+            int expReward = this.expReward;
+            if (i < scavengerExpObj.Length)
+            {
+                // Get scavenger data, add exp, then save before the animations
+                CharacterMonitor charMonitor = scavObj.GetComponent<CharacterMonitor>();
+                //dataController.AddExp(charMonitor.Scavenger, expReward);
+
+                // Set scavenger icon, name, current level
+                scavengerExpObj[i].transform.GetChild(0).GetComponent<Image>().sprite = charMonitor.Scavenger.characterThumb;
+                scavengerExpObj[i].transform.GetChild(1).GetComponent<Image>().sprite = charMonitor.Scavenger.characterThumb;
+                scavengerExpObj[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.characterName;
+                scavengerExpObj[i].transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+                scavengerExpObj[i].transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+
+                // Show scavenger data
+                scavengerExpObj[i].SetActive(true);
+                yield return new WaitForSeconds(0.5f);
+
+                // Show acquired exp
+                scavengerExpObj[i].transform.GetChild(5).gameObject.SetActive(true);
+                if (charMonitor.Scavenger.currentLevel < 30)
+                {
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "+" + expReward.ToString() + " EXP";
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "+" + expReward.ToString() + " EXP";
+
+                    LevelRequirements levelReq = new LevelRequirements();
+                    while (expReward > 0)
+                    {
+                        if ((charMonitor.Scavenger.currentExp + expReward) >= levelReq.expReq[charMonitor.Scavenger.currentLevel - 1])
+                        {
+                            int levelUp = charMonitor.Scavenger.currentLevel;
+                            if (levelUp++ <= charMonitor.Scavenger.currentLevelCap)
+                            {
+                                float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
+                                float leftToFill = 1f - currentExp;
+
+                                yield return new WaitForSeconds(0.5f);
+                                for (float k = 0.0f; k <= leftToFill; k += 0.1f)
+                                {
+                                    scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp + k;
+                                    yield return null;
+                                }
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
+
+                                charMonitor.Scavenger.currentExp = 0;
+                                expReward -= levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+
+                                charMonitor.Scavenger.currentLevel++;
+                                scavengerExpObj[i].transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+                                scavengerExpObj[i].transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = charMonitor.Scavenger.currentLevel.ToString();
+                                scavengerExpObj[i].transform.GetChild(6).gameObject.SetActive(true);
+
+                                yield return new WaitForSeconds(1f);
+                            }
+                            else
+                            {
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
+                                scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
+                                scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
+                            }
+                        }
+                        else
+                        {
+                            float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+                            float expRewardFloat = (float)expReward / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
+                            scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
+
+                            yield return new WaitForSeconds(0.5f);
+                            for (float k = 0.0f; k <= expRewardFloat; k += 0.1f)
+                            {
+                                scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp + k;
+                                yield return null;
+                            }
+
+                            scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp + expRewardFloat;
+                            expReward -= expReward;
+                        }
+                    }
+                }
+                else
+                {
+                    scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
+                    scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
+                }
+            }
+            i++;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+        scavengerExp.GetComponent<Animator>().SetBool("Up", true);
+        yield return new WaitForSeconds(0.5f);
+        scavengerExp.SetActive(false);
+
+        StartCoroutine(ShowVictoryLootBox());
+        yield return new WaitForSeconds(5.0f);
+
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
     }
 
     public IEnumerator ShowDefeatLootBox()
     {
-        victoryLootBox.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return null;
+    }
 
-        victoryLootBox.GetComponent<Animator>().SetBool("Open", true);
-        StartCoroutine(particleManager.PlayParticles(0, Camera.main.ScreenToWorldPoint(victoryLootBox.transform.position)));
+    public IEnumerator DefeatWithoutScrap()
+    {
+        battleResult.SetActive(true);
+        defeatLabel.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
 
-        yield return new WaitForSeconds(1f);
-        victoryLootBox.SetActive(false);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
     }
 }

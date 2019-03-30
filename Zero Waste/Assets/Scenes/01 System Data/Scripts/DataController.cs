@@ -10,20 +10,22 @@ public class DataController : MonoBehaviour
 {
     [Header("Data Controller")]
     public static DataController instance;
+    
+    [Header("Game Data")]
     public string saveFolderName;
 
-    [Header("Game Data")]
+    [Space]
     public GameData currentGameData;
     public SaveData currentSaveData;
 
-    [Space]
+    [Header("Character List")]
     public List<Player> allScavengersList;
     public List<Enemy> allWasteList;
 
-    [Header("Player Roster")]
+    [Header("Player's Roster")]
     public List<Player> scavengerRoster;
 
-    [Space]
+    [Header("Battle Inputs")]
     public Cutscene currentCutscene;
     public string targetParty;
     public Effect[] battleModifiers;
@@ -283,6 +285,56 @@ public class DataController : MonoBehaviour
         }
     }
 
+    public void AddExp(Player scavengerToEnhance, int expToAdd)
+    {
+        LevelRequirements levelReq = new LevelRequirements();
+        foreach (Player scavenger in scavengerRoster)
+        {
+            if (scavenger.characterId.Equals(scavengerToEnhance.characterId))
+            {
+                // Check if Scavenger can still level up
+                if (scavenger.currentLevel < 30)
+                {
+                    // Loop while there's exp left to add
+                    while (expToAdd > 0)
+                    {
+                        // Check if exp to add plus scavenger's current exp exceeds level requirement
+                        if ((scavenger.currentExp + expToAdd) >= levelReq.expReq[scavenger.currentLevel - 1])
+                        {
+                            // Since exp requirement to level up is reached,
+                            // check if next level is less than level cap
+                            if (scavenger.currentLevel++ <= scavenger.currentLevelCap)
+                            {
+                                // Level up scav, reset exp, subtract exp requirment from exp to add
+                                scavenger.currentLevel++;
+                                scavenger.currentExp = 0;
+                                expToAdd -= levelReq.expReq[scavenger.currentLevel - 1] - scavenger.currentExp;
+                            }
+                            else
+                            // If not, reset current exp cause scavenger will not
+                            // level up until cap is broken and increase
+                            {
+                                scavenger.currentExp = 0;
+                                expToAdd -= expToAdd;
+                            }
+                        }
+                        // If not, just add the exp
+                        else
+                        {
+                            scavenger.currentExp += expToAdd;
+                            expToAdd -= expToAdd;
+                        }
+                    }
+                }
+
+                // Save
+                SaveScavenger(scavenger);
+                SaveSaveData();
+                SaveGameData();
+            }
+        }
+    }
+
     public int GetNextSceneId(string nextLevel)
     {
         switch (nextLevel)
@@ -354,5 +406,15 @@ public class DataController : MonoBehaviour
         // Save every time levels are unlocked
         SaveSaveData();
         SaveGameData();
+    }
+
+    public void AddScrap(int scrap)
+    {
+        currentSaveData.AddScrap(scrap);
+    }
+
+    public void UseScrap(int scrap)
+    {
+        currentSaveData.UseScrap(scrap);
     }
 }

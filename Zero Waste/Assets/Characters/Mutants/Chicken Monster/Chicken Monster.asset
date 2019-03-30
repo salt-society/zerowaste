@@ -20,18 +20,18 @@ MonoBehaviour:
   characterFull: {fileID: 21300000, guid: ff31d4358f54fb5418254fc25b9a118b, type: 3}
   prefab: {fileID: 874135886, guid: b4ed6f57f36e31a43a8c4ca8f20079ac, type: 3}
   scale: {x: 1, y: 1, z: 0}
-  baseSpd: 5
+  baseSpd: 1
   currentSpd: 0
   abilities:
   - {fileID: 11400000, guid: f26efaf2973105747855e747b847dbb8, type: 2}
   - {fileID: 11400000, guid: 3e69d0ed1c778d641a7aa56ddb326af8, type: 2}
   effects: []
   mutantLevel: 2
-  maxPollutionLevel: 80
+  maxPollutionLevel: 100
   maxAtk: 5
   maxDef: 0
   baseScrapReward: 30
-  baseEXPReward: 60
+  baseEXPReward: 500
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0
