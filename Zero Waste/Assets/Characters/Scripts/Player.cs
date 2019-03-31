@@ -10,7 +10,7 @@ public class Player : Character {
     [Range(1, 30)] public int currentLevel;
     [Range(5, 10)] public int baseHP;
     public int baseAnt;
-    [Range(1, 5)] public int baseAtk;
+    [Range(1, 10)] public int baseAtk;
     [Range(1, 5)] public int baseDef;
     [Range(1, 3)] public int antGen;
     [Range(1, 5)] public int threatLevel;
@@ -217,7 +217,7 @@ public class Player : Character {
     }
 
     // Clear all debuffs from player
-    public void isCleared()
+    public void IsCleared()
     {
         if (effects.Count > 0)
         {

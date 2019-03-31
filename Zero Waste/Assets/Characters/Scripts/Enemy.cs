@@ -91,7 +91,7 @@ public class Enemy : Character {
             currentPollutionLevel = estimatedStat;
         }
 
-        if (currentPollutionLevel > maxPollutionLevel * .5)
+        if (currentPollutionLevel > (int)(maxPollutionLevel * 0.5f))
             currentState = "Offensive";
 
         else

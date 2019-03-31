@@ -29,10 +29,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b84da9e4a89cba742ae5388bcf5744ae, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 16
+  currentLevel: 30
   baseHP: 8
   baseAnt: 5
-  baseAtk: 5
+  baseAtk: 10
   baseDef: 3
   antGen: 1
   threatLevel: 4

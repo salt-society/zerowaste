@@ -30,3 +30,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8c5e638bdf8fc14e87e1e343b1e3557, type: 2}
   cooldown: 0
   turnTillActive: 0
+  chanceToProc: 100
+  abilityState: Offensive

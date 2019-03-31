@@ -30,3 +30,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2220955663eeef04d8c2660ebe0b8832, type: 2}
   cooldown: 1
   turnTillActive: 0
+  chanceToProc: 25
+  abilityState: Defensive

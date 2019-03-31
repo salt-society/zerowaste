@@ -12,7 +12,10 @@ public class Battle : ScriptableObject {
     public int battleId;
     public string battleName;
     public string info;
+
+    [Space]
     public bool isBossBattle;
+    public bool isTutorial;
 
     [Space]
     public Node node;

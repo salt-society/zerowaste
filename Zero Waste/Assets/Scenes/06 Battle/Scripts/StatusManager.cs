@@ -350,6 +350,18 @@ public class StatusManager : MonoBehaviour
         }
     }
 
+    public void SetBossDetails(Enemy[] mutantData)
+    {
+        foreach (Enemy mutant in mutantData)
+        {
+            if (mutant != null)
+            {
+                mutantStatusSection.transform.GetChild(5).GetComponent<Image>().sprite = mutant.characterThumb;
+                combinedPL += mutant.currentPollutionLevel;
+            }
+        }
+    }
+
     // <summary>
     // Display mutant status panel
     // </summary>
@@ -377,16 +389,26 @@ public class StatusManager : MonoBehaviour
             yield return null;
         }
 
-        // Show mutant icons near PL Bar
-        i = 0;
-        foreach (Enemy mutant in mutantData)
+        if (dataController != null)
         {
-            // Make sure there's mutant in position
-            if (mutant != null)
+            if (dataController.currentBattle.isBossBattle)
             {
-                mutantStatusPanel[i].SetActive(true);
-                i++;
-                yield return null;
+                mutantStatusSection.transform.GetChild(5).gameObject.SetActive(true);
+            }
+            else
+            {
+                // Show mutant icons near PL Bar
+                i = 0;
+                foreach (Enemy mutant in mutantData)
+                {
+                    // Make sure there's mutant in position
+                    if (mutant != null)
+                    {
+                        mutantStatusPanel[i].SetActive(true);
+                        i++;
+                        yield return null;
+                    }
+                }
             }
         }
     }
@@ -399,19 +421,19 @@ public class StatusManager : MonoBehaviour
     // <summary>
     // Shows damage taken by Scavenger or Mutant
     // </summary>
-    public IEnumerator ShowValues(string value, string valueType, GameObject characterObj, int particleIndex)
+    public IEnumerator ShowValues(string value, int maxValue, string valueType, GameObject characterObj, int particleIndex)
     {
         TextMeshProUGUI valuePrefab;
         if (valueType.Equals("Offensive"))
         {
-            if (int.Parse(value) > 100)
+            if (int.Parse(value) > (maxValue/2))
                 valuePrefab = damagePointsPrefab;
             else
                 valuePrefab = smallDamagePrefab;
         }
         else
         {
-            if (int.Parse(value) > 100)
+            if (int.Parse(value) > (maxValue/2))
                 valuePrefab = healPointsPrefab;
             else
                 valuePrefab = smallHealPrefab;
@@ -572,8 +594,11 @@ public class StatusManager : MonoBehaviour
         int maxCombinedPL = 0;
         foreach (GameObject mutantPrefab in mutantPrefabs) 
         {
-            currentCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().CurrentHealth;
-            maxCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().GetMutantMaxHealth();
+            if (mutantPrefab != null)
+            {
+                currentCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().CurrentHealth;
+                maxCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().GetMutantMaxHealth();
+            }
         }
 
         float combinedPLLeft = (float)currentCombinedPL / (float)maxCombinedPL;
@@ -606,8 +631,11 @@ public class StatusManager : MonoBehaviour
         int maxCombinedPL = 0;
         foreach (GameObject mutantPrefab in mutantPrefabs)
         {
-            currentCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().CurrentHealth;
-            maxCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().GetMutantMaxHealth();
+            if (mutantPrefab != null)
+            {
+                currentCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().CurrentHealth;
+                maxCombinedPL += mutantPrefab.GetComponent<CharacterMonitor>().GetMutantMaxHealth();
+            }
         }
 
         float combinedPLLeft = (float)currentCombinedPL / (float)maxCombinedPL;

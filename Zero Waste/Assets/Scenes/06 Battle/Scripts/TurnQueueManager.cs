@@ -30,6 +30,7 @@ public class TurnQueueManager : MonoBehaviour {
 
     public void CalculateTurn(Player[] scavengers, Enemy[] mutants)
     {
+        characterQueue = new List<Character>();
         // Create lists for all characters [characterList]
         // and sorted characters by speed [characterQ]
         List<Character> characterList = new List<Character>();
@@ -73,6 +74,12 @@ public class TurnQueueManager : MonoBehaviour {
 
             characterList.Remove(fastestCharacter);
             characterQ.Add(fastestCharacter);
+
+            Debug.Log("Fastest Character: " + fastestCharacter.characterName + " " + fastestCharacter.currentSpd);
+
+            if (fastestCharacter is Boss)
+                characterQ.Add(fastestCharacter);
+
             fastestSpeed = -1;
         }
 
@@ -93,7 +100,7 @@ public class TurnQueueManager : MonoBehaviour {
             queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
             queueIcons[i].SetActive(true);
 
-            if (deadCharacterList != null)
+            /*if (deadCharacterList != null)
             {
                 if (deadCharacterList.Count > j)
                 {
@@ -115,7 +122,7 @@ public class TurnQueueManager : MonoBehaviour {
             else
             {
                 queueOverlays[i].SetActive(false);
-            }
+            }*/
 
             queueBars[i].SetActive(true);
             i++;
@@ -181,6 +188,11 @@ public class TurnQueueManager : MonoBehaviour {
         return characterQueue;
     }
 
+    public void ClearCharacterQueue()
+    {
+        characterQueue = new List<Character>();
+    }
+
     // <summary>
     // Dims character's queue icon to emphasize remaining characters
     // that will still attack
@@ -192,7 +204,7 @@ public class TurnQueueManager : MonoBehaviour {
         {
             if (character.GetInstanceID().Equals(finishedCharacter.GetInstanceID()))
             {
-                queueOverlays[i].SetActive(true);
+                //queueOverlays[i].SetActive(true);
                 break;
             }
             i++;
@@ -209,8 +221,8 @@ public class TurnQueueManager : MonoBehaviour {
         {
             if (character.GetInstanceID().Equals(deadCharacter.GetInstanceID()))
             {
-                queueOverlays[i].SetActive(true);
-                deadCharacterList.Add(i);
+                //queueOverlays[i].SetActive(true);
+                //deadCharacterList.Add(i);
                 break;
             }
             i++;

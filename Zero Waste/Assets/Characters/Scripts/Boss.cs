@@ -6,6 +6,8 @@ using UnityEngine;
 public class Boss : Enemy
 {
     [Header("Boss Information")]
+    public Color[] phaseColors;
+
     // Definition for how many phases we want to have
     public float[] phaseNumbers;
 
@@ -16,10 +18,10 @@ public class Boss : Enemy
     public Effect[] phaseEffects;
 
     // Storage for HP thresholds to reduce computation time
-    private int[] thresholds;
+    [HideInInspector] public int[] thresholds;
 
     // Boolean to check if phases has been cleared
-    private bool[] hasClearedPhase;
+    [HideInInspector] public bool[] hasClearedPhase;
 
     // Override initialize enemy to initialize boolean array and calculate PL to switch phase to
     public override void OnInitialize()
@@ -37,6 +39,8 @@ public class Boss : Enemy
         // Calculate thresholds for when to switch to next phase
         for (int CTR = 0; CTR < phaseNumbers.Length; CTR++)
             thresholds[CTR] = (int)(maxPollutionLevel * phaseNumbers[CTR]);
+
+        Debug.Log("Init Boss.");
     }
 
     // Override isAttacked to accomodate phase switching
@@ -71,10 +75,14 @@ public class Boss : Enemy
             for (int CTR = phaseNumber; CTR >= 0; CTR--)
                 effectEnd += effectNumber[CTR];
         }
+        else
+        {
+            effectEnd = effectNumber[phaseNumber];
+        }
 
         while (effectStart < effectEnd)
         {
-            this.IsBuffed(phaseEffects[effectStart]);
+            this.IsBuffed(Instantiate(phaseEffects[effectStart]));
             effectStart++;
         }
     }

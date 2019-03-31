@@ -11,8 +11,6 @@ public class CharacterManager : MonoBehaviour {
     public GameObject mutantGroup;
     public GameObject[] mutants;
 
-    
-
     [Header("Managers")]
     public StatusManager statusManager;
     public CameraManager cameraManager;
@@ -47,24 +45,14 @@ public class CharacterManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(this);
+
+
     }
 
     void Start()
     {
         allScavengersAlive = true;
         allMutantsAlive = true;
-    }
-
-    public Player[] CloneCharacters(Player[] scavengers)
-    {
-        Player[] clonedScavengers = (Player[])scavengers.Clone();
-        return clonedScavengers;
-    }
-
-    public Enemy[] CloneCharacters(Enemy[] mutants)
-    {
-        Enemy[] clonedMutants = (Enemy[])mutants.Clone();
-        return clonedMutants;
     }
 
     public Player[] InstantiateCharacterData(Player[] scavengers)
@@ -82,7 +70,6 @@ public class CharacterManager : MonoBehaviour {
 
     public Enemy[] InstantiateCharacterData(Enemy[] mutants)
     {
-
         Enemy[] instantiatedMutants = new Enemy[mutants.Length];
         for (int i = 0; i < mutants.Length; i++)
         {
@@ -131,29 +118,18 @@ public class CharacterManager : MonoBehaviour {
         return initMutants;
     }
 
-    public void ChangeSprite(Player[] scavengers)
+    public Enemy[] InitializeBoss(Enemy bossMutant)
     {
-        int i = 0;
-        foreach (Player scavenger in scavengers)
-        {
-            this.scavengers[i].GetComponent<SpriteRenderer>().sprite = scavenger.characterFull;
-            i++;
-        }
+        Enemy[] initMutants = new Enemy[2];
+        initMutants[0] = null;
+
+        Boss bossMutantTemp = bossMutant as Boss;
+        bossMutantTemp.OnInitialize();
+        initMutants[1] = bossMutantTemp as Enemy;
+
+        return initMutants;
     }
 
-    public void ChangeSprite(Enemy[] mutants)
-    {
-        int i = 0;
-        foreach (Enemy mutant in mutants)
-        {
-            this.mutants[i].GetComponent<SpriteRenderer>().sprite = mutant.characterFull;
-            i++;
-        }
-    }
-
-    // <summary>
-    // Instantiate each scavenger's prefab on respective positions.
-    // </summary>
     public void InstantiateCharacterPrefab(Player[] scavengers) 
     {
         scavengerPrefabs = new GameObject[scavengers.Length];
@@ -188,23 +164,23 @@ public class CharacterManager : MonoBehaviour {
         int i = 0;
         foreach (Enemy mutant in mutants)
         {
-            // Instantiate
-            mutantObject = Instantiate(mutant.prefab, this.mutants[i].transform);
-            mutantObject.GetComponent<CharacterMonitor>().InitializeMonitor();
-            mutantObject.GetComponent<CharacterMonitor>().Mutant = mutant;
-            mutantObject.GetComponent<CharacterMonitor>().Position = i;
-            mutantObject.GetComponent<CharacterMonitor>().SetCharacter();
-            mutantObject.transform.localScale = mutant.scale;
+            if (mutant != null)
+            {
+                // Instantiate
+                mutantObject = Instantiate(mutant.prefab, this.mutants[i].transform);
+                mutantObject.GetComponent<CharacterMonitor>().InitializeMonitor();
+                mutantObject.GetComponent<CharacterMonitor>().Mutant = mutant;
+                mutantObject.GetComponent<CharacterMonitor>().Position = i;
+                mutantObject.GetComponent<CharacterMonitor>().SetCharacter();
+                mutantObject.transform.localScale = mutant.scale;
 
-            // Store mutant prefab for later access
-            mutantPrefabs[i] = mutantObject;
+                // Store mutant prefab for later access
+                mutantPrefabs[i] = mutantObject;
+            }
             i++;
         }
     }
 
-    // <summary>
-    // Gets scavenger prefab, existing on battle, through scavenger data
-    // </summary>
     public GameObject GetScavengerPrefab(Player scavengerData)
     {
         GameObject scavengerPrefab = null;
@@ -250,12 +226,15 @@ public class CharacterManager : MonoBehaviour {
 
         foreach (GameObject mutantObject in mutantPrefabs)
         {
-            int instanceId = mutantObject.GetComponent<CharacterMonitor>().InstanceId;
-
-            if (instanceId.Equals(mutantData.GetInstanceID()))
+            if (mutantObject != null)
             {
-                mutantPrefab = mutantObject;
-                break;
+                int instanceId = mutantObject.GetComponent<CharacterMonitor>().InstanceId;
+
+                if (instanceId.Equals(mutantData.GetInstanceID()))
+                {
+                    mutantPrefab = mutantObject;
+                    break;
+                }
             }
         }
 
@@ -285,9 +264,6 @@ public class CharacterManager : MonoBehaviour {
         return (characterType > 0) ? scavengerPrefabs : mutantPrefabs;
     }
 
-    // <summary>
-    // Gets character section, gameObject that holds each character type
-    // </summary>
     public GameObject GetCharacterSection(int characterType)
     {
         return (characterType > 0) ? scavengerGroup : mutantGroup;
@@ -323,50 +299,42 @@ public class CharacterManager : MonoBehaviour {
         // Loop throught the prefabs, get character monitor, and check if character is alive
         foreach (GameObject characterObject in characterPrefabs)
         {
-            // If a character is alive, break loop
-            // This means that battle must go on as both scavengers and mutants
-            // still has alive characters
-            if (characterObject.GetComponent<CharacterMonitor>().IsAlive)
+            // Make sure character object is not null before accessing
+            // its components like character monitor
+            if (characterObject != null)
             {
-                if (targetCharacter == 1)
-                    allScavengersAlive = true;
-
-                if (targetCharacter == 0)
-                    allMutantsAlive = true;
-
-                break;
-            }
-            // This condition is reached if a character is dead
-            else
-            {
-                // This condition won't be reached if loop haven't gone through
-                // all prefabs, which just means all characters in a team is dead
-                if (characterObject.GetInstanceID() == 
-                    characterPrefabs[characterPrefabs.Length - 1].GetInstanceID())
+                // If a character is alive, break loop
+                // This means that battle must go on as both scavengers and mutants
+                // still has alive characters
+                if (characterObject.GetComponent<CharacterMonitor>().IsAlive)
                 {
                     if (targetCharacter == 1)
-                        allScavengersAlive = false;
+                        allScavengersAlive = true;
 
                     if (targetCharacter == 0)
-                        allMutantsAlive = false;
+                        allMutantsAlive = true;
+
+                    break;
+                }
+                // This condition is reached if a character is dead
+                else
+                {
+                    // This condition won't be reached if loop haven't gone through
+                    // all prefabs, which just means all characters in a team is dead
+                    if (characterObject.GetInstanceID() ==
+                        characterPrefabs[characterPrefabs.Length - 1].GetInstanceID())
+                    {
+                        if (targetCharacter == 1)
+                            allScavengersAlive = false;
+
+                        if (targetCharacter == 0)
+                            allMutantsAlive = false;
+                    }
                 }
             }
         }
 
         yield return null;
-    }
-
-    public void CheckStatusEffects()
-    {
-        foreach (GameObject scavengerPrefab in scavengerPrefabs)
-        {
-            scavengerPrefab.GetComponent<CharacterMonitor>().EndOfLoop = true;
-        }
-
-        foreach (GameObject mutantPrefab in mutantPrefabs)
-        {
-            mutantPrefab.GetComponent<CharacterMonitor>().EndOfLoop = true;
-        }
     }
 
     void Update()

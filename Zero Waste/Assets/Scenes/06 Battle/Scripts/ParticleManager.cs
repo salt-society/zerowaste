@@ -13,7 +13,7 @@ public class ParticleManager : MonoBehaviour
     {
         float duration = particleList[particleIndex].main.duration;
 
-        ParticleSystem newParticle = Instantiate(particleList[particleIndex], canvasTransform);
+        ParticleSystem newParticle = Instantiate(particleList[particleIndex]);
         newParticle.transform.position = instantiatePos;
 
         yield return new WaitForSeconds(duration);

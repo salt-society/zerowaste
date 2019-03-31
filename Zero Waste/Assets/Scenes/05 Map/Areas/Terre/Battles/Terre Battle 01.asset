@@ -17,7 +17,8 @@ MonoBehaviour:
   battleId: 0
   battleName: Terre 1
   info: 
-  isBossBattle: 0
+  isBossBattle: 1
+  isTutorial: 0
   node: {fileID: 11400000, guid: 385719f75d227cd4e83ba83a540632db, type: 2}
   wastePool: {fileID: 11400000, guid: 1acacc314d99ee64b95d0866fa8067f9, type: 2}
   isMajorCutscene: 0

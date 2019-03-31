@@ -32,9 +32,11 @@ MonoBehaviour:
   maxDef: 0
   baseScrapReward: 30
   baseEXPReward: 500
+  baseState: Offensive
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0
   currentDef: 0
   currentScrapReward: 0
   currentEXPReward: 0
+  currentState: 

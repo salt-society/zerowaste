@@ -60,6 +60,9 @@ public class PlayerAbilityManager : MonoBehaviour
     }
     #endregion
 
+    private bool switchingPhase;
+    private float switchLength;
+
     void Start()
     {
         battleController = FindObjectOfType<BattleController>();
@@ -71,6 +74,8 @@ public class PlayerAbilityManager : MonoBehaviour
         particleManager = FindObjectOfType<ParticleManager>();
         characterManager = FindObjectOfType<CharacterManager>();
         turnQueueManager = FindObjectOfType<TurnQueueManager>();
+
+        switchingPhase = false;
     }
 
     // <summary>
@@ -210,7 +215,7 @@ public class PlayerAbilityManager : MonoBehaviour
                 {
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
                     StartCoroutine(statusManager.IncrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj, ability.particleIndex));
                     yield return new WaitForSeconds(1f);
                 }
                 else
@@ -220,7 +225,7 @@ public class PlayerAbilityManager : MonoBehaviour
                     StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
 
                     if (ability.showValue)
-                        StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+                        StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj, ability.particleIndex));
 
                     yield return new WaitForSeconds(1f);
                 }
@@ -269,6 +274,13 @@ public class PlayerAbilityManager : MonoBehaviour
             if (!targetObj.GetComponent<CharacterMonitor>().IsAlive)
                 yield return new WaitForSeconds(1f);
 
+            if (switchingPhase)
+            {
+                yield return new WaitForSeconds(switchLength + 0.5f);
+                switchingPhase = false;
+                switchLength = 0f;
+            }
+
         }
         else if (ability.range.Equals("AOE"))
         {
@@ -301,6 +313,11 @@ public class PlayerAbilityManager : MonoBehaviour
 
     IEnumerator ToMutant(GameObject targetObj)
     {
+        bool switchPhase = false;
+        int currentPhase = -1;
+        int startIndex = 0;
+        int endIndex = 0;
+        
         animationManager.PlayAnimation(ability, scavengerObj, targetObj, scavenger.characterType);
         foreach (Effect effect in ability.effects)
         {
@@ -310,8 +327,40 @@ public class PlayerAbilityManager : MonoBehaviour
                 int valueChanged = targetObj.GetComponent<CharacterMonitor>().MutantDamaged(effect.strength, scavenger);
                 changeApplied += valueChanged;
 
+                if (targetObj.GetComponent<CharacterMonitor>().Mutant is Boss)
+                {
+                    Boss boss = targetObj.GetComponent<CharacterMonitor>().Mutant as Boss;
+                    foreach (bool clearedPhase in boss.hasClearedPhase)
+                    {
+                        if (clearedPhase)
+                            currentPhase++;
+                    }
+
+                    if ((currentPhase > -1) && (currentPhase < boss.hasClearedPhase.Length))
+                    {
+                        switchPhase = boss.hasClearedPhase[currentPhase];
+                        switchingPhase = switchPhase;
+
+                        if (currentPhase > 0)
+                        {
+                            for (int i = currentPhase; i > 0; i--)
+                                startIndex += boss.effectNumber[i];
+
+                            for (int i = currentPhase; i >= 0; i--)
+                                endIndex += boss.effectNumber[i];
+                        }
+                        else
+                        {
+                            endIndex = boss.effectNumber[currentPhase];
+                        }
+                        
+                        switchLength = (float)endIndex;
+                    }
+                }
+
                 StartCoroutine(statusManager.DecrementPollutionBar(valueChanged));
-                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), ability.type, targetObj, ability.particleIndex));
+                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), targetObj.GetComponent<CharacterMonitor>().MaxHealth, 
+                    ability.type, targetObj, ability.particleIndex));
                 yield return new WaitForSeconds(1f);
             }
 
@@ -329,11 +378,48 @@ public class PlayerAbilityManager : MonoBehaviour
                 if (effect.application.Equals("Condition"))
                 {
                     targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.GetComponent<BoxCollider2D>().bounds.center));
                 }
                 yield return new WaitForSeconds(1f);
             }
         }
+
+        if (targetObj.GetComponent<CharacterMonitor>().IsAlive)
+        {
+            if (switchPhase)
+            {
+                yield return new WaitForSeconds(2f);
+
+                Boss boss = targetObj.GetComponent<CharacterMonitor>().Mutant as Boss;
+                BoxCollider2D bossCollider = targetObj.GetComponent<BoxCollider2D>();
+                StartCoroutine(particleManager.PlayParticles(0, bossCollider.bounds.center));
+                while (startIndex < endIndex)
+                {
+                    Debug.Log("Apply " + boss.phaseEffects[startIndex].effectName);
+                    cameraManager.Shake(true, 2);
+                    if (boss.phaseEffects[startIndex].type.Equals("Status"))
+                    {
+                        if (boss.phaseEffects[startIndex].application.Equals("CharStats"))
+                        {
+                            targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, boss.phaseEffects[startIndex]);
+                            StartCoroutine(statusManager.ShowBuff(targetObj, boss.phaseEffects[startIndex].state));
+                        }
+
+                        if (boss.phaseEffects[startIndex].application.Equals("Condition"))
+                        {
+                            targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, boss.phaseEffects[startIndex]);
+                            StartCoroutine(particleManager.PlayParticles(boss.phaseEffects[startIndex].particleIndex, targetObj.transform.position));
+                        }
+
+                        yield return new WaitForSeconds(1.2f);
+                        startIndex++;
+                    }
+                }
+
+                cameraManager.Shake(false, 2);
+            }
+        }
+        
     }
 
     public IEnumerator EndTurn()

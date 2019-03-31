@@ -29,7 +29,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b84da9e4a89cba742ae5388bcf5744ae, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 1
+  currentLevel: 30
   baseHP: 6
   baseAnt: 5
   baseAtk: 5

@@ -21,14 +21,9 @@ public class BattleController : MonoBehaviour {
     public float[] mutantEntranceDelay;
     public float[] renderDelay;
 
-    private string battleNo;
-    private string nodeName;
-
     [Space]
-    [SerializeField] private Player[] scavengerTeamArray;
-    [SerializeField] private Enemy[] mutantTeamArray;
-    private List<Player> scavengerTeamList;
-    private List<Enemy> mutantTeamList;
+    private Player[] scavengerTeam;
+    private Enemy[] mutantTeam;
 
     private List<Character> characterQueue;
 
@@ -56,8 +51,7 @@ public class BattleController : MonoBehaviour {
         // MarkAsPlayed();
 
         // Get all details needed for battle and set it up
-        GetBattleData();
-        BattleSetup();
+        CheckMode();
     }
 
     // <summary>
@@ -72,81 +66,95 @@ public class BattleController : MonoBehaviour {
         }
     }
 
-    // Gets data from previous scene, which is the Map Screen,
-    // that has the Team Select function.
+    void CheckMode()
+    {
+        if (dataController != null)
+        {
+            if (dataController.currentBattle.isTutorial)
+            {
+
+            }
+            else
+            {
+                GetBattleData();
+                BattleSetup();
+            }
+        }
+    }
+
     void GetBattleData()
     {
         if (dataController != null)
         {
-            scavengerTeamList = new List<Player>();
+            List<Player> scavengerTemp = new List<Player>();
+            List<Enemy> mutantTemp = new List<Enemy>();
+
             foreach (Player scavenger in dataController.scavengerTeam)
             {
                 if (scavenger != null)
-                    scavengerTeamList.Add(scavenger);
-            }
+                    scavengerTemp.Add(scavenger);
+            }     
 
-            mutantTeamList = new List<Enemy>();
             foreach (Enemy mutant in dataController.wasteTeam)
             {
                 if (mutant != null)
-                    mutantTeamList.Add(mutant);
+                    mutantTemp.Add(mutant);
             }
 
-            scavengerTeamArray = new Player[scavengerTeamList.Count];
-            scavengerTeamArray = scavengerTeamList.ToArray();
-            scavengerTeamArray = characterManager.InstantiateCharacterData(scavengerTeamArray);
-            scavengerTeamArray = characterManager.InitializeScavengers(scavengerTeamArray);
+            dataController.scavengerCount = scavengerTemp.Count;
+            dataController.mutantCount = mutantTemp.Count;
 
-            mutantTeamArray = new Enemy[mutantTeamList.Count];
-            mutantTeamArray = mutantTeamList.ToArray();
-            mutantTeamArray = characterManager.InstantiateCharacterData(mutantTeamArray);
-            mutantTeamArray = characterManager.InitializeMutants(mutantTeamArray);
+            scavengerTeam = new Player[scavengerTemp.Count];
+            scavengerTeam = scavengerTemp.ToArray();
+            scavengerTeam = characterManager.InstantiateCharacterData(scavengerTeam);
+            scavengerTeam = characterManager.InitializeScavengers(scavengerTeam);
+
+            mutantTeam = new Enemy[mutantTemp.Count];
+            mutantTeam = mutantTemp.ToArray();
+            mutantTeam = characterManager.InstantiateCharacterData(mutantTeam);
+
+            if (dataController.currentBattle.isBossBattle)
+                mutantTeam = characterManager.InitializeBoss(mutantTeam[0]);
+            else
+                mutantTeam = characterManager.InitializeMutants(mutantTeam);
         }
+    }
+
+    void SetDefaultFlags()
+    {
+        firstLoop = true;
+        loopDone = true;
+        battleEnd = false;
+        endOfLoop = false;
+        turnCount = 0;
     }
 
     void BattleSetup()
     {
         if (dataController != null)
         {
-            // Set Flags to Default Values
-            firstLoop = true;
-            loopDone = true;
-            battleEnd = false;
-            endOfLoop = false;
-            turnCount = 0;
-            
-            // Set Background
+            SetDefaultFlags();
+
             environmentManager.SetBackground(dataController.currentBattle.background);
+            statusManager.SetScavengerDetails(scavengerTeam);
+            statusManager.SetMutantDetails(mutantTeam);
+            characterManager.InstantiateCharacterPrefab(scavengerTeam);
+            characterManager.InstantiateCharacterPrefab(mutantTeam);
 
-            // Set Character Objects
-            characterManager.InstantiateCharacterPrefab(scavengerTeamArray);
-            characterManager.InstantiateCharacterPrefab(mutantTeamArray);
-
-            // Set Character Details
-            statusManager.SetScavengerDetails(scavengerTeamArray);
-            statusManager.SetMutantDetails(mutantTeamArray);
-
-            // Start Battle Loop
             if (!dataController.currentBattle.isBossBattle)
-            {
                 StartCoroutine(BattleLoop());
-            }
-            else
-            {
 
-            }
-            
+            if (dataController.currentBattle.isBossBattle)
+                StartCoroutine(BossBattleLoop());
         } 
     }
 
     void ProcessTurn()
     {
-        turnQueueManager.CalculateTurn(scavengerTeamArray, mutantTeamArray);
+        turnQueueManager.CalculateTurn(scavengerTeam, mutantTeam);
 
         characterQueue = new List<Character>();
         characterQueue = turnQueueManager.GetCharacterQueue();
-
-        Debug.Log("Processing Turns");
     }
 
     IEnumerator RenderBattleComponents()
@@ -160,8 +168,8 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(characterManager.MutantEntrance());
         yield return new WaitForSeconds(mutantEntranceDelay[dataController.mutantCount - 1]);
 
-        StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeamArray));
-        StartCoroutine(statusManager.DisplayMutantStatusSection(mutantTeamArray));
+        StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeam));
+        StartCoroutine(statusManager.DisplayMutantStatusSection(mutantTeam));
         yield return new WaitForSeconds(3f);
 
         firstLoop = false;
@@ -178,9 +186,11 @@ public class BattleController : MonoBehaviour {
             {
                 StartCoroutine(RenderBattleComponents());
                 yield return new WaitForSeconds(renderDelay[dataController.scavengerCount - 1]);
+
+                firstLoop = false;
             }
 
-            if (turnCount < (dataController.scavengerCount + dataController.mutantCount))
+            if (turnCount < (scavengerTeam.Length + mutantTeam.Length))
             {
                 if (loopDone)
                 {
@@ -221,7 +231,176 @@ public class BattleController : MonoBehaviour {
 
                     if (characterQueue[turnCount] is Player)
                     {
-                        
+                        attackController.DisplayAttackButtons(1);
+                        yield return new WaitForSeconds(0.5f);
+                        attackController.ShowAttackButtons();
+
+                        // Get scavenger prefab
+                        GameObject scavengerPrefab = characterManager.
+                            GetScavengerPrefab(characterQueue[turnCount] as Player);
+
+                        // If not null, trigger its fight instance
+                        if (scavengerPrefab != null)
+                        {
+                            scavengerPrefab.GetComponent<CharacterMonitor>().CharacterBattleStance();
+                            itemManager.SetCurrentScavenger(scavengerPrefab.GetComponent<CharacterMonitor>().Position);
+                        }
+
+                        turnQueueManager.SetCurrentCharacter(turnCount);
+                        attackController.ScavengerAttackSetup();
+                    }
+                    else
+                    {
+                        attackController.EnableAttackButtons(0);
+                        attackController.HideAttackButtons();
+
+                        GameObject mutantObject = characterManager.GetMutantPrefab(characterQueue[turnCount] as Enemy);
+                        if (mutantObject != null)
+                        {
+                            mutantObject.GetComponent<CharacterMonitor>().CharacterBattleStance();
+                            yield return new WaitForSeconds(1f);
+                        }
+
+                        turnQueueManager.SetCurrentCharacter(turnCount);
+                        enemyAbilityManager.SetupEnemyAttack(mutantObject.GetComponent<CharacterMonitor>().Mutant, mutantObject);
+                    }
+                }
+                else
+                {
+                    turnCount++;
+                    StopAllCoroutines();
+                    StartCoroutine(BattleLoop());
+                }
+
+            }
+            else
+            {
+                loopDone = true;
+                endOfLoop = true;
+                turnCount = 0;
+
+                attackController.HideAttackButtons();
+                turnQueueManager.ShowTurnQueue(0);
+                turnQueueManager.HideTurnQueue(1);
+
+                yield return new WaitForSeconds(1f);
+                StartCoroutine(turnQueueManager.HideTurnQueue());
+
+                for (int i = 0; i < 2; i++)
+                {
+                    int j = 0;
+                    foreach (GameObject characterObj in characterManager.GetAllCharacterPrefabs(i))
+                    {
+                        if (characterObj != null)
+                        {
+                            if (characterObj.GetComponent<CharacterMonitor>().IsAlive)
+                                StartCoroutine(characterObj.GetComponent<CharacterMonitor>().UpdateEffects());
+
+                            if (i == 0)
+                            {
+                                mutantTeam[j] = null;
+                                mutantTeam[j] = characterObj.GetComponent<CharacterMonitor>().Mutant;
+                                j++;
+                            }
+
+                            if (i == 1)
+                            {
+                                scavengerTeam[j] = null;
+                                scavengerTeam[j] = characterObj.GetComponent<CharacterMonitor>().Scavenger;
+                                j++;
+                            }
+                        }
+                    }
+
+                    if (i == 1)
+                    {
+                        yield return new WaitForSeconds(1f);
+                        StartCoroutine(BattleLoop());
+                    }
+                }
+            }
+        }
+        
+    }
+
+    IEnumerator RenderBossBattleComponents()
+    {
+        StartCoroutine(battleInfoManager.ShowBossAnimation(1));
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(battleInfoManager.ShowBossAnimation(0));
+
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(characterManager.ScavengersEntrance());
+        yield return new WaitForSeconds(scavengerEntranceDelay[dataController.scavengerCount - 1]);
+
+        cameraManager.Shake(true, 2);
+        StartCoroutine(characterManager.MutantEntrance());
+        yield return new WaitForSeconds(mutantEntranceDelay[dataController.mutantCount - 1]);
+        yield return new WaitForSeconds(1f);
+        cameraManager.Shake(false, 2);
+
+        StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeam));
+        StartCoroutine(statusManager.DisplayMutantStatusSection(mutantTeam));
+        yield return new WaitForSeconds(3f);
+
+        firstLoop = false;
+        yield return null;
+    }
+
+    IEnumerator BossBattleLoop()
+    {
+        if (!battleEnd)
+        {
+            if (firstLoop)
+            {
+                StartCoroutine(RenderBossBattleComponents());
+                yield return new WaitForSeconds(renderDelay[dataController.scavengerCount - 1]);
+
+                firstLoop = false;
+            }
+
+            if (turnCount < (scavengerTeam.Length + mutantTeam.Length))
+            {
+                if (loopDone)
+                {
+                    ProcessTurn();
+                    turnQueueManager.ShowPointer(0);
+
+                    battleInfoManager.SetMiddleMessage("Processing Turn");
+                    battleInfoManager.DisplayMiddleMessage(1);
+                    battleInfoManager.HideMiddleMessage(0);
+                    yield return new WaitForSeconds(1f);
+                    battleInfoManager.HideMiddleMessage(1);
+
+                    StartCoroutine(turnQueueManager.DisplayTurnQueue());
+
+                    if (turnCount == 0)
+                        yield return new WaitForSeconds(2f);
+
+                    loopDone = false;
+                }
+
+                // See if character is still alive to decide if you should skip this turn
+                bool continueLoop = IsCurrentCharacterAlive();
+                if (continueLoop && !battleEnd)
+                {
+                    battleInfoManager.SetCurrentTurn(characterQueue[turnCount].characterThumb,
+                    characterQueue[turnCount].characterName);
+
+                    /*battleInfoManager.DisplayNextTurnPanel(1);
+                    yield return new WaitForSeconds(0.5f);
+                    battleInfoManager.DisplayNextTurnSign(1);
+                    yield return new WaitForSeconds(1f);
+
+                    battleInfoManager.DisplayNextTurnSign(0);
+                    battleInfoManager.DisplayNextTurnPanel(0);*/
+
+                    turnQueueManager.ShowPointer(1);
+                    turnQueueManager.PointCurrentCharacter(turnCount);
+
+                    if (characterQueue[turnCount] is Player)
+                    {
+
 
                         attackController.DisplayAttackButtons(1);
                         yield return new WaitForSeconds(0.5f);
@@ -254,16 +433,15 @@ public class BattleController : MonoBehaviour {
                         }
 
                         turnQueueManager.SetCurrentCharacter(turnCount);
-                        enemyAbilityManager.SetupEnemyAttack(characterQueue[turnCount] as Enemy, mutantObject);
+                        enemyAbilityManager.SetupEnemyAttack(mutantObject.GetComponent<CharacterMonitor>().Mutant, mutantObject);
                     }
                 }
                 else
                 {
                     turnCount++;
                     StopAllCoroutines();
-                    StartCoroutine(BattleLoop());
+                    StartCoroutine(BossBattleLoop());
                 }
-
             }
             else
             {
@@ -278,23 +456,49 @@ public class BattleController : MonoBehaviour {
                 yield return new WaitForSeconds(1f);
                 StartCoroutine(turnQueueManager.HideTurnQueue());
 
+                float delay = 1f;
                 for (int i = 0; i < 2; i++)
                 {
                     foreach (GameObject characterObj in characterManager.GetAllCharacterPrefabs(i))
                     {
-                        if (characterObj.GetComponent<CharacterMonitor>().IsAlive)
-                            StartCoroutine(characterObj.GetComponent<CharacterMonitor>().UpdateEffects());
+                        if (characterObj != null)
+                        {
+                            if (characterObj.GetComponent<CharacterMonitor>().IsAlive)
+                            {
+                                StartCoroutine(characterObj.GetComponent<CharacterMonitor>().UpdateEffects());
+
+                                if (i == 0)
+                                    delay += characterObj.GetComponent<CharacterMonitor>().SwitchLength;
+                            }
+                                
+
+                            if (i == 0)
+                            {
+                                int position = characterObj.GetComponent<CharacterMonitor>().Position;
+                                mutantTeam[position] = null;
+                                mutantTeam[position] = characterObj.GetComponent<CharacterMonitor>().Mutant;
+
+                            }
+
+                            if (i == 1)
+                            {
+                                int position = characterObj.GetComponent<CharacterMonitor>().Position;
+                                scavengerTeam[position] = null;
+                                scavengerTeam[position] = characterObj.GetComponent<CharacterMonitor>().Scavenger;
+                            }
+                        }
                     }
 
                     if (i == 1)
                     {
-                        yield return new WaitForSeconds(1f);
-                        StartCoroutine(BattleLoop());
+                        yield return new WaitForSeconds(delay);
+                        StartCoroutine(BossBattleLoop());
                     }
                 }
             }
         }
-        
+
+        yield return null;
     }
 
     bool IsCurrentCharacterAlive()
@@ -320,7 +524,16 @@ public class BattleController : MonoBehaviour {
         StopAllCoroutines();
 
         turnCount++;
-        StartCoroutine(BattleLoop());
+        if (dataController.currentBattle.isBossBattle)
+        {
+            Debug.Log("Boss Battle");
+            StartCoroutine(BossBattleLoop());
+        }
+        else
+        {
+            StartCoroutine(BattleLoop());
+        }
+        
     }
 
     IEnumerator DisplayBattleResult(bool victory)

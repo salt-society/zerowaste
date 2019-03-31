@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour {
     private Animator mainCamAnimator;
     private Animator particleFxCamAnimator;
 
-    void Start()
+    void Awake()
     {
         // Get animators of both cam
         mainCamAnimator = mainCam.GetComponent<Animator>();

@@ -25,6 +25,8 @@ MonoBehaviour:
   showValue: 0
   repeatAnimation: 0
   particleIndex: 0
+  spawnY: 0
   effects:
   - {fileID: 11400000, guid: 6debbbad192e6bf42a5033e5f0e5b421, type: 2}
+  - {fileID: 11400000, guid: ee1831e571e421d4ab4fcfc7afd10fe4, type: 2}
   antRequirement: 0

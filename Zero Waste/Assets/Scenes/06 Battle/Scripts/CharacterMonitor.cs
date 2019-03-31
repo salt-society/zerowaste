@@ -103,6 +103,14 @@ public class CharacterMonitor : MonoBehaviour
         set { isDying = value; }
     }
 
+    private float switchLength;
+
+    public float SwitchLength
+    {
+        get { return switchLength; }
+        set { switchLength = value; }
+    }
+
     #endregion
 
     #region Scripts
@@ -114,7 +122,13 @@ public class CharacterMonitor : MonoBehaviour
     private BattleInfoManager battleInfoManager;
     #endregion
 
-    
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.name == "Ground")
+        {
+            gameObject.GetComponent<Animator>().enabled = true;
+        }
+    }
 
     // <summary>
     // Called the moment character is rendered on screen.
@@ -142,7 +156,7 @@ public class CharacterMonitor : MonoBehaviour
         // dead and ignored in queue
         if (isAlive)
         {
-            // Update character stats if scavenger
+            // Update character
             if (characterType.Equals("Scavenger"))
             {
                 statusManager.detailedScavengerStatusPanel[position].transform.GetChild(3).GetChild(2).
@@ -151,6 +165,13 @@ public class CharacterMonitor : MonoBehaviour
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavenger.currentAtk.ToString();
                 statusManager.detailedScavengerStatusPanel[position].transform.GetChild(5).GetChild(2).
                     gameObject.GetComponent<TextMeshProUGUI>().text = scavenger.currentDef.ToString();
+
+                currentHealth = scavenger.currentHP;
+                currentAnt = scavenger.currentAnt;
+            }
+            else
+            {
+                currentHealth = mutant.currentPollutionLevel;
             }
 
             // Check if dying or revived
@@ -255,6 +276,10 @@ public class CharacterMonitor : MonoBehaviour
         List<int> effectNos = new List<int>();
         List<Effect> effectsToRemove = new List<Effect>();
 
+        bool switchPhase = false;
+        int currentPhase = -1;
+        int startIndex = 0, endIndex = 0;
+
         if (scavenger != null)
         {
             if (scavenger.effects != null)
@@ -272,7 +297,7 @@ public class CharacterMonitor : MonoBehaviour
                             scavenger.currentHP = currentHealth;
                             
                             StartCoroutine(statusManager.IncrementHealthBar(currentHealth, currentMaxHealth, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), "Defensive", gameObject, 1));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxHealth, "Defensive", gameObject, 1));
                         }
                         else
                         {
@@ -282,7 +307,7 @@ public class CharacterMonitor : MonoBehaviour
                             scavenger.currentHP = currentHealth;
 
                             StartCoroutine(statusManager.DecrementHealthBar(currentHealth, currentMaxHealth, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), "Offensive", gameObject, 0));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxHealth, "Offensive", gameObject, 0));
                         }
                     }
                     else if (effect.target.Equals("ANT"))
@@ -295,7 +320,7 @@ public class CharacterMonitor : MonoBehaviour
                             scavenger.currentAnt = currentAnt;
 
                             StartCoroutine(statusManager.IncrementAntidoteBar(currentAnt, currentMaxAnt, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), "Defensive", gameObject, 2));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxAnt, "Defensive", gameObject, 2));
                         }
                         else
                         {
@@ -304,7 +329,7 @@ public class CharacterMonitor : MonoBehaviour
                             valueChanged -= currentAnt;
                             scavenger.currentAnt = currentAnt;
                             StartCoroutine(statusManager.DecrementAntidoteBar(currentAnt, currentMaxAnt, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), "Offensive", gameObject, 0));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxAnt, "Offensive", gameObject, 0));
                         }
                     }
 
@@ -403,7 +428,7 @@ public class CharacterMonitor : MonoBehaviour
                             mutant.currentPollutionLevel = currentHealth;
                                                       
                             StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), "Defensive", gameObject, 1));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Defensive", gameObject, 1));
                         }
                         else
                         {
@@ -411,9 +436,41 @@ public class CharacterMonitor : MonoBehaviour
                             currentHealth = mutant.CheckMax(currentHealth - effect.strength);
                             valueChanged -= currentHealth;
                             mutant.currentPollutionLevel = currentHealth;
-                            
+
+                            // Check if a phase of boss is done and show change of phase
+                            // at the end of all the updates of effects
+                            if (mutant is Boss)
+                            {
+                                Boss boss = mutant as Boss;
+                                foreach (bool clearedPhase in boss.hasClearedPhase)
+                                {
+                                    if (clearedPhase)
+                                        currentPhase++;
+                                }
+
+                                if ((currentPhase > -1) && (currentPhase < boss.hasClearedPhase.Length))
+                                {
+                                    switchPhase = boss.hasClearedPhase[currentPhase];
+
+                                    if (currentPhase > 0)
+                                    {
+                                        for (int i = currentPhase; i > 0; i--)
+                                            startIndex += boss.effectNumber[i];
+
+                                        for (int i = currentPhase; i >= 0; i--)
+                                            endIndex += boss.effectNumber[i];
+                                    }
+                                    else
+                                    {
+                                        endIndex = boss.effectNumber[currentPhase];
+                                    }
+
+                                    switchLength = (float)endIndex;
+                                }
+                            }
+
                             StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), "Offensive", gameObject, 0));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Offensive", gameObject, 0));
                         }
                     }
 
@@ -484,9 +541,42 @@ public class CharacterMonitor : MonoBehaviour
             if (effect.application.Equals("Condition"))
             {
                 EffectsAnimation(effect.effectIndex, effect);
-                StartCoroutine(particleManager.PlayParticles(effect.particleIndex, new Vector3(gameObject.transform.position.x, 0, 0)));
+                StartCoroutine(particleManager.PlayParticles(effect.particleIndex, gameObject.GetComponent<BoxCollider2D>().bounds.center));
                 yield return new WaitForSeconds(effect.animationLength);
             }
+        }
+
+        if (switchPhase)
+        {
+            yield return new WaitForSeconds(2f);
+
+            Boss boss = mutant as Boss;
+            BoxCollider2D bossCollider = gameObject.GetComponent<BoxCollider2D>();
+            StartCoroutine(particleManager.PlayParticles(0, bossCollider.bounds.center));
+            while (startIndex < endIndex)
+            {
+                Debug.Log("Apply " + boss.phaseEffects[startIndex].effectName);
+                cameraManager.Shake(true, 2);
+                if (boss.phaseEffects[startIndex].type.Equals("Status"))
+                {
+                    if (boss.phaseEffects[startIndex].application.Equals("CharStats"))
+                    {
+                        EffectsAnimation(4, boss.phaseEffects[startIndex]);
+                        StartCoroutine(statusManager.ShowBuff(gameObject, boss.phaseEffects[startIndex].state));
+                    }
+
+                    if (boss.phaseEffects[startIndex].application.Equals("Condition"))
+                    {
+                        EffectsAnimation(4, boss.phaseEffects[startIndex]);
+                        StartCoroutine(particleManager.PlayParticles(boss.phaseEffects[startIndex].particleIndex, bossCollider.bounds.center));
+                    }
+
+                    yield return new WaitForSeconds(1.2f);
+                    startIndex++;
+                }
+            }
+
+            cameraManager.Shake(false, 2);
         }
     }
 
@@ -795,43 +885,20 @@ public class CharacterMonitor : MonoBehaviour
 
     public int ScavengerDamaged(string targetStat, int statModifier, Enemy mutant)
     {
-        scavenger.IsAttacked(targetStat, statModifier, mutant);
+        int damage = scavenger.IsAttacked(targetStat, statModifier, mutant);
+        currentHealth = scavenger.currentHP;
+        currentAnt = scavenger.currentAnt;
 
-        if (targetStat.Equals("HP"))
-        {
-            int previousHealth = currentHealth;
-            currentHealth = scavenger.currentHP;
-            int damage = previousHealth - currentHealth;
-            return damage;
-        }
-        else
-        {
-            int previousAnt = currentAnt;
-            currentAnt = scavenger.currentAnt;
-            int antLoss = previousAnt - currentAnt;
-            return antLoss;
-        }
-        
+        return damage;
     }
 
     public int ScavengerHealed(string targetStat, int statModifier)
     {
-        scavenger.IsHealed(targetStat, statModifier);
+        int heal = scavenger.IsHealed(targetStat, statModifier);
+        currentHealth = scavenger.currentHP;
+        currentAnt = scavenger.currentAnt;
 
-        if (targetStat.Equals("HP"))
-        {
-            int previousHealth = currentHealth;
-            currentHealth = scavenger.currentHP;
-            int healValue = currentHealth - previousHealth;
-            return healValue;
-        }
-        else
-        {
-            int previousAnt = currentAnt;
-            currentAnt = scavenger.currentAnt;
-            int antGain = currentAnt - previousAnt;
-            return antGain;
-        }
+        return heal;
     }
 
     public void ScavengerBuffed(Effect effect)

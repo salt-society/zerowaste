@@ -56,6 +56,25 @@ public class BattleInfoManager : MonoBehaviour {
         battleStart.SetActive(showComponent);
     }
 
+    public IEnumerator ShowBossAnimation(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+
+        if (showComponent)
+        {
+            bossBattleBackground.SetActive(showComponent);
+            yield return new WaitForSeconds(0.5f);
+            bossBattleStart.SetActive(showComponent);
+        }
+        else
+        {
+            bossBattleBackground.GetComponent<Animator>().SetBool("Hide", true);
+            yield return new WaitForSeconds(0.6f);
+            bossBattleBackground.SetActive(showComponent);
+            bossBattleStart.SetActive(showComponent);
+        }
+    }
+
     public void SetMiddleMessage(string message)
     {
         turnProcessSign.GetComponentInChildren<TextMeshProUGUI>().text = message;
