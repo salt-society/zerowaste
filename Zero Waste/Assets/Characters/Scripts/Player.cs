@@ -8,18 +8,17 @@ public class Player : Character {
     [Header("Statistics")]
     public Role characterClass;
     [Range(1, 30)] public int currentLevel;
-    [Range(5, 10)] public int baseHP;
+    [Range(50, 75)] public int baseHP;
     public int baseAnt;
-    [Range(1, 10)] public int baseAtk;
-    [Range(1, 5)] public int baseDef;
-    [Range(1, 3)] public int antGen;
-    [Range(1, 5)] public int threatLevel;
+    [Range(10, 20)] public int baseAtk;
+    [Range(10, 20)] public int baseDef;
+    [Range(10, 30)] public int antGen;
+    [Range(1, 3)] public int threatLevel;
 
     [Header("Level Modifiers")]
-    [Range(1f, 2f)] public int hpModifier;
-    [Range(0.5f, 1f)] public int atkModifier;
-    [Range(0.5f, 1f)] public int defModifier;
-    [Range(1f, 2f)] public int spdModifier;
+    [Range(10, 15)] public int hpModifier;
+    [Range(5, 10)] public int atkModifier;
+    [Range(5, 10)] public int defModifier;
     
     [HideInInspector] public int currentHP;
     [HideInInspector] public int currentAnt;
@@ -33,11 +32,10 @@ public class Player : Character {
     // Apply level modifiers to character
     public void OnInitialize()
     {
-        currentHP = baseHP + (int)((currentLevel - 1) * hpModifier);
-        currentAnt = (int)(baseAnt / 2);
-        currentAtk = baseAtk + (int)((currentLevel - 1) * atkModifier);
-        currentDef = baseDef + (int)((currentLevel - 1) * defModifier);
-        currentSpd = baseSpd + (int)((currentLevel - 1) * spdModifier);
+        currentHP = baseHP + ((currentLevel - 1) * hpModifier);
+        currentAnt = baseAnt / 2;
+        currentAtk = baseAtk + ((currentLevel - 1) * atkModifier);
+        currentDef = baseDef + ((currentLevel - 1) * defModifier);
         currentAntGen = antGen;
         currentThreatLevel = threatLevel;
     }

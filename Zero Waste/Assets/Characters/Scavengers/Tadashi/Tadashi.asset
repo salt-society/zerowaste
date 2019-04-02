@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: Tadashi
   m_EditorClassIdentifier: 
   characterId: 5
+  characterType: 
   characterName: Tadashi
   characterThumb: {fileID: 21300000, guid: 20ccc2f31a0849340b54f9c7c7a12cb5, type: 3}
   characterHalf: {fileID: 21300000, guid: 0b931cd7abc270d43b4dbdc55cee20f0, type: 3}
   characterFull: {fileID: 21300000, guid: b5161e7ab408f9f4283b729d2eeb8380, type: 3}
   prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
   scale: {x: 1, y: 1, z: 0}
-  baseSpd: 2
+  baseSpd: 75
   currentSpd: 0
   abilities:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a654eff19430c4c4498b658480ee26ba, type: 2}
+  - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
+  - {fileID: 11400000, guid: 0f664f5a224f9a74aa01076c060bd08a, type: 2}
+  - {fileID: 11400000, guid: 951d3825e9e66a44284d9eff8efc2f68, type: 2}
   effects: []
   characterClass: {fileID: 0}
   currentLevel: 1
-  baseHP: 9
-  baseAnt: 10
-  baseAtk: 2
-  baseDef: 4
-  antGen: 2
-  threatLevel: 3
-  hpModifier: 1.899999976158142
-  atkModifier: 0.6499999761581421
-  defModifier: 0.8999999761581421
-  spdModifier: 1.2000000476837158
+  baseHP: 70
+  baseAnt: 100
+  baseAtk: 12
+  baseDef: 18
+  antGen: 20
+  threatLevel: 2
+  hpModifier: 13
+  atkModifier: 6
+  defModifier: 9
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

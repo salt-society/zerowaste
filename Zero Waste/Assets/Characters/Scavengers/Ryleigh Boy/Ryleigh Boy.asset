@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: Ryleigh Boy
   m_EditorClassIdentifier: 
   characterId: 0
+  characterType: 
   characterName: Ryleigh
   characterThumb: {fileID: 21300000, guid: 0626a946375c850448e01ddadf36b7ef, type: 3}
   characterHalf: {fileID: 21300000, guid: 68bf0e4e0d803fa4c9b76ad89db527b7, type: 3}
   characterFull: {fileID: 21300000, guid: 908884550752cfd40b14e0381498dbb9, type: 3}
   prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
   scale: {x: 1, y: 1, z: 1}
-  baseSpd: 3
+  baseSpd: 100
   currentSpd: 0
   abilities:
-  - {fileID: 11400000, guid: 62173e364b6454d45b17f1dc9d2e5e5c, type: 2}
+  - {fileID: 11400000, guid: a654eff19430c4c4498b658480ee26ba, type: 2}
   - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
-  - {fileID: 11400000, guid: b164f5efdfb8cfd469dfe65b54af699e, type: 2}
-  - {fileID: 11400000, guid: 3a91431911db14b45ad69310b09006e9, type: 2}
+  - {fileID: 11400000, guid: d525d49ae80caa249a89ca29ed7643cb, type: 2}
+  - {fileID: 11400000, guid: 4b40e3db7e53e8543a32ea3788911a8f, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
   currentLevel: 1
-  baseHP: 8
-  baseAnt: 5
-  baseAtk: 4
-  baseDef: 3
-  antGen: 1
-  threatLevel: 4
-  hpModifier: 1.75
-  atkModifier: 1
-  defModifier: 0.699999988079071
-  spdModifier: 1.5
+  baseHP: 70
+  baseAnt: 100
+  baseAtk: 20
+  baseDef: 15
+  antGen: 10
+  threatLevel: 3
+  hpModifier: 13
+  atkModifier: 10
+  defModifier: 8
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

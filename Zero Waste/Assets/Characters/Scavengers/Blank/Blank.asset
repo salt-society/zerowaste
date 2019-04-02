@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: Blank
   m_EditorClassIdentifier: 
   characterId: 7
+  characterType: 
   characterName: Blank
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 5
+  baseSpd: 150
   currentSpd: 0
   abilities:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a654eff19430c4c4498b658480ee26ba, type: 2}
+  - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
+  - {fileID: 11400000, guid: f3305d1f434695d4dac375a0df5c1c8a, type: 2}
+  - {fileID: 11400000, guid: e964073a32a5cbd40a6cb34b7ac6654a, type: 2}
   effects: []
   characterClass: {fileID: 0}
   currentLevel: 1
-  baseHP: 5
-  baseAnt: 10
-  baseAtk: 5
-  baseDef: 1
-  antGen: 2
-  threatLevel: 3
-  hpModifier: 1
-  atkModifier: 1
-  defModifier: 0.6000000238418579
-  spdModifier: 2
+  baseHP: 50
+  baseAnt: 100
+  baseAtk: 20
+  baseDef: 10
+  antGen: 20
+  threatLevel: 2
+  hpModifier: 10
+  atkModifier: 10
+  defModifier: 5
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

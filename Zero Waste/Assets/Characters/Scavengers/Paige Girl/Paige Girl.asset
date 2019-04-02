@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: Paige Girl
   m_EditorClassIdentifier: 
   characterId: 3
+  characterType: 
   characterName: Paige
   characterThumb: {fileID: 21300000, guid: 8c4f4959637a0ca4f8973abe52d88461, type: 3}
   characterHalf: {fileID: 21300000, guid: c9e7871acead7754ea4f641d3ab394ed, type: 3}
   characterFull: {fileID: 21300000, guid: b59e24c188f883f439e7fb3882869183, type: 3}
   prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
   scale: {x: 1, y: 1, z: 0}
-  baseSpd: 4
+  baseSpd: 125
   currentSpd: 0
   abilities:
-  - {fileID: 11400000, guid: 62173e364b6454d45b17f1dc9d2e5e5c, type: 2}
+  - {fileID: 11400000, guid: a654eff19430c4c4498b658480ee26ba, type: 2}
   - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
-  - {fileID: 11400000, guid: b164f5efdfb8cfd469dfe65b54af699e, type: 2}
-  - {fileID: 11400000, guid: 3a91431911db14b45ad69310b09006e9, type: 2}
+  - {fileID: 11400000, guid: 498f930beca73684ca4a6bfe9c7a0498, type: 2}
+  - {fileID: 11400000, guid: a2eacabc710041e48ac5e4dc8da6ea14, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 36095d1aaca4ace42aae40eebddead5d, type: 2}
   currentLevel: 1
-  baseHP: 6
-  baseAnt: 5
-  baseAtk: 1
-  baseDef: 3
-  antGen: 3
-  threatLevel: 2
-  hpModifier: 1.2999999523162842
-  atkModifier: 0.6000000238418579
-  defModifier: 0.75
-  spdModifier: 1.75
+  baseHP: 55
+  baseAnt: 100
+  baseAtk: 10
+  baseDef: 15
+  antGen: 30
+  threatLevel: 1
+  hpModifier: 11
+  atkModifier: 5
+  defModifier: 8
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

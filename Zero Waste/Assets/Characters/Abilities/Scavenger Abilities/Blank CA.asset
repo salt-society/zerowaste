@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a6750bfe262b54794ffd28f61b0075, type: 3}
+  m_Name: Blank CA
+  m_EditorClassIdentifier: 
+  index: 2
+  icon: {fileID: 0}
+  selectedIcon: {fileID: 0}
+  abilityName: Careful Discarding
+  abilityDescription: 'Blank carefully and rightfully disposes
+
+    the trash.'
+  length: 0
+  type: Offensive
+  range: Single
+  withDirect: 0
+  directIndex: 0
+  showValue: 0
+  repeatAnimation: 0
+  particleIndex: 0
+  spawnY: 0
+  effects:
+  - {fileID: 11400000, guid: 164ea312d93c15e4995b062c6055f7d2, type: 2}
+  - {fileID: 11400000, guid: 3c57a211dfc1ea74ca19de3fb6139f86, type: 2}
+  antRequirement: 50

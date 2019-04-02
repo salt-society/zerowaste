@@ -7,12 +7,13 @@ public class Enemy : Character {
 
     [Header("Enemy Statistics")]
     public int mutantLevel;
-    public int maxPollutionLevel;
-    public int maxAtk;
-    public int maxDef;
-    public int baseScrapReward;
-    public int baseEXPReward;
+    [Range(100, 2000)] public int maxPollutionLevel;
+    [Range(20, 250)] public int maxAtk;
+    [Range(20, 250)]public int maxDef;
+    [Range(10, 200)]public int baseScrapReward;
+    [Range(10, 500)]public int baseEXPReward;
     public string baseState;
+    public string roleWeakness;
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
@@ -67,7 +68,10 @@ public class Enemy : Character {
 
         if (attacker.currentAtk >= 0)
         {
-            int projectedStrength = Random.Range((int)(attacker.currentAtk * 0.5), (int)(attacker.currentAtk * 1.5) + 1);
+            int projectedStrength = Random.Range(attacker.currentAtk, (int)(attacker.currentAtk * 1.25) + 1);
+
+            if (attacker.characterClass.roleName == roleWeakness)
+                projectedStrength += (int)(projectedStrength * 0.5);
 
             if (currentDef > 0)
                 damage = CheckMin((projectedStrength + statModifier) - currentDef);
@@ -92,10 +96,13 @@ public class Enemy : Character {
         }
 
         if (currentPollutionLevel > (int)(maxPollutionLevel * 0.5f))
-            currentState = "Offensive";
+        {
+            if (baseState == "Offensive")
+                currentState = "Defensive";
 
-        else
-            currentState = "Defensive";
+            else
+                currentState = "Offensive";
+        }
 
         Debug.Log("Current Atk: " + attacker.currentAtk + " Stat Modifier: " + statModifier 
             + " Current Def: " + currentDef + " Damage: " + damage + " | " + estimatedStat);

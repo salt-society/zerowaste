@@ -13,32 +13,32 @@ MonoBehaviour:
   m_Name: Anthony
   m_EditorClassIdentifier: 
   characterId: 4
+  characterType: 
   characterName: Anthony
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 1
+  baseSpd: 50
   currentSpd: 0
   abilities:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a654eff19430c4c4498b658480ee26ba, type: 2}
+  - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
+  - {fileID: 11400000, guid: 67baae45d366f7342a7e50a6834af51d, type: 2}
+  - {fileID: 11400000, guid: 7c950b7273fd60046b5aab2b6f32fd24, type: 2}
   effects: []
   characterClass: {fileID: 0}
   currentLevel: 1
-  baseHP: 10
-  baseAnt: 10
-  baseAtk: 2
-  baseDef: 5
-  antGen: 1
-  threatLevel: 5
-  hpModifier: 2
-  atkModifier: 0.5
-  defModifier: 1
-  spdModifier: 1
+  baseHP: 75
+  baseAnt: 100
+  baseAtk: 12
+  baseDef: 20
+  antGen: 10
+  threatLevel: 3
+  hpModifier: 15
+  atkModifier: 6
+  defModifier: 10
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

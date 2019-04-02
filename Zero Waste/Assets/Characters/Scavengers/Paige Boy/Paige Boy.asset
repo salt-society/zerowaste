@@ -20,26 +20,25 @@ MonoBehaviour:
   characterFull: {fileID: 21300000, guid: 98d02b82f78115643989bb1628884341, type: 3}
   prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
   scale: {x: 1.05, y: 1.05, z: 0}
-  baseSpd: 1
+  baseSpd: 125
   currentSpd: 0
   abilities:
-  - {fileID: 11400000, guid: 8b87f12dc98acfc48a74bc5331b65587, type: 2}
-  - {fileID: 11400000, guid: 8be3a441781843542b8a8045b71facfc, type: 2}
-  - {fileID: 11400000, guid: 41f4bb97297a1064db3482fe25830957, type: 2}
-  - {fileID: 11400000, guid: b84da9e4a89cba742ae5388bcf5744ae, type: 2}
+  - {fileID: 11400000, guid: a654eff19430c4c4498b658480ee26ba, type: 2}
+  - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
+  - {fileID: 11400000, guid: 498f930beca73684ca4a6bfe9c7a0498, type: 2}
+  - {fileID: 11400000, guid: a2eacabc710041e48ac5e4dc8da6ea14, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
   currentLevel: 30
-  baseHP: 6
-  baseAnt: 5
-  baseAtk: 5
-  baseDef: 3
-  antGen: 3
-  threatLevel: 2
-  hpModifier: 2
-  atkModifier: 1
-  defModifier: 1
-  spdModifier: 1
+  baseHP: 55
+  baseAnt: 100
+  baseAtk: 10
+  baseDef: 15
+  antGen: 30
+  threatLevel: 1
+  hpModifier: 11
+  atkModifier: 5
+  defModifier: 8
   currentHP: 0
   currentAnt: 0
   currentAtk: 0
