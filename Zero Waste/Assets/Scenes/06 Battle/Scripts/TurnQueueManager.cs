@@ -80,7 +80,7 @@ public class TurnQueueManager : MonoBehaviour {
             if (fastestCharacter is Boss)
                 characterQ.Add(fastestCharacter);
 
-            fastestSpeed = -1;
+            fastestSpeed = -100;
         }
 
         // Store sorted characters to global list

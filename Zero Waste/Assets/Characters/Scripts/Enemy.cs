@@ -7,9 +7,9 @@ public class Enemy : Character {
 
     [Header("Enemy Statistics")]
     [Range(1,30)]public int mutantLevel;
-    [Range(100, 2000)] public int maxPollutionLevel;
-    [Range(10, 250)] public int maxAtk;
-    [Range(10, 250)]public int maxDef;
+    [Range(100, 1500)] public int maxPollutionLevel;
+    [Range(10, 200)] public int maxAtk;
+    [Range(10, 200)]public int maxDef;
     [Range(10, 200)]public int baseScrapReward;
     [Range(10, 500)]public int baseEXPReward;
     public string baseState;
