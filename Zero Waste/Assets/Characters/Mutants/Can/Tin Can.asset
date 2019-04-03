@@ -25,18 +25,18 @@ MonoBehaviour:
   abilities: []
   effects: []
   mutantLevel: 1
-  maxPollutionLevel: 100
+  maxPollutionLevel: 150
   maxAtk: 15
   maxDef: 25
   baseScrapReward: 10
   baseEXPReward: 10
   baseState: Offensive
   roleWeakness: Reduce
-  plModifier: 50
-  atkModifier: 2
-  defModifier: 3
-  expModifier: 10
-  scrapModifier: 10
+  plModifier: 3
+  atkModifier: 1
+  defModifier: 2
+  expModifier: 1
+  scrapModifier: 1
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

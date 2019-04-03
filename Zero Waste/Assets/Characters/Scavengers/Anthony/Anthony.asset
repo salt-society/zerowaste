@@ -37,8 +37,8 @@ MonoBehaviour:
   antGen: 10
   threatLevel: 3
   hpModifier: 15
-  atkModifier: 6
-  defModifier: 10
+  atkModifier: 11
+  defModifier: 15
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

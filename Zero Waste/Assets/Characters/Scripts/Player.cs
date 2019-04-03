@@ -17,8 +17,8 @@ public class Player : Character {
 
     [Header("Level Modifiers")]
     [Range(10, 15)] public int hpModifier;
-    [Range(5, 10)] public int atkModifier;
-    [Range(5, 10)] public int defModifier;
+    [Range(10, 15)] public int atkModifier;
+    [Range(10, 15)] public int defModifier;
     
     [HideInInspector] public int currentHP;
     [HideInInspector] public int currentAnt;
@@ -32,10 +32,10 @@ public class Player : Character {
     // Apply level modifiers to character
     public void OnInitialize()
     {
-        currentHP = baseHP + ((currentLevel - 1) * hpModifier);
+        currentHP = baseHP + (currentLevel * hpModifier);
         currentAnt = baseAnt / 2;
-        currentAtk = baseAtk + ((currentLevel - 1) * atkModifier);
-        currentDef = baseDef + ((currentLevel - 1) * defModifier);
+        currentAtk = baseAtk + (currentLevel * atkModifier);
+        currentDef = baseDef + (currentLevel * defModifier);
         currentAntGen = antGen;
         currentThreatLevel = threatLevel;
     }
@@ -46,8 +46,8 @@ public class Player : Character {
         switch (target)
         {
             case "HP":
-                if (endStat > (baseHP + (int)((currentLevel - 1) * hpModifier)))
-                    return baseHP + (int)((currentLevel - 1) * hpModifier);
+                if (endStat > (baseHP + (int)(currentLevel * hpModifier)))
+                    return baseHP + (int)(currentLevel * hpModifier);
                 else
                     return endStat;
 

@@ -7,7 +7,7 @@ public class Enemy : Character {
 
     [Header("Enemy Statistics")]
     [Range(1,30)]public int mutantLevel;
-    [Range(100, 1000)] public int maxPollutionLevel;
+    [Range(100, 1500)] public int maxPollutionLevel;
     [Range(10, 100)] public int maxAtk;
     [Range(10, 100)]public int maxDef;
     [Range(10, 500)]public int baseScrapReward;
@@ -16,9 +16,9 @@ public class Enemy : Character {
     public string roleWeakness;
 
     [Header("Modifiers")]
-    [Range(50, 100)]public int plModifier;
-    [Range(1, 10)]public int atkModifier;
-    [Range(1, 10)]public int defModifier;
+    [Range(3, 10)]public int plModifier;
+    [Range(0, 10)]public int atkModifier;
+    [Range(0, 10)]public int defModifier;
     [Range(1, 5)]public int expModifier;
     [Range(1, 5)]public int scrapModifier;
 
@@ -32,6 +32,7 @@ public class Enemy : Character {
     [HideInInspector] public string currentState;
 
     private int levelModifier;
+    private bool hasChangedState;
 
     // Used because the isAttacked of enemy is an overrideable function
     private int damage;
@@ -50,6 +51,7 @@ public class Enemy : Character {
         currentEXPReward += (expModifier * mutantLevel);
 
         currentState = baseState;
+        hasChangedState = false;
 
         InitializeAbilities();
     }
@@ -108,7 +110,7 @@ public class Enemy : Character {
             currentPollutionLevel = estimatedStat;
         }
 
-        if (currentPollutionLevel > (int)(maxPollutionLevel * 0.5f))
+        if (currentPollutionLevel > (int)(maxPollutionLevel * 0.5f) && hasChangedState == false)
         {
             if (baseState == "Offensive")
                 currentState = "Defensive";
