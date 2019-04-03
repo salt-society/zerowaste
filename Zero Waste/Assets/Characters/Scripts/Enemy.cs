@@ -8,11 +8,10 @@ public class Enemy : Character {
     [Header("Enemy Statistics")]
     [Range(1,30)]public int mutantLevel;
     [Range(100, 2000)] public int maxPollutionLevel;
-    [Range(20, 250)] public int maxAtk;
-    [Range(20, 250)]public int maxDef;
+    [Range(10, 250)] public int maxAtk;
+    [Range(10, 250)]public int maxDef;
     [Range(10, 200)]public int baseScrapReward;
     [Range(10, 500)]public int baseEXPReward;
-    [Range(1, 30)] public int baseLevel;
     public string baseState;
     public string roleWeakness;
 
@@ -20,8 +19,8 @@ public class Enemy : Character {
     [Range(50, 100)]public int plModifier;
     [Range(1, 10)]public int atkModifier;
     [Range(1, 10)]public int defModifier;
-    [Range(50, 100)]public int expModifier;
-    [Range(50, 100)]public int scrapModifier;
+    [Range(10, 50)]public int expModifier;
+    [Range(10, 20)]public int scrapModifier;
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
