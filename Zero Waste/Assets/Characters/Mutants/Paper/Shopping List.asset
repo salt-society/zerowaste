@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Aluminum Can
+  m_Name: Shopping List
   m_EditorClassIdentifier: 
   characterId: 0
-  characterType: 
-  characterName: Aluminum Can-Monster
-  characterThumb: {fileID: 0}
+  characterType: Mutant
+  characterName: Shopping List Paper-Monster
+  characterThumb: {fileID: 21300000, guid: 14632a0d6af04094e8ba3922d810e234, type: 3}
   characterHalf: {fileID: 0}
-  characterFull: {fileID: 0}
-  prefab: {fileID: 0}
-  scale: {x: 0, y: 0, z: 0}
+  characterFull: {fileID: 21300000, guid: 8daa6973a8e68b74089693f3ecf5f4e4, type: 3}
+  prefab: {fileID: 6360173412088857774, guid: c14610655d1209543bb937be1761ab83, type: 3}
+  scale: {x: 1.5, y: 1.5, z: 0}
   baseSpd: 75
-  currentSpd: 0
+  currentSpd: 4
   abilities: []
   effects: []
-  mutantLevel: 7
+  mutantLevel: 2
   maxPollutionLevel: 300
-  maxAtk: 25
-  maxDef: 60
-  baseScrapReward: 100
-  baseEXPReward: 100
+  maxAtk: 15
+  maxDef: 15
+  baseScrapReward: 20
+  baseEXPReward: 20
   baseState: Offensive
   roleWeakness: Reduce
   plModifier: 60
-  atkModifier: 3
-  defModifier: 5
-  expModifier: 30
-  scrapModifier: 30
+  atkModifier: 2
+  defModifier: 2
+  expModifier: 10
+  scrapModifier: 10
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0
   currentDef: 0
-  currentScrapReward: 0
+  currentScrapReward: 30
   currentEXPReward: 0
   currentState: 

@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Aluminum Can
+  m_Name: Trash-Covered Rabbit
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: Aluminum Can-Monster
+  characterName: Trash-Covered Rabbit-Mutant
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 75
+  baseSpd: 100
   currentSpd: 0
   abilities: []
   effects: []
-  mutantLevel: 7
-  maxPollutionLevel: 300
-  maxAtk: 25
-  maxDef: 60
+  mutantLevel: 12
+  maxPollutionLevel: 100
+  maxAtk: 60
+  maxDef: 15
   baseScrapReward: 100
   baseEXPReward: 100
   baseState: Offensive
-  roleWeakness: Reduce
-  plModifier: 60
-  atkModifier: 3
-  defModifier: 5
+  roleWeakness: 0
+  plModifier: 50
+  atkModifier: 5
+  defModifier: 2
   expModifier: 30
   scrapModifier: 30
   instanceAbilities: []

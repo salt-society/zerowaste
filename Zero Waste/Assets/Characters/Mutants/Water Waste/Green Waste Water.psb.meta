@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 18653cfdd4ab0464783602e8ead211f8
+guid: c0eb9a233ff19514a84d5b453de3341a
 ScriptedImporter:
   fileIDToRecycleName:
-    100000: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO
-    100002: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Body
-    100004: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Hand Left
-    100006: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Hand Right
-    100008: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Head
-    100010: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Trash
-    400000: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Transform
-    400002: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Body/Transform
-    400004: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Hand Left/Transform
-    400006: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Hand Right/Transform
-    400008: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Head/Transform
-    400010: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Trash/Transform
-    2800000: Water Waste Dark Grey
-    21200000: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Body/SpriteRenderer
-    21200002: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Hand Left/SpriteRenderer
-    21200004: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Hand Right/SpriteRenderer
-    21200006: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Head/SpriteRenderer
-    21200008: Water Waste Dark Grey_GO/Water Waste Dark Grey_GO/Trash/SpriteRenderer
+    100012: Green Waste Water_GO/Green Waste Water_GO
+    100014: Green Waste Water_GO/Green Waste Water_GO/Body
+    100016: Green Waste Water_GO/Green Waste Water_GO/Hand Left
+    100018: Green Waste Water_GO/Green Waste Water_GO/Hand Right
+    100020: Green Waste Water_GO/Green Waste Water_GO/Head
+    100022: Green Waste Water_GO/Green Waste Water_GO/Trash
+    400012: Green Waste Water_GO/Green Waste Water_GO/Transform
+    400014: Green Waste Water_GO/Green Waste Water_GO/Body/Transform
+    400016: Green Waste Water_GO/Green Waste Water_GO/Hand Left/Transform
+    400018: Green Waste Water_GO/Green Waste Water_GO/Hand Right/Transform
+    400020: Green Waste Water_GO/Green Waste Water_GO/Head/Transform
+    400022: Green Waste Water_GO/Green Waste Water_GO/Trash/Transform
+    2800002: Green Waste Water
+    21200010: Green Waste Water_GO/Green Waste Water_GO/Body/SpriteRenderer
+    21200012: Green Waste Water_GO/Green Waste Water_GO/Hand Left/SpriteRenderer
+    21200014: Green Waste Water_GO/Green Waste Water_GO/Hand Right/SpriteRenderer
+    21200016: Green Waste Water_GO/Green Waste Water_GO/Head/SpriteRenderer
+    21200018: Green Waste Water_GO/Green Waste Water_GO/Trash/SpriteRenderer
     21300000: Trash
     21300002: Head
     21300004: Hand Right
     21300006: Hand Left
     21300008: Body
-    100100000: Water Waste Dark Grey_GO
+    100100002: Green Waste Water_GO
   externalObjects: {}
   userData: 
   assetBundleName: 
@@ -119,7 +119,7 @@ ScriptedImporter:
       y: 139
       width: 338
       height: 70
-    spriteID: 2075eedeeba3dee449e7a42b0dc44766
+    spriteID: b86508e8ea816cf4f9cc597504b4cd6e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -138,9 +138,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 217
-      width: 138
+      width: 139
       height: 92
-    spriteID: da07c14b03be22049a923b1c6faf26a6
+    spriteID: ad5b44151547cc944828f819d859dbbf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -157,11 +157,11 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
+      x: 80
       y: 317
       width: 77
-      height: 153
-    spriteID: 673bbf2a7de548144b53905b3f08777f
+      height: 152
+    spriteID: 4012f5157346c4d4aa17574351b07d09
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,7 +170,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -400, y: 50}
+    uvTransform: {x: -324, y: 49}
   - name: Hand Left
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -178,11 +178,11 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 89
+      x: 4
       y: 317
       width: 68
       height: 173
-    spriteID: ca3b72fd9da42504588ca6da9579a5fa
+    spriteID: df5ed19f6e0c5ef43a79d6797137ff50
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -191,7 +191,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -120, y: 78}
+    uvTransform: {x: -205, y: 78}
   - name: Body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -203,7 +203,7 @@ ScriptedImporter:
       y: 4
       width: 484
       height: 127
-    spriteID: 70417f8d69d72c74e8b067b51bbd30ac
+    spriteID: 9ee93d89bc6157548a9e20766c7adc85
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -232,35 +232,35 @@ ScriptedImporter:
     spriteName: Trash
     isGroup: 0
     parentIndex: -1
-    spriteID: 2075eedeeba3dee449e7a42b0dc44766
+    spriteID: b86508e8ea816cf4f9cc597504b4cd6e
     layerID: 32
     mosaicPosition: {x: 4, y: 139}
   - name: Head
     spriteName: Head
     isGroup: 0
     parentIndex: -1
-    spriteID: da07c14b03be22049a923b1c6faf26a6
+    spriteID: ad5b44151547cc944828f819d859dbbf
     layerID: 27
     mosaicPosition: {x: 4, y: 217}
   - name: Hand Right
     spriteName: Hand Right
     isGroup: 0
     parentIndex: -1
-    spriteID: 673bbf2a7de548144b53905b3f08777f
+    spriteID: 4012f5157346c4d4aa17574351b07d09
     layerID: 21
-    mosaicPosition: {x: 4, y: 317}
+    mosaicPosition: {x: 80, y: 317}
   - name: Hand Left
     spriteName: Hand Left
     isGroup: 0
     parentIndex: -1
-    spriteID: ca3b72fd9da42504588ca6da9579a5fa
+    spriteID: df5ed19f6e0c5ef43a79d6797137ff50
     layerID: 15
-    mosaicPosition: {x: 89, y: 317}
+    mosaicPosition: {x: 4, y: 317}
   - name: Body
     spriteName: Body
     isGroup: 0
     parentIndex: -1
-    spriteID: 70417f8d69d72c74e8b067b51bbd30ac
+    spriteID: 9ee93d89bc6157548a9e20766c7adc85
     layerID: 9
     mosaicPosition: {x: 4, y: 4}
   characterData:

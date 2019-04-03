@@ -19,7 +19,7 @@ public class Character : ScriptableObject {
     public Vector3 scale;
 
     [Header("Shared Information")]
-    [Range(50, 150)] public int baseSpd;
+    [Range(25, 150)] public int baseSpd;
     [HideInInspector] public int currentSpd;
 
     [Header("Abilities")]

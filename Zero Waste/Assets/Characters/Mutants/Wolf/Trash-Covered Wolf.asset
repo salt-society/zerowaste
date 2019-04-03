@@ -10,29 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Paper Waste
+  m_Name: Trash-Covered Wolf
   m_EditorClassIdentifier: 
   characterId: 0
-  characterType: Mutant
-  characterName: Paper Waste
-  characterThumb: {fileID: 21300000, guid: 14632a0d6af04094e8ba3922d810e234, type: 3}
+  characterType: 
+  characterName: Trash-Covered Wolf-Mutant
+  characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
-  characterFull: {fileID: 21300000, guid: 8daa6973a8e68b74089693f3ecf5f4e4, type: 3}
-  prefab: {fileID: 6360173412088857774, guid: c14610655d1209543bb937be1761ab83, type: 3}
-  scale: {x: 1.5, y: 1.5, z: 0}
-  baseSpd: 2
-  currentSpd: 4
+  characterFull: {fileID: 0}
+  prefab: {fileID: 0}
+  scale: {x: 0, y: 0, z: 0}
+  baseSpd: 125
+  currentSpd: 0
   abilities: []
   effects: []
-  mutantLevel: 3
-  maxPollutionLevel: 80
-  maxAtk: 5
-  maxDef: 0
-  baseScrapReward: 30
-  baseEXPReward: 60
+  mutantLevel: 12
+  maxPollutionLevel: 100
+  maxAtk: 130
+  maxDef: 15
+  baseScrapReward: 175
+  baseEXPReward: 175
+  baseState: Offensive
+  roleWeakness: None
+  plModifier: 50
+  atkModifier: 7
+  defModifier: 2
+  expModifier: 45
+  scrapModifier: 45
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0
   currentDef: 0
-  currentScrapReward: 30
+  currentScrapReward: 0
   currentEXPReward: 0
+  currentState: 

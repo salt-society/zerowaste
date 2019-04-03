@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Aluminum Can
+  m_Name: Turtle
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: Aluminum Can-Monster
+  characterName: Turtle Mutant
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 75
+  baseSpd: 0
   currentSpd: 0
   abilities: []
   effects: []
-  mutantLevel: 7
-  maxPollutionLevel: 300
+  mutantLevel: 14
+  maxPollutionLevel: 600
   maxAtk: 25
   maxDef: 60
-  baseScrapReward: 100
-  baseEXPReward: 100
-  baseState: Offensive
-  roleWeakness: Reduce
-  plModifier: 60
+  baseScrapReward: 140
+  baseEXPReward: 140
+  baseState: Defensive
+  roleWeakness: None
+  plModifier: 70
   atkModifier: 3
   defModifier: 5
-  expModifier: 30
-  scrapModifier: 30
+  expModifier: 45
+  scrapModifier: 45
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

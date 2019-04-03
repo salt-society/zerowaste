@@ -2,39 +2,39 @@ fileFormatVersion: 2
 guid: 5a79eb540c28bb14987d44af86c20ca3
 ScriptedImporter:
   fileIDToRecycleName:
-    100000: Gas Dark Purple_GO/Gas Dark Purple_GO
-    100002: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer3
-    100004: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer4
-    100006: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer5
-    100008: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer7
-    100010: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer13
-    100012: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer14
-    100014: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer15
-    100016: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer22
-    100018: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer28
-    100020: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer29
-    400000: Gas Dark Purple_GO/Gas Dark Purple_GO/Transform
-    400002: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer3/Transform
-    400004: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer4/Transform
-    400006: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer5/Transform
-    400008: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer7/Transform
-    400010: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer13/Transform
-    400012: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer14/Transform
-    400014: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer15/Transform
-    400016: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer22/Transform
-    400018: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer28/Transform
-    400020: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer29/Transform
-    2800000: Gas Dark Purple
-    21200000: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer3/SpriteRenderer
-    21200002: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer4/SpriteRenderer
-    21200004: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer5/SpriteRenderer
-    21200006: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer7/SpriteRenderer
-    21200008: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer13/SpriteRenderer
-    21200010: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer14/SpriteRenderer
-    21200012: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer15/SpriteRenderer
-    21200014: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer22/SpriteRenderer
-    21200016: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer28/SpriteRenderer
-    21200018: Gas Dark Purple_GO/Gas Dark Purple_GO/Layer29/SpriteRenderer
+    100022: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO
+    100024: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer3
+    100026: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer4
+    100028: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer5
+    100030: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer7
+    100032: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer13
+    100034: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer14
+    100036: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer15
+    100038: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer22
+    100040: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer28
+    100042: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer29
+    400022: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Transform
+    400024: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer3/Transform
+    400026: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer4/Transform
+    400028: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer5/Transform
+    400030: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer7/Transform
+    400032: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer13/Transform
+    400034: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer14/Transform
+    400036: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer15/Transform
+    400038: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer22/Transform
+    400040: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer28/Transform
+    400042: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer29/Transform
+    2800002: Nitrous Oxide Gas
+    21200020: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer3/SpriteRenderer
+    21200022: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer4/SpriteRenderer
+    21200024: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer5/SpriteRenderer
+    21200026: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer7/SpriteRenderer
+    21200028: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer13/SpriteRenderer
+    21200030: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer14/SpriteRenderer
+    21200032: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer15/SpriteRenderer
+    21200034: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer22/SpriteRenderer
+    21200036: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer28/SpriteRenderer
+    21200038: Nitrous Oxide Gas_GO/Nitrous Oxide Gas_GO/Layer29/SpriteRenderer
     21300000: Layer4
     21300002: Layer7
     21300004: Layer28
@@ -45,7 +45,7 @@ ScriptedImporter:
     21300014: Layer22
     21300016: Layer3
     21300018: Layer15
-    100100000: Gas Dark Purple_GO
+    100100002: Nitrous Oxide Gas_GO
   externalObjects: {}
   userData: 
   assetBundleName: 

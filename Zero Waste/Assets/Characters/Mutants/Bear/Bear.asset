@@ -9,34 +9,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Aluminum Can
+  m_Script: {fileID: 11500000, guid: 8087696d2d3f4af4aaa91a8ebac35702, type: 3}
+  m_Name: Bear
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: Aluminum Can-Monster
+  characterName: Bear-Mutant
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 75
+  baseSpd: 100
   currentSpd: 0
   abilities: []
   effects: []
-  mutantLevel: 7
-  maxPollutionLevel: 300
-  maxAtk: 25
+  mutantLevel: 15
+  maxPollutionLevel: 600
+  maxAtk: 60
   maxDef: 60
-  baseScrapReward: 100
-  baseEXPReward: 100
+  baseScrapReward: 200
+  baseEXPReward: 200
   baseState: Offensive
-  roleWeakness: Reduce
-  plModifier: 60
-  atkModifier: 3
+  roleWeakness: None
+  plModifier: 70
+  atkModifier: 5
   defModifier: 5
-  expModifier: 30
-  scrapModifier: 30
+  expModifier: 50
+  scrapModifier: 50
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0
@@ -44,3 +44,14 @@ MonoBehaviour:
   currentScrapReward: 0
   currentEXPReward: 0
   currentState: 
+  phaseColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  phaseNumbers:
+  - 0.5
+  effectNumber: 03000000
+  phaseEffects:
+  - {fileID: 11400000, guid: af059a9ddc3b87842883733747ef0b12, type: 2}
+  - {fileID: 11400000, guid: 8dbfd823823ae82408e08ed97b55dce9, type: 2}
+  - {fileID: 11400000, guid: aeb50e8210398da43a19a2530d50ffaf, type: 2}
+  thresholds: 
+  hasClearedPhase: 

@@ -7,10 +7,10 @@ public class Enemy : Character {
 
     [Header("Enemy Statistics")]
     [Range(1,30)]public int mutantLevel;
-    [Range(100, 1500)] public int maxPollutionLevel;
-    [Range(10, 200)] public int maxAtk;
-    [Range(10, 200)]public int maxDef;
-    [Range(10, 200)]public int baseScrapReward;
+    [Range(100, 1000)] public int maxPollutionLevel;
+    [Range(10, 100)] public int maxAtk;
+    [Range(10, 100)]public int maxDef;
+    [Range(10, 500)]public int baseScrapReward;
     [Range(10, 500)]public int baseEXPReward;
     public string baseState;
     public string roleWeakness;
@@ -19,8 +19,8 @@ public class Enemy : Character {
     [Range(50, 100)]public int plModifier;
     [Range(1, 10)]public int atkModifier;
     [Range(1, 10)]public int defModifier;
-    [Range(10, 50)]public int expModifier;
-    [Range(10, 20)]public int scrapModifier;
+    [Range(1, 5)]public int expModifier;
+    [Range(1, 5)]public int scrapModifier;
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
@@ -41,25 +41,13 @@ public class Enemy : Character {
     {
         levelModifier = Random.Range(0, 4);
 
-        if(levelModifier == 0)
-        {
-            currentPollutionLevel = maxPollutionLevel;
-            currentAtk = maxAtk;
-            currentDef = maxDef;
-            currentSpd = baseSpd;
-            currentScrapReward = baseScrapReward;
-            currentEXPReward = baseEXPReward;
-        }
-            
-        else
-        {
-            mutantLevel += levelModifier;
-            currentPollutionLevel += (plModifier * levelModifier);
-            currentAtk += (atkModifier * levelModifier);
-            currentDef += (defModifier * levelModifier);
-            currentScrapReward += (scrapModifier * levelModifier);
-            currentEXPReward += (expModifier * levelModifier);
-        }
+        mutantLevel += levelModifier;
+
+        currentPollutionLevel += (plModifier * mutantLevel);
+        currentAtk += (atkModifier * mutantLevel);
+        currentDef += (defModifier * mutantLevel);
+        currentScrapReward += (scrapModifier * mutantLevel);
+        currentEXPReward += (expModifier * mutantLevel);
 
         currentState = baseState;
 

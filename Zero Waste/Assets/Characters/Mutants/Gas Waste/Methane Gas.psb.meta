@@ -2,51 +2,51 @@ fileFormatVersion: 2
 guid: fd7bfc29389853a4289c1795fe98dbe2
 ScriptedImporter:
   fileIDToRecycleName:
-    100000: Gas Green_GO/Gas Green_GO
-    100002: Gas Green_GO/Gas Green_GO/Layer3
-    100004: Gas Green_GO/Gas Green_GO/Layer4
-    100006: Gas Green_GO/Gas Green_GO/Layer5
-    100008: Gas Green_GO/Gas Green_GO/Layer7
-    100010: Gas Green_GO/Gas Green_GO/Layer8
-    100012: Gas Green_GO/Gas Green_GO/Layer13
-    100014: Gas Green_GO/Gas Green_GO/Layer14
-    100016: Gas Green_GO/Gas Green_GO/Layer15
-    100018: Gas Green_GO/Gas Green_GO/Layer16
-    100020: Gas Green_GO/Gas Green_GO/Layer22
-    100022: Gas Green_GO/Gas Green_GO/Layer23
-    100024: Gas Green_GO/Gas Green_GO/Layer28
-    100026: Gas Green_GO/Gas Green_GO/Layer29
-    100028: Gas Green_GO/Gas Green_GO/Layer30
-    400000: Gas Green_GO/Gas Green_GO/Transform
-    400002: Gas Green_GO/Gas Green_GO/Layer3/Transform
-    400004: Gas Green_GO/Gas Green_GO/Layer4/Transform
-    400006: Gas Green_GO/Gas Green_GO/Layer5/Transform
-    400008: Gas Green_GO/Gas Green_GO/Layer7/Transform
-    400010: Gas Green_GO/Gas Green_GO/Layer8/Transform
-    400012: Gas Green_GO/Gas Green_GO/Layer13/Transform
-    400014: Gas Green_GO/Gas Green_GO/Layer14/Transform
-    400016: Gas Green_GO/Gas Green_GO/Layer15/Transform
-    400018: Gas Green_GO/Gas Green_GO/Layer16/Transform
-    400020: Gas Green_GO/Gas Green_GO/Layer22/Transform
-    400022: Gas Green_GO/Gas Green_GO/Layer23/Transform
-    400024: Gas Green_GO/Gas Green_GO/Layer28/Transform
-    400026: Gas Green_GO/Gas Green_GO/Layer29/Transform
-    400028: Gas Green_GO/Gas Green_GO/Layer30/Transform
-    2800000: Gas Green
-    21200000: Gas Green_GO/Gas Green_GO/Layer3/SpriteRenderer
-    21200002: Gas Green_GO/Gas Green_GO/Layer4/SpriteRenderer
-    21200004: Gas Green_GO/Gas Green_GO/Layer5/SpriteRenderer
-    21200006: Gas Green_GO/Gas Green_GO/Layer7/SpriteRenderer
-    21200008: Gas Green_GO/Gas Green_GO/Layer8/SpriteRenderer
-    21200010: Gas Green_GO/Gas Green_GO/Layer13/SpriteRenderer
-    21200012: Gas Green_GO/Gas Green_GO/Layer14/SpriteRenderer
-    21200014: Gas Green_GO/Gas Green_GO/Layer15/SpriteRenderer
-    21200016: Gas Green_GO/Gas Green_GO/Layer16/SpriteRenderer
-    21200018: Gas Green_GO/Gas Green_GO/Layer22/SpriteRenderer
-    21200020: Gas Green_GO/Gas Green_GO/Layer23/SpriteRenderer
-    21200022: Gas Green_GO/Gas Green_GO/Layer28/SpriteRenderer
-    21200024: Gas Green_GO/Gas Green_GO/Layer29/SpriteRenderer
-    21200026: Gas Green_GO/Gas Green_GO/Layer30/SpriteRenderer
+    100030: Methane Gas_GO/Methane Gas_GO
+    100032: Methane Gas_GO/Methane Gas_GO/Layer3
+    100034: Methane Gas_GO/Methane Gas_GO/Layer4
+    100036: Methane Gas_GO/Methane Gas_GO/Layer5
+    100038: Methane Gas_GO/Methane Gas_GO/Layer7
+    100040: Methane Gas_GO/Methane Gas_GO/Layer8
+    100042: Methane Gas_GO/Methane Gas_GO/Layer13
+    100044: Methane Gas_GO/Methane Gas_GO/Layer14
+    100046: Methane Gas_GO/Methane Gas_GO/Layer15
+    100048: Methane Gas_GO/Methane Gas_GO/Layer16
+    100050: Methane Gas_GO/Methane Gas_GO/Layer22
+    100052: Methane Gas_GO/Methane Gas_GO/Layer23
+    100054: Methane Gas_GO/Methane Gas_GO/Layer28
+    100056: Methane Gas_GO/Methane Gas_GO/Layer29
+    100058: Methane Gas_GO/Methane Gas_GO/Layer30
+    400030: Methane Gas_GO/Methane Gas_GO/Transform
+    400032: Methane Gas_GO/Methane Gas_GO/Layer3/Transform
+    400034: Methane Gas_GO/Methane Gas_GO/Layer4/Transform
+    400036: Methane Gas_GO/Methane Gas_GO/Layer5/Transform
+    400038: Methane Gas_GO/Methane Gas_GO/Layer7/Transform
+    400040: Methane Gas_GO/Methane Gas_GO/Layer8/Transform
+    400042: Methane Gas_GO/Methane Gas_GO/Layer13/Transform
+    400044: Methane Gas_GO/Methane Gas_GO/Layer14/Transform
+    400046: Methane Gas_GO/Methane Gas_GO/Layer15/Transform
+    400048: Methane Gas_GO/Methane Gas_GO/Layer16/Transform
+    400050: Methane Gas_GO/Methane Gas_GO/Layer22/Transform
+    400052: Methane Gas_GO/Methane Gas_GO/Layer23/Transform
+    400054: Methane Gas_GO/Methane Gas_GO/Layer28/Transform
+    400056: Methane Gas_GO/Methane Gas_GO/Layer29/Transform
+    400058: Methane Gas_GO/Methane Gas_GO/Layer30/Transform
+    2800002: Methane Gas
+    21200028: Methane Gas_GO/Methane Gas_GO/Layer3/SpriteRenderer
+    21200030: Methane Gas_GO/Methane Gas_GO/Layer4/SpriteRenderer
+    21200032: Methane Gas_GO/Methane Gas_GO/Layer5/SpriteRenderer
+    21200034: Methane Gas_GO/Methane Gas_GO/Layer7/SpriteRenderer
+    21200036: Methane Gas_GO/Methane Gas_GO/Layer8/SpriteRenderer
+    21200038: Methane Gas_GO/Methane Gas_GO/Layer13/SpriteRenderer
+    21200040: Methane Gas_GO/Methane Gas_GO/Layer14/SpriteRenderer
+    21200042: Methane Gas_GO/Methane Gas_GO/Layer15/SpriteRenderer
+    21200044: Methane Gas_GO/Methane Gas_GO/Layer16/SpriteRenderer
+    21200046: Methane Gas_GO/Methane Gas_GO/Layer22/SpriteRenderer
+    21200048: Methane Gas_GO/Methane Gas_GO/Layer23/SpriteRenderer
+    21200050: Methane Gas_GO/Methane Gas_GO/Layer28/SpriteRenderer
+    21200052: Methane Gas_GO/Methane Gas_GO/Layer29/SpriteRenderer
+    21200054: Methane Gas_GO/Methane Gas_GO/Layer30/SpriteRenderer
     21300000: Layer4
     21300002: Layer8
     21300004: Layer7
@@ -61,7 +61,7 @@ ScriptedImporter:
     21300022: Layer3
     21300024: Layer16
     21300026: Layer15
-    100100000: Gas Green_GO
+    100100002: Methane Gas_GO
   externalObjects: {}
   userData: 
   assetBundleName: 

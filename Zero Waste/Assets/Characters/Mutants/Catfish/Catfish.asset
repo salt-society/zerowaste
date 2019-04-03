@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8087696d2d3f4af4aaa91a8ebac35702, type: 3}
+  m_Name: Catfish
+  m_EditorClassIdentifier: 
+  characterId: 0
+  characterType: 
+  characterName: Catfish-Mutant
+  characterThumb: {fileID: 0}
+  characterHalf: {fileID: 0}
+  characterFull: {fileID: 0}
+  prefab: {fileID: 0}
+  scale: {x: 0, y: 0, z: 0}
+  baseSpd: 125
+  currentSpd: 0
+  abilities: []
+  effects: []
+  mutantLevel: 20
+  maxPollutionLevel: 1000
+  maxAtk: 130
+  maxDef: 130
+  baseScrapReward: 300
+  baseEXPReward: 300
+  baseState: Offensive
+  roleWeakness: None
+  plModifier: 85
+  atkModifier: 7
+  defModifier: 7
+  expModifier: 70
+  scrapModifier: 70
+  instanceAbilities: []
+  currentPollutionLevel: 0
+  currentAtk: 0
+  currentDef: 0
+  currentScrapReward: 0
+  currentEXPReward: 0
+  currentState: 
+  phaseColors:
+  - {r: 1, g: 0, b: 0.86133146, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  phaseNumbers:
+  - 0.5
+  - 0.25
+  effectNumber: 0300000003000000
+  phaseEffects:
+  - {fileID: 11400000, guid: af059a9ddc3b87842883733747ef0b12, type: 2}
+  - {fileID: 11400000, guid: 8dbfd823823ae82408e08ed97b55dce9, type: 2}
+  - {fileID: 11400000, guid: aeb50e8210398da43a19a2530d50ffaf, type: 2}
+  - {fileID: 11400000, guid: 9d8fdd9e9a31b974a8dd69202a51bb55, type: 2}
+  - {fileID: 11400000, guid: 3e36eaa358902d047b8edc87a5586dcb, type: 2}
+  - {fileID: 11400000, guid: 152d325011c9d03428c8604d0cb46f23, type: 2}
+  thresholds: 
+  hasClearedPhase: 

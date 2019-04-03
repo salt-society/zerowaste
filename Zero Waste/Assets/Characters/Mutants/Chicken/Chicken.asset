@@ -10,29 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Chicken Monster
+  m_Name: Chicken
   m_EditorClassIdentifier: 
   characterId: 1
   characterType: Mutant
-  characterName: Mutated Chicken
+  characterName: Chicken-Mutant
   characterThumb: {fileID: 21300000, guid: b41575a3360ff994cb60e0965d6f8507, type: 3}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 21300000, guid: ff31d4358f54fb5418254fc25b9a118b, type: 3}
   prefab: {fileID: 874135886, guid: b4ed6f57f36e31a43a8c4ca8f20079ac, type: 3}
   scale: {x: 1, y: 1, z: 0}
-  baseSpd: 1
+  baseSpd: 75
   currentSpd: 0
   abilities:
   - {fileID: 11400000, guid: f26efaf2973105747855e747b847dbb8, type: 2}
   - {fileID: 11400000, guid: 3e69d0ed1c778d641a7aa56ddb326af8, type: 2}
   effects: []
-  mutantLevel: 2
+  mutantLevel: 5
   maxPollutionLevel: 100
-  maxAtk: 5
-  maxDef: 0
-  baseScrapReward: 30
-  baseEXPReward: 500
+  maxAtk: 25
+  maxDef: 15
+  baseScrapReward: 50
+  baseEXPReward: 50
   baseState: Offensive
+  roleWeakness: None
+  plModifier: 50
+  atkModifier: 3
+  defModifier: 2
+  expModifier: 20
+  scrapModifier: 20
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

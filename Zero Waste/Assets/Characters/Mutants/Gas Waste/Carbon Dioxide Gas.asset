@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Aluminum Can
+  m_Name: Carbon Dioxide Gas
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: Aluminum Can-Monster
+  characterName: Carbon Dioxide Gas-Monster
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 75
+  baseSpd: 150
   currentSpd: 0
   abilities: []
   effects: []
-  mutantLevel: 7
-  maxPollutionLevel: 300
-  maxAtk: 25
-  maxDef: 60
-  baseScrapReward: 100
-  baseEXPReward: 100
+  mutantLevel: 26
+  maxPollutionLevel: 600
+  maxAtk: 200
+  maxDef: 15
+  baseScrapReward: 400
+  baseEXPReward: 400
   baseState: Offensive
   roleWeakness: Reduce
-  plModifier: 60
-  atkModifier: 3
-  defModifier: 5
-  expModifier: 30
-  scrapModifier: 30
+  plModifier: 70
+  atkModifier: 10
+  defModifier: 2
+  expModifier: 85
+  scrapModifier: 85
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

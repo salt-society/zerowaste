@@ -2,30 +2,30 @@ fileFormatVersion: 2
 guid: 6adb9cd72366ff04abf19fc4c92b47c3
 ScriptedImporter:
   fileIDToRecycleName:
-    100000: Gas White_GO/Gas White_GO
-    100002: Gas White_GO/Gas White_GO/Anthena
-    100004: Gas White_GO/Gas White_GO/Arm Right
-    100006: Gas White_GO/Gas White_GO/Body
-    100008: Gas White_GO/Gas White_GO/Eye
-    100010: Gas White_GO/Gas White_GO/handoz
-    100012: Gas White_GO/Gas White_GO/Left Arm
-    100014: Gas White_GO/Gas White_GO/Mouth
-    400000: Gas White_GO/Gas White_GO/Transform
-    400002: Gas White_GO/Gas White_GO/Anthena/Transform
-    400004: Gas White_GO/Gas White_GO/Arm Right/Transform
-    400006: Gas White_GO/Gas White_GO/Body/Transform
-    400008: Gas White_GO/Gas White_GO/Eye/Transform
-    400010: Gas White_GO/Gas White_GO/handoz/Transform
-    400012: Gas White_GO/Gas White_GO/Left Arm/Transform
-    400014: Gas White_GO/Gas White_GO/Mouth/Transform
-    2800000: Gas White
-    21200000: Gas White_GO/Gas White_GO/Anthena/SpriteRenderer
-    21200002: Gas White_GO/Gas White_GO/Arm Right/SpriteRenderer
-    21200004: Gas White_GO/Gas White_GO/Body/SpriteRenderer
-    21200006: Gas White_GO/Gas White_GO/Eye/SpriteRenderer
-    21200008: Gas White_GO/Gas White_GO/handoz/SpriteRenderer
-    21200010: Gas White_GO/Gas White_GO/Left Arm/SpriteRenderer
-    21200012: Gas White_GO/Gas White_GO/Mouth/SpriteRenderer
+    100016: CFC Gas_GO/CFC Gas_GO
+    100018: CFC Gas_GO/CFC Gas_GO/Anthena
+    100020: CFC Gas_GO/CFC Gas_GO/Arm Right
+    100022: CFC Gas_GO/CFC Gas_GO/Body
+    100024: CFC Gas_GO/CFC Gas_GO/Eye
+    100026: CFC Gas_GO/CFC Gas_GO/handoz
+    100028: CFC Gas_GO/CFC Gas_GO/Left Arm
+    100030: CFC Gas_GO/CFC Gas_GO/Mouth
+    400016: CFC Gas_GO/CFC Gas_GO/Transform
+    400018: CFC Gas_GO/CFC Gas_GO/Anthena/Transform
+    400020: CFC Gas_GO/CFC Gas_GO/Arm Right/Transform
+    400022: CFC Gas_GO/CFC Gas_GO/Body/Transform
+    400024: CFC Gas_GO/CFC Gas_GO/Eye/Transform
+    400026: CFC Gas_GO/CFC Gas_GO/handoz/Transform
+    400028: CFC Gas_GO/CFC Gas_GO/Left Arm/Transform
+    400030: CFC Gas_GO/CFC Gas_GO/Mouth/Transform
+    2800002: CFC Gas
+    21200014: CFC Gas_GO/CFC Gas_GO/Anthena/SpriteRenderer
+    21200016: CFC Gas_GO/CFC Gas_GO/Arm Right/SpriteRenderer
+    21200018: CFC Gas_GO/CFC Gas_GO/Body/SpriteRenderer
+    21200020: CFC Gas_GO/CFC Gas_GO/Eye/SpriteRenderer
+    21200022: CFC Gas_GO/CFC Gas_GO/handoz/SpriteRenderer
+    21200024: CFC Gas_GO/CFC Gas_GO/Left Arm/SpriteRenderer
+    21200026: CFC Gas_GO/CFC Gas_GO/Mouth/SpriteRenderer
     21300000: Body
     21300002: Arm Right
     21300004: handoz
@@ -33,7 +33,7 @@ ScriptedImporter:
     21300008: Mouth
     21300010: Left Arm
     21300012: Anthena
-    100100000: Gas White_GO
+    100100002: CFC Gas_GO
   externalObjects: {}
   userData: 
   assetBundleName: 

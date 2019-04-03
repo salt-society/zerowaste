@@ -14,29 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: 
+  characterName: Tin Can-Monster
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 0
+  baseSpd: 50
   currentSpd: 0
   abilities: []
   effects: []
-  mutantLevel: 0
-  maxPollutionLevel: 0
-  maxAtk: 0
-  maxDef: 0
-  baseScrapReward: 0
-  baseEXPReward: 0
-  baseState: 
-  roleWeakness: 
-  plModifier: 0
-  atkModifier: 0
-  defModifier: 0
-  expModifier: 0
-  scrapModifier: 0
+  mutantLevel: 1
+  maxPollutionLevel: 100
+  maxAtk: 15
+  maxDef: 25
+  baseScrapReward: 10
+  baseEXPReward: 10
+  baseState: Offensive
+  roleWeakness: Reduce
+  plModifier: 50
+  atkModifier: 2
+  defModifier: 3
+  expModifier: 10
+  scrapModifier: 10
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

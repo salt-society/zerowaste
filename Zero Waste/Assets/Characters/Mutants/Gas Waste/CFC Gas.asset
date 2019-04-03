@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Aluminum Can
+  m_Name: CFC Gas
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: Aluminum Can-Monster
+  characterName: CFC Gas-Monster
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
   prefab: {fileID: 0}
   scale: {x: 0, y: 0, z: 0}
-  baseSpd: 75
+  baseSpd: 125
   currentSpd: 0
   abilities: []
   effects: []
-  mutantLevel: 7
+  mutantLevel: 23
   maxPollutionLevel: 300
-  maxAtk: 25
-  maxDef: 60
-  baseScrapReward: 100
-  baseEXPReward: 100
+  maxAtk: 130
+  maxDef: 15
+  baseScrapReward: 300
+  baseEXPReward: 300
   baseState: Offensive
   roleWeakness: Reduce
   plModifier: 60
-  atkModifier: 3
-  defModifier: 5
-  expModifier: 30
-  scrapModifier: 30
+  atkModifier: 7
+  defModifier: 2
+  expModifier: 75
+  scrapModifier: 75
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0
