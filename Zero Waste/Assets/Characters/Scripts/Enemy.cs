@@ -6,14 +6,22 @@ using UnityEngine;
 public class Enemy : Character {
 
     [Header("Enemy Statistics")]
-    public int mutantLevel;
+    [Range(1,30)]public int mutantLevel;
     [Range(100, 2000)] public int maxPollutionLevel;
     [Range(20, 250)] public int maxAtk;
     [Range(20, 250)]public int maxDef;
     [Range(10, 200)]public int baseScrapReward;
     [Range(10, 500)]public int baseEXPReward;
+    [Range(1, 30)] public int baseLevel;
     public string baseState;
     public string roleWeakness;
+
+    [Header("Modifiers")]
+    [Range(50, 100)]public int plModifier;
+    [Range(1, 10)]public int atkModifier;
+    [Range(1, 10)]public int defModifier;
+    [Range(50, 100)]public int expModifier;
+    [Range(50, 100)]public int scrapModifier;
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
@@ -24,18 +32,36 @@ public class Enemy : Character {
     [HideInInspector] public int currentEXPReward;
     [HideInInspector] public string currentState;
 
+    private int levelModifier;
+
     // Used because the isAttacked of enemy is an overrideable function
     private int damage;
 
     // Initialize currentStats to be equal to maxStats
     public virtual void OnInitialize()
     {
-        currentPollutionLevel = maxPollutionLevel;
-        currentAtk = maxAtk;
-        currentDef = maxDef;
-        currentSpd = baseSpd;
-        currentScrapReward = baseScrapReward;
-        currentEXPReward = baseEXPReward;
+        levelModifier = Random.Range(0, 4);
+
+        if(levelModifier == 0)
+        {
+            currentPollutionLevel = maxPollutionLevel;
+            currentAtk = maxAtk;
+            currentDef = maxDef;
+            currentSpd = baseSpd;
+            currentScrapReward = baseScrapReward;
+            currentEXPReward = baseEXPReward;
+        }
+            
+        else
+        {
+            mutantLevel += levelModifier;
+            currentPollutionLevel += (plModifier * levelModifier);
+            currentAtk += (atkModifier * levelModifier);
+            currentDef += (defModifier * levelModifier);
+            currentScrapReward += (scrapModifier * levelModifier);
+            currentEXPReward += (expModifier * levelModifier);
+        }
+
         currentState = baseState;
 
         InitializeAbilities();
