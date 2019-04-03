@@ -1,0 +1,304 @@
+fileFormatVersion: 2
+guid: be76edf81216de54086491e615a95cb2
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: Gas Red_GO/Gas Red_GO
+    100002: Gas Red_GO/Gas Red_GO/Anthena
+    100004: Gas Red_GO/Gas Red_GO/Body
+    100006: Gas Red_GO/Gas Red_GO/Eye
+    100008: Gas Red_GO/Gas Red_GO/Left Arm
+    100010: Gas Red_GO/Gas Red_GO/Mouth
+    100012: Gas Red_GO/Gas Red_GO/Right Arm
+    400000: Gas Red_GO/Gas Red_GO/Transform
+    400002: Gas Red_GO/Gas Red_GO/Anthena/Transform
+    400004: Gas Red_GO/Gas Red_GO/Body/Transform
+    400006: Gas Red_GO/Gas Red_GO/Eye/Transform
+    400008: Gas Red_GO/Gas Red_GO/Left Arm/Transform
+    400010: Gas Red_GO/Gas Red_GO/Mouth/Transform
+    400012: Gas Red_GO/Gas Red_GO/Right Arm/Transform
+    2800000: Gas Red
+    21200000: Gas Red_GO/Gas Red_GO/Anthena/SpriteRenderer
+    21200002: Gas Red_GO/Gas Red_GO/Body/SpriteRenderer
+    21200004: Gas Red_GO/Gas Red_GO/Eye/SpriteRenderer
+    21200006: Gas Red_GO/Gas Red_GO/Left Arm/SpriteRenderer
+    21200008: Gas Red_GO/Gas Red_GO/Mouth/SpriteRenderer
+    21200010: Gas Red_GO/Gas Red_GO/Right Arm/SpriteRenderer
+    21300000: Body
+    21300002: Right Arm
+    21300004: Eye
+    21300006: Mouth
+    21300008: Left Arm
+    21300010: Anthena
+    100100000: Gas Red_GO
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 293
+      height: 469
+    spriteID: c366ec4f93121944ba6ed8229cf0173f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -260, y: -8}
+  - name: Right Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 305
+      y: 4
+      width: 99
+      height: 249
+    spriteID: fbae25da385eeab4fa746136f8dad8f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -221, y: -37}
+  - name: Eye
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 289
+      y: 481
+      width: 151
+      height: 56
+    spriteID: 18261e1f022b85046913f5bd563917d9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -49, y: 136}
+  - name: Mouth
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 111
+      y: 597
+      width: 225
+      height: 104
+    spriteID: 31173652e6c96a04d8caac90b3a177a1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -198, y: 355}
+  - name: Left Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 597
+      width: 99
+      height: 248
+    spriteID: 7d1274a3dea5dd642a22746f1554359d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -192, y: 543}
+  - name: Anthena
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 481
+      width: 277
+      height: 108
+    spriteID: 37db49f92d2c7d047a913752f9fadba1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -132, y: 17}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 512
+  importedTextureHeight: 1024
+  documentSize: {x: 800, y: 600}
+  textureActualWidth: 512
+  textureActualHeight: 1024
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Body
+    spriteName: Body
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c366ec4f93121944ba6ed8229cf0173f
+    layerID: 48
+    mosaicPosition: {x: 4, y: 4}
+  - name: Right Arm
+    spriteName: Right Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: fbae25da385eeab4fa746136f8dad8f2
+    layerID: 39
+    mosaicPosition: {x: 305, y: 4}
+  - name: Eye
+    spriteName: Eye
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 18261e1f022b85046913f5bd563917d9
+    layerID: 26
+    mosaicPosition: {x: 289, y: 481}
+  - name: Mouth
+    spriteName: Mouth
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 31173652e6c96a04d8caac90b3a177a1
+    layerID: 23
+    mosaicPosition: {x: 111, y: 597}
+  - name: Left Arm
+    spriteName: Left Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7d1274a3dea5dd642a22746f1554359d
+    layerID: 20
+    mosaicPosition: {x: 4, y: 597}
+  - name: Anthena
+    spriteName: Anthena
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 37db49f92d2c7d047a913752f9fadba1
+    layerID: 12
+    mosaicPosition: {x: 4, y: 481}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  firstCreate: 0
+  generateGOHierarchy: 0

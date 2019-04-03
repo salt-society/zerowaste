@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: 615bf3f991c16aa4585b0aefd9c126ac
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: Wolf_GO/Wolf_GO
+    100002: Wolf_GO/Wolf_GO/Back Left Lower Leg
+    100004: Wolf_GO/Wolf_GO/Back Left Upper Leg
+    100006: Wolf_GO/Wolf_GO/Back Right Lower Leg
+    100008: Wolf_GO/Wolf_GO/Back Right Upper Leg
+    100010: Wolf_GO/Wolf_GO/Body
+    100012: Wolf_GO/Wolf_GO/Ear Left
+    100014: Wolf_GO/Wolf_GO/Ear Right
+    100016: Wolf_GO/Wolf_GO/Front Left Lower Leg
+    100018: Wolf_GO/Wolf_GO/Front Left Upper Leg
+    100020: Wolf_GO/Wolf_GO/Front Right Lower Leg
+    100022: Wolf_GO/Wolf_GO/Front Right Upper Leg
+    100024: Wolf_GO/Wolf_GO/Head
+    100026: Wolf_GO/Wolf_GO/Lower Jaw
+    100028: Wolf_GO/Wolf_GO/Tail
+    100030: Wolf_GO/Wolf_GO/Trash
+    100032: Wolf_GO/Wolf_GO/Upper Jaw
+    400000: Wolf_GO/Wolf_GO/Transform
+    400002: Wolf_GO/Wolf_GO/Back Left Lower Leg/Transform
+    400004: Wolf_GO/Wolf_GO/Back Left Upper Leg/Transform
+    400006: Wolf_GO/Wolf_GO/Back Right Lower Leg/Transform
+    400008: Wolf_GO/Wolf_GO/Back Right Upper Leg/Transform
+    400010: Wolf_GO/Wolf_GO/Body/Transform
+    400012: Wolf_GO/Wolf_GO/Ear Left/Transform
+    400014: Wolf_GO/Wolf_GO/Ear Right/Transform
+    400016: Wolf_GO/Wolf_GO/Front Left Lower Leg/Transform
+    400018: Wolf_GO/Wolf_GO/Front Left Upper Leg/Transform
+    400020: Wolf_GO/Wolf_GO/Front Right Lower Leg/Transform
+    400022: Wolf_GO/Wolf_GO/Front Right Upper Leg/Transform
+    400024: Wolf_GO/Wolf_GO/Head/Transform
+    400026: Wolf_GO/Wolf_GO/Lower Jaw/Transform
+    400028: Wolf_GO/Wolf_GO/Tail/Transform
+    400030: Wolf_GO/Wolf_GO/Trash/Transform
+    400032: Wolf_GO/Wolf_GO/Upper Jaw/Transform
+    2800000: Wolf
+    21200000: Wolf_GO/Wolf_GO/Back Left Lower Leg/SpriteRenderer
+    21200002: Wolf_GO/Wolf_GO/Back Left Upper Leg/SpriteRenderer
+    21200004: Wolf_GO/Wolf_GO/Back Right Lower Leg/SpriteRenderer
+    21200006: Wolf_GO/Wolf_GO/Back Right Upper Leg/SpriteRenderer
+    21200008: Wolf_GO/Wolf_GO/Body/SpriteRenderer
+    21200010: Wolf_GO/Wolf_GO/Ear Left/SpriteRenderer
+    21200012: Wolf_GO/Wolf_GO/Ear Right/SpriteRenderer
+    21200014: Wolf_GO/Wolf_GO/Front Left Lower Leg/SpriteRenderer
+    21200016: Wolf_GO/Wolf_GO/Front Left Upper Leg/SpriteRenderer
+    21200018: Wolf_GO/Wolf_GO/Front Right Lower Leg/SpriteRenderer
+    21200020: Wolf_GO/Wolf_GO/Front Right Upper Leg/SpriteRenderer
+    21200022: Wolf_GO/Wolf_GO/Head/SpriteRenderer
+    21200024: Wolf_GO/Wolf_GO/Lower Jaw/SpriteRenderer
+    21200026: Wolf_GO/Wolf_GO/Tail/SpriteRenderer
+    21200028: Wolf_GO/Wolf_GO/Trash/SpriteRenderer
+    21200030: Wolf_GO/Wolf_GO/Upper Jaw/SpriteRenderer
+    21300000: Trash
+    21300002: Front Right Lower Leg
+    21300004: Front Right Upper Leg
+    21300006: Back Right Lower Leg
+    21300008: Back Right Upper Leg
+    21300010: Ear Right
+    21300012: Ear Left
+    21300014: Upper Jaw
+    21300016: Lower Jaw
+    21300018: Head
+    21300020: Tail
+    21300022: Body
+    21300024: Back Left Upper Leg
+    21300026: Back Left Lower Leg
+    21300028: Front Left Upper Leg
+    21300030: Front Left Lower Leg
+    100100000: Wolf_GO
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Trash
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 898
+      width: 128
+      height: 115
+    spriteID: 987c292826e7b9d4baeb331e4fc48ecd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -360, y: 617}
+  - name: Front Right Lower Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 189
+      width: 128
+      height: 402
+    spriteID: a1c2492291555b042af7f396be8ed74e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -499, y: 110}
+  - name: Front Right Upper Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 660
+      y: 4
+      width: 95
+      height: 135
+    spriteID: 186388cad597b894a952a102f4652aaf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 172, y: -211}
+  - name: Back Right Lower Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 763
+      y: 4
+      width: 86
+      height: 149
+    spriteID: 4f824f7ce3ae050408b17b9cb7bf11bc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 507, y: -65}
+  - name: Back Right Upper Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 749
+      width: 108
+      height: 141
+    spriteID: 9d2d63fc76d738c489fc8822c56dee2f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -260, y: 551}
+  - name: Ear Right
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 951
+      y: 4
+      width: 28
+      height: 49
+    spriteID: 2be0fe2acdb824149b886b852bff3036
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 347, y: -496}
+  - name: Ear Left
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 243
+      y: 444
+      width: 49
+      height: 81
+    spriteID: 6cd8bc4a6625e9043966863a8748aa9f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -313, y: -34}
+  - name: Upper Jaw
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 140
+      y: 583
+      width: 102
+      height: 50
+    spriteID: 60f9d7bbab04d7045995538a34d2baca
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -446, y: 169}
+  - name: Lower Jaw
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 660
+      y: 147
+      width: 66
+      height: 32
+    spriteID: c2d9f81672790964bae054f5962f7cdf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 64, y: -258}
+  - name: Head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 140
+      y: 189
+      width: 167
+      height: 247
+    spriteID: f79cdeb226956634783e9d6b9cc1d92f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -341, y: -125}
+  - name: Tail
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 338
+      y: 4
+      width: 221
+      height: 177
+    spriteID: dc1401c255aabe645a27a68765d0c11f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 232, y: -284}
+  - name: Body
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 326
+      height: 177
+    spriteID: a77bcf18122a8fd428e299d6ce055aa6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -271, y: -238}
+  - name: Back Left Upper Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 599
+      width: 108
+      height: 142
+    spriteID: d0f5ba1142957c64c91511e72c8993bb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -273, y: 404}
+  - name: Back Left Lower Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 857
+      y: 4
+      width: 86
+      height: 148
+    spriteID: f539597f0b702d84b933fd797370de4d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 589, y: -65}
+  - name: Front Left Upper Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 140
+      y: 444
+      width: 95
+      height: 131
+    spriteID: b5171a22bb87e9e4b86f6dd995627b79
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -337, y: 230}
+  - name: Front Left Lower Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 567
+      y: 4
+      width: 85
+      height: 153
+    spriteID: 6f69ec5b63ace2b42a39635e179af8fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 73, y: -74}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
+  documentSize: {x: 800, y: 600}
+  textureActualWidth: 1024
+  textureActualHeight: 1024
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Trash
+    spriteName: Trash
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 987c292826e7b9d4baeb331e4fc48ecd
+    layerID: 58
+    mosaicPosition: {x: 4, y: 898}
+  - name: Front Right Lower Leg
+    spriteName: Front Right Lower Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a1c2492291555b042af7f396be8ed74e
+    layerID: 54
+    mosaicPosition: {x: 4, y: 189}
+  - name: Front Right Upper Leg
+    spriteName: Front Right Upper Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 186388cad597b894a952a102f4652aaf
+    layerID: 50
+    mosaicPosition: {x: 660, y: 4}
+  - name: Back Right Lower Leg
+    spriteName: Back Right Lower Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4f824f7ce3ae050408b17b9cb7bf11bc
+    layerID: 46
+    mosaicPosition: {x: 763, y: 4}
+  - name: Back Right Upper Leg
+    spriteName: Back Right Upper Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9d2d63fc76d738c489fc8822c56dee2f
+    layerID: 42
+    mosaicPosition: {x: 4, y: 749}
+  - name: Ear Right
+    spriteName: Ear Right
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2be0fe2acdb824149b886b852bff3036
+    layerID: 38
+    mosaicPosition: {x: 951, y: 4}
+  - name: Ear Left
+    spriteName: Ear Left
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6cd8bc4a6625e9043966863a8748aa9f
+    layerID: 35
+    mosaicPosition: {x: 243, y: 444}
+  - name: Upper Jaw
+    spriteName: Upper Jaw
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 60f9d7bbab04d7045995538a34d2baca
+    layerID: 59
+    mosaicPosition: {x: 140, y: 583}
+  - name: Lower Jaw
+    spriteName: Lower Jaw
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c2d9f81672790964bae054f5962f7cdf
+    layerID: 61
+    mosaicPosition: {x: 660, y: 147}
+  - name: Head
+    spriteName: Head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f79cdeb226956634783e9d6b9cc1d92f
+    layerID: 31
+    mosaicPosition: {x: 140, y: 189}
+  - name: Tail
+    spriteName: Tail
+    isGroup: 0
+    parentIndex: -1
+    spriteID: dc1401c255aabe645a27a68765d0c11f
+    layerID: 27
+    mosaicPosition: {x: 338, y: 4}
+  - name: Body
+    spriteName: Body
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a77bcf18122a8fd428e299d6ce055aa6
+    layerID: 23
+    mosaicPosition: {x: 4, y: 4}
+  - name: Back Left Upper Leg
+    spriteName: Back Left Upper Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d0f5ba1142957c64c91511e72c8993bb
+    layerID: 19
+    mosaicPosition: {x: 4, y: 599}
+  - name: Back Left Lower Leg
+    spriteName: Back Left Lower Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f539597f0b702d84b933fd797370de4d
+    layerID: 15
+    mosaicPosition: {x: 857, y: 4}
+  - name: Front Left Upper Leg
+    spriteName: Front Left Upper Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b5171a22bb87e9e4b86f6dd995627b79
+    layerID: 11
+    mosaicPosition: {x: 140, y: 444}
+  - name: Front Left Lower Leg
+    spriteName: Front Left Lower Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6f69ec5b63ace2b42a39635e179af8fd
+    layerID: 7
+    mosaicPosition: {x: 567, y: 4}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  firstCreate: 0
+  generateGOHierarchy: 0

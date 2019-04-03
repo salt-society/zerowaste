@@ -1,0 +1,535 @@
+fileFormatVersion: 2
+guid: a4bf7f3c4856aad429a7018bf30f0adb
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: Cat Fish_GO/Cat Fish_GO
+    100002: Cat Fish_GO/Cat Fish_GO/Bone 1
+    100004: Cat Fish_GO/Cat Fish_GO/Bone 2
+    100006: Cat Fish_GO/Cat Fish_GO/Bone 3
+    100008: Cat Fish_GO/Cat Fish_GO/Bone 4
+    100010: Cat Fish_GO/Cat Fish_GO/Bone 5
+    100012: Cat Fish_GO/Cat Fish_GO/Bone 6
+    100014: Cat Fish_GO/Cat Fish_GO/Head
+    100016: Cat Fish_GO/Cat Fish_GO/Layer3
+    100018: Cat Fish_GO/Cat Fish_GO/Layer12
+    100020: Cat Fish_GO/Cat Fish_GO/Lower Lefy Bone
+    100022: Cat Fish_GO/Cat Fish_GO/Lower Mouth
+    100024: Cat Fish_GO/Cat Fish_GO/Lower Right Bone
+    100026: Cat Fish_GO/Cat Fish_GO/Upper Bone
+    400000: Cat Fish_GO/Cat Fish_GO/Transform
+    400002: Cat Fish_GO/Cat Fish_GO/Bone 1/Transform
+    400004: Cat Fish_GO/Cat Fish_GO/Bone 2/Transform
+    400006: Cat Fish_GO/Cat Fish_GO/Bone 3/Transform
+    400008: Cat Fish_GO/Cat Fish_GO/Bone 4/Transform
+    400010: Cat Fish_GO/Cat Fish_GO/Bone 5/Transform
+    400012: Cat Fish_GO/Cat Fish_GO/Bone 6/Transform
+    400014: Cat Fish_GO/Cat Fish_GO/Head/Transform
+    400016: Cat Fish_GO/Cat Fish_GO/Layer3/Transform
+    400018: Cat Fish_GO/Cat Fish_GO/Layer12/Transform
+    400020: Cat Fish_GO/Cat Fish_GO/Lower Lefy Bone/Transform
+    400022: Cat Fish_GO/Cat Fish_GO/Lower Mouth/Transform
+    400024: Cat Fish_GO/Cat Fish_GO/Lower Right Bone/Transform
+    400026: Cat Fish_GO/Cat Fish_GO/Upper Bone/Transform
+    2800000: Cat Fish
+    21200000: Cat Fish_GO/Cat Fish_GO/Bone 1/SpriteRenderer
+    21200002: Cat Fish_GO/Cat Fish_GO/Bone 2/SpriteRenderer
+    21200004: Cat Fish_GO/Cat Fish_GO/Bone 3/SpriteRenderer
+    21200006: Cat Fish_GO/Cat Fish_GO/Bone 4/SpriteRenderer
+    21200008: Cat Fish_GO/Cat Fish_GO/Bone 5/SpriteRenderer
+    21200010: Cat Fish_GO/Cat Fish_GO/Bone 6/SpriteRenderer
+    21200012: Cat Fish_GO/Cat Fish_GO/Head/SpriteRenderer
+    21200014: Cat Fish_GO/Cat Fish_GO/Layer3/SpriteRenderer
+    21200016: Cat Fish_GO/Cat Fish_GO/Layer12/SpriteRenderer
+    21200018: Cat Fish_GO/Cat Fish_GO/Lower Lefy Bone/SpriteRenderer
+    21200020: Cat Fish_GO/Cat Fish_GO/Lower Mouth/SpriteRenderer
+    21200022: Cat Fish_GO/Cat Fish_GO/Lower Right Bone/SpriteRenderer
+    21200024: Cat Fish_GO/Cat Fish_GO/Upper Bone/SpriteRenderer
+    21300000: Bone 6
+    21300002: Bone 5
+    21300004: Bone 4
+    21300006: Bone 3
+    21300008: Bone 2
+    21300010: Bone 1
+    21300012: Lower Right Bone
+    21300014: Lower Lefy Bone
+    21300016: Upper Bone
+    21300018: Lower Mouth
+    21300020: Head
+    21300022: Layer3
+    21300024: Layer12
+    100100000: Cat Fish_GO
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Bone 6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1645
+      width: 460
+      height: 114
+    spriteID: d985a5ae39e156b44b3b208a1931a48f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -305, y: 1193}
+  - name: Bone 5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 471
+      y: 1205
+      width: 82
+      height: 162
+    spriteID: 7c5588d6dfb19b945a037ab861bf9dcd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 116, y: 772}
+  - name: Bone 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 315
+      y: 909
+      width: 131
+      height: 223
+    spriteID: 9c6c9aa6a503e2e4caf7fe8aa3370560
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -104, y: 496}
+  - name: Bone 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 317
+      y: 1205
+      width: 146
+      height: 239
+    spriteID: 229f622f08a37134eb052780ce3e9251
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -176, y: 816}
+  - name: Bone 2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 354
+      y: 602
+      width: 158
+      height: 264
+    spriteID: f05d871b2b073124788fdf087c520889
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -220, y: 256}
+  - name: Bone 1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 332
+      y: 266
+      width: 136
+      height: 275
+    spriteID: fd51b6582f28fc144bb297987630f87c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -318, y: -39}
+  - name: Lower Right Bone
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 909
+      width: 303
+      height: 288
+    spriteID: 548492e282a78184ba6e9d73b2313689
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -493, y: 815}
+  - name: Lower Lefy Bone
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 352
+      y: 1473
+      width: 189
+      height: 131
+    spriteID: 6312bee15bf20db42870bdae1dc27e34
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 32, y: 1171}
+  - name: Upper Bone
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 576
+      height: 254
+    spriteID: e3f2bdcd68104ae47bd925dfc4f33477
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -230, y: -524}
+  - name: Lower Mouth
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1473
+      width: 340
+      height: 164
+    spriteID: e46dca0b0bcb77142bbb86f64544d201
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -741, y: 1272}
+  - name: Head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 602
+      width: 342
+      height: 299
+    spriteID: 0e194a1a8e0f1f8439adfa9ae78bcdb3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -752, y: 276}
+  - name: Layer3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 266
+      width: 320
+      height: 328
+    spriteID: 6850c6a65a84b6247912ac1a1566c8e7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: -18}
+  - name: Layer12
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1205
+      width: 305
+      height: 260
+    spriteID: c1e42323d5aaa454aa2f0ee24f09293c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -1, y: 873}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 2048
+  documentSize: {x: 1100, y: 900}
+  textureActualWidth: 1024
+  textureActualHeight: 2048
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Bone 6
+    spriteName: Bone 6
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d985a5ae39e156b44b3b208a1931a48f
+    layerID: 47
+    mosaicPosition: {x: 4, y: 1645}
+  - name: Bone 5
+    spriteName: Bone 5
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7c5588d6dfb19b945a037ab861bf9dcd
+    layerID: 43
+    mosaicPosition: {x: 471, y: 1205}
+  - name: Bone 4
+    spriteName: Bone 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9c6c9aa6a503e2e4caf7fe8aa3370560
+    layerID: 39
+    mosaicPosition: {x: 315, y: 909}
+  - name: Bone 3
+    spriteName: Bone 3
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 229f622f08a37134eb052780ce3e9251
+    layerID: 35
+    mosaicPosition: {x: 317, y: 1205}
+  - name: Bone 2
+    spriteName: Bone 2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: f05d871b2b073124788fdf087c520889
+    layerID: 31
+    mosaicPosition: {x: 354, y: 602}
+  - name: Bone 1
+    spriteName: Bone 1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: fd51b6582f28fc144bb297987630f87c
+    layerID: 27
+    mosaicPosition: {x: 332, y: 266}
+  - name: Lower Right Bone
+    spriteName: Lower Right Bone
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 548492e282a78184ba6e9d73b2313689
+    layerID: 23
+    mosaicPosition: {x: 4, y: 909}
+  - name: Lower Lefy Bone
+    spriteName: Lower Lefy Bone
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6312bee15bf20db42870bdae1dc27e34
+    layerID: 19
+    mosaicPosition: {x: 352, y: 1473}
+  - name: Upper Bone
+    spriteName: Upper Bone
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e3f2bdcd68104ae47bd925dfc4f33477
+    layerID: 15
+    mosaicPosition: {x: 4, y: 4}
+  - name: Lower Mouth
+    spriteName: Lower Mouth
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e46dca0b0bcb77142bbb86f64544d201
+    layerID: 48
+    mosaicPosition: {x: 4, y: 1473}
+  - name: Head
+    spriteName: Head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 0e194a1a8e0f1f8439adfa9ae78bcdb3
+    layerID: 11
+    mosaicPosition: {x: 4, y: 602}
+  - name: Tail
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: 
+    layerID: 7
+    mosaicPosition: {x: 0, y: 0}
+  - name: Layer3
+    spriteName: Layer3
+    isGroup: 0
+    parentIndex: 11
+    spriteID: 6850c6a65a84b6247912ac1a1566c8e7
+    layerID: 6
+    mosaicPosition: {x: 4, y: 266}
+  - name: Layer12
+    spriteName: Layer12
+    isGroup: 0
+    parentIndex: 11
+    spriteID: c1e42323d5aaa454aa2f0ee24f09293c
+    layerID: 5
+    mosaicPosition: {x: 4, y: 1205}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  firstCreate: 0
+  generateGOHierarchy: 0
