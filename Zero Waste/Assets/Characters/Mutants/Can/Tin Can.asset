@@ -22,7 +22,11 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   baseSpd: 50
   currentSpd: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 50e5b8d7e2140a945a771f65e8afc6b5, type: 2}
+  - {fileID: 11400000, guid: 56b0b520c784f5349af868aa875b0328, type: 2}
+  - {fileID: 11400000, guid: 2b20eda59aeccf8478f2ebe7b2f08246, type: 2}
+  - {fileID: 11400000, guid: c6d0002d8e68e9745bd4625b7a0b7036, type: 2}
   effects: []
   mutantLevel: 1
   maxPollutionLevel: 150

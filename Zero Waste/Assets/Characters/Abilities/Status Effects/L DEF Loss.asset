@@ -15,15 +15,15 @@ MonoBehaviour:
   icon: {fileID: 0}
   effectName: Large DEF Loss
   description: Massive loss to DEF.
-  target: 
-  type: 
+  target: DEF
+  type: Status
   particleIndex: 0
   particleLoop: 0
-  strength: 0
-  state: 
+  strength: 80
+  state: Debuff
   application: 
-  duration: 0
-  turnsRemaining: 0
+  duration: 3
+  turnsRemaining: 3
   receiveAnim: 
   effectIndex: 0
   animationLength: 0

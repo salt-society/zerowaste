@@ -23,8 +23,10 @@ MonoBehaviour:
   baseSpd: 75
   currentSpd: 0
   abilities:
-  - {fileID: 11400000, guid: f26efaf2973105747855e747b847dbb8, type: 2}
-  - {fileID: 11400000, guid: 3e69d0ed1c778d641a7aa56ddb326af8, type: 2}
+  - {fileID: 11400000, guid: 50e5b8d7e2140a945a771f65e8afc6b5, type: 2}
+  - {fileID: 11400000, guid: cf89e60d3cceb904a94e71b0e9dcb804, type: 2}
+  - {fileID: 11400000, guid: e37b8cebe3efb2744b40feac1f78474e, type: 2}
+  - {fileID: 11400000, guid: 5dac5868c850bbf4f83ec3093cf646d1, type: 2}
   effects: []
   mutantLevel: 5
   maxPollutionLevel: 100
@@ -34,11 +36,11 @@ MonoBehaviour:
   baseEXPReward: 50
   baseState: Offensive
   roleWeakness: None
-  plModifier: 50
+  plModifier: 5
   atkModifier: 3
   defModifier: 2
-  expModifier: 20
-  scrapModifier: 20
+  expModifier: 1
+  scrapModifier: 1
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

@@ -22,21 +22,25 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   baseSpd: 0
   currentSpd: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 50e5b8d7e2140a945a771f65e8afc6b5, type: 2}
+  - {fileID: 11400000, guid: 4fbede55b17fa3448b040ce979f9dd90, type: 2}
+  - {fileID: 11400000, guid: 53fb7dd20b3051540be440eecd59d163, type: 2}
+  - {fileID: 11400000, guid: ba43bc78ebac43845bc766d9cc4fe962, type: 2}
   effects: []
   mutantLevel: 18
-  maxPollutionLevel: 1000
+  maxPollutionLevel: 600
   maxAtk: 25
-  maxDef: 130
+  maxDef: 60
   baseScrapReward: 200
   baseEXPReward: 200
   baseState: Defensive
   roleWeakness: None
-  plModifier: 85
-  atkModifier: 3
-  defModifier: 7
-  expModifier: 50
-  scrapModifier: 50
+  plModifier: 8
+  atkModifier: 2
+  defModifier: 6
+  expModifier: 4
+  scrapModifier: 4
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

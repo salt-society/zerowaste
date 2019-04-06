@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
-  m_Name: M PL Regen
+  m_Name: L SPD Loss
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  effectName: Medium PL Regen
-  description: Constantly regenerating a moderate amount of PL.
-  target: PL
+  effectName: Large SPD Loss
+  description: A signifcant loss to SPD.
+  target: SPD
   type: Status
   particleIndex: 0
   particleLoop: 0
-  strength: 50
-  state: Buff
+  strength: 80
+  state: Debuff
   application: 
   duration: 3
   turnsRemaining: 3

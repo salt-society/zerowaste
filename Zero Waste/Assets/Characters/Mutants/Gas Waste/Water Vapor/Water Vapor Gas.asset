@@ -22,21 +22,25 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   baseSpd: 150
   currentSpd: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 50e5b8d7e2140a945a771f65e8afc6b5, type: 2}
+  - {fileID: 11400000, guid: 0196f23d94b548a40bcd5efe915a8345, type: 2}
+  - {fileID: 11400000, guid: 6413a8bfad30fef44a55637e0921ee29, type: 2}
+  - {fileID: 11400000, guid: 4774a77828ff70a43a38ec290c1d3e88, type: 2}
   effects: []
   mutantLevel: 25
-  maxPollutionLevel: 600
-  maxAtk: 200
+  maxPollutionLevel: 400
+  maxAtk: 80
   maxDef: 15
   baseScrapReward: 400
   baseEXPReward: 400
   baseState: Offensive
   roleWeakness: Reduce
-  plModifier: 70
-  atkModifier: 10
-  defModifier: 2
-  expModifier: 85
-  scrapModifier: 85
+  plModifier: 7
+  atkModifier: 8
+  defModifier: 1
+  expModifier: 5
+  scrapModifier: 5
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

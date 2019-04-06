@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Nitrous Oxide Gas
+  m_Name: CFC Gas
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: Nitroux Oxide Gas-Monster
+  characterName: CFC Gas-Monster
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
@@ -22,21 +22,25 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   baseSpd: 125
   currentSpd: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 50e5b8d7e2140a945a771f65e8afc6b5, type: 2}
+  - {fileID: 11400000, guid: cdcb99cbeffe5414691d2ba7c72aac4e, type: 2}
+  - {fileID: 11400000, guid: 10dfb6820a1f3994096265cc644a26dc, type: 2}
+  - {fileID: 11400000, guid: 0bb6f5521162b534abe3b724d79773c7, type: 2}
   effects: []
-  mutantLevel: 22
-  maxPollutionLevel: 300
-  maxAtk: 130
+  mutantLevel: 23
+  maxPollutionLevel: 200
+  maxAtk: 60
   maxDef: 15
-  baseScrapReward: 250
-  baseEXPReward: 250
+  baseScrapReward: 300
+  baseEXPReward: 300
   baseState: Offensive
   roleWeakness: Reduce
-  plModifier: 60
-  atkModifier: 7
-  defModifier: 2
-  expModifier: 60
-  scrapModifier: 60
+  plModifier: 6
+  atkModifier: 6
+  defModifier: 1
+  expModifier: 5
+  scrapModifier: 5
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

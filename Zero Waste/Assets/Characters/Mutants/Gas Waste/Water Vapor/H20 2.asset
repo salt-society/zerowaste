@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f925702807f31488074c7e16c25cda, type: 3}
+  m_Name: H20 2
+  m_EditorClassIdentifier: 
+  index: 2
+  icon: {fileID: 0}
+  selectedIcon: {fileID: 0}
+  abilityName: Amplifier
+  abilityDescription: 'Apply 2 cases of M DEF Down to a single
+
+    enemy.'
+  length: 0
+  type: Offensive
+  range: Single
+  withDirect: 0
+  directIndex: 0
+  showValue: 0
+  repeatAnimation: 0
+  particleIndex: 0
+  spawnY: 0
+  effects:
+  - {fileID: 11400000, guid: ae00b037e5058c046a1a50a8bcae8928, type: 2}
+  - {fileID: 11400000, guid: ae00b037e5058c046a1a50a8bcae8928, type: 2}
+  cooldown: 2
+  turnTillActive: 2
+  chanceToProc: 35
+  abilityState: Offensive

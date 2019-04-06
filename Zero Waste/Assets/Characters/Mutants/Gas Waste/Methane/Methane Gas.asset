@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: CFC Gas
+  m_Name: Methane Gas
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
-  characterName: CFC Gas-Monster
+  characterName: Methane Gas-Monster
   characterThumb: {fileID: 0}
   characterHalf: {fileID: 0}
   characterFull: {fileID: 0}
@@ -22,21 +22,25 @@ MonoBehaviour:
   scale: {x: 0, y: 0, z: 0}
   baseSpd: 125
   currentSpd: 0
-  abilities: []
+  abilities:
+  - {fileID: 11400000, guid: 50e5b8d7e2140a945a771f65e8afc6b5, type: 2}
+  - {fileID: 11400000, guid: 70cc1eb80d2fe104294ca43c895bce95, type: 2}
+  - {fileID: 11400000, guid: 4e3ffcd9732c08541938ffbf44bb445a, type: 2}
+  - {fileID: 11400000, guid: cd53a5a10834d934a843a96f568e378b, type: 2}
   effects: []
-  mutantLevel: 23
-  maxPollutionLevel: 300
-  maxAtk: 130
+  mutantLevel: 24
+  maxPollutionLevel: 200
+  maxAtk: 60
   maxDef: 15
   baseScrapReward: 300
   baseEXPReward: 300
   baseState: Offensive
   roleWeakness: Reduce
-  plModifier: 60
-  atkModifier: 7
-  defModifier: 2
-  expModifier: 75
-  scrapModifier: 75
+  plModifier: 6
+  atkModifier: 6
+  defModifier: 1
+  expModifier: 5
+  scrapModifier: 5
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0
