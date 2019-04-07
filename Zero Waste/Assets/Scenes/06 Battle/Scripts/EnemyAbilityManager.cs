@@ -70,7 +70,7 @@ public class EnemyAbilityManager : MonoBehaviour
                 float chance = Random.Range(minChance, maxChance + 1);
 
                 // Add if the ability's state aligns with the enemy's current state
-                if (ability.abilityState == mutant.currentState)
+                if (ability.type == mutant.currentState)
                     chance += 30f;
 
                 // If it's the most probable ability, pick that
