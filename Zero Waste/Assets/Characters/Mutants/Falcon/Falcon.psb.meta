@@ -3,44 +3,56 @@ guid: 894e790aa2db27f43b133a2172261d20
 ScriptedImporter:
   fileIDToRecycleName:
     100000: Falcon_GO/Falcon_GO
-    100002: Falcon_GO/Falcon_GO/Body
-    100004: Falcon_GO/Falcon_GO/Body and Tail Trash
-    100006: Falcon_GO/Falcon_GO/Foot Left
-    100008: Falcon_GO/Falcon_GO/Foot Right
-    100010: Falcon_GO/Falcon_GO/Head
-    100012: Falcon_GO/Falcon_GO/Tail
-    100014: Falcon_GO/Falcon_GO/Wing Left
-    100016: Falcon_GO/Falcon_GO/Wing Right
-    100018: Falcon_GO/Falcon_GO/Wing Trash
+    100002: Falcon_GO/Falcon_GO/Beak Lower
+    100004: Falcon_GO/Falcon_GO/Beak Upper
+    100006: Falcon_GO/Falcon_GO/Body
+    100008: Falcon_GO/Falcon_GO/Body and Tail Trash
+    100010: Falcon_GO/Falcon_GO/Foot Left
+    100012: Falcon_GO/Falcon_GO/Foot Right
+    100014: Falcon_GO/Falcon_GO/Head
+    100016: Falcon_GO/Falcon_GO/Mouth
+    100018: Falcon_GO/Falcon_GO/Tail
+    100020: Falcon_GO/Falcon_GO/Wing Left
+    100022: Falcon_GO/Falcon_GO/Wing Right
+    100024: Falcon_GO/Falcon_GO/Wing Trash
     400000: Falcon_GO/Falcon_GO/Transform
-    400002: Falcon_GO/Falcon_GO/Body/Transform
-    400004: Falcon_GO/Falcon_GO/Body and Tail Trash/Transform
-    400006: Falcon_GO/Falcon_GO/Foot Left/Transform
-    400008: Falcon_GO/Falcon_GO/Foot Right/Transform
-    400010: Falcon_GO/Falcon_GO/Head/Transform
-    400012: Falcon_GO/Falcon_GO/Tail/Transform
-    400014: Falcon_GO/Falcon_GO/Wing Left/Transform
-    400016: Falcon_GO/Falcon_GO/Wing Right/Transform
-    400018: Falcon_GO/Falcon_GO/Wing Trash/Transform
+    400002: Falcon_GO/Falcon_GO/Beak Lower/Transform
+    400004: Falcon_GO/Falcon_GO/Beak Upper/Transform
+    400006: Falcon_GO/Falcon_GO/Body/Transform
+    400008: Falcon_GO/Falcon_GO/Body and Tail Trash/Transform
+    400010: Falcon_GO/Falcon_GO/Foot Left/Transform
+    400012: Falcon_GO/Falcon_GO/Foot Right/Transform
+    400014: Falcon_GO/Falcon_GO/Head/Transform
+    400016: Falcon_GO/Falcon_GO/Mouth/Transform
+    400018: Falcon_GO/Falcon_GO/Tail/Transform
+    400020: Falcon_GO/Falcon_GO/Wing Left/Transform
+    400022: Falcon_GO/Falcon_GO/Wing Right/Transform
+    400024: Falcon_GO/Falcon_GO/Wing Trash/Transform
     2800000: Falcon
-    21200000: Falcon_GO/Falcon_GO/Body/SpriteRenderer
-    21200002: Falcon_GO/Falcon_GO/Body and Tail Trash/SpriteRenderer
-    21200004: Falcon_GO/Falcon_GO/Foot Left/SpriteRenderer
-    21200006: Falcon_GO/Falcon_GO/Foot Right/SpriteRenderer
-    21200008: Falcon_GO/Falcon_GO/Head/SpriteRenderer
-    21200010: Falcon_GO/Falcon_GO/Tail/SpriteRenderer
-    21200012: Falcon_GO/Falcon_GO/Wing Left/SpriteRenderer
-    21200014: Falcon_GO/Falcon_GO/Wing Right/SpriteRenderer
-    21200016: Falcon_GO/Falcon_GO/Wing Trash/SpriteRenderer
+    21200000: Falcon_GO/Falcon_GO/Beak Lower/SpriteRenderer
+    21200002: Falcon_GO/Falcon_GO/Beak Upper/SpriteRenderer
+    21200004: Falcon_GO/Falcon_GO/Body/SpriteRenderer
+    21200006: Falcon_GO/Falcon_GO/Body and Tail Trash/SpriteRenderer
+    21200008: Falcon_GO/Falcon_GO/Foot Left/SpriteRenderer
+    21200010: Falcon_GO/Falcon_GO/Foot Right/SpriteRenderer
+    21200012: Falcon_GO/Falcon_GO/Head/SpriteRenderer
+    21200014: Falcon_GO/Falcon_GO/Mouth/SpriteRenderer
+    21200016: Falcon_GO/Falcon_GO/Tail/SpriteRenderer
+    21200018: Falcon_GO/Falcon_GO/Wing Left/SpriteRenderer
+    21200020: Falcon_GO/Falcon_GO/Wing Right/SpriteRenderer
+    21200022: Falcon_GO/Falcon_GO/Wing Trash/SpriteRenderer
     21300000: Wing Trash
     21300002: Wing Left
-    21300004: Head
-    21300006: Body and Tail Trash
-    21300008: Tail
-    21300010: Foot Left
-    21300012: Body
-    21300014: Foot Right
-    21300016: Wing Right
+    21300004: Beak Lower
+    21300006: Beak Upper
+    21300008: Mouth
+    21300010: Head
+    21300012: Body and Tail Trash
+    21300014: Tail
+    21300016: Foot Left
+    21300018: Body
+    21300020: Foot Right
+    21300022: Wing Right
     100100000: Falcon_GO
   externalObjects: {}
   userData: 
@@ -135,7 +147,7 @@ ScriptedImporter:
       y: 4
       width: 324
       height: 223
-    spriteID: 1fac2f9ab77c1284fb8241229411951d
+    spriteID: 7337f3e10bf4f3c4e8992f18247d1f25
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,7 +156,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 346, y: -325}
+    uvTransform: {x: 438, y: -159}
   - name: Wing Left
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -156,7 +168,7 @@ ScriptedImporter:
       y: 4
       width: 322
       height: 521
-    spriteID: e848d6cb8aad5714782e8c338862f9c3
+    spriteID: 0a510063e75848144a689f150598639e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -165,7 +177,70 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -175, y: -253}
+    uvTransform: {x: -83, y: -87}
+  - name: Beak Lower
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 790
+      y: 643
+      width: 50
+      height: 23
+    spriteID: 18bba4037395c8145878daa4fc4feb50
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 244, y: 546}
+  - name: Beak Upper
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 334
+      y: 429
+      width: 70
+      height: 55
+    spriteID: fc28d751e3d782449bb17ebfa69eaa2f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -212, y: 349}
+  - name: Mouth
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 739
+      y: 643
+      width: 43
+      height: 32
+    spriteID: 1d3c2f931ca598c4fa5b545ea44a51ef
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 192, y: 545}
   - name: Head
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -175,9 +250,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 279
       y: 533
-      width: 251
+      width: 230
       height: 138
-    spriteID: c426fffa02592aa43aa67fa669de5454
+    spriteID: 985d647ff9b02df43b52e3afbaa3bc46
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -186,7 +261,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -179, y: 304}
+    uvTransform: {x: -87, y: 470}
   - name: Body and Tail Trash
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -198,7 +273,7 @@ ScriptedImporter:
       y: 235
       width: 334
       height: 181
-    spriteID: 7a7707de5fe7e6c4183fd8485cf1d54a
+    spriteID: 76567617dbb32cd4aa867b84447e7755
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -207,7 +282,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 498, y: 4}
+    uvTransform: {x: 590, y: 170}
   - name: Tail
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -215,11 +290,11 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 538
+      x: 517
       y: 533
-      width: 229
-      height: 132
-    spriteID: cfbf41c8ddafd1f4f98935ede5d362b2
+      width: 214
+      height: 123
+    spriteID: da60c0461bd3f034fb2f7fa586e11508
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -228,7 +303,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 461, y: 285}
+    uvTransform: {x: 517, y: 451}
   - name: Foot Left
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -236,11 +311,11 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 775
+      x: 739
       y: 533
       width: 117
       height: 102
-    spriteID: 998c5cb66f349f446b62c92feb9ff73b
+    spriteID: 29816981871859a4ba4fc8264677bb3e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -249,7 +324,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 540, y: 361}
+    uvTransform: {x: 596, y: 527}
   - name: Body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -261,7 +336,7 @@ ScriptedImporter:
       y: 533
       width: 267
       height: 146
-    spriteID: bcf0883f076aca84285304a2863d6540
+    spriteID: 767fb96fb1c6c53439e02754c718e73f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -270,7 +345,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -277, y: 311}
+    uvTransform: {x: -185, y: 477}
   - name: Foot Right
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -278,11 +353,11 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 900
+      x: 864
       y: 533
       width: 117
       height: 102
-    spriteID: 51092de7994c5f741b1b273a06b42951
+    spriteID: 9ad09b694c942df438e9b6d6f44596db
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -291,7 +366,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 616, y: 367}
+    uvTransform: {x: 672, y: 533}
   - name: Wing Right
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -303,7 +378,7 @@ ScriptedImporter:
       y: 4
       width: 302
       height: 417
-    spriteID: 7fc4f26d8f998494f9c03fd20de5212c
+    spriteID: 0f73e5db9d0529742ac189f6eee00bf0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -312,7 +387,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -103, y: -300}
+    uvTransform: {x: -11, y: -134}
   platformSettings: []
   mosaicLayers: 1
   documentPivot: {x: 0, y: 0}
@@ -320,7 +395,7 @@ ScriptedImporter:
   importHiddenLayers: 0
   importedTextureWidth: 1024
   importedTextureHeight: 1024
-  documentSize: {x: 900, y: 900}
+  documentSize: {x: 647, y: 612}
   textureActualWidth: 1024
   textureActualHeight: 1024
   spritePackingTag: 
@@ -332,63 +407,84 @@ ScriptedImporter:
     spriteName: Wing Trash
     isGroup: 0
     parentIndex: -1
-    spriteID: 1fac2f9ab77c1284fb8241229411951d
+    spriteID: 7337f3e10bf4f3c4e8992f18247d1f25
     layerID: 40
     mosaicPosition: {x: 644, y: 4}
   - name: Wing Left
     spriteName: Wing Left
     isGroup: 0
     parentIndex: -1
-    spriteID: e848d6cb8aad5714782e8c338862f9c3
+    spriteID: 0a510063e75848144a689f150598639e
     layerID: 36
     mosaicPosition: {x: 4, y: 4}
+  - name: Beak Lower
+    spriteName: Beak Lower
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 18bba4037395c8145878daa4fc4feb50
+    layerID: 47
+    mosaicPosition: {x: 790, y: 643}
+  - name: Beak Upper
+    spriteName: Beak Upper
+    isGroup: 0
+    parentIndex: -1
+    spriteID: fc28d751e3d782449bb17ebfa69eaa2f
+    layerID: 44
+    mosaicPosition: {x: 334, y: 429}
+  - name: Mouth
+    spriteName: Mouth
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1d3c2f931ca598c4fa5b545ea44a51ef
+    layerID: 49
+    mosaicPosition: {x: 739, y: 643}
   - name: Head
     spriteName: Head
     isGroup: 0
     parentIndex: -1
-    spriteID: c426fffa02592aa43aa67fa669de5454
+    spriteID: 985d647ff9b02df43b52e3afbaa3bc46
     layerID: 31
     mosaicPosition: {x: 279, y: 533}
   - name: Body and Tail Trash
     spriteName: Body and Tail Trash
     isGroup: 0
     parentIndex: -1
-    spriteID: 7a7707de5fe7e6c4183fd8485cf1d54a
+    spriteID: 76567617dbb32cd4aa867b84447e7755
     layerID: 27
     mosaicPosition: {x: 644, y: 235}
   - name: Tail
     spriteName: Tail
     isGroup: 0
     parentIndex: -1
-    spriteID: cfbf41c8ddafd1f4f98935ede5d362b2
+    spriteID: da60c0461bd3f034fb2f7fa586e11508
     layerID: 23
-    mosaicPosition: {x: 538, y: 533}
+    mosaicPosition: {x: 517, y: 533}
   - name: Foot Left
     spriteName: Foot Left
     isGroup: 0
     parentIndex: -1
-    spriteID: 998c5cb66f349f446b62c92feb9ff73b
+    spriteID: 29816981871859a4ba4fc8264677bb3e
     layerID: 19
-    mosaicPosition: {x: 775, y: 533}
+    mosaicPosition: {x: 739, y: 533}
   - name: Body
     spriteName: Body
     isGroup: 0
     parentIndex: -1
-    spriteID: bcf0883f076aca84285304a2863d6540
+    spriteID: 767fb96fb1c6c53439e02754c718e73f
     layerID: 15
     mosaicPosition: {x: 4, y: 533}
   - name: Foot Right
     spriteName: Foot Right
     isGroup: 0
     parentIndex: -1
-    spriteID: 51092de7994c5f741b1b273a06b42951
+    spriteID: 9ad09b694c942df438e9b6d6f44596db
     layerID: 11
-    mosaicPosition: {x: 900, y: 533}
+    mosaicPosition: {x: 864, y: 533}
   - name: Wing Right
     spriteName: Wing Right
     isGroup: 0
     parentIndex: -1
-    spriteID: 7fc4f26d8f998494f9c03fd20de5212c
+    spriteID: 0f73e5db9d0529742ac189f6eee00bf0
     layerID: 7
     mosaicPosition: {x: 334, y: 4}
   characterData:
