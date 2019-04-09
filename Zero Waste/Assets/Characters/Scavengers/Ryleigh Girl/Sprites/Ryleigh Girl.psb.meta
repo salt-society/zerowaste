@@ -1,0 +1,1168 @@
+fileFormatVersion: 2
+guid: 0fdb23594b666a14d9b4ce1c67b4c9ce
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: Ryleigh Girl_GO/Ryleigh Girl_GO
+    100002: Ryleigh Girl_GO/Ryleigh Girl_GO/Head
+    100004: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Back Cape
+    100006: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Cape Front
+    100008: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Foot
+    100010: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Hand
+    100012: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Leg Lower
+    100014: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Leg Upper
+    100016: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Lower Arm
+    100018: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Skirt Back
+    100020: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Skirt Front
+    100022: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Upper Arm
+    100024: Ryleigh Girl_GO/Ryleigh Girl_GO/Neck
+    100026: Ryleigh Girl_GO/Ryleigh Girl_GO/Rght Leg Lower
+    100028: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon 01
+    100030: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon 02
+    100032: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Loop 01
+    100034: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Loop 02
+    100036: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Tail 01
+    100038: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Tail 02
+    100040: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Back Cape
+    100042: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Cape Front
+    100044: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Foot
+    100046: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Hand
+    100048: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Leg Upper
+    100050: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Lower Arm
+    100052: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Skirt Back
+    100054: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Skirt Front
+    100056: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Upper Arm
+    100058: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel 01
+    100060: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel 02
+    100062: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel Tail 01
+    100064: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel Tail 02
+    100066: Ryleigh Girl_GO/Ryleigh Girl_GO/Torso
+    400000: Ryleigh Girl_GO/Ryleigh Girl_GO/Transform
+    400002: Ryleigh Girl_GO/Ryleigh Girl_GO/Head/Transform
+    400004: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Back Cape/Transform
+    400006: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Cape Front/Transform
+    400008: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Foot/Transform
+    400010: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Hand/Transform
+    400012: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Leg Lower/Transform
+    400014: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Leg Upper/Transform
+    400016: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Lower Arm/Transform
+    400018: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Skirt Back/Transform
+    400020: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Skirt Front/Transform
+    400022: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Upper Arm/Transform
+    400024: Ryleigh Girl_GO/Ryleigh Girl_GO/Neck/Transform
+    400026: Ryleigh Girl_GO/Ryleigh Girl_GO/Rght Leg Lower/Transform
+    400028: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon 01/Transform
+    400030: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon 02/Transform
+    400032: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Loop 01/Transform
+    400034: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Loop 02/Transform
+    400036: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Tail 01/Transform
+    400038: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Tail 02/Transform
+    400040: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Back Cape/Transform
+    400042: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Cape Front/Transform
+    400044: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Foot/Transform
+    400046: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Hand/Transform
+    400048: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Leg Upper/Transform
+    400050: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Lower Arm/Transform
+    400052: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Skirt Back/Transform
+    400054: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Skirt Front/Transform
+    400056: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Upper Arm/Transform
+    400058: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel 01/Transform
+    400060: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel 02/Transform
+    400062: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel Tail 01/Transform
+    400064: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel Tail 02/Transform
+    400066: Ryleigh Girl_GO/Ryleigh Girl_GO/Torso/Transform
+    2800000: Ryleigh Girl
+    21200000: Ryleigh Girl_GO/Ryleigh Girl_GO/Head/SpriteRenderer
+    21200002: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Back Cape/SpriteRenderer
+    21200004: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Cape Front/SpriteRenderer
+    21200006: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Foot/SpriteRenderer
+    21200008: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Hand/SpriteRenderer
+    21200010: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Leg Lower/SpriteRenderer
+    21200012: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Leg Upper/SpriteRenderer
+    21200014: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Lower Arm/SpriteRenderer
+    21200016: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Skirt Back/SpriteRenderer
+    21200018: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Skirt Front/SpriteRenderer
+    21200020: Ryleigh Girl_GO/Ryleigh Girl_GO/Left Upper Arm/SpriteRenderer
+    21200022: Ryleigh Girl_GO/Ryleigh Girl_GO/Neck/SpriteRenderer
+    21200024: Ryleigh Girl_GO/Ryleigh Girl_GO/Rght Leg Lower/SpriteRenderer
+    21200026: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon 01/SpriteRenderer
+    21200028: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon 02/SpriteRenderer
+    21200030: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Loop 01/SpriteRenderer
+    21200032: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Loop 02/SpriteRenderer
+    21200034: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Tail 01/SpriteRenderer
+    21200036: Ryleigh Girl_GO/Ryleigh Girl_GO/Ribbon Tail 02/SpriteRenderer
+    21200038: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Back Cape/SpriteRenderer
+    21200040: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Cape Front/SpriteRenderer
+    21200042: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Foot/SpriteRenderer
+    21200044: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Hand/SpriteRenderer
+    21200046: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Leg Upper/SpriteRenderer
+    21200048: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Lower Arm/SpriteRenderer
+    21200050: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Skirt Back/SpriteRenderer
+    21200052: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Skirt Front/SpriteRenderer
+    21200054: Ryleigh Girl_GO/Ryleigh Girl_GO/Right Upper Arm/SpriteRenderer
+    21200056: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel 01/SpriteRenderer
+    21200058: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel 02/SpriteRenderer
+    21200060: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel Tail 01/SpriteRenderer
+    21200062: Ryleigh Girl_GO/Ryleigh Girl_GO/Tassel Tail 02/SpriteRenderer
+    21200064: Ryleigh Girl_GO/Ryleigh Girl_GO/Torso/SpriteRenderer
+    21300000: Ribbon Loop 02
+    21300002: Ribbon Loop 01
+    21300004: Head
+    21300006: Tassel 02
+    21300008: Tassel Tail 02
+    21300010: Tassel 01
+    21300012: Tassel Tail 01
+    21300014: Ribbon Tail 02
+    21300016: Ribbon Tail 01
+    21300018: Ribbon 02
+    21300020: Ribbon 01
+    21300022: Right Cape Front
+    21300024: Right Upper Arm
+    21300026: Right Lower Arm
+    21300028: Right Hand
+    21300030: Left Cape Front
+    21300032: Torso
+    21300034: Left Upper Arm
+    21300036: Left Lower Arm
+    21300038: Left Hand
+    21300040: Left Skirt Front
+    21300042: Right Skirt Front
+    21300044: Left Leg Lower
+    21300046: Left Leg Upper
+    21300048: Left Foot
+    21300050: Rght Leg Lower
+    21300052: Right Leg Upper
+    21300054: Right Foot
+    21300056: Right Back Cape
+    21300058: Left Back Cape
+    21300060: Right Skirt Back
+    21300062: Left Skirt Back
+    21300064: Neck
+    100100000: Ryleigh Girl_GO
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Ribbon Loop 02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 648
+      y: 429
+      width: 92
+      height: 90
+    spriteID: a62e7a89be7fff8419c2c2dfe770c461
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 469, y: -253}
+  - name: Ribbon Loop 01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 310
+      y: 682
+      width: 105
+      height: 150
+    spriteID: 1a55b619d35544047826302c85f99dad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 136, y: 64}
+  - name: Head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 488
+      height: 458
+    spriteID: 288193a7fb3211f41921c456c6b0b348
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -33, y: -891}
+  - name: Tassel 02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 648
+      y: 196
+      width: 56
+      height: 225
+    spriteID: 8797e4a11eda064489bf0c996d41df41
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 379, y: -344}
+  - name: Tassel Tail 02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 423
+      y: 750
+      width: 39
+      height: 61
+    spriteID: 14feddc18be3b734aa3e46644977c20b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 113, y: 266}
+  - name: Tassel 01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 608
+      y: 980
+      width: 30
+      height: 229
+    spriteID: 85c845f3f6895cd498eb1c762e8069e3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 340, y: 442}
+  - name: Tassel Tail 01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 251
+      y: 1961
+      width: 37
+      height: 62
+    spriteID: 60014a35171bfa046b3c113a367088a9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -23, y: 1479}
+  - name: Ribbon Tail 02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 419
+      y: 1743
+      width: 66
+      height: 236
+    spriteID: 46c2b1e6dab52d24cb622079d90f7714
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -77, y: 849}
+  - name: Ribbon Tail 01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 1732
+      width: 89
+      height: 231
+    spriteID: 9fdd3a908016b1f40b8fbfbd2675dfbe
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -2, y: 832}
+  - name: Ribbon 02
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 568
+      y: 1971
+      width: 62
+      height: 58
+    spriteID: a0364338eead3ef42889c871b4a41961
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 87, y: 849}
+  - name: Ribbon 01
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 423
+      y: 682
+      width: 57
+      height: 60
+    spriteID: 5a0f302f890a7b745bee2b928154fcf5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -60, y: -475}
+  - name: Right Cape Front
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 853
+      width: 267
+      height: 351
+    spriteID: ae2caedca8535f74fa4e12f0ef510e18
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -297, y: 291}
+  - name: Right Upper Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 980
+      width: 100
+      height: 242
+    spriteID: 9ea4308745555b54fa57f1cde2838453
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 188, y: 320}
+  - name: Right Lower Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 648
+      y: 4
+      width: 99
+      height: 184
+    spriteID: 6505661cfed25c34fb1a731d5e88239e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 312, y: -511}
+  - name: Right Hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 128
+      y: 1893
+      width: 113
+      height: 102
+    spriteID: ebb8d3625a301164eb75b0f389f2fc47
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -204, y: 1462}
+  - name: Left Cape Front
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1555
+      width: 218
+      height: 330
+    spriteID: b9e60c511de843d47a5c51e784e7dfb5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 4, y: 973}
+  - name: Torso
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 251
+      y: 1212
+      width: 221
+      height: 314
+    spriteID: de2a23eed1f50c041b414efd00af2a6a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 109, y: 583}
+  - name: Left Upper Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 760
+      width: 117
+      height: 212
+    spriteID: 710727a4f0e96c541ba2406c0fd55d2a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 383, y: 59}
+  - name: Left Lower Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 4
+      width: 140
+      height: 219
+    spriteID: 7121dc1a5ae1134469f32daf4fc40f3e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 449, y: -517}
+  - name: Left Hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 403
+      y: 1072
+      width: 88
+      height: 98
+    spriteID: 5091c3ef4d46937478a79ba5b522a318
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 386, y: 614}
+  - name: Left Skirt Front
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 251
+      y: 1743
+      width: 160
+      height: 210
+    spriteID: 1ebb05bdcf538964e86af6e75002eb71
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 187, y: 1296}
+  - name: Right Skirt Front
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 279
+      y: 853
+      width: 182
+      height: 211
+    spriteID: 95d10aaae296bf64680ebb8514130630
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 80, y: 414}
+  - name: Left Leg Lower
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 1484
+      width: 91
+      height: 240
+    spriteID: 36b1b9c120514944a8e64243b3d130be
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 381, y: 1387}
+  - name: Left Leg Upper
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 231
+      width: 101
+      height: 257
+    spriteID: 366e9390542be714a8cde0431050e457
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 385, y: -68}
+  - name: Left Foot
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1893
+      width: 116
+      height: 113
+    spriteID: 716a26446b6fd874e9864766f2f600c2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -87, y: 1883}
+  - name: Rght Leg Lower
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 1230
+      width: 98
+      height: 246
+    spriteID: 4576c3769a9d86243b2f664eb9264773
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 229, y: 1141}
+  - name: Right Leg Upper
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 496
+      width: 99
+      height: 256
+    spriteID: b1aebb1ad8faec54eaff054c518884f9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 252, y: 194}
+  - name: Right Foot
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 279
+      y: 1072
+      width: 116
+      height: 118
+    spriteID: 6d0cceb2804d4e34ba0b53bc73fa360f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 22, y: 1072}
+  - name: Right Back Cape
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 470
+      width: 298
+      height: 375
+    spriteID: fe5ae26348aa908489c10ade93f2db55
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -267, y: -74}
+  - name: Left Back Cape
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1212
+      width: 239
+      height: 335
+    spriteID: 1ad42185e80068f488d0625f652c1937
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -1, y: 632}
+  - name: Right Skirt Back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 310
+      y: 470
+      width: 181
+      height: 204
+    spriteID: a069dbec604a91243a85c9946bb918a5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 111, y: 23}
+  - name: Left Skirt Back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 251
+      y: 1534
+      width: 168
+      height: 201
+    spriteID: 687024965c933354cb96a34c3043ff64
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 189, y: 1085}
+  - name: Neck
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 500
+      y: 1971
+      width: 60
+      height: 60
+    spriteID: 94aca0a4d902c014ca96f95298daf760
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 248, y: 1069}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 2048
+  documentSize: {x: 591, y: 1353}
+  textureActualWidth: 1024
+  textureActualHeight: 2048
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Ribbon Loop 02
+    spriteName: Ribbon Loop 02
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a62e7a89be7fff8419c2c2dfe770c461
+    layerID: 186
+    mosaicPosition: {x: 648, y: 429}
+  - name: Ribbon Loop 01
+    spriteName: Ribbon Loop 01
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1a55b619d35544047826302c85f99dad
+    layerID: 182
+    mosaicPosition: {x: 310, y: 682}
+  - name: Head
+    spriteName: Head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 288193a7fb3211f41921c456c6b0b348
+    layerID: 172
+    mosaicPosition: {x: 4, y: 4}
+  - name: Tassel 02
+    spriteName: Tassel 02
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8797e4a11eda064489bf0c996d41df41
+    layerID: 161
+    mosaicPosition: {x: 648, y: 196}
+  - name: Tassel Tail 02
+    spriteName: Tassel Tail 02
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 14feddc18be3b734aa3e46644977c20b
+    layerID: 158
+    mosaicPosition: {x: 423, y: 750}
+  - name: Tassel 01
+    spriteName: Tassel 01
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 85c845f3f6895cd498eb1c762e8069e3
+    layerID: 155
+    mosaicPosition: {x: 608, y: 980}
+  - name: Tassel Tail 01
+    spriteName: Tassel Tail 01
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 60014a35171bfa046b3c113a367088a9
+    layerID: 152
+    mosaicPosition: {x: 251, y: 1961}
+  - name: Ribbon Tail 02
+    spriteName: Ribbon Tail 02
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 46c2b1e6dab52d24cb622079d90f7714
+    layerID: 149
+    mosaicPosition: {x: 419, y: 1743}
+  - name: Ribbon Tail 01
+    spriteName: Ribbon Tail 01
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9fdd3a908016b1f40b8fbfbd2675dfbe
+    layerID: 145
+    mosaicPosition: {x: 500, y: 1732}
+  - name: Ribbon 02
+    spriteName: Ribbon 02
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a0364338eead3ef42889c871b4a41961
+    layerID: 141
+    mosaicPosition: {x: 568, y: 1971}
+  - name: Ribbon 01
+    spriteName: Ribbon 01
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5a0f302f890a7b745bee2b928154fcf5
+    layerID: 137
+    mosaicPosition: {x: 423, y: 682}
+  - name: Right Cape Front
+    spriteName: Right Cape Front
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ae2caedca8535f74fa4e12f0ef510e18
+    layerID: 101
+    mosaicPosition: {x: 4, y: 853}
+  - name: Right Upper Arm
+    spriteName: Right Upper Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 9ea4308745555b54fa57f1cde2838453
+    layerID: 95
+    mosaicPosition: {x: 500, y: 980}
+  - name: Right Lower Arm
+    spriteName: Right Lower Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6505661cfed25c34fb1a731d5e88239e
+    layerID: 92
+    mosaicPosition: {x: 648, y: 4}
+  - name: Right Hand
+    spriteName: Right Hand
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ebb8d3625a301164eb75b0f389f2fc47
+    layerID: 16
+    mosaicPosition: {x: 128, y: 1893}
+  - name: Left Cape Front
+    spriteName: Left Cape Front
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b9e60c511de843d47a5c51e784e7dfb5
+    layerID: 89
+    mosaicPosition: {x: 4, y: 1555}
+  - name: Torso
+    spriteName: Torso
+    isGroup: 0
+    parentIndex: -1
+    spriteID: de2a23eed1f50c041b414efd00af2a6a
+    layerID: 83
+    mosaicPosition: {x: 251, y: 1212}
+  - name: Left Upper Arm
+    spriteName: Left Upper Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 710727a4f0e96c541ba2406c0fd55d2a
+    layerID: 77
+    mosaicPosition: {x: 500, y: 760}
+  - name: Left Lower Arm
+    spriteName: Left Lower Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 7121dc1a5ae1134469f32daf4fc40f3e
+    layerID: 74
+    mosaicPosition: {x: 500, y: 4}
+  - name: Left Hand
+    spriteName: Left Hand
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5091c3ef4d46937478a79ba5b522a318
+    layerID: 61
+    mosaicPosition: {x: 403, y: 1072}
+  - name: Left Skirt Front
+    spriteName: Left Skirt Front
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1ebb05bdcf538964e86af6e75002eb71
+    layerID: 71
+    mosaicPosition: {x: 251, y: 1743}
+  - name: Right Skirt Front
+    spriteName: Right Skirt Front
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 95d10aaae296bf64680ebb8514130630
+    layerID: 66
+    mosaicPosition: {x: 279, y: 853}
+  - name: Left Leg Lower
+    spriteName: Left Leg Lower
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 36b1b9c120514944a8e64243b3d130be
+    layerID: 58
+    mosaicPosition: {x: 500, y: 1484}
+  - name: Left Leg Upper
+    spriteName: Left Leg Upper
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 366e9390542be714a8cde0431050e457
+    layerID: 54
+    mosaicPosition: {x: 500, y: 231}
+  - name: Left Foot
+    spriteName: Left Foot
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 716a26446b6fd874e9864766f2f600c2
+    layerID: 49
+    mosaicPosition: {x: 4, y: 1893}
+  - name: Rght Leg Lower
+    spriteName: Rght Leg Lower
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4576c3769a9d86243b2f664eb9264773
+    layerID: 45
+    mosaicPosition: {x: 500, y: 1230}
+  - name: Right Leg Upper
+    spriteName: Right Leg Upper
+    isGroup: 0
+    parentIndex: -1
+    spriteID: b1aebb1ad8faec54eaff054c518884f9
+    layerID: 41
+    mosaicPosition: {x: 500, y: 496}
+  - name: Right Foot
+    spriteName: Right Foot
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6d0cceb2804d4e34ba0b53bc73fa360f
+    layerID: 36
+    mosaicPosition: {x: 279, y: 1072}
+  - name: Right Back Cape
+    spriteName: Right Back Cape
+    isGroup: 0
+    parentIndex: -1
+    spriteID: fe5ae26348aa908489c10ade93f2db55
+    layerID: 32
+    mosaicPosition: {x: 4, y: 470}
+  - name: Left Back Cape
+    spriteName: Left Back Cape
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1ad42185e80068f488d0625f652c1937
+    layerID: 28
+    mosaicPosition: {x: 4, y: 1212}
+  - name: Right Skirt Back
+    spriteName: Right Skirt Back
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a069dbec604a91243a85c9946bb918a5
+    layerID: 24
+    mosaicPosition: {x: 310, y: 470}
+  - name: Left Skirt Back
+    spriteName: Left Skirt Back
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 687024965c933354cb96a34c3043ff64
+    layerID: 20
+    mosaicPosition: {x: 251, y: 1534}
+  - name: Neck
+    spriteName: Neck
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 94aca0a4d902c014ca96f95298daf760
+    layerID: 13
+    mosaicPosition: {x: 500, y: 1971}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  firstCreate: 0
+  generateGOHierarchy: 0
