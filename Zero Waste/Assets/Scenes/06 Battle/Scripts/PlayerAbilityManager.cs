@@ -99,6 +99,8 @@ public class PlayerAbilityManager : MonoBehaviour
             // If ability is switched, "Cancel Attack" message shouldn't be shown
             if (attackController.SwitchedAbility)
             {
+                scavengerObj.GetComponent<Animator>().SetBool("Idle", true);
+                scavengerObj.GetComponent<Animator>().SetBool("Turn", false);
                 targetManager.CancelTargetSelection(attackController.SwitchedAbility);
             }
                 
@@ -106,6 +108,8 @@ public class PlayerAbilityManager : MonoBehaviour
         }
         else
         {
+            scavengerObj.GetComponent<Animator>().SetBool("Idle", true);
+            scavengerObj.GetComponent<Animator>().SetBool("Turn", false);
             targetManager.CancelTargetSelection(attackController.SwitchedAbility);
         }
             

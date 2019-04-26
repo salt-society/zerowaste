@@ -19,7 +19,7 @@ MonoBehaviour:
   abilityDescription: 'Deal moderate damage and decrease an enemy''s
 
     speed.'
-  length: 0
+  length: 1
   type: Offensive
   range: Single
   withDirect: 0
@@ -34,4 +34,3 @@ MonoBehaviour:
   cooldown: 2
   turnTillActive: 2
   chanceToProc: 35
-  abilityState: Offensive

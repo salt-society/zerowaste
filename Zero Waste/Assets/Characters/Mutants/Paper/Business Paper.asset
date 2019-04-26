@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
   m_Name: Business Paper
   m_EditorClassIdentifier: 
-  characterId: 0
-  characterType: 
+  characterId: 1
+  characterType: Mutant
   characterName: Business Paper-Monster
-  characterThumb: {fileID: 0}
-  characterHalf: {fileID: 0}
-  characterFull: {fileID: 0}
-  prefab: {fileID: 0}
-  scale: {x: 0, y: 0, z: 0}
+  characterThumb: {fileID: 21300000, guid: 5a613ce447d6d6e419402113a9e22605, type: 3}
+  characterHalf: {fileID: 21300000, guid: 5a613ce447d6d6e419402113a9e22605, type: 3}
+  characterFull: {fileID: 21300000, guid: 0bc165e58a07e554f8f70a87b4f7f312, type: 3}
+  prefab: {fileID: 5955266946264191016, guid: 0e94d0e2b859d224d8a5aa82e98012d8, type: 3}
+  scale: {x: 0.8, y: 0.8, z: 0.8}
   baseSpd: 75
   currentSpd: 0
   abilities:

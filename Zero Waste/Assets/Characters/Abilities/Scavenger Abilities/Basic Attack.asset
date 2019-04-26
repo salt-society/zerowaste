@@ -19,7 +19,7 @@ MonoBehaviour:
   abilityDescription: 'A basic maneuver used to properly
 
     dispose of wastes.'
-  length: 0
+  length: 1
   type: Offensive
   range: Single
   withDirect: 0

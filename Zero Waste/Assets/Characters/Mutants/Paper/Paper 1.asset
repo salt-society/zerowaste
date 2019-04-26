@@ -17,7 +17,7 @@ MonoBehaviour:
   selectedIcon: {fileID: 0}
   abilityName: Loosen Up
   abilityDescription: Decrease own def but boost speed
-  length: 0
+  length: 1
   type: Defensive
   range: Self
   withDirect: 0
@@ -32,4 +32,3 @@ MonoBehaviour:
   cooldown: 1
   turnTillActive: 1
   chanceToProc: 25
-  abilityState: Defensive

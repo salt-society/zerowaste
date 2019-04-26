@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Ryleigh Boy
   m_EditorClassIdentifier: 
   characterId: 0
-  characterType: 
+  characterType: Scavenger
   characterName: Ryleigh
-  characterThumb: {fileID: 21300000, guid: 0626a946375c850448e01ddadf36b7ef, type: 3}
-  characterHalf: {fileID: 21300000, guid: 68bf0e4e0d803fa4c9b76ad89db527b7, type: 3}
-  characterFull: {fileID: 21300000, guid: 908884550752cfd40b14e0381498dbb9, type: 3}
-  prefab: {fileID: 129353497, guid: 32ec4bf4a1bd03e4ab806ac790acfaa4, type: 3}
-  scale: {x: 1, y: 1, z: 1}
+  characterThumb: {fileID: 21300000, guid: 81d7654bfc8fc4e42845011e8d4912e8, type: 3}
+  characterHalf: {fileID: 21300000, guid: 18b9f749c38a13644a0f34280a17d9e8, type: 3}
+  characterFull: {fileID: 21300000, guid: ec54d19462301da4ab8198abb4e1d332, type: 3}
+  prefab: {fileID: 505465878, guid: 3ed4f8c377cd50b49b54ecf9fb388f96, type: 3}
+  scale: {x: 0.55, y: 0.55, z: 0.55}
   baseSpd: 100
   currentSpd: 0
   abilities:

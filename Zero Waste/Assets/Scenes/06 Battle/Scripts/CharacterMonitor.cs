@@ -111,6 +111,8 @@ public class CharacterMonitor : MonoBehaviour
         set { switchLength = value; }
     }
 
+    private bool damaged;
+
     #endregion
 
     #region Scripts
@@ -137,6 +139,7 @@ public class CharacterMonitor : MonoBehaviour
     public void InitializeMonitor()
     {
         isDying = false;
+        damaged = false;
 
         // Get Managers
         statusManager = FindObjectOfType<StatusManager>();
@@ -177,16 +180,19 @@ public class CharacterMonitor : MonoBehaviour
             // Check if dying or revived
             if (!isDying)
             {
-                if (currentHealth <= (int)(currentMaxHealth * 0.25f))
+                if (damaged)
                 {
-                    isDying = true;
-                    StartCoroutine(CharacterDying());
+                    if (currentHealth <= (int)(currentMaxHealth * 0.10f))
+                    {
+                        isDying = true;
+                        StartCoroutine(CharacterDying());
+                    }
                 }
             }
             
             if(isDying)
             {
-                if (currentHealth > (int)(currentMaxHealth * 0.25f))
+                if (currentHealth > (int)(currentMaxHealth * 0.105f))
                 {
                     isDying = false;
                     StartCoroutine(CharacterRevive());
@@ -589,9 +595,15 @@ public class CharacterMonitor : MonoBehaviour
     {
         // Trigger fight stance animation
         if (!isDying)
+        {
+            gameObject.GetComponent<Animator>().SetBool("Idle", false);
             gameObject.GetComponent<Animator>().SetBool("Turn", true);
+        }
         else
-            gameObject.GetComponent<Animator>().SetBool("Dying Turn", true);
+        {
+            gameObject.GetComponent<Animator>().SetBool("Idle", false);
+            gameObject.GetComponent<Animator>().SetBool("Turn", true);
+        }   
     }
 
     public void AbilityAnimations(Ability ability)
@@ -675,46 +687,20 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator ScavengerBasicAttack(float length)
     {
-        if (!isDying)
-        {
-            gameObject.GetComponent<Animator>().SetBool("Idle", false);
-            gameObject.GetComponent<Animator>().SetBool("Basic Attack", true);
-            gameObject.GetComponent<Animator>().SetBool("Turn", false);
-            yield return new WaitForSeconds(length);
-            gameObject.GetComponent<Animator>().SetBool("Basic Attack", false);
-            gameObject.GetComponent<Animator>().SetBool("Idle", true);
-        }
-        else
-        {
-            gameObject.GetComponent<Animator>().SetBool("Basic Attack", true);
-            yield return new WaitForSeconds(length);
-            gameObject.GetComponent<Animator>().SetBool("Basic Attack", false);
-            yield return new WaitForSeconds(0.5f);
-            gameObject.GetComponent<Animator>().SetBool("Dying Turn", false);
-        }
-        
+        gameObject.GetComponent<Animator>().SetBool("Idle", false);
+        gameObject.GetComponent<Animator>().SetBool("Basic Attack", true);
+        gameObject.GetComponent<Animator>().SetBool("Turn", false);
+        yield return new WaitForSeconds(length);
+        gameObject.GetComponent<Animator>().SetBool("Basic Attack", false);
     }
 
     public IEnumerator ScavengerCharge(float length)
     {
-        if (!isDying)
-        {
-            gameObject.GetComponent<Animator>().SetBool("Idle", false);
-            gameObject.GetComponent<Animator>().SetBool("Charge", true);
-            gameObject.GetComponent<Animator>().SetBool("Turn", false);
-            yield return new WaitForSeconds(length);
-            gameObject.GetComponent<Animator>().SetBool("Charge", false);
-            gameObject.GetComponent<Animator>().SetBool("Idle", true);
-        }
-        else
-        {
-            gameObject.GetComponent<Animator>().SetBool("Charge", true);
-            yield return new WaitForSeconds(length);
-            gameObject.GetComponent<Animator>().SetBool("Charge", false);
-            yield return new WaitForSeconds(0.5f);
-            gameObject.GetComponent<Animator>().SetBool("Dying Turn", false);
-        }
-        
+        gameObject.GetComponent<Animator>().SetBool("Idle", false);
+        gameObject.GetComponent<Animator>().SetBool("Charge", true);
+        gameObject.GetComponent<Animator>().SetBool("Turn", false);
+        yield return new WaitForSeconds(length);
+        gameObject.GetComponent<Animator>().SetBool("Charge", false);
     }
 
     public IEnumerator ScavengerSkill(float length)
@@ -733,11 +719,11 @@ public class CharacterMonitor : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("Turn", false);
         yield return new WaitForSeconds(length);
         gameObject.GetComponent<Animator>().SetBool("Ultimate", false);
-        gameObject.GetComponent<Animator>().SetBool("Idle", true);
     }
 
     public IEnumerator MutantBasicAttack(float length)
     {
+        gameObject.GetComponent<Animator>().SetBool("Idle", false);
         gameObject.GetComponent<Animator>().SetBool("Basic Attack", true);
         gameObject.GetComponent<Animator>().SetBool("Turn", false);
         yield return new WaitForSeconds(length);
@@ -746,6 +732,7 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator MutantSkill01(float length)
     {
+        gameObject.GetComponent<Animator>().SetBool("Idle", false);
         gameObject.GetComponent<Animator>().SetBool("Skill 01", true);
         gameObject.GetComponent<Animator>().SetBool("Turn", false);
         yield return new WaitForSeconds(length);
@@ -754,15 +741,17 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator MutantSkill02(float length)
     {
-        gameObject.GetComponent<Animator>().SetBool("Skill 01", true);
+        gameObject.GetComponent<Animator>().SetBool("Idle", false);
+        gameObject.GetComponent<Animator>().SetBool("Skill 02", true);
         gameObject.GetComponent<Animator>().SetBool("Turn", false);
         yield return new WaitForSeconds(length);
-        gameObject.GetComponent<Animator>().SetBool("Skill 01", false);
+        gameObject.GetComponent<Animator>().SetBool("Skill 02", false);
 
     }
 
     public IEnumerator MutantUltimate(float length)
     {
+        gameObject.GetComponent<Animator>().SetBool("Idle", false);
         gameObject.GetComponent<Animator>().SetBool("Ultimate", true);
         gameObject.GetComponent<Animator>().SetBool("Turn", false);
         yield return new WaitForSeconds(length);
@@ -805,7 +794,6 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator CharacterDying()
     {
-        Debug.Log("Character dying...");
         gameObject.GetComponent<Animator>().SetBool("Idle", false);
         yield return new WaitForSeconds(1f);
         gameObject.GetComponent<Animator>().SetBool("Dying", true);
@@ -814,47 +802,43 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator CharacterRevive()
     {
-        Debug.Log("Character revived...");
         yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<Animator>().SetBool("Dying", false);
-        gameObject.GetComponent<Animator>().SetBool("Dying Turn", false);
     }
 
     public IEnumerator Hurt()
     {
+        if (!damaged)
+            damaged = true;
+
         gameObject.GetComponent<Animator>().SetBool("Hurt", true);
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Hurt", false);
     }
 
     public IEnumerator Heal()
     {
         gameObject.GetComponent<Animator>().SetBool("Heal", true);
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Heal", false);
-    }
-
-    public IEnumerator AntGen()
-    {
-        yield return null;
     }
 
     public IEnumerator Buff()
     {
-        yield return null;
+        gameObject.GetComponent<Animator>().SetBool("Buff", true);
+        yield return new WaitForSeconds(1.0f);
+        gameObject.GetComponent<Animator>().SetBool("Buff", false);
     }
 
     public IEnumerator Debuff()
     {
-        yield return null;
+        gameObject.GetComponent<Animator>().SetBool("Debuff", true);
+        yield return new WaitForSeconds(1.0f);
+        gameObject.GetComponent<Animator>().SetBool("Debuff", false);
     }
 
     public IEnumerator StatusEffect(Effect effect)
     {
-        Debug.Log("Status effect applied to: " + ((scavenger != null) ? scavenger.characterName : mutant.characterName));
-        Debug.Log("Effect Name: " + effect.effectName);
-        Debug.Log("Animation: " + effect.receiveAnim);
-
         gameObject.GetComponent<Animator>().SetInteger("Status Effect", effect.effectIndex);
         gameObject.GetComponent<Animator>().SetBool(effect.receiveAnim, true);
         yield return new WaitForSeconds(1f);

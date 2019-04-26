@@ -15,11 +15,11 @@ MonoBehaviour:
   characterId: 0
   characterType: Mutant
   characterName: Shopping List Paper-Monster
-  characterThumb: {fileID: 21300000, guid: 14632a0d6af04094e8ba3922d810e234, type: 3}
-  characterHalf: {fileID: 0}
-  characterFull: {fileID: 21300000, guid: 8daa6973a8e68b74089693f3ecf5f4e4, type: 3}
-  prefab: {fileID: 6360173412088857774, guid: c14610655d1209543bb937be1761ab83, type: 3}
-  scale: {x: 1.5, y: 1.5, z: 0}
+  characterThumb: {fileID: 21300000, guid: 99a5c82bb6b6d0742be128a806037214, type: 3}
+  characterHalf: {fileID: 21300000, guid: 99a5c82bb6b6d0742be128a806037214, type: 3}
+  characterFull: {fileID: 21300000, guid: f6a119139bb892d4aa436c482755d5f4, type: 3}
+  prefab: {fileID: 6308034635017518444, guid: b8545ea5fc4e24c48a688c00deabc0a1, type: 3}
+  scale: {x: 0.8, y: 0.8, z: 0.8}
   baseSpd: 75
   currentSpd: 4
   abilities:

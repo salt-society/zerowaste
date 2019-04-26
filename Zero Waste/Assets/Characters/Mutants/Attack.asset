@@ -17,7 +17,7 @@ MonoBehaviour:
   selectedIcon: {fileID: 0}
   abilityName: Attack
   abilityDescription: A basic attack.
-  length: 0
+  length: 1
   type: Offensive
   range: Single
   withDirect: 0
@@ -31,4 +31,3 @@ MonoBehaviour:
   cooldown: 0
   turnTillActive: 0
   chanceToProc: 20
-  abilityState: Offensive

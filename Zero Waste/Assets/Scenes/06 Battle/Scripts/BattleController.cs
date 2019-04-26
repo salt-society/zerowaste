@@ -51,7 +51,7 @@ public class BattleController : MonoBehaviour {
         // MarkAsPlayed();
 
         // Get all details needed for battle and set it up
-        //CheckMode();
+        CheckMode();
     }
 
     // <summary>

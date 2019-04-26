@@ -17,7 +17,7 @@ MonoBehaviour:
   selectedIcon: {fileID: 0}
   abilityName: Free Form
   abilityDescription: Boost all allies' stats.
-  length: 0
+  length: 1
   type: Defensive
   range: AOE
   withDirect: 0
@@ -33,4 +33,3 @@ MonoBehaviour:
   cooldown: 3
   turnTillActive: 3
   chanceToProc: 50
-  abilityState: Defensive
