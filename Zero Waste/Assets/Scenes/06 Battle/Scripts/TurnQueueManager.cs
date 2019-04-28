@@ -94,35 +94,30 @@ public class TurnQueueManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
 
         int i = 0;
-        int j = 0;
         foreach (Character character in characterQueue)
         {
             queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
             queueIcons[i].SetActive(true);
 
-            /*if (deadCharacterList != null)
+            if (deadCharacterList != null)
             {
-                if (deadCharacterList.Count > j)
+                foreach (int characterInstance in deadCharacterList)
                 {
-                    if (deadCharacterList[j] == i)
+                    if (characterInstance.Equals(character.GetInstanceID()))
                     {
                         queueOverlays[i].SetActive(true);
-                        j++;
+                        break;
                     }
                     else
                     {
                         queueOverlays[i].SetActive(false);
                     }
                 }
-                else
-                {
-                    queueOverlays[i].SetActive(false);
-                }
             }
             else
             {
                 queueOverlays[i].SetActive(false);
-            }*/
+            }
 
             queueBars[i].SetActive(true);
             i++;
@@ -204,7 +199,7 @@ public class TurnQueueManager : MonoBehaviour {
         {
             if (character.GetInstanceID().Equals(finishedCharacter.GetInstanceID()))
             {
-                //queueOverlays[i].SetActive(true);
+                queueOverlays[i].SetActive(true);
                 break;
             }
             i++;
@@ -221,8 +216,8 @@ public class TurnQueueManager : MonoBehaviour {
         {
             if (character.GetInstanceID().Equals(deadCharacter.GetInstanceID()))
             {
-                //queueOverlays[i].SetActive(true);
-                //deadCharacterList.Add(i);
+                queueOverlays[i].SetActive(true);
+                deadCharacterList.Add(deadCharacter.GetInstanceID());
                 break;
             }
             i++;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: Constrict
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 413654543716a234ca440e5939f81363, type: 3}
   effectName: Constricted
   description: Having a hard time breathing
   target: HP

@@ -229,7 +229,7 @@ public class EnemyAbilityManager : MonoBehaviour
                 {
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
                     StartCoroutine(statusManager.DecrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj, ability.particleIndex));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
                     yield return new WaitForSeconds(1f);
                 }
 
@@ -238,7 +238,7 @@ public class EnemyAbilityManager : MonoBehaviour
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
                     StartCoroutine(statusManager.DecrementAntidoteBar(scavMonitor.CurrentAnt, scavMonitor.MaxAnt, scavMonitor.Position));
                     StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj, ability.particleIndex));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
 
                     yield return new WaitForSeconds(1f);
                 }
@@ -323,7 +323,7 @@ public class EnemyAbilityManager : MonoBehaviour
 
                 StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
                 StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), targetObj.GetComponent<CharacterMonitor>().MaxHealth, 
-                    ability.type, targetObj, ability.particleIndex));
+                    ability.type, targetObj));
                 yield return new WaitForSeconds(1f);
             }
 

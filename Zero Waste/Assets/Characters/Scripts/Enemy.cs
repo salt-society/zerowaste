@@ -118,9 +118,6 @@ public class Enemy : Character {
             else
                 currentState = "Offensive";
         }
-
-        Debug.Log("Current Atk: " + attacker.currentAtk + " Stat Modifier: " + statModifier 
-            + " Current Def: " + currentDef + " Damage: " + damage + " | " + estimatedStat);
     }
 
     // Call if enemy has been healed

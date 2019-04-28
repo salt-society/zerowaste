@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: L DEF Boost
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c28d9bf234af0b147bec94068007970a, type: 3}
   effectName: Large DEF Boost
   description: A massive boost to DEF.
   target: DEF

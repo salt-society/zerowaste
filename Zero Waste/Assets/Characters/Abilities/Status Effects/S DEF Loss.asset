@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: S DEF Loss
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3a1a61320c136f441afbb617e2fa35ee, type: 3}
   effectName: Small DEF Loss
   description: A small loss to DEF.
   target: DEF

@@ -111,8 +111,6 @@ public class CharacterMonitor : MonoBehaviour
         set { switchLength = value; }
     }
 
-    private bool damaged;
-
     #endregion
 
     #region Scripts
@@ -139,7 +137,6 @@ public class CharacterMonitor : MonoBehaviour
     public void InitializeMonitor()
     {
         isDying = false;
-        damaged = false;
 
         // Get Managers
         statusManager = FindObjectOfType<StatusManager>();
@@ -180,19 +177,16 @@ public class CharacterMonitor : MonoBehaviour
             // Check if dying or revived
             if (!isDying)
             {
-                if (damaged)
+                if (currentHealth <= (int)(currentMaxHealth * 0.10f))
                 {
-                    if (currentHealth <= (int)(currentMaxHealth * 0.10f))
-                    {
-                        isDying = true;
-                        StartCoroutine(CharacterDying());
-                    }
+                    isDying = true;
+                    StartCoroutine(CharacterDying());
                 }
             }
             
             if(isDying)
             {
-                if (currentHealth > (int)(currentMaxHealth * 0.105f))
+                if (currentHealth > (int)(currentMaxHealth * 0.10f))
                 {
                     isDying = false;
                     StartCoroutine(CharacterRevive());
@@ -234,7 +228,7 @@ public class CharacterMonitor : MonoBehaviour
             instanceId = mutant.GetInstanceID();
             characterType = mutant.characterType;
 
-            currentMaxHealth = mutant.maxPollutionLevel;
+            currentMaxHealth = mutant.currentPollutionLevel;
             currentHealth = mutant.currentPollutionLevel;
 
             isAlive = true;
@@ -256,7 +250,7 @@ public class CharacterMonitor : MonoBehaviour
     // </summary>
     public int GetMutantMaxHealth()
     {
-        return mutant.maxPollutionLevel;
+        return currentMaxHealth;
     }
 
     // <summary>
@@ -303,7 +297,7 @@ public class CharacterMonitor : MonoBehaviour
                             scavenger.currentHP = currentHealth;
                             
                             StartCoroutine(statusManager.IncrementHealthBar(currentHealth, currentMaxHealth, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxHealth, "Defensive", gameObject, 1));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxHealth, "Defensive", gameObject));
                         }
                         else
                         {
@@ -313,7 +307,7 @@ public class CharacterMonitor : MonoBehaviour
                             scavenger.currentHP = currentHealth;
 
                             StartCoroutine(statusManager.DecrementHealthBar(currentHealth, currentMaxHealth, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxHealth, "Offensive", gameObject, 0));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxHealth, "Offensive", gameObject));
                         }
                     }
                     else if (effect.target.Equals("ANT"))
@@ -326,7 +320,7 @@ public class CharacterMonitor : MonoBehaviour
                             scavenger.currentAnt = currentAnt;
 
                             StartCoroutine(statusManager.IncrementAntidoteBar(currentAnt, currentMaxAnt, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxAnt, "Defensive", gameObject, 2));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxAnt, "Defensive", gameObject));
                         }
                         else
                         {
@@ -335,7 +329,7 @@ public class CharacterMonitor : MonoBehaviour
                             valueChanged -= currentAnt;
                             scavenger.currentAnt = currentAnt;
                             StartCoroutine(statusManager.DecrementAntidoteBar(currentAnt, currentMaxAnt, position));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxAnt, "Offensive", gameObject, 0));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), currentMaxAnt, "Offensive", gameObject));
                         }
                     }
 
@@ -434,7 +428,7 @@ public class CharacterMonitor : MonoBehaviour
                             mutant.currentPollutionLevel = currentHealth;
                                                       
                             StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Defensive", gameObject, 1));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Defensive", gameObject));
                         }
                         else
                         {
@@ -476,7 +470,7 @@ public class CharacterMonitor : MonoBehaviour
                             }
 
                             StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Offensive", gameObject, 0));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Offensive", gameObject));
                         }
                     }
 
@@ -808,8 +802,8 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Hurt()
     {
-        if (!damaged)
-            damaged = true;
+        int particleIndex = (characterType.Equals("Scavenger")) ? 0 : 1;
+        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector2(gameObject.transform.position.x, 0)));
 
         gameObject.GetComponent<Animator>().SetBool("Hurt", true);
         yield return new WaitForSeconds(1.0f);
@@ -818,6 +812,7 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Heal()
     {
+        StartCoroutine(particleManager.PlayParticles(4, new Vector2(gameObject.transform.position.x, 0)));
         gameObject.GetComponent<Animator>().SetBool("Heal", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Heal", false);
