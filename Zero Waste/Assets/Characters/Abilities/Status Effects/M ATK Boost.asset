@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: M ATK Boost
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bfbe6bf589b62114f90425f683fc10d7, type: 3}
   effectName: Medium ATK Boost
   description: A medium increase to ATK.
   target: ATK

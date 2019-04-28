@@ -97,7 +97,7 @@ public class ItemManager : MonoBehaviour
                 {
                     CharacterMonitor scavMonitor = scavObjs[currentScav].GetComponent<CharacterMonitor>();
                     StartCoroutine(statusManager.IncrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, booster.type, scavObjs[currentScav], booster.particleIndex));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, booster.type, scavObjs[currentScav]));
                     yield return new WaitForSeconds(1f);
                 }
                 else
@@ -106,7 +106,7 @@ public class ItemManager : MonoBehaviour
                     StartCoroutine(statusManager.IncrementAntidoteBar(scavMonitor.CurrentAnt, scavMonitor.MaxAnt, scavMonitor.Position));
                     StartCoroutine(particleManager.PlayParticles(effect.particleIndex, scavObjs[currentScav].transform.position));
 
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, booster.type, scavObjs[currentScav], booster.particleIndex));
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, booster.type, scavObjs[currentScav]));
 
                     yield return new WaitForSeconds(1f);
                 }

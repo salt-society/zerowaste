@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: M HP Regen
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6e39fe8273ce8444baeca77ea58ccf41, type: 3}
   effectName: Medium HP Regen
   description: Recover a moderate amount of HP per turn.
   target: HP

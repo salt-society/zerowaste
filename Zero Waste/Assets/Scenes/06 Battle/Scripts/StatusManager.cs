@@ -421,15 +421,19 @@ public class StatusManager : MonoBehaviour
     // <summary>
     // Shows damage taken by Scavenger or Mutant
     // </summary>
-    public IEnumerator ShowValues(string value, int maxValue, string valueType, GameObject characterObj, int particleIndex)
+    public IEnumerator ShowValues(string value, int maxValue, string valueType, GameObject characterObj)
     {
         TextMeshProUGUI valuePrefab;
+        int particleIndex = 0;
+
         if (valueType.Equals("Offensive"))
         {
             if (int.Parse(value) > (maxValue/2))
                 valuePrefab = damagePointsPrefab;
             else
                 valuePrefab = smallDamagePrefab;
+
+            particleIndex = 2;
         }
         else
         {
@@ -437,6 +441,8 @@ public class StatusManager : MonoBehaviour
                 valuePrefab = healPointsPrefab;
             else
                 valuePrefab = smallHealPrefab;
+
+            particleIndex = 3;
         }
 
         TextMeshProUGUI valueObj = Instantiate(valuePrefab, canvasTransform);

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: L SPD Loss
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b140f7aea5a65834cb9841b104da0091, type: 3}
   effectName: Large SPD Loss
   description: A signifcant loss to SPD.
   target: SPD

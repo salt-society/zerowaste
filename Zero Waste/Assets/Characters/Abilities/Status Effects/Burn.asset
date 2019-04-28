@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: Burn
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bc07c2b18bdfaee4fa50af828ff9485b, type: 3}
   effectName: Burn
   description: Constantly being singed.
   target: HP

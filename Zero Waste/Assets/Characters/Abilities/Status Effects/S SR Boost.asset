@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: S SR Boost
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d0ce286a30fd99e4e82993fdbfefe93a, type: 3}
   effectName: Small SR Boost
   description: A small boost to SR.
   target: SCRAP
