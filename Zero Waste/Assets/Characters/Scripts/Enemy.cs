@@ -44,11 +44,11 @@ public class Enemy : Character {
 
         mutantLevel += levelModifier;
 
-        currentPollutionLevel += (plModifier * mutantLevel);
-        currentAtk += (atkModifier * mutantLevel);
-        currentDef += (defModifier * mutantLevel);
-        currentScrapReward += (scrapModifier * mutantLevel);
-        currentEXPReward += (expModifier * mutantLevel);
+        currentPollutionLevel = maxPollutionLevel + (plModifier * mutantLevel);
+        currentAtk = maxAtk + (atkModifier * mutantLevel);
+        currentDef = maxDef + (defModifier * mutantLevel);
+        currentScrapReward = baseScrapReward + (scrapModifier * mutantLevel);
+        currentEXPReward = baseEXPReward + (expModifier * mutantLevel);
 
         currentState = baseState;
         hasChangedState = false;
