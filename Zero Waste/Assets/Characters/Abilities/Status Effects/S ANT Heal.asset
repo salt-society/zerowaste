@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Small recovery of ANT.
   target: ANT
   type: Direct
-  particleIndex: 0
+  particleIndex: 5
   particleLoop: 0
   strength: 20
   state: 

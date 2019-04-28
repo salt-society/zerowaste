@@ -23,13 +23,13 @@ MonoBehaviour:
   baseSpd: 100
   currentSpd: 0
   abilities:
-  - {fileID: 11400000, guid: a654eff19430c4c4498b658480ee26ba, type: 2}
+  - {fileID: 11400000, guid: 565be2941ece88c4a82ac1b886668e48, type: 2}
   - {fileID: 11400000, guid: 40c43c0eea0b5e8488a4205df8e14140, type: 2}
   - {fileID: 11400000, guid: d525d49ae80caa249a89ca29ed7643cb, type: 2}
   - {fileID: 11400000, guid: 4b40e3db7e53e8543a32ea3788911a8f, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 1
+  currentLevel: 7
   baseHP: 70
   baseAnt: 100
   baseAtk: 20

@@ -23,7 +23,7 @@ MonoBehaviour:
     useless trash anymore, but as something
 
     which can be useful in the future.'
-  length: 0
+  length: 1
   type: Defensive
   range: Self
   withDirect: 0

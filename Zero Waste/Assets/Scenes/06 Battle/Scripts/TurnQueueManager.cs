@@ -99,20 +99,9 @@ public class TurnQueueManager : MonoBehaviour {
             queueIcons[i].GetComponent<Image>().sprite = character.characterThumb;
             queueIcons[i].SetActive(true);
 
-            if (deadCharacterList != null)
+            if (deadCharacterList.Contains(character.GetInstanceID()))
             {
-                foreach (int characterInstance in deadCharacterList)
-                {
-                    if (characterInstance.Equals(character.GetInstanceID()))
-                    {
-                        queueOverlays[i].SetActive(true);
-                        break;
-                    }
-                    else
-                    {
-                        queueOverlays[i].SetActive(false);
-                    }
-                }
+                queueOverlays[i].SetActive(true);
             }
             else
             {

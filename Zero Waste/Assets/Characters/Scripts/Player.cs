@@ -36,6 +36,7 @@ public class Player : Character {
         currentAnt = baseAnt / 2;
         currentAtk = baseAtk + (currentLevel * atkModifier);
         currentDef = baseDef + (currentLevel * defModifier);
+        currentSpd = baseSpd;
         currentAntGen = antGen;
         currentThreatLevel = threatLevel;
     }

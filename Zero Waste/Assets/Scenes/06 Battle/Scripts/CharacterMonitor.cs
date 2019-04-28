@@ -774,16 +774,6 @@ public class CharacterMonitor : MonoBehaviour
             battleInfoManager.AddScrap(mutant.currentScrapReward);
             battleInfoManager.AddExp(mutant.currentEXPReward);
         }
-
-        // We need to turn off the box collider for this mutant
-        // to not be part of the target selection but
-        // turning off the box collider will make make mutant fall
-        // indefinitely so we need to disable the rigidbody too
-        // Another easy way is to just destroy the gameObject
-        // but we will do this just in case of revive function
-        /*Rigidbody2D rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.isKinematic = true;
-        GetComponent<BoxCollider2D>().enabled = false;*/
     }
 
     public IEnumerator CharacterDying()
@@ -802,8 +792,8 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Hurt()
     {
-        int particleIndex = (characterType.Equals("Scavenger")) ? 0 : 1;
-        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector2(gameObject.transform.position.x, 0)));
+        int particleIndex = (characterType.Equals("Scavenger")) ? 1 : 2;
+        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector2(gameObject.transform.position.x, -2)));
 
         gameObject.GetComponent<Animator>().SetBool("Hurt", true);
         yield return new WaitForSeconds(1.0f);
@@ -812,7 +802,7 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Heal()
     {
-        StartCoroutine(particleManager.PlayParticles(4, new Vector2(gameObject.transform.position.x, 0)));
+        StartCoroutine(particleManager.PlayParticles(3, new Vector2(gameObject.transform.position.x, -2)));
         gameObject.GetComponent<Animator>().SetBool("Heal", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Heal", false);
@@ -820,6 +810,7 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Buff()
     {
+        StartCoroutine(particleManager.PlayParticles(7, new Vector2(gameObject.transform.position.x, -2)));
         gameObject.GetComponent<Animator>().SetBool("Buff", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Buff", false);
@@ -827,6 +818,7 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Debuff()
     {
+        StartCoroutine(particleManager.PlayParticles(8, new Vector2(gameObject.transform.position.x, 8)));
         gameObject.GetComponent<Animator>().SetBool("Debuff", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Debuff", false);

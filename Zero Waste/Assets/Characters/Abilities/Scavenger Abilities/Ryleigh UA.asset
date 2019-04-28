@@ -19,7 +19,7 @@ MonoBehaviour:
   abilityDescription: 'Ryleigh commits to the cause of reducing
 
     all that will be considered trash.'
-  length: 0
+  length: 1
   type: Offensive
   range: AOE
   withDirect: 0

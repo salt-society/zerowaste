@@ -195,7 +195,6 @@ public class PlayerAbilityManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1f);
-            StartCoroutine(statusManager.ShowTotalValue(changeApplied.ToString(), ability.type, 1, ability.particleIndex));
         }
 
         yield return null;
@@ -219,8 +218,8 @@ public class PlayerAbilityManager : MonoBehaviour
                 {
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
                     StartCoroutine(statusManager.IncrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
                     yield return new WaitForSeconds(1f);
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
                 }
                 else
                 {
@@ -307,7 +306,6 @@ public class PlayerAbilityManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1f);
-            StartCoroutine(statusManager.ShowTotalValue(changeApplied.ToString(), ability.type, 0, ability.particleIndex));
         }
 
         yield return null;
@@ -363,9 +361,9 @@ public class PlayerAbilityManager : MonoBehaviour
                 }
 
                 StartCoroutine(statusManager.DecrementPollutionBar(valueChanged));
-                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), targetObj.GetComponent<CharacterMonitor>().MaxHealth, 
-                    ability.type, targetObj));
                 yield return new WaitForSeconds(1f);
+                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), targetObj.GetComponent<CharacterMonitor>().MaxHealth,
+                    ability.type, targetObj));
             }
 
             if (effect.type.Equals("Status"))

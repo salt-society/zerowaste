@@ -146,11 +146,17 @@ public class TargetManager : MonoBehaviour
     // </summary>
     void PrepareForAbilityExecution(GameObject targetObject)
     {
-        bool characterTypeMatch = targetObject.
-            GetComponent<CharacterMonitor>().CheckCharacterType(targetType);
+        bool characterTypeMatch = false;
 
-        if (abilityManager.Ability.range.Equals("AOE"))
+        if (abilityManager.Ability.range.Equals("AOE")) 
+        {
             characterTypeMatch = true;
+        } 
+        else
+        {
+            characterTypeMatch = targetObject.
+            GetComponent<CharacterMonitor>().CheckCharacterType(targetType);
+        }
 
         // Make sure that the target chosen by player matches where
         // ability can be applied, if its offensive or defensive

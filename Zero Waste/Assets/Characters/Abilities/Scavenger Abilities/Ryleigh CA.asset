@@ -21,7 +21,7 @@ MonoBehaviour:
     trash without a thought. His regret allows
 
     him to take a step to better oneself.'
-  length: 0
+  length: 1
   type: Defensive
   range: Self
   withDirect: 0

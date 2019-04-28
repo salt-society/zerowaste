@@ -47,6 +47,7 @@ public class Enemy : Character {
         currentPollutionLevel = maxPollutionLevel + (plModifier * mutantLevel);
         currentAtk = maxAtk + (atkModifier * mutantLevel);
         currentDef = maxDef + (defModifier * mutantLevel);
+        currentSpd = baseSpd;
         currentScrapReward = baseScrapReward + (scrapModifier * mutantLevel);
         currentEXPReward = baseEXPReward + (expModifier * mutantLevel);
 

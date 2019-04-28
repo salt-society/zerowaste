@@ -85,7 +85,7 @@ public class EnemyAbilityManager : MonoBehaviour
         this.ability = availableAbilities[chosenAbilityIndex];
 
         // Cool down chosen ability so mutants wouldn't be able to spam it
-        /// this.ability.turnTillActive = this.ability.cooldown;
+        this.ability.turnTillActive = this.ability.cooldown;
 
         ExecuteAbility();
     }
@@ -229,8 +229,8 @@ public class EnemyAbilityManager : MonoBehaviour
                 {
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
                     StartCoroutine(statusManager.DecrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
                     yield return new WaitForSeconds(1f);
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
                 }
 
                 if (effect.target.Equals("ANT"))
@@ -238,9 +238,8 @@ public class EnemyAbilityManager : MonoBehaviour
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
                     StartCoroutine(statusManager.DecrementAntidoteBar(scavMonitor.CurrentAnt, scavMonitor.MaxAnt, scavMonitor.Position));
                     StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
-                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
-
                     yield return new WaitForSeconds(1f);
+                    StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
                 }
             }
 
@@ -322,9 +321,9 @@ public class EnemyAbilityManager : MonoBehaviour
                 changeApplied += valueChanged;
 
                 StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
-                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), targetObj.GetComponent<CharacterMonitor>().MaxHealth, 
-                    ability.type, targetObj));
                 yield return new WaitForSeconds(1f);
+                StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), targetObj.GetComponent<CharacterMonitor>().MaxHealth,
+                    ability.type, targetObj));
             }
 
             if (effect.type.Equals("Status"))

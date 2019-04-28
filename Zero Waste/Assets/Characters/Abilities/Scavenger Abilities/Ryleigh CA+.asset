@@ -21,7 +21,7 @@ MonoBehaviour:
     mistakes of the past now serve as
 
     stepping stones towards a brighter future.'
-  length: 0
+  length: 1
   type: Defensive
   range: Self
   withDirect: 0

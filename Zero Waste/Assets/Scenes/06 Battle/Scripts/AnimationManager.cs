@@ -76,7 +76,9 @@ public class AnimationManager : MonoBehaviour
     {
         cameraManager.Shake(true, 2);
         attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
-        StartCoroutine(particleManager.PlayParticles(ability.particleIndex, new Vector3(attackerObj.transform.position.x, ability.spawnY)));
+
+        if (ability.particleIndex != -1)
+            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, new Vector3(attackerObj.transform.position.x, ability.spawnY)));
         yield return new WaitForSeconds(1f);
 
         targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
@@ -87,9 +89,9 @@ public class AnimationManager : MonoBehaviour
 
     public IEnumerator Charge(Ability ability, GameObject targetObj)
     {
+        StartCoroutine(particleManager.PlayParticles(ability.particleIndex, targetObj.transform.position));
         targetObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
         yield return new WaitForSeconds(1f);
-        StartCoroutine(particleManager.PlayParticles(ability.particleIndex, targetObj.transform.position));
     }
 
     public IEnumerator ScavengerSkill(Ability ability, GameObject attackerObj, GameObject targetObj)

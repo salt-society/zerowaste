@@ -456,7 +456,7 @@ public class StatusManager : MonoBehaviour
 
         valueObj.transform.position = valuePos;
         valueObj.gameObject.SetActive(true);
-        StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector3(randomX, randomY, 0)));
+        //StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector3(randomX, randomY, 0)));
 
         yield return new WaitForSeconds(1.8f);
         Destroy(valueObj.gameObject);
