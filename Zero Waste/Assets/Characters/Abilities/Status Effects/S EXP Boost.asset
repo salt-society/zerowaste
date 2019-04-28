@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239cfe6819410ca4580cdfbf1b6be249, type: 3}
   m_Name: S EXP Boost
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 21d0b087eaace3b45beb5510719de078, type: 3}
   effectName: Small EXP Boost
   description: A small boost to EXP received on this enemy's defeat.
   target: EXP
