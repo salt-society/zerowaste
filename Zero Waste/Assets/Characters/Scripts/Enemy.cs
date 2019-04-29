@@ -24,7 +24,7 @@ public class Enemy : Character {
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
-    [HideInInspector] public int currentPollutionLevel;
+    public int currentPollutionLevel;
     [HideInInspector] public int currentAtk;
     [HideInInspector] public int currentDef;
     [HideInInspector] public int currentScrapReward;

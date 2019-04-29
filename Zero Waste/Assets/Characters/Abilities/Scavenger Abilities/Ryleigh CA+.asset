@@ -28,7 +28,7 @@ MonoBehaviour:
   directIndex: 0
   showValue: 0
   repeatAnimation: 0
-  particleIndex: 0
+  particleIndex: 7
   spawnY: 0
   effects:
   - {fileID: 11400000, guid: 1c474762af3e23846b0d6d48385c25f6, type: 2}

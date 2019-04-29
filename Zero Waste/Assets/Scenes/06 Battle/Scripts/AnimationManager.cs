@@ -100,6 +100,7 @@ public class AnimationManager : MonoBehaviour
         {
             cameraManager.Shake(true, 1);
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
+            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
 
             if (ability.withDirect)
             {
@@ -128,6 +129,7 @@ public class AnimationManager : MonoBehaviour
         {
             cameraManager.Shake(true, 1);
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
+            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
 
             if (ability.withDirect)
             {
@@ -156,6 +158,7 @@ public class AnimationManager : MonoBehaviour
         {
             cameraManager.Shake(true, 2);
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
+            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
 
             if (ability.withDirect)
             {

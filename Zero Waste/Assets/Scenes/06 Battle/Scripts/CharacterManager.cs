@@ -11,6 +11,9 @@ public class CharacterManager : MonoBehaviour {
     public GameObject mutantGroup;
     public GameObject[] mutants;
 
+    [Header("Battle Controller")]
+    public GameObject battleController;
+
     [Header("Managers")]
     public StatusManager statusManager;
     public CameraManager cameraManager;
@@ -311,7 +314,7 @@ public class CharacterManager : MonoBehaviour {
                     if (targetCharacter == 1)
                         allScavengersAlive = true;
 
-                    if (targetCharacter == 0)
+                    else if (targetCharacter == 0)
                         allMutantsAlive = true;
 
                     break;
@@ -321,14 +324,19 @@ public class CharacterManager : MonoBehaviour {
                 {
                     // This condition won't be reached if loop haven't gone through
                     // all prefabs, which just means all characters in a team is dead
-                    if (characterObject.GetInstanceID() ==
-                        characterPrefabs[characterPrefabs.Length - 1].GetInstanceID())
+                    if(characterObject.GetInstanceID() == (characterPrefabs[characterPrefabs.Length - 1]).GetInstanceID())
                     {
                         if (targetCharacter == 1)
+                        {
+                            battleController.GetComponent<BattleController>().CheckBattleEnd(targetCharacter);
                             allScavengersAlive = false;
+                        }
 
-                        if (targetCharacter == 0)
+                        else if (targetCharacter == 0)
+                        {
+                            battleController.GetComponent<BattleController>().CheckBattleEnd(targetCharacter);
                             allMutantsAlive = false;
+                        }
                     }
                 }
             }
@@ -341,7 +349,10 @@ public class CharacterManager : MonoBehaviour {
     {
         // Constantly check lives of characters per team
         // If all characters in a team, Scavenger or Mutant, are dead, battle should end
-        StartCoroutine(CheckIfCharactersAreAlive(0));
-        StartCoroutine(CheckIfCharactersAreAlive(1));
+        if (allMutantsAlive && allScavengersAlive)
+        {
+            StartCoroutine(CheckIfCharactersAreAlive(0));
+            StartCoroutine(CheckIfCharactersAreAlive(1));
+        }
     }
 }

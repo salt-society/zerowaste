@@ -5849,6 +5849,7 @@ MonoBehaviour:
   - {fileID: 3298201325159275447, guid: d6762778627d826468962772cba3fb8e, type: 3}
   - {fileID: 7543908511021684328, guid: 339e591f5ca2d6d41a3ef43859b5913d, type: 3}
   - {fileID: 8592093386426763795, guid: 4333e5cf9aca0cc498b3d7300a853ad6, type: 3}
+  - {fileID: 3990694538004022074, guid: d6dd7f356e2db0c418fdbac92197c916, type: 3}
   particlesOnLoop: []
 --- !u!1 &713893843
 GameObject:
@@ -8428,6 +8429,7 @@ MonoBehaviour:
   - {fileID: 2017576841}
   - {fileID: 1834559682}
   - {fileID: 1854762418}
+  battleController: {fileID: 599245734}
   statusManager: {fileID: 712595548}
   cameraManager: {fileID: 0}
   battleInfoManager: {fileID: 0}

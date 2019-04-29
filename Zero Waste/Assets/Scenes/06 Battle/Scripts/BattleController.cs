@@ -539,10 +539,10 @@ public class BattleController : MonoBehaviour {
     IEnumerator DisplayBattleResult(bool victory)
     {
         cameraManager.Shake(true, 1);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.60f);
         cameraManager.Shake(true, 1);
 
-        StopAllCoroutines();
+        //StopAllCoroutines();
         battleInfoManager.CalculateResult(victory);
 
         battleInfoManager.DisplayMiddleMessage(0);
@@ -553,20 +553,18 @@ public class BattleController : MonoBehaviour {
         attackController.HideAttackButtons();
     }
 
-    void Update()
+    // Check if the battle has ended
+    public void CheckBattleEnd(int targetCharacter)
     {
-        // Always monitor if group of characters are alive or not
-        // instead of checking every end of loop
-
         // Here all mutants are dead, which means victory
-        if (!characterManager.AllMutantsAlive && !battleEnd)
+        if (targetCharacter == 0)
         {
             battleEnd = true;
             StartCoroutine(DisplayBattleResult(true));
         }
 
         // All scavengers are dead, defeat
-        if (!characterManager.AllScavengersAlive && !battleEnd)
+        if (targetCharacter == 1)
         {
             battleEnd = true;
             StartCoroutine(DisplayBattleResult(false));

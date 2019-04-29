@@ -169,6 +169,7 @@ public class CharacterMonitor : MonoBehaviour
                 currentHealth = scavenger.currentHP;
                 currentAnt = scavenger.currentAnt;
             }
+
             else
             {
                 currentHealth = mutant.currentPollutionLevel;
@@ -241,7 +242,7 @@ public class CharacterMonitor : MonoBehaviour
     // </summary>
     public int GetScavengerMaxHealth()
     {
-        return scavenger.baseHP + (int)((scavenger.currentLevel - 1) * scavenger.hpModifier);
+        return scavenger.baseHP + (scavenger.currentLevel * scavenger.hpModifier);
     }
 
     // <summary>

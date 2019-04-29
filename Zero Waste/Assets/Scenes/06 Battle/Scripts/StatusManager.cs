@@ -539,7 +539,7 @@ public class StatusManager : MonoBehaviour
     {
         float hpLeft = currentHealth / maxHealth;
         float hpBarValue = healthBars[position].GetComponent<Image>().fillAmount;
-
+        
         while (hpBarValue > hpLeft)
         {
             hpBarValue -= 0.1f;
