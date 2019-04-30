@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398174f9157595049bc99acb2ac06557, type: 3}
+  m_Name: TN5
+  m_EditorClassIdentifier: 
+  nodeIcon: {fileID: 0}
+  nodeId: 4
+  nodeName: Landfill Mountain
+  info: Heaps upon heaps of trash, tower everything in sight, like a city made out
+    of trash.
+  threatLevel: {r: 0, g: 0, b: 0, a: 0}
+  area: {fileID: 11400000, guid: a54a40b72df378248b174c3778b402aa, type: 2}
+  battleStartIndex: 0
+  battleEndIndex: 0
+  hasPath: 0
+  pathPosition: {x: 0, y: 0, z: 0}
+  pathRotation: {x: 0, y: 0, z: 0}
+  pathScale: {x: 0, y: 0, z: 0}
+  battles:
+  - {fileID: 11400000, guid: 0085668fbe643b74cbfce58c0f61c169, type: 2}
+  - {fileID: 11400000, guid: bf9c25c64cc1dbd43a7123eaf3642125, type: 2}
+  - {fileID: 11400000, guid: 85ddbdcafc01a7248899eab0e24e556d, type: 2}
+  - {fileID: 11400000, guid: 57099f202cdea524587a6e3f3c1719e1, type: 2}
+  nextLevels: []
+  levelIds: 
+  nextScene: 

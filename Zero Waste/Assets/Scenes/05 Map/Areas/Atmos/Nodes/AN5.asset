@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398174f9157595049bc99acb2ac06557, type: 3}
+  m_Name: AN5
+  m_EditorClassIdentifier: 
+  nodeIcon: {fileID: 0}
+  nodeId: 14
+  nodeName: Factory Fortress
+  info: The Factory, still alive, spewing out the gray and black fog that surrounds
+    Atmos.
+  threatLevel: {r: 0, g: 0, b: 0, a: 0}
+  area: {fileID: 11400000, guid: d9b8fa7dd018c9b418e71ea089b47320, type: 2}
+  battleStartIndex: 0
+  battleEndIndex: 0
+  hasPath: 0
+  pathPosition: {x: 0, y: 0, z: 0}
+  pathRotation: {x: 0, y: 0, z: 0}
+  pathScale: {x: 0, y: 0, z: 0}
+  battles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nextLevels: []
+  levelIds: 
+  nextScene: 

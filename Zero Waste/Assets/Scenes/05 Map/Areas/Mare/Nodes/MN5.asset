@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398174f9157595049bc99acb2ac06557, type: 3}
+  m_Name: MN5
+  m_EditorClassIdentifier: 
+  nodeIcon: {fileID: 0}
+  nodeId: 9
+  nodeName: The Blockade
+  info: "The river\u2019s sole connection to the sea, blocked by a huge wall of trash."
+  threatLevel: {r: 0, g: 0, b: 0, a: 0}
+  area: {fileID: 11400000, guid: d7f1046726874394dbfa88f6aa04d34b, type: 2}
+  battleStartIndex: 0
+  battleEndIndex: 0
+  hasPath: 0
+  pathPosition: {x: 0, y: 0, z: 0}
+  pathRotation: {x: 0, y: 0, z: 0}
+  pathScale: {x: 0, y: 0, z: 0}
+  battles:
+  - {fileID: 11400000, guid: a1791060c4860a342b3bda396582e5d0, type: 2}
+  - {fileID: 11400000, guid: 583d2e867d054d041b461019713d821d, type: 2}
+  - {fileID: 11400000, guid: 2844c4e8d60e55545a7df4e56101a227, type: 2}
+  - {fileID: 11400000, guid: 82ad56edb2de92049b61a4ff7d5d7546, type: 2}
+  nextLevels: []
+  levelIds: 
+  nextScene: 

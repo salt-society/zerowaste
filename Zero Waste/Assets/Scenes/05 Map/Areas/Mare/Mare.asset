@@ -16,12 +16,24 @@ MonoBehaviour:
   areaId: 1
   areaName: Mare
   subtitle: Green Murky Waters
-  info: 
+  info: "A land close to the sea, Mare\u2019s main source of income is its fishing
+    industry. With a long and bountiful river to boot, it\u2019s no wonder this country
+    is a land rich in both culture and resources. However, the people have dumped
+    their wastes on the river. This caused the marine life to reach an all-time low,
+    endangering the country\u2019s economy. ZWA considers Mare a 2* threat."
   coordinates: {x: 28, y: 86, z: -10}
   zoomSize: 100
   zoomSpeed: 80
   moveSpeed: 80
-  maxNodes: 0
-  battles: []
-  positions: []
-  nextLevel: 
+  startNodeIndex: 5
+  maxNodes: 5
+  nodes:
+  - {fileID: 11400000, guid: 239008f4abb04af49ae324535f89931f, type: 2}
+  - {fileID: 11400000, guid: 0327fde301551064ba72d32067b6ed0c, type: 2}
+  - {fileID: 11400000, guid: 94d3cf382394ba94e8af5ab5cecdc103, type: 2}
+  - {fileID: 11400000, guid: 95a595cbe36a59b44b24b07a6045b9d6, type: 2}
+  - {fileID: 11400000, guid: 3605a9b44f491c9478fb00d2d02ea348, type: 2}
+  nodePositions: []
+  nextLevels: []
+  levelIds: 
+  nextScene: 

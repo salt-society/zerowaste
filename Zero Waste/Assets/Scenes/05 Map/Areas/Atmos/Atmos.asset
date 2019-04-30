@@ -16,12 +16,24 @@ MonoBehaviour:
   areaId: 2
   areaName: Atmos
   subtitle: Ruins of Sunless Sky
-  info: 
+  info: "A land infamous for its industry, various factories dominate the landscape,
+    each spewing black smoke. As a result, the people of Atmos hasn\u2019t seen the
+    sun in a very long time, as their skies are pitch black. Nevertheless, one cannot
+    deny the technological advancements and the wealth of this country. ZWA considers
+    Atmos a 3* priority."
   coordinates: {x: 235, y: 32, z: -10}
   zoomSize: 120
   zoomSpeed: 80
   moveSpeed: 80
-  maxNodes: 0
-  battles: []
-  positions: []
-  nextLevel: 
+  startNodeIndex: 10
+  maxNodes: 5
+  nodes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nodePositions: []
+  nextLevels: []
+  levelIds: 
+  nextScene: 

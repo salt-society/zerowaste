@@ -16,7 +16,11 @@ MonoBehaviour:
   areaId: 0
   areaName: Terre
   subtitle: Land of Filth
-  info: 
+  info: "A landlocked area, Terre is a small country that is infamous for its landfills.
+    The country has severe issues with pollution and waste management. As a result,
+    more landfills are made, and the condition is just worsening. These may be since
+    the country itself is \u201Cthird-world\u201D in nature. The ZWA considers Terre
+    a 1* threat."
   coordinates: {x: 28, y: -68, z: -10}
   zoomSize: 100
   zoomSpeed: 100

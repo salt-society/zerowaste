@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce43060f1c15ef242ab1d97538ee708c, type: 3}
+  m_Name: TN1L3 B
+  m_EditorClassIdentifier: 
+  nodeIcon: {fileID: 0}
+  background: {fileID: 0}
+  battleId: 10
+  battleName: Terre Completed
+  info: Ryleigh celebrates along with Terre
+  isBossBattle: 0
+  isTutorial: 0
+  node: {fileID: 11400000, guid: 385719f75d227cd4e83ba83a540632db, type: 2}
+  wastePool: {fileID: 0}
+  isMajorCutscene: 1
+  cutsceneAtStart: 0
+  startCutscene: {fileID: 11400000, guid: fea8b48b5e363c34396736d35d03e2f8, type: 2}
+  cutsceneAtEnd: 0
+  endCutscene: {fileID: 0}
+  nextLevels:
+  - Battle
+  levelIds: 0b000000
+  nextScene: Cutscene

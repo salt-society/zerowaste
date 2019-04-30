@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398174f9157595049bc99acb2ac06557, type: 3}
+  m_Name: TN1
+  m_EditorClassIdentifier: 
+  nodeIcon: {fileID: 0}
+  nodeId: 0
+  nodeName: Village
+  info: A simple village of makeshift houses. The poor condition of the country is
+    apparent in this village.
+  threatLevel: {r: 0, g: 0, b: 0, a: 0}
+  area: {fileID: 11400000, guid: a54a40b72df378248b174c3778b402aa, type: 2}
+  battleStartIndex: 0
+  battleEndIndex: 4
+  hasPath: 1
+  pathPosition: {x: 4.62, y: 4.53, z: 0}
+  pathRotation: {x: 0, y: 0, z: 44.6}
+  pathScale: {x: 1.47, y: 1.3, z: 0}
+  battles:
+  - {fileID: 11400000, guid: 556b51b5c0972ba4d96bb9ba0660ca93, type: 2}
+  - {fileID: 11400000, guid: 0b992e0a4676d3e4a9c45abce55eed06, type: 2}
+  - {fileID: 11400000, guid: 5b5bbd7c326f32a41b0ae5564091a876, type: 2}
+  nextLevels: []
+  levelIds: 
+  nextScene: 
