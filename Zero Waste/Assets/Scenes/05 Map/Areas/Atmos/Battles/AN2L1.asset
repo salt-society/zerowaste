@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 30
+  battleId: 32
   battleName: Creepy Alley
   info: The darkness hides the ferocious beasts that would attack the unwary.
   isBossBattle: 0
   isTutorial: 0
-  node: {fileID: 0}
-  wastePool: {fileID: 0}
+  node: {fileID: 11400000, guid: 40fd1a096b753a44fb0a32cfe07b14eb, type: 2}
+  wastePool: {fileID: 11400000, guid: 89b474a7f141eb040890f7e709c47f2e, type: 2}
   isMajorCutscene: 0
   cutsceneAtStart: 0
   startCutscene: {fileID: 0}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
-  nextLevels: []
-  levelIds: 
-  nextScene: 
+  nextLevels:
+  - Battle
+  levelIds: 21000000
+  nextScene: Battle

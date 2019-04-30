@@ -20,5 +20,5 @@ MonoBehaviour:
   nextLevels:
   - Node
   - Battle
-  levelIds: 0800000017000000
+  levelIds: 0800000019000000
   nextScene: Map

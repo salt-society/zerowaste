@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce43060f1c15ef242ab1d97538ee708c, type: 3}
+  m_Name: AN3L4
+  m_EditorClassIdentifier: 
+  nodeIcon: {fileID: 0}
+  background: {fileID: 0}
+  battleId: 37
+  battleName: The Thieves
+  info: The main culprits. The fast and furious wolves.
+  isBossBattle: 0
+  isTutorial: 0
+  node: {fileID: 11400000, guid: 5690075556821e94ba1f90220dd57059, type: 2}
+  wastePool: {fileID: 11400000, guid: 2ce49a50e5c5e404592f4d0b3049cd23, type: 2}
+  isMajorCutscene: 0
+  cutsceneAtStart: 0
+  startCutscene: {fileID: 0}
+  cutsceneAtEnd: 0
+  endCutscene: {fileID: 0}
+  nextLevels:
+  - Battle
+  levelIds: 26000000
+  nextScene: Battle

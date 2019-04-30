@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 3
+  battleId: 4
   battleName: Village Cleanup
   info: Paper and Can Monsters team up to devour anything in sight.
   isBossBattle: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   nextLevels:
   - Node
   - Battle
-  levelIds: 0100000004000000
+  levelIds: 0100000005000000
   nextScene: Battle

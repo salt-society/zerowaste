@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 21
+  battleId: 23
   battleName: Mare's Treasure
   info: Ryleigh and team report about the catfish.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 16000000
+  levelIds: 18000000
   nextScene: Cutscene

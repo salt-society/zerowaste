@@ -19,5 +19,5 @@ MonoBehaviour:
   dialogues: []
   nextLevels:
   - Node
-  levelIds: 02000000
+  levelIds: 03000000
   nextScene: Map

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 4
+  battleId: 5
   battleName: A Talk With The Rangers
   info: Ryleigh arrives at the ranger's outpost.
   isBossBattle: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   nextLevels:
   - Battle
   - Battle
-  levelIds: 05000000ffffffff
+  levelIds: 06000000ffffffff
   nextScene: Cutscene

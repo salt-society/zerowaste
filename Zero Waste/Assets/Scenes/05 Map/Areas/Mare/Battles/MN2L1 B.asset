@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 13
+  battleId: 15
   battleName: Hermit of Boats
   info: Ryleigh and team encounter the hermit.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 0e000000
+  levelIds: 10000000
   nextScene: Cutscene

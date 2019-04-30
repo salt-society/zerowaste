@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 25
+  battleId: 27
   battleName: Guardian
   info: Ryleigh and team arrive at the blockade.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 1a000000
+  levelIds: 1c000000
   nextScene: Cutscene

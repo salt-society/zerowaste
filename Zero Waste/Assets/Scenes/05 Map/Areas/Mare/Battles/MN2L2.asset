@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 14
+  battleId: 16
   battleName: The Docks
   info: 'Numerous scraps and parts of boats litter the area. '
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 0f000000
+  levelIds: 11000000
   nextScene: Battle

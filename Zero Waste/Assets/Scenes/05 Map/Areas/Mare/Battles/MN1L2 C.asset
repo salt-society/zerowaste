@@ -19,5 +19,5 @@ MonoBehaviour:
   dialogues: []
   nextLevels:
   - Battle
-  levelIds: 16000000
+  levelIds: 18000000
   nextScene: ZWA

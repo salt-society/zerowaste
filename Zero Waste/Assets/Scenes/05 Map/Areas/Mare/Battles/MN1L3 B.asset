@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 27
+  battleId: 29
   battleName: Mare, a treasure to be reborn!
   info: Ryleigh and team report back to the shogun.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 1c000000
+  levelIds: 1e000000
   nextScene: Cutscene

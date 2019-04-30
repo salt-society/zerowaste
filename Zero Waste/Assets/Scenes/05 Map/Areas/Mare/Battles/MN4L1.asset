@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 23
+  battleId: 25
   battleName: Black Trail
   info: The waters have turned black from too much waste and pollution. What was once
     gentle waters now reek of death.
@@ -29,5 +29,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 18000000
+  levelIds: 1a000000
   nextScene: Battle

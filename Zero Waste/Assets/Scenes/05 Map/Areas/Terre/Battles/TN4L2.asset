@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 7
+  battleId: 9
   battleName: Among Pack of Wolves
   info: The howls render you awake as mutated wolves make their presence known.
   isBossBattle: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   nextLevels:
   - Node
   - Battle
-  levelIds: 0400000008000000
+  levelIds: 040000000a000000
   nextScene: Battle
