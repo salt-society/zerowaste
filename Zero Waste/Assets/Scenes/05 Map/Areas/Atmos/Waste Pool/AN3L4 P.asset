@@ -15,3 +15,5 @@ MonoBehaviour:
   wastePool:
   - {fileID: 11400000, guid: 67c076ecc4e207a40adc1a82df01ef18, type: 2}
   spawnRate: 64000000
+  baseLevel: 26
+  maxLevel: 26

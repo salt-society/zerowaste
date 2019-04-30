@@ -16,3 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fd5363204494af448aed8216c14f7828, type: 2}
   - {fileID: 11400000, guid: bf9263ea8cd04d2459b2a9206f0aa4a2, type: 2}
   spawnRate: 3200000032000000
+  baseLevel: 26
+  maxLevel: 27

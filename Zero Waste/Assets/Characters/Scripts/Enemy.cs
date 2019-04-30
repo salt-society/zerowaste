@@ -6,32 +6,34 @@ using UnityEngine;
 public class Enemy : Character {
 
     [Header("Enemy Statistics")]
-    [Range(1,30)]public int mutantLevel;
     [Range(100, 1500)] public int maxPollutionLevel;
     [Range(10, 100)] public int maxAtk;
-    [Range(10, 100)]public int maxDef;
-    [Range(10, 500)]public int baseScrapReward;
-    [Range(10, 500)]public int baseEXPReward;
+    [Range(10, 100)] public int maxDef;
+    [Range(10, 500)] public int baseScrapReward;
+    [Range(10, 500)] public int baseEXPReward;
     public string baseState;
     public string roleWeakness;
 
-    [Header("Modifiers")]
-    [Range(3, 10)]public int plModifier;
-    [Range(0, 10)]public int atkModifier;
-    [Range(0, 10)]public int defModifier;
-    [Range(1, 5)]public int expModifier;
-    [Range(1, 5)]public int scrapModifier;
+    [Header("Modifiers")] 
+    [Range(3, 10)] public int plModifier;
+    [Range(0, 10)] public int atkModifier;
+    [Range(0, 10)] public int defModifier;
+    [Range(1, 5)] public int expModifier;
+    [Range(1, 5)] public int scrapModifier;
+
+    [HideInInspector] public int baseLevel;
+    [HideInInspector] public int maxLevel;
+    [HideInInspector] public int mutantLevel;
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
-    public int currentPollutionLevel;
+    [HideInInspector] public int currentPollutionLevel;
     [HideInInspector] public int currentAtk;
     [HideInInspector] public int currentDef;
     [HideInInspector] public int currentScrapReward;
     [HideInInspector] public int currentEXPReward;
     [HideInInspector] public string currentState;
 
-    private int levelModifier;
     private bool hasChangedState;
 
     // Used because the isAttacked of enemy is an overrideable function
@@ -40,9 +42,7 @@ public class Enemy : Character {
     // Initialize currentStats to be equal to maxStats
     public virtual void OnInitialize()
     {
-        levelModifier = Random.Range(0, 4);
-
-        mutantLevel += levelModifier;
+        mutantLevel = Random.Range(baseLevel, maxLevel + 1);
 
         currentPollutionLevel = maxPollutionLevel + (plModifier * mutantLevel);
         currentAtk = maxAtk + (atkModifier * mutantLevel);

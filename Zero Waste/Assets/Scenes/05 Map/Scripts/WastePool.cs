@@ -11,6 +11,10 @@ public class WastePool : ScriptableObject
     [Header("Waste Spawn Rates")]
     public int[] spawnRate;
 
+    [Header("Node Level Details")]
+    public int baseLevel;
+    public int maxLevel;
+
     // Function for getting the array of wastes to be spawned
     public Enemy[] SelectWatesFromPool()
     {
@@ -33,8 +37,14 @@ public class WastePool : ScriptableObject
 
                 // If randomized number fits into spawn rate, add waste to wasteTeam
                 if (rand <= spawnRate[check])
+                {
                     wasteTeam[CTR] = wastePool[check];
 
+                    // Test Stuff
+                    wasteTeam[CTR].baseLevel = baseLevel;
+                    wasteTeam[CTR].maxLevel = maxLevel;
+                }
+                    
                 // If not, reduce the max by subtracting the spawnrate of current enemy. By doing this, there is always a guarantee
                 // that one monster will be chosen from the pool
                 else
