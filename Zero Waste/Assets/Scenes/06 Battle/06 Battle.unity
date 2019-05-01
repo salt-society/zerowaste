@@ -1721,7 +1721,7 @@ MonoBehaviour:
   currentNodeObject: {fileID: 0}
   currentNode: {fileID: 11400000, guid: 385719f75d227cd4e83ba83a540632db, type: 2}
   currentBattleObject: {fileID: 0}
-  currentBattle: {fileID: 11400000, guid: 556b51b5c0972ba4d96bb9ba0660ca93, type: 2}
+  currentBattle: {fileID: 11400000, guid: 6afd6484c4c3f7d46b126ba8308b9e87, type: 2}
   scavengerTeam:
   - {fileID: 11400000, guid: a2c8028abd4b51448814724edf67f26c, type: 2}
   - {fileID: 11400000, guid: a2c8028abd4b51448814724edf67f26c, type: 2}
@@ -9816,7 +9816,7 @@ SpriteRenderer:
   m_SortingLayerID: 388809709
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 42cb5bad660c39f40940bc52337ca653, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10a5b2ac0f7c7a44b876a45c79b2e9a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

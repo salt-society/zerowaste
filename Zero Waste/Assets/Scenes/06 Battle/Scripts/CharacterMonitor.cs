@@ -901,7 +901,7 @@ public class CharacterMonitor : MonoBehaviour
         mutant.IsAttacked(effectStrength, scavenger);
 
         currentHealth = mutant.currentPollutionLevel;
-        int damage = previousHealth - currentHealth;
+        int damage = mutant.GetDamage();
 
         return damage;
     }

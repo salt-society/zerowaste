@@ -16,7 +16,7 @@ public class WastePool : ScriptableObject
     public int maxLevel;
 
     // Function for getting the array of wastes to be spawned
-    public Enemy[] SelectWatesFromPool()
+    public Enemy[] SelectWasteFromPool()
     {
         // First find how many wastes will be spawned
         int numberOfWastes = NumberOfWastes();

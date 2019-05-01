@@ -127,7 +127,7 @@ public class AnimationManager : MonoBehaviour
     {
         if (ability.type.Equals("Offensive"))
         {
-            cameraManager.Shake(true, 1);
+            cameraManager.Shake(true, 2);
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
             StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
 

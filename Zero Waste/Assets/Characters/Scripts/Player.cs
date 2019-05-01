@@ -76,7 +76,7 @@ public class Player : Character {
 
                 if(attacker.currentAtk > 0)
                 {
-                    int projectedStrength = Random.Range((int)(attacker.currentAtk * 0.5), (int)(attacker.currentAtk * 1.5) + 1);
+                    int projectedStrength = Random.Range(attacker.currentAtk, (int)(attacker.currentAtk * 1.25) + 1);
 
                     if (currentDef > 0)
                         damage = CheckMin((projectedStrength + statModifier) - (int)(currentDef / 1.25));

@@ -417,4 +417,9 @@ public class DataController : MonoBehaviour
     {
         currentSaveData.UseScrap(scrap);
     }
+
+    public void CreateTeam()
+    {
+        wasteTeam = currentBattle.wastePool.SelectWasteFromPool();
+    }
 }

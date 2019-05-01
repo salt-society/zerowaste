@@ -48,7 +48,7 @@ public class TeamSelect : MonoBehaviour
             yield return new WaitForSeconds(1f);
             scavengerSlots[0].SetActive(true);
 
-            wasteTeam = dataController.currentBattle.wastePool.SelectWatesFromPool();
+            wasteTeam = dataController.currentBattle.wastePool.SelectWasteFromPool();
         }
     }
 

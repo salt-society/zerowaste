@@ -22,7 +22,7 @@ MonoBehaviour:
   length: 1
   type: Offensive
   range: Single
-  withDirect: 0
+  withDirect: 1
   directIndex: 0
   showValue: 0
   repeatAnimation: 0

@@ -30,6 +30,9 @@ public class Battle : ScriptableObject {
     public bool cutsceneAtEnd;
     public Cutscene endCutscene;
 
+    [Space]
+    public string BGM;
+
     [Header("Progess")]
     public List<string> nextLevels;
     public List<int> levelIds;

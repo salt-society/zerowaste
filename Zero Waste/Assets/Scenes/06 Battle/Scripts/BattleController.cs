@@ -32,7 +32,7 @@ public class BattleController : MonoBehaviour {
     private bool loopDone;
     private bool endOfLoop;
     private bool battleEnd;
-    
+
     void Start()
     {
         // Get references to battle managers
@@ -48,9 +48,8 @@ public class BattleController : MonoBehaviour {
         cameraManager = FindObjectOfType<CameraManager>();
         enemyAbilityManager = FindObjectOfType<EnemyAbilityManager>();
 
+        PlayBGM();
         // MarkAsPlayed();
-
-        // Get all details needed for battle and set it up
         CheckMode();
     }
 
@@ -70,7 +69,7 @@ public class BattleController : MonoBehaviour {
     {
         if (audioManager != null)
         {
-
+            audioManager.PlaySound(dataController.currentBattle.BGM);
         }
     }
 
@@ -94,6 +93,8 @@ public class BattleController : MonoBehaviour {
     {
         if (dataController != null)
         {
+            dataController.CreateTeam();
+
             List<Player> scavengerTemp = new List<Player>();
             List<Enemy> mutantTemp = new List<Enemy>();
 

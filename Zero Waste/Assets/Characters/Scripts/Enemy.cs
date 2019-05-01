@@ -105,7 +105,7 @@ public class Enemy : Character {
         else
         {
             if (currentDef > 0)
-                damage = CheckMin(statModifier - currentDef);
+                damage = CheckMin(statModifier - (int)(currentDef / 1.25));
 
             else
                 damage = statModifier;
