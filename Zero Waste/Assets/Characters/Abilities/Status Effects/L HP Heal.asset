@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: L HP Heal
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  effectName: Medium HP Heal
-  description: Recover a moderate amount of HP.
+  effectName: Large HP Heal
+  description: Recover a large amount of HP.
   target: HP
   type: Direct
   particleIndex: 0
   particleLoop: 0
-  strength: 150
+  strength: 100
   state: 
   application: 
   duration: 0

@@ -19,7 +19,7 @@ MonoBehaviour:
   type: Status
   particleIndex: 0
   particleLoop: 0
-  strength: 20
+  strength: 10
   state: Buff
   application: 
   duration: 3

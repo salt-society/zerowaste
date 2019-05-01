@@ -33,12 +33,12 @@ MonoBehaviour:
   baseHP: 55
   baseAnt: 100
   baseAtk: 10
-  baseDef: 15
+  baseDef: 16
   antGen: 30
   threatLevel: 1
-  hpModifier: 11
-  atkModifier: 10
-  defModifier: 13
+  hpModifier: 6
+  atkModifier: 5
+  defModifier: 7
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

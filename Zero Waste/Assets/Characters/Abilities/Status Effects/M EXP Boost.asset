@@ -19,7 +19,7 @@ MonoBehaviour:
   type: Status
   particleIndex: 0
   particleLoop: 0
-  strength: 100
+  strength: 30
   state: Debuff
   application: 
   duration: -1

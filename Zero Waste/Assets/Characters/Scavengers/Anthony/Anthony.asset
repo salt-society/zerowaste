@@ -30,15 +30,15 @@ MonoBehaviour:
   effects: []
   characterClass: {fileID: 0}
   currentLevel: 1
-  baseHP: 75
+  baseHP: 70
   baseAnt: 100
-  baseAtk: 12
+  baseAtk: 13
   baseDef: 20
   antGen: 10
   threatLevel: 3
-  hpModifier: 15
-  atkModifier: 11
-  defModifier: 15
+  hpModifier: 10
+  atkModifier: 6
+  defModifier: 10
   currentHP: 0
   currentAnt: 0
   currentAtk: 0

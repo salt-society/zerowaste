@@ -8,17 +8,17 @@ public class Player : Character {
     [Header("Statistics")]
     public Role characterClass;
     [Range(1, 30)] public int currentLevel;
-    [Range(50, 75)] public int baseHP;
-    public int baseAnt;
+    [Range(50, 70)] public int baseHP;
+    [Range(100,100)] public int baseAnt;
     [Range(10, 20)] public int baseAtk;
     [Range(10, 20)] public int baseDef;
     [Range(10, 30)] public int antGen;
     [Range(1, 3)] public int threatLevel;
 
     [Header("Level Modifiers")]
-    [Range(10, 15)] public int hpModifier;
-    [Range(10, 15)] public int atkModifier;
-    [Range(10, 15)] public int defModifier;
+    [Range(5, 10)] public int hpModifier;
+    [Range(5, 10)] public int atkModifier;
+    [Range(5, 10)] public int defModifier;
     
     [HideInInspector] public int currentHP;
     [HideInInspector] public int currentAnt;
@@ -32,6 +32,8 @@ public class Player : Character {
     // Apply level modifiers to character
     public void OnInitialize()
     {
+        baseAnt = 100;
+
         currentHP = baseHP + (currentLevel * hpModifier);
         currentAnt = baseAnt / 2;
         currentAtk = baseAtk + (currentLevel * atkModifier);
@@ -77,7 +79,7 @@ public class Player : Character {
                     int projectedStrength = Random.Range((int)(attacker.currentAtk * 0.5), (int)(attacker.currentAtk * 1.5) + 1);
 
                     if (currentDef > 0)
-                        damage = CheckMin((projectedStrength + statModifier) - currentDef);
+                        damage = CheckMin((projectedStrength + statModifier) - (int)(currentDef / 1.25));
 
                     else
                         damage = projectedStrength + statModifier;
@@ -86,7 +88,7 @@ public class Player : Character {
                 else
                 {
                     if (currentDef > 0)
-                        damage = CheckMin(statModifier - currentDef);
+                        damage = CheckMin(statModifier - (int)(currentDef / 1.25));
 
                     else
                         damage = statModifier;
