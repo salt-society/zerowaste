@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 26
+  battleId: 28
   battleName: Giant Catfish
   info: Ryleigh and team confront the catfish.
   isBossBattle: 1
@@ -30,5 +30,5 @@ MonoBehaviour:
   - Battle
   - Battle
   - Battle
-  levelIds: 1b000000fbfffffffaffffff
+  levelIds: 1d000000fbfffffffaffffff
   nextScene: Battle

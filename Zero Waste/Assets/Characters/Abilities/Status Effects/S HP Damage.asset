@@ -19,7 +19,7 @@ MonoBehaviour:
   type: Direct
   particleIndex: 0
   particleLoop: 0
-  strength: 30
+  strength: 10
   state: 
   application: 
   duration: 0

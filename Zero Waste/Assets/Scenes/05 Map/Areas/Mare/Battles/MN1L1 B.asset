@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 12
+  battleId: 14
   battleName: Help Has Arrived
   info: Ryleigh and team arrive at Mare
   isBossBattle: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   nextLevels:
   - Node
   - Battle
-  levelIds: 060000000d000000
+  levelIds: 060000000f000000
   nextScene: Cutscene

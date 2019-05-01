@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 24
+  battleId: 26
   battleName: Black and Green
   info: Both black and green converge on this spot, both radiating the sense of malice
     and destruction.
@@ -30,5 +30,5 @@ MonoBehaviour:
   nextLevels:
   - Node
   - Battle
-  levelIds: 0900000019000000
+  levelIds: 090000001b000000
   nextScene: Battle

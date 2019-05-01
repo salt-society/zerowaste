@@ -19,5 +19,5 @@ MonoBehaviour:
   dialogues: []
   nextLevels:
   - Battle
-  levelIds: 0b000000
+  levelIds: 0d000000
   nextScene: ZWA

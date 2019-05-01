@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 28
+  battleId: 30
   battleName: The Third Assignment
   info: Ryleigh and team are given the third and last assignment.
   isBossBattle: 0
@@ -30,5 +30,5 @@ MonoBehaviour:
   - Area
   - Node
   - Battle
-  levelIds: 020000000a0000001d000000
+  levelIds: 020000000a0000001f000000
   nextScene: Cutscene

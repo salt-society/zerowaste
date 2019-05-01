@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 5
+  battleId: 6
   battleName: Reporting Back
   info: Ryleigh reports back to the chief.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 06000000
+  levelIds: 07000000
   nextScene: Cutscene

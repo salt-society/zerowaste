@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 21300000, guid: b9488ed09e7432b42b2581a8d033b985, type: 3}
-  battleId: 1
+  battleId: 2
   battleName: Reporting to the Chief
   info: Ryleigh arrives at Terre.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Node
-  levelIds: 02000000
+  levelIds: 03000000
   nextScene: Cutscene

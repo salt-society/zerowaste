@@ -6,32 +6,34 @@ using UnityEngine;
 public class Enemy : Character {
 
     [Header("Enemy Statistics")]
-    [Range(1,30)]public int mutantLevel;
-    [Range(100, 1500)] public int maxPollutionLevel;
-    [Range(10, 100)] public int maxAtk;
-    [Range(10, 100)]public int maxDef;
-    [Range(10, 500)]public int baseScrapReward;
-    [Range(10, 500)]public int baseEXPReward;
+    [Range(100, 300)] public int basePollutionLevel;
+    [Range(10, 20)] public int baseAtk;
+    [Range(10, 20)] public int baseDef;
+    [Range(5, 50)] public int baseScrapReward;
+    [Range(5, 50)] public int baseEXPReward;
     public string baseState;
     public string roleWeakness;
 
-    [Header("Modifiers")]
-    [Range(3, 10)]public int plModifier;
-    [Range(0, 10)]public int atkModifier;
-    [Range(0, 10)]public int defModifier;
-    [Range(1, 5)]public int expModifier;
-    [Range(1, 5)]public int scrapModifier;
+    [Header("Modifiers")] 
+    [Range(10, 20)] public int plModifier;
+    [Range(5, 10)] public int atkModifier;
+    [Range(5, 10)] public int defModifier;
+    private int expModifier;
+    private int scrapModifier;
+
+    [HideInInspector] public int baseLevel;
+    [HideInInspector] public int maxLevel;
+    [HideInInspector] public int mutantLevel;
 
     [HideInInspector] public List<Ability> instanceAbilities;
 
-    public int currentPollutionLevel;
+    [HideInInspector] public int currentPollutionLevel;
     [HideInInspector] public int currentAtk;
     [HideInInspector] public int currentDef;
     [HideInInspector] public int currentScrapReward;
     [HideInInspector] public int currentEXPReward;
     [HideInInspector] public string currentState;
 
-    private int levelModifier;
     private bool hasChangedState;
 
     // Used because the isAttacked of enemy is an overrideable function
@@ -40,13 +42,14 @@ public class Enemy : Character {
     // Initialize currentStats to be equal to maxStats
     public virtual void OnInitialize()
     {
-        levelModifier = Random.Range(0, 4);
+        mutantLevel = Random.Range(baseLevel, maxLevel + 1);
 
-        mutantLevel += levelModifier;
+        expModifier = 10;
+        scrapModifier = 10;
 
-        currentPollutionLevel = maxPollutionLevel + (plModifier * mutantLevel);
-        currentAtk = maxAtk + (atkModifier * mutantLevel);
-        currentDef = maxDef + (defModifier * mutantLevel);
+        currentPollutionLevel = basePollutionLevel + (plModifier * mutantLevel);
+        currentAtk = baseAtk + (atkModifier * mutantLevel);
+        currentDef = baseDef + (defModifier * mutantLevel);
         currentSpd = baseSpd;
         currentScrapReward = baseScrapReward + (scrapModifier * mutantLevel);
         currentEXPReward = baseEXPReward + (expModifier * mutantLevel);
@@ -69,8 +72,8 @@ public class Enemy : Character {
     // Check max so values do not go beyond max
     public int CheckMax(int targetStat)
     {
-        if (targetStat > maxPollutionLevel)
-            return maxPollutionLevel;
+        if (targetStat > basePollutionLevel)
+            return basePollutionLevel;
 
         else
             return targetStat;
@@ -90,7 +93,7 @@ public class Enemy : Character {
                 projectedStrength += (int)(projectedStrength * 0.5);
 
             if (currentDef > 0)
-                damage = CheckMin((projectedStrength + statModifier) - currentDef);
+                damage = CheckMin((projectedStrength + statModifier) - (int)(currentDef / 1.25));
 
             else
                 damage = projectedStrength + statModifier;
@@ -111,7 +114,7 @@ public class Enemy : Character {
             currentPollutionLevel = estimatedStat;
         }
 
-        if (currentPollutionLevel > (int)(maxPollutionLevel * 0.5f) && hasChangedState == false)
+        if (currentPollutionLevel > (int)(basePollutionLevel * 0.5f) && hasChangedState == false)
         {
             if (baseState == "Offensive")
                 currentState = "Defensive";

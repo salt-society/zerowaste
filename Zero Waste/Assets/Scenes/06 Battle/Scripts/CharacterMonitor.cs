@@ -429,7 +429,7 @@ public class CharacterMonitor : MonoBehaviour
                             mutant.currentPollutionLevel = currentHealth;
                                                       
                             StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Defensive", gameObject));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.basePollutionLevel, "Defensive", gameObject));
                         }
                         else
                         {
@@ -471,7 +471,7 @@ public class CharacterMonitor : MonoBehaviour
                             }
 
                             StartCoroutine(statusManager.IncrementPollutionBar(valueChanged));
-                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.maxPollutionLevel, "Offensive", gameObject));
+                            StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), mutant.basePollutionLevel, "Offensive", gameObject));
                         }
                     }
 

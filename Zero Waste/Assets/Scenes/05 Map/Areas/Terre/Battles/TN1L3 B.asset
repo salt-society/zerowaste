@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 10
+  battleId: 12
   battleName: Terre Completed
   info: Ryleigh celebrates along with Terre
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 0b000000
+  levelIds: 0d000000
   nextScene: Cutscene

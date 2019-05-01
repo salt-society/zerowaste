@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 18
+  battleId: 20
   battleName: Ninjas?!
   info: Ryleigh and team encounter a ninja.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 13000000
+  levelIds: 15000000
   nextScene: Cutscene

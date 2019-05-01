@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 19
+  battleId: 21
   battleName: Island Center
   info: An unfamiliar sight. Water full of trash, walking in open land.
   isBossBattle: 0
@@ -28,5 +28,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 14000000
+  levelIds: 16000000
   nextScene: Battle

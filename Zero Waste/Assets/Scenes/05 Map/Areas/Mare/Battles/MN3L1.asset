@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 17
+  battleId: 19
   battleName: Riverbank
   info: The entrance to this solitary isle, surrounded by both monsters and mutants,
     giving all an unfriendly welcome.
@@ -29,5 +29,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 12000000
+  levelIds: 14000000
   nextScene: Battle

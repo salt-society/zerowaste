@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 16
+  battleId: 18
   battleName: A Boat!
   info: The Hermit gives the team a boat.
   isBossBattle: 0
@@ -29,5 +29,5 @@ MonoBehaviour:
   nextLevels:
   - Node
   - Battle
-  levelIds: 0700000011000000
+  levelIds: 0700000013000000
   nextScene: Cutscene

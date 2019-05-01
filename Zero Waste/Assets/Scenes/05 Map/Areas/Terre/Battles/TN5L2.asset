@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 9
+  battleId: 11
   battleName: Mutant Bear Confrontation
   info: A confrontation with the Mutated Bear
   isBossBattle: 1
@@ -30,5 +30,5 @@ MonoBehaviour:
   - Battle
   - Battle
   - Battle
-  levelIds: 0a000000fdfffffffcffffff
+  levelIds: 0c000000fdfffffffcffffff
   nextScene: Battle

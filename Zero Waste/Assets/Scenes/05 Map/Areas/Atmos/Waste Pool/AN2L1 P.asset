@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efe29497e5fb5ec448076db559e44e12, type: 3}
+  m_Name: AN2L1 P
+  m_EditorClassIdentifier: 
+  wastePool:
+  - {fileID: 11400000, guid: e663f2c0bf10cb84f9a6f2e5c302439e, type: 2}
+  - {fileID: 11400000, guid: 0681225e932dacd41970fe4ace6387ca, type: 2}
+  - {fileID: 11400000, guid: 9588935df7b919e4e836dace10a68cec, type: 2}
+  spawnRate: 23000000230000001e000000
+  baseLevel: 20
+  maxLevel: 21

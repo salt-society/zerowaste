@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 2
+  battleId: 3
   battleName: Picking up some Cans
   info: Multiple can-monsters litter around the outskirts of the village, waiting
     for the unwary.
@@ -29,5 +29,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 03000000
+  levelIds: 04000000
   nextScene: Battle

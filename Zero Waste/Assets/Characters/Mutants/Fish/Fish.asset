@@ -28,19 +28,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 658360c8fd51c3c499ba12bd784961fa, type: 2}
   - {fileID: 11400000, guid: 90347d104b40bb347b280f568cc90fef, type: 2}
   effects: []
-  mutantLevel: 12
-  maxPollutionLevel: 150
-  maxAtk: 80
-  maxDef: 15
-  baseScrapReward: 150
-  baseEXPReward: 150
+  basePollutionLevel: 100
+  baseAtk: 18
+  baseDef: 10
+  baseScrapReward: 20
+  baseEXPReward: 20
   baseState: Offensive
   roleWeakness: None
-  plModifier: 5
-  atkModifier: 9
-  defModifier: 1
-  expModifier: 3
-  scrapModifier: 3
+  plModifier: 10
+  atkModifier: 8
+  defModifier: 5
+  baseLevel: 0
+  maxLevel: 0
+  mutantLevel: 12
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

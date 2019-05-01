@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f23c43125ffaa8d468e2bce52ce88813, type: 3}
-  m_Name: Green Waste-Wate
+  m_Name: Green Waste-Water
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: 
@@ -28,19 +28,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e0393b0ba1a0e74db15e2409dae4c97, type: 2}
   - {fileID: 11400000, guid: bf7b597b4228a18499bc9e588f8fd3e9, type: 2}
   effects: []
-  mutantLevel: 13
-  maxPollutionLevel: 400
-  maxAtk: 25
-  maxDef: 15
-  baseScrapReward: 150
-  baseEXPReward: 150
+  basePollutionLevel: 200
+  baseAtk: 13
+  baseDef: 10
+  baseScrapReward: 20
+  baseEXPReward: 20
   baseState: Defensive
   roleWeakness: None
-  plModifier: 7
-  atkModifier: 2
-  defModifier: 1
-  expModifier: 2
-  scrapModifier: 2
+  plModifier: 16
+  atkModifier: 6
+  defModifier: 5
+  baseLevel: 0
+  maxLevel: 0
+  mutantLevel: 13
   instanceAbilities: []
   currentPollutionLevel: 0
   currentAtk: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 6
+  battleId: 8
   battleName: Not Alone in the Forest
   info: The tree husks do nothing to shelter you from the eyes of both mutants and
     monsters alike.
@@ -29,5 +29,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 07000000
+  levelIds: 09000000
   nextScene: Battle

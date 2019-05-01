@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 0
+  battleId: 1
   battleName: The First Mission
   info: Ryleigh is assigned the first mission.
   isBossBattle: 0
@@ -30,5 +30,5 @@ MonoBehaviour:
   - Area
   - Node
   - Battle
-  levelIds: 000000000000000001000000
+  levelIds: 000000000000000002000000
   nextScene: Cutscene

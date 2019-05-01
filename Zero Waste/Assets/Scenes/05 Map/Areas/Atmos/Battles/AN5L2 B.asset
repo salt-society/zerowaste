@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce43060f1c15ef242ab1d97538ee708c, type: 3}
+  m_Name: AN5L2 B
+  m_EditorClassIdentifier: 
+  nodeIcon: {fileID: 0}
+  background: {fileID: 0}
+  battleId: 46
+  battleName: The Battle Plan
+  info: Ryleigh and team discuss the plan to siege the castle.
+  isBossBattle: 0
+  isTutorial: 0
+  node: {fileID: 11400000, guid: 8f47ee1ff37a75a4a85b203dea736eea, type: 2}
+  wastePool: {fileID: 0}
+  isMajorCutscene: 1
+  cutsceneAtStart: 0
+  startCutscene: {fileID: 0}
+  cutsceneAtEnd: 0
+  endCutscene: {fileID: 0}
+  nextLevels:
+  - Battle
+  levelIds: 2f000000
+  nextScene: Cutscene

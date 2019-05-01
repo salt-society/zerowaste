@@ -19,5 +19,5 @@ MonoBehaviour:
   dialogues: []
   nextLevels:
   - Battle
-  levelIds: 1e000000
+  levelIds: 20000000
   nextScene: Map

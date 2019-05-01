@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
   background: {fileID: 0}
-  battleId: 15
+  battleId: 17
   battleName: Fishing Area
   info: Both the water and its inhabitants show the fangs of a monster about to swallow
     you whole.
@@ -29,5 +29,5 @@ MonoBehaviour:
   endCutscene: {fileID: 0}
   nextLevels:
   - Battle
-  levelIds: 10000000
+  levelIds: 12000000
   nextScene: Battle
