@@ -20,7 +20,7 @@ MonoBehaviour:
   isBossBattle: 0
   isTutorial: 0
   node: {fileID: 0}
-  wastePool: {fileID: 0}
+  wastePool: {fileID: 11400000, guid: 8bef8312f91749d469a35c03a4a76afe, type: 2}
   isMajorCutscene: 0
   cutsceneAtStart: 1
   startCutscene: {fileID: 11400000, guid: 4d6579de1608b7342a83c6392147022d, type: 2}
