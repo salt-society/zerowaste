@@ -66,6 +66,14 @@ public class BattleController : MonoBehaviour {
         }
     }
 
+    void PlayBGM()
+    {
+        if (audioManager != null)
+        {
+
+        }
+    }
+
     void CheckMode()
     {
         if (dataController != null)
