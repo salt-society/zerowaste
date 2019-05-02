@@ -16,7 +16,32 @@ MonoBehaviour:
   chapter: 
   title: Prologue 1
   firstBackground: {fileID: 0}
-  dialogues: []
+  dialogues:
+  - {fileID: 11400000, guid: a497c36127479a042ad15ccf2fa43206, type: 2}
+  - {fileID: 11400000, guid: 4552a97690237c449a58c682ee112847, type: 2}
+  - {fileID: 11400000, guid: 1f56e5708cf46274ba6b8b7b07aa424c, type: 2}
+  - {fileID: 11400000, guid: 10f4f4004c1b2234f9bffad937d6db19, type: 2}
+  - {fileID: 11400000, guid: 6a8f681d75f67f64c98706cbc972fced, type: 2}
+  - {fileID: 11400000, guid: 529b48a88a8e52745b23fd382fb3e304, type: 2}
+  - {fileID: 11400000, guid: 1d40199fba5ac8b4eb777a8079e55581, type: 2}
+  - {fileID: 11400000, guid: dbbe2a7f394dba24eb8c0ecbff63a893, type: 2}
+  - {fileID: 11400000, guid: d8e767260b889654e8e822276a214361, type: 2}
+  - {fileID: 11400000, guid: 7ca78a8e514dd1847bb3ec2ee9ef3ccf, type: 2}
+  - {fileID: 11400000, guid: 430c7c2bdff422d45bd4f2ccabdfcee4, type: 2}
+  - {fileID: 11400000, guid: 8918a32515dc0744fad9d2fc8bbf3c80, type: 2}
+  - {fileID: 11400000, guid: c15680f577d6cf64793dd1a11386761e, type: 2}
+  - {fileID: 11400000, guid: 85169c4de130cda4483feee7dcb366da, type: 2}
+  - {fileID: 11400000, guid: f13fc36d5a4bbea45a7a4873938b9f76, type: 2}
+  - {fileID: 11400000, guid: 8a38946c7e7ced64bb8d081c1fdb5fa1, type: 2}
+  - {fileID: 11400000, guid: 2ef7009873d431c4ea057785628109e5, type: 2}
+  - {fileID: 11400000, guid: 2459dbf2fefdfc8438e08cb3457538b9, type: 2}
+  - {fileID: 11400000, guid: bf58528fb38174e4d89e58f80ba44322, type: 2}
+  - {fileID: 11400000, guid: 9a1da0dfde84d754e9a5b74691fe902d, type: 2}
+  - {fileID: 11400000, guid: 85fecd3c7973563449a096790a43327e, type: 2}
+  - {fileID: 11400000, guid: 76ef00ec8167cb44aa48262586a3ef2b, type: 2}
+  - {fileID: 11400000, guid: 91040174db2adea4ca03d8f941efcd4b, type: 2}
+  - {fileID: 11400000, guid: 08c4eb7a3745b4349a3d4540583d5669, type: 2}
+  - {fileID: 11400000, guid: a55fa9b5313542747896ba5390225952, type: 2}
   nextLevels: []
   levelIds: 
   nextScene: Battle
