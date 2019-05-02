@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogueId: 7
   characterName: Dr. Cooper
   characterThumb: {fileID: 0}
-  characterHalf: {fileID: 0}
+  characterHalf: {fileID: 21300000, guid: 1511b19ca2bc7f7498a0840cdf1152ce, type: 3}
   characterSprites: []
   isCharacterLive2D: 0
   content: People tried to help... scavengers we called them. They knew how to properly

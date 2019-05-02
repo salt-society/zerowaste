@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogueId: 15
   characterName: Dr. Cooper
   characterThumb: {fileID: 0}
-  characterHalf: {fileID: 0}
+  characterHalf: {fileID: 21300000, guid: 1511b19ca2bc7f7498a0840cdf1152ce, type: 3}
   characterSprites: []
   isCharacterLive2D: 0
   content: But you just woke up Ryleigh!
