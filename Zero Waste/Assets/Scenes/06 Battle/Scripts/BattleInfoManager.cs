@@ -11,6 +11,7 @@ public class BattleInfoManager : MonoBehaviour {
     private ParticleManager particleManager;
     private CharacterManager characterManager;
     private AudioManager audioManager;
+    private BattleController battleController;
 
     private int scrapReward;
     private int expReward;
@@ -50,6 +51,7 @@ public class BattleInfoManager : MonoBehaviour {
         particleManager = FindObjectOfType<ParticleManager>();
         characterManager = FindObjectOfType<CharacterManager>();
         audioManager = FindObjectOfType<AudioManager>();
+        battleController = FindObjectOfType<BattleController>();
     }
 
     public void ShowStartAnimation(int visibility)
@@ -284,6 +286,7 @@ public class BattleInfoManager : MonoBehaviour {
         //yield return new WaitForSeconds(5.0f);
 
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        battleController.BattleEnd();
     }
 
     public IEnumerator ShowVictoryLootBox()
@@ -418,6 +421,7 @@ public class BattleInfoManager : MonoBehaviour {
         //yield return new WaitForSeconds(5.0f);
 
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        battleController.BattleEnd();
     }
 
     public IEnumerator ShowDefeatLootBox()
@@ -435,5 +439,6 @@ public class BattleInfoManager : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
 
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        battleController.BattleEnd();
     }
 }

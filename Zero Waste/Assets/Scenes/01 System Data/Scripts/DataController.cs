@@ -25,6 +25,9 @@ public class DataController : MonoBehaviour
     [Header("Player's Roster")]
     public List<Player> scavengerRoster;
 
+    [Header("Battles")]
+    public List<Battle> allBattles;
+
     [Header("Battle Inputs")]
     public Cutscene currentCutscene;
     public string targetParty;

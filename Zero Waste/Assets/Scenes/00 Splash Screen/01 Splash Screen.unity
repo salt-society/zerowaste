@@ -800,6 +800,7 @@ MonoBehaviour:
       playCount: 0
       playerName: 
       gender: Male
+      scraps: 0
       battleTutorial: 0
       zwaTutorial: 0
       mapTutorial: 0
@@ -816,6 +817,7 @@ MonoBehaviour:
     playCount: 0
     playerName: 
     gender: 
+    scraps: 0
     battleTutorial: 0
     zwaTutorial: 0
     mapTutorial: 0
@@ -833,8 +835,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b6b2bf6d7b200540a00c39a944c8b79, type: 2}
   - {fileID: 11400000, guid: c0961660f0302e043a9bc6912f24c2cd, type: 2}
   - {fileID: 11400000, guid: e797dc2a48d5cc74eb19e9f0ecb1d817, type: 2}
-  allWasteList: []
+  allWasteList:
+  - {fileID: 11400000, guid: f51534d7f9fbd3d4294a3241ac74422c, type: 2}
   scavengerRoster: []
+  allBattles:
+  - {fileID: 11400000, guid: 8fe4fce50b386fd4a8ae4cfbde4430f3, type: 2}
   currentCutscene: {fileID: 0}
   targetParty: 
   battleModifiers: []
@@ -846,7 +851,8 @@ MonoBehaviour:
   scavengerTeam: []
   scavengerCount: 0
   wasteTeam: []
-  wasteCount: 0
+  mutantCount: 0
+  boosters: []
 --- !u!4 &1915336098
 Transform:
   m_ObjectHideFlags: 0

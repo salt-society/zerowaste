@@ -1773,7 +1773,7 @@ MonoBehaviour:
   dataController: {fileID: 0}
   currentCutscene: {fileID: 0}
   cutsceneList:
-  - {fileID: 11400000, guid: 8ee8cf636bd6701419f217f1fed226b3, type: 2}
+  - {fileID: 11400000, guid: 4d6579de1608b7342a83c6392147022d, type: 2}
   dialogueManager: {fileID: 372595879}
   backgroundManager: {fileID: 1850297556}
   historyBox: {fileID: 86783251}

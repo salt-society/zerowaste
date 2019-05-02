@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 0
   characterType: Scavenger
+  gender: Male
   characterName: Ryleigh
   characterThumb: {fileID: 21300000, guid: 81d7654bfc8fc4e42845011e8d4912e8, type: 3}
   characterHalf: {fileID: 21300000, guid: 18b9f749c38a13644a0f34280a17d9e8, type: 3}
@@ -29,7 +30,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4b40e3db7e53e8543a32ea3788911a8f, type: 2}
   effects: []
   characterClass: {fileID: 11400000, guid: 0f83d17d135106346b5a5475563757cf, type: 2}
-  currentLevel: 10
+  currentLevel: 1
   baseHP: 65
   baseAnt: 100
   baseAtk: 20

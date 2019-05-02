@@ -86,7 +86,6 @@ public class EnemyAbilityManager : MonoBehaviour
 
         // Cool down chosen ability so mutants wouldn't be able to spam it
         this.ability.turnTillActive = this.ability.cooldown;
-
         ExecuteAbility();
     }
 

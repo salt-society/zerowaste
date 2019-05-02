@@ -444,7 +444,7 @@ public class DialogueManager : MonoBehaviour
 
         if (!canSkipDialogue)
         {
-            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 4");
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");
             return;
         }     
 
@@ -456,7 +456,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (dialogueFinished)
                     {
-                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");
 
                         dialogueIndex++;
                         currentDialogue = dialogues[dialogueIndex];
@@ -466,7 +466,7 @@ public class DialogueManager : MonoBehaviour
                     }
                     else
                     {
-                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 4");
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");
                         GameObject.FindObjectOfType<CustceneController>().StopAllCoroutines();
                         StopAllCoroutines();
 
@@ -477,7 +477,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (!dialogueFinished)
                     {
-                       GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+                        GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");
 
                         StopAllCoroutines();
                         DisplayFullDialogue();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleController : MonoBehaviour {
 
@@ -20,6 +21,9 @@ public class BattleController : MonoBehaviour {
     public float[] scavengerEntranceDelay;
     public float[] mutantEntranceDelay;
     public float[] renderDelay;
+
+    [Space]
+    public GameObject fadeTransition;
 
     [Space]
     private Player[] scavengerTeam;
@@ -69,7 +73,8 @@ public class BattleController : MonoBehaviour {
     {
         if (audioManager != null)
         {
-            audioManager.PlaySound(dataController.currentBattle.BGM);
+            if (!string.IsNullOrEmpty(dataController.currentBattle.BGM))
+                audioManager.PlaySound(dataController.currentBattle.BGM);
         }
     }
 
@@ -79,7 +84,8 @@ public class BattleController : MonoBehaviour {
         {
             if (dataController.currentBattle.isTutorial)
             {
-
+                CreateBattleData();
+                BattleSetup();
             }
             else
             {
@@ -89,12 +95,42 @@ public class BattleController : MonoBehaviour {
         }
     }
 
+    void CreateBattleData()
+    {
+        if (dataController != null)
+        {
+            List<Player> scavengerTemp = new List<Player>();
+            List<Enemy> mutantTemp = new List<Enemy>();
+
+            scavengerTemp.Add(dataController.scavengerRoster[0]);
+            dataController.scavengerCount = scavengerTemp.Count;
+
+            mutantTemp.Add(dataController.allWasteList[0]);
+            dataController.mutantCount = mutantTemp.Count;
+
+            mutantTemp[0].baseLevel = dataController.currentBattle.wastePool.baseLevel;
+            mutantTemp[0].maxLevel = dataController.currentBattle.wastePool.maxLevel;
+
+            scavengerTeam = new Player[scavengerTemp.Count];
+            scavengerTeam = scavengerTemp.ToArray();
+            scavengerTeam = characterManager.InstantiateCharacterData(scavengerTeam);
+            scavengerTeam = characterManager.InitializeScavengers(scavengerTeam);
+
+            mutantTeam = new Enemy[mutantTemp.Count];
+            mutantTeam = mutantTemp.ToArray();
+            mutantTeam = characterManager.InstantiateCharacterData(mutantTeam);
+
+            if (dataController.currentBattle.isBossBattle)
+                mutantTeam = characterManager.InitializeBoss(mutantTeam[0]);
+            else
+                mutantTeam = characterManager.InitializeMutants(mutantTeam);
+        }
+    }
+
     void GetBattleData()
     {
         if (dataController != null)
         {
-            dataController.CreateTeam();
-
             List<Player> scavengerTemp = new List<Player>();
             List<Enemy> mutantTemp = new List<Enemy>();
 
@@ -151,10 +187,20 @@ public class BattleController : MonoBehaviour {
             characterManager.InstantiateCharacterPrefab(mutantTeam);
 
             if (!dataController.currentBattle.isBossBattle)
-                StartCoroutine(BattleLoop());
-
-            if (dataController.currentBattle.isBossBattle)
+            {
+                if (dataController.currentBattle.isTutorial)
+                {
+                    StartCoroutine(BattleTutorialLoop());
+                }
+                else
+                {
+                    StartCoroutine(BattleLoop());
+                }
+            }
+            else if (dataController.currentBattle.isBossBattle)
+            {
                 StartCoroutine(BossBattleLoop());
+            }
         } 
     }
 
@@ -194,6 +240,7 @@ public class BattleController : MonoBehaviour {
             if (firstLoop)
             {
                 StartCoroutine(RenderBattleComponents());
+                Debug.Log(dataController.scavengerCount);
                 yield return new WaitForSeconds(renderDelay[dataController.scavengerCount - 1]);
 
                 firstLoop = false;
@@ -330,6 +377,31 @@ public class BattleController : MonoBehaviour {
             }
         }
         
+    }
+
+    IEnumerator RenderBattleTutorialComponents()
+    {
+        StartCoroutine(characterManager.ScavengersEntrance());
+        yield return new WaitForSeconds(scavengerEntranceDelay[dataController.scavengerCount - 1]);
+        StartCoroutine(characterManager.MutantEntrance());
+        yield return new WaitForSeconds(mutantEntranceDelay[dataController.mutantCount - 1]);
+
+
+    }
+
+    public IEnumerator BattleTutorialLoop()
+    {
+        if (!battleEnd)
+        {
+            if (firstLoop)
+            {
+                StartCoroutine(RenderBattleComponents());
+                Debug.Log(dataController.scavengerCount);
+                yield return new WaitForSeconds(renderDelay[dataController.scavengerCount - 1]);
+
+                firstLoop = false;
+            }
+        }
     }
 
     IEnumerator RenderBossBattleComponents()
@@ -578,6 +650,32 @@ public class BattleController : MonoBehaviour {
             battleEnd = true;
             StartCoroutine(DisplayBattleResult(false));
         }
+
+    }
+
+    public void BattleEnd()
+    {
+        if (dataController.currentBattle.cutsceneAtEnd)
+        {
+            dataController.currentCutscene = dataController.currentBattle.endCutscene;
+        }
+
+        StartCoroutine(LoadScene());
+    }
+
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
+
+        int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
+        SceneManager.LoadScene(nextSceneId);
+    }
+
+    void Update()
+    {
 
     }
 }

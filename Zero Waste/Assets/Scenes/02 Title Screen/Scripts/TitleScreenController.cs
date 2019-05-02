@@ -97,6 +97,10 @@ public class TitleScreenController : MonoBehaviour
                     // If not, repeat Prologue Cutscene
                     else
                     {
+                        // Turn of Title Screen BGM
+                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
+                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
+
                         nextSceneId = dataController.GetNextSceneId("Cutscene");
                         dataController.currentSaveData.UnlockCutscene(0, false);
                         StartCoroutine(LoadScene());

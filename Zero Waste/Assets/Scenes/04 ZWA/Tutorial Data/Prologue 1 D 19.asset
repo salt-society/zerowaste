@@ -19,7 +19,7 @@ MonoBehaviour:
   characterSprites: []
   isCharacterLive2D: 0
   content: We try to blame that doctor for making such a horrible virus... But wasn't
-    she just affected by what we all caused?
+    he just affected by what we all caused?
   isNarration: 1
   canSkip: 0
   BGM: []

@@ -30,4 +30,5 @@ public class ParticleManager : MonoBehaviour
         particlesOnLoop.Add(newParticle);
     }
 
+
 }

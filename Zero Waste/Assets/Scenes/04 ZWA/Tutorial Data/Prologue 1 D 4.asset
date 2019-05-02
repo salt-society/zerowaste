@@ -18,8 +18,8 @@ MonoBehaviour:
   characterHalf: {fileID: 0}
   characterSprites: []
   isCharacterLive2D: 0
-  content: This woman was a kind doctor, who wanted the world to be clean and green
-    for her daughter.
+  content: This man was a kind doctor, who wanted the world to be clean and green
+    for his daughter.
   isNarration: 1
   canSkip: 0
   BGM: []

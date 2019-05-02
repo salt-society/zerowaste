@@ -30,7 +30,7 @@ public class GameDataController : MonoBehaviour
                 {
                     dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
                     dataController.currentSaveData.LaunchGameDetails();
-                    PrintSaveDetails();
+                    //PrintSaveDetails();
                 }
             }
             else

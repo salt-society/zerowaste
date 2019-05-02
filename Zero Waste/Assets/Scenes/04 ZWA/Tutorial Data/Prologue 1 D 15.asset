@@ -20,7 +20,7 @@ MonoBehaviour:
   isCharacterLive2D: 0
   content: It didn't matter who you were. The trash mutants would destroy anyone in
     their way.
-  isNarration: 0
+  isNarration: 1
   canSkip: 0
   BGM: []
   startSFX: []

@@ -48,8 +48,6 @@ public class CharacterManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(this);
-
-
     }
 
     void Start()

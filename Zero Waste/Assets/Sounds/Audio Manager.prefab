@@ -44,14 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - audioClip: {fileID: 8300000, guid: 5d72f84baff14ee45888a40ce07915ca, type: 3}
+  - audioClip: {fileID: 8300000, guid: 8337cfbe220676b4ea7eaf140dc65220, type: 3}
     soundName: RPG Theme Looping
     source: {fileID: 0}
-    volume: 1
+    volume: 0.5
     pitch: 1
     spatialBlend: 0
     playOnAwake: 0
-    loopClip: 1
+    loopClip: 0
   - audioClip: {fileID: 8300000, guid: 8f783bfea3f3ad44092f137d2129bf5e, type: 3}
     soundName: Click 01
     source: {fileID: 0}
@@ -71,7 +71,7 @@ MonoBehaviour:
   - audioClip: {fileID: 8300000, guid: bc0259a9483348c47b092659af8cfb22, type: 3}
     soundName: Click 03
     source: {fileID: 0}
-    volume: 0.6
+    volume: 1
     pitch: 1
     spatialBlend: 0
     playOnAwake: 0

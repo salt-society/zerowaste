@@ -18,8 +18,8 @@ MonoBehaviour:
   characterHalf: {fileID: 0}
   characterSprites: []
   isCharacterLive2D: 0
-  content: But her neighbours didn't care... They continued polluting, and alas...
-    her daughter caught a terrible illness.
+  content: But his neighbours didn't care... They continued polluting, and alas...
+    his daughter caught a terrible illness.
   isNarration: 1
   canSkip: 0
   BGM: []
