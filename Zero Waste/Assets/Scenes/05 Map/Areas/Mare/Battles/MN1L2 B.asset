@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MN1L2 B
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: ea4b7a7fece125b4cb07f01329fa066b, type: 3}
   battleId: 23
   battleName: Mare's Treasure
   info: Ryleigh and team report about the catfish.
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 11400000, guid: 925b9786e3d58ac44a0f69706e783db1, type: 2}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels:
   - Battle
   levelIds: 18000000

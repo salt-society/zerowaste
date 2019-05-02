@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TN1L3 B
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: b9488ed09e7432b42b2581a8d033b985, type: 3}
   battleId: 12
   battleName: Terre Completed
   info: Ryleigh celebrates along with Terre
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 11400000, guid: fea8b48b5e363c34396736d35d03e2f8, type: 2}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels:
   - Battle
   levelIds: 0d000000

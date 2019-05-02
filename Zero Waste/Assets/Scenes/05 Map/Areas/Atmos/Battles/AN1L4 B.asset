@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AN1L4 B
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: ff6fe8ddd54fd154ab84368f2645decf, type: 3}
   battleId: 51
   battleName: Thanks, we'll take it from here!
   info: Ryleigh and team celebrate with Atmos.
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 11400000, guid: a2a3277c36057234db79bd4e5f505a57, type: 2}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels:
   - Battle
   levelIds: 34000000

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TN3L3
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: 309eb87cc3f60784399c88c0028425b5, type: 3}
   battleId: -2
   battleName: Outpost Cleanup
   info: Paper, plastic and can, the three most common trash.
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 0}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels: []
   levelIds: 
   nextScene: Battle

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TN5L1 B
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: 7b5188ff2f1884045971ffb650490b81, type: 3}
   battleId: 10
   battleName: Encountering the Beast
   info: Ryleigh and team find the mutated bear.
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 11400000, guid: dacadf94c9cf6364a98cb26b43548ce9, type: 2}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels:
   - Battle
   levelIds: 0b000000

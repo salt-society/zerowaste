@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TN2L2
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: e45216bc11669ae4087fedfd9c620784, type: 3}
   battleId: 4
   battleName: Village Cleanup
   info: Paper and Can Monsters team up to devour anything in sight.
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 0}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels:
   - Node
   - Battle

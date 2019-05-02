@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TN3L1 B
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: 309eb87cc3f60784399c88c0028425b5, type: 3}
   battleId: 5
   battleName: A Talk With The Rangers
   info: Ryleigh arrives at the ranger's outpost.
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 11400000, guid: 75e5c746089a05e44a3ed2b075124b8c, type: 2}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels:
   - Battle
   - Battle

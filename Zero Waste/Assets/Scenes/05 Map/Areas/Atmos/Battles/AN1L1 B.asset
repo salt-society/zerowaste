@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AN1L1 B
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: ff6fe8ddd54fd154ab84368f2645decf, type: 3}
   battleId: 31
   battleName: The Gleaming City in the Sunless Skies
   info: Ryleigh and team arrive at Atmos.
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 11400000, guid: 2fcaa686e6e8bb24aa561e49c960e628, type: 2}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: 
   nextLevels:
   - Battle
   levelIds: 20000000
