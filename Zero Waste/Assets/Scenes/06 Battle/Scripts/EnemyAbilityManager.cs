@@ -228,6 +228,7 @@ public class EnemyAbilityManager : MonoBehaviour
                 if (effect.target.Equals("HP"))
                 {
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
+                    scavMonitor.EffectsAnimation(0, effect);
                     StartCoroutine(statusManager.DecrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
                     yield return new WaitForSeconds(1f);
                     StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
@@ -249,15 +250,15 @@ public class EnemyAbilityManager : MonoBehaviour
 
                 if (effect.application.Equals("CharStats"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
                     StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
                     yield return new WaitForSeconds(effect.animationLength);
                 }
 
                 if (effect.application.Equals("Condition"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
+                    //StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
                     yield return new WaitForSeconds(effect.animationLength);
                 }
 
@@ -332,7 +333,7 @@ public class EnemyAbilityManager : MonoBehaviour
 
                 if (effect.application.Equals("CharStats"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
                     yield return new WaitForSeconds(effect.animationLength);
                     StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
                     yield return new WaitForSeconds(1f);
@@ -340,9 +341,9 @@ public class EnemyAbilityManager : MonoBehaviour
 
                 if (effect.application.Equals("Condition"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
                     yield return new WaitForSeconds(effect.animationLength);
-                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    //StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
                     yield return new WaitForSeconds(1f);
                 }
             }

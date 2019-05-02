@@ -24,8 +24,11 @@ MonoBehaviour:
   directIndex: 0
   showValue: 0
   repeatAnimation: 0
-  particleIndex: 0
+  castParticle: 0
+  customCoords: 0
+  spawnX: 0
   spawnY: 0
+  SFX: Crumpling Paper
   effects:
   - {fileID: 11400000, guid: 83c02674dcb5619498ca24f5b082464a, type: 2}
   cooldown: 0

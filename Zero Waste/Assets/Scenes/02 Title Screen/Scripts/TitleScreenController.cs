@@ -112,7 +112,7 @@ public class TitleScreenController : MonoBehaviour
         if (dataController != null)
         {
             // Play SFX
-            GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 3");
+            GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");
 
             // Gender button animation
             StartCoroutine(ChangeGender(chosenGender));

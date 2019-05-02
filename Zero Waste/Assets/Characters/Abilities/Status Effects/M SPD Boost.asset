@@ -17,13 +17,13 @@ MonoBehaviour:
   description: A moderate boost to SPD.
   target: SPD
   type: Status
-  particleIndex: 0
+  particleIndex: -1
   particleLoop: 0
   strength: 30
   state: Buff
-  application: 
+  application: Condition
   duration: 3
   turnsRemaining: 3
-  receiveAnim: 
-  effectIndex: 0
-  animationLength: 0
+  receiveAnim: Buff
+  effectIndex: 2
+  animationLength: 0.5

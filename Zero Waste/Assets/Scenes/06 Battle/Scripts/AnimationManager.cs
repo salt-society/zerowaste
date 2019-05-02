@@ -7,12 +7,14 @@ public class AnimationManager : MonoBehaviour
     private CameraManager cameraManager;
     private StatusManager statusManager;
     private ParticleManager particleManager;
+    private AudioManager audioManager;
 
     void Start()
     {
         statusManager = FindObjectOfType<StatusManager>();
         cameraManager = FindObjectOfType<CameraManager>();
         particleManager = FindObjectOfType<ParticleManager>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void PlayAnimation(Ability ability, GameObject attackerObj, GameObject targetObj, string attackerType)
@@ -77,11 +79,33 @@ public class AnimationManager : MonoBehaviour
         cameraManager.Shake(true, 2);
         attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
 
-        if (ability.particleIndex != -1)
-            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, new Vector3(attackerObj.transform.position.x, ability.spawnY)));
+        if (ability.castParticle != -1)
+        {
+            if (ability.customCoords)
+            {
+                if (ability.cCoordX)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(attackerObj.transform.position.x, ability.spawnY)));
+                }
+                else if (ability.cCoordY)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+                }
+                else
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, attackerObj.transform.position.y)));
+                }
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+            }
+        }
+
+        audioManager.PlaySound(ability.SFX);
         yield return new WaitForSeconds(1f);
 
-        targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
+        targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.toSelfDirectEffect, null);
 
         yield return new WaitForSeconds(1f);
         cameraManager.Shake(false, 2);
@@ -89,8 +113,28 @@ public class AnimationManager : MonoBehaviour
 
     public IEnumerator Charge(Ability ability, GameObject targetObj)
     {
-        StartCoroutine(particleManager.PlayParticles(ability.particleIndex, targetObj.transform.position));
+        if (ability.customCoords)
+        {
+            if (ability.cCoordX)
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(targetObj.transform.position.x, ability.spawnY)));
+            }
+            else if (ability.cCoordY)
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, targetObj.transform.position.y)));
+            }
+        }
+        else
+        {
+            StartCoroutine(particleManager.PlayParticles(ability.castParticle, targetObj.transform.position));
+        }
+
         targetObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
+        audioManager.PlaySound(ability.SFX);
         yield return new WaitForSeconds(1f);
     }
 
@@ -100,12 +144,33 @@ public class AnimationManager : MonoBehaviour
         {
             cameraManager.Shake(true, 1);
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
-            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
 
-            if (ability.withDirect)
+            if (ability.customCoords)
             {
-                StartCoroutine(particleManager.PlayParticles(ability.particleIndex, targetObj.transform.position));
-                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
+                if (ability.cCoordX)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(attackerObj.transform.position.x, ability.spawnY)));
+                }
+                else if (ability.cCoordY)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+                }
+                else
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, attackerObj.transform.position.y)));
+                }
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+            }
+
+            audioManager.PlaySound(ability.SFX);
+
+            if (ability.withDirectEffect)
+            {
+                // StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+                attackerObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.toSelfDirectEffect, null);
             }
 
             yield return new WaitForSeconds(1f);
@@ -115,11 +180,32 @@ public class AnimationManager : MonoBehaviour
         if (ability.type.Equals("Defensive"))
         {
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
-            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
+
+            if (ability.customCoords)
+            {
+                if (ability.cCoordX)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(attackerObj.transform.position.x, ability.spawnY)));
+                }
+                else if (ability.cCoordY)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+                }
+                else
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, attackerObj.transform.position.y)));
+                }
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+            }
+
+            audioManager.PlaySound(ability.SFX);
             yield return new WaitForSeconds(1f);
 
-            if (ability.withDirect)
-                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
+            if (ability.withDirectEffect)
+                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.toSelfDirectEffect, null);
         }
     }
 
@@ -129,41 +215,33 @@ public class AnimationManager : MonoBehaviour
         {
             cameraManager.Shake(true, 2);
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
-            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
 
-            if (ability.withDirect)
+            if (ability.customCoords)
             {
-                StartCoroutine(particleManager.PlayParticles(ability.particleIndex, targetObj.transform.position));
-                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
+                if (ability.cCoordX)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(attackerObj.transform.position.x, ability.spawnY)));
+                }
+                else if (ability.cCoordY)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+                }
+                else
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, attackerObj.transform.position.y)));
+                }
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
             }
 
-            yield return new WaitForSeconds(1f);
-            cameraManager.Shake(false, 1);
-        }
+            audioManager.PlaySound(ability.SFX);
 
-        if (ability.type.Equals("Defensive"))
-        {
-            attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
-            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
-            yield return new WaitForSeconds(1f);
-
-            if (ability.withDirect)
-                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
-        }
-    }
-
-    public IEnumerator Ultimate(Ability ability, GameObject attackerObj, GameObject targetObj)
-    {
-        if (ability.type.Equals("Offensive"))
-        {
-            cameraManager.Shake(true, 2);
-            attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
-            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
-
-            if (ability.withDirect)
+            if (ability.withDirectEffect)
             {
-                StartCoroutine(particleManager.PlayParticles(ability.particleIndex, targetObj.transform.position));
-                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
+                // StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+                attackerObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.toSelfDirectEffect, null);
             }
 
             yield return new WaitForSeconds(1f);
@@ -173,11 +251,102 @@ public class AnimationManager : MonoBehaviour
         if (ability.type.Equals("Defensive"))
         {
             attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
-            StartCoroutine(particleManager.PlayParticles(ability.particleIndex, attackerObj.transform.position));
+
+            if (ability.customCoords)
+            {
+                if (ability.cCoordX)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(attackerObj.transform.position.x, ability.spawnY)));
+                }
+                else if (ability.cCoordY)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+                }
+                else
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, attackerObj.transform.position.y)));
+                }
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+            }
+
+            audioManager.PlaySound(ability.SFX);
             yield return new WaitForSeconds(1f);
 
-            if (ability.withDirect)
-                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.directIndex, null);
+            if (ability.withDirectEffect)
+                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.toSelfDirectEffect, null);
+        }
+    }
+
+    public IEnumerator Ultimate(Ability ability, GameObject attackerObj, GameObject targetObj)
+    {
+        if (ability.type.Equals("Offensive"))
+        {
+            cameraManager.Shake(true, 2);
+            attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
+
+            if (ability.customCoords)
+            {
+                if (ability.cCoordX)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(attackerObj.transform.position.x, ability.spawnY)));
+                }
+                else if (ability.cCoordY)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+                }
+                else
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, attackerObj.transform.position.y)));
+                }
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+            }
+            
+            audioManager.PlaySound(ability.SFX);
+
+            if (ability.withDirectEffect)
+            {
+                // StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+                attackerObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.toSelfDirectEffect, null);
+            }
+
+            yield return new WaitForSeconds(1f);
+            cameraManager.Shake(false, 2);
+        }
+
+        if (ability.type.Equals("Defensive"))
+        {
+            attackerObj.GetComponent<CharacterMonitor>().AbilityAnimations(ability);
+            if (ability.customCoords)
+            {
+                if (ability.cCoordX)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(attackerObj.transform.position.x, ability.spawnY)));
+                }
+                else if (ability.cCoordY)
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, ability.spawnY)));
+                }
+                else
+                {
+                    StartCoroutine(particleManager.PlayParticles(ability.castParticle, new Vector2(ability.spawnX, attackerObj.transform.position.y)));
+                }
+            }
+            else
+            {
+                StartCoroutine(particleManager.PlayParticles(ability.castParticle, attackerObj.transform.position));
+            }
+
+            audioManager.PlaySound(ability.SFX);
+            yield return new WaitForSeconds(1f);
+
+            if (ability.withDirectEffect)
+                targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(ability.toSelfDirectEffect, null);
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: 10a5b2ac0f7c7a44b876a45c79b2e9a8, type: 3}
   battleId: 0
   battleName: Tutorial
   info: Learn the game!
@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 11400000, guid: 4d6579de1608b7342a83c6392147022d, type: 2}
   cutsceneAtEnd: 1
   endCutscene: {fileID: 11400000, guid: c57256f5ce6b1f64b9402a6e76f08326, type: 2}
+  BGM: RPG Theme Looping
   nextLevels:
   - Battle
   levelIds: 01000000

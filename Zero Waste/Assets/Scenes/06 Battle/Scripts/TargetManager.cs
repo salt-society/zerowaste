@@ -11,6 +11,7 @@ public class TargetManager : MonoBehaviour
     private CharacterManager characterManager;
     private AttackController attackController;
     private StatusManager statusManager;
+    private AudioManager audioManager;
     #endregion
 
     private PlayerAbilityManager abilityManager;
@@ -26,6 +27,7 @@ public class TargetManager : MonoBehaviour
         characterManager = FindObjectOfType<CharacterManager>();
         attackController = FindObjectOfType<AttackController>();
         statusManager = FindObjectOfType<StatusManager>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
    
     // <summary>
@@ -212,7 +214,16 @@ public class TargetManager : MonoBehaviour
                         if (targetObject.GetComponent<CharacterMonitor>() != null)
                         {
                             PrepareForAbilityExecution(targetObject);
+                            audioManager.PlaySound("Click 02");
                         }
+                        else
+                        {
+                            audioManager.PlaySound("Beep Denied");
+                        }
+                    }
+                    else
+                    {
+                        audioManager.PlaySound("Beep Denied");
                     }
                 }
             }

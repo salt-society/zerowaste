@@ -22,12 +22,17 @@ MonoBehaviour:
   length: 1
   type: Offensive
   range: Single
-  withDirect: 0
-  directIndex: 0
+  withDirectEffect: 0
+  toSelfDirectEffect: 0
   showValue: 0
   repeatAnimation: 0
-  particleIndex: 12
-  spawnY: 0
+  castParticle: 12
+  customCoords: 1
+  cCoordX: 0
+  spawnX: 0
+  cCoordY: 1
+  spawnY: 3
+  SFX: Attack 01
   effects:
   - {fileID: 11400000, guid: a2ccdeaca2d6d434caac024c9faeff68, type: 2}
   antRequirement: 0

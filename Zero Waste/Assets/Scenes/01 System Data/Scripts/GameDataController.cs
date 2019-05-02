@@ -24,9 +24,14 @@ public class GameDataController : MonoBehaviour
             if (dataController.GameDataExists())
             {
                 dataController.ReadGameData();
-                dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
-                dataController.currentSaveData.LaunchGameDetails();
-                PrintSaveDetails();
+
+                // Check if scavenger list is null
+                if (dataController.currentSaveData.scavengerList != null)
+                {
+                    dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
+                    dataController.currentSaveData.LaunchGameDetails();
+                    PrintSaveDetails();
+                }
             }
             else
             {

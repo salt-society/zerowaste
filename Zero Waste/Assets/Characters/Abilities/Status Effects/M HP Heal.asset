@@ -17,13 +17,13 @@ MonoBehaviour:
   description: Recover medium HP.
   target: HP
   type: Direct
-  particleIndex: 0
+  particleIndex: -1
   particleLoop: 0
   strength: 50
   state: 
   application: 
   duration: 0
   turnsRemaining: 0
-  receiveAnim: 
-  effectIndex: 0
-  animationLength: 0
+  receiveAnim: Heal
+  effectIndex: 1
+  animationLength: 1

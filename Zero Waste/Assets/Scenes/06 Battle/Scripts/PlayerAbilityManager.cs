@@ -16,6 +16,7 @@ public class PlayerAbilityManager : MonoBehaviour
     private ParticleManager particleManager;
     private CharacterManager characterManager;
     private TurnQueueManager turnQueueManager;
+    private AudioManager audioManager;
     #endregion
 
     #region Properties
@@ -74,6 +75,7 @@ public class PlayerAbilityManager : MonoBehaviour
         particleManager = FindObjectOfType<ParticleManager>();
         characterManager = FindObjectOfType<CharacterManager>();
         turnQueueManager = FindObjectOfType<TurnQueueManager>();
+        audioManager = FindObjectOfType<AudioManager>();
 
         switchingPhase = false;
     }
@@ -86,6 +88,7 @@ public class PlayerAbilityManager : MonoBehaviour
     // </summary>
     public void ChooseAbility()
     {
+        audioManager.PlaySound("Click 01");
 
         Debug.Log("Ability Chosen: " + ability.name);
         // Let attack controller know that player has chosen an ability
@@ -217,6 +220,7 @@ public class PlayerAbilityManager : MonoBehaviour
                 if (effect.target.Equals("HP"))
                 {
                     CharacterMonitor scavMonitor = targetObj.GetComponent<CharacterMonitor>();
+                    scavMonitor.EffectsAnimation(effect.effectIndex, effect);
                     StartCoroutine(statusManager.IncrementHealthBar(scavMonitor.CurrentHealth, scavMonitor.MaxHealth, scavMonitor.Position));
                     yield return new WaitForSeconds(1f);
                     StartCoroutine(statusManager.ShowValues(valueChanged.ToString(), scavMonitor.MaxHealth, ability.type, targetObj));
@@ -240,15 +244,17 @@ public class PlayerAbilityManager : MonoBehaviour
 
                 if (effect.application.Equals("CharStats"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
                     StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
                     yield return new WaitForSeconds(1f);
                 }
 
                 if (effect.application.Equals("Condition"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
+                    
+                    if(effect.particleIndex != -1)
+                        StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.transform.position));
                     yield return new WaitForSeconds(1f);
                 }
 
@@ -373,14 +379,16 @@ public class PlayerAbilityManager : MonoBehaviour
 
                 if (effect.application.Equals("CharStats"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
                     StartCoroutine(statusManager.ShowBuff(targetObj, effect.state));
                 }
 
                 if (effect.application.Equals("Condition"))
                 {
-                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(4, effect);
-                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.GetComponent<BoxCollider2D>().bounds.center));
+                    targetObj.GetComponent<CharacterMonitor>().EffectsAnimation(effect.effectIndex, effect);
+
+                    if(effect.particleIndex != -1)
+                        StartCoroutine(particleManager.PlayParticles(effect.particleIndex, targetObj.GetComponent<BoxCollider2D>().bounds.center));
                 }
                 yield return new WaitForSeconds(1f);
             }

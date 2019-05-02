@@ -22,12 +22,17 @@ MonoBehaviour:
   length: 1
   type: Offensive
   range: Single
-  withDirect: 1
-  directIndex: 0
+  withDirectEffect: 0
+  toSelfDirectEffect: 0
   showValue: 0
   repeatAnimation: 0
-  particleIndex: 0
+  castParticle: 0
+  customCoords: 0
+  cCoordX: 0
+  spawnX: 0
+  cCoordY: 0
   spawnY: 0
+  SFX: Crumpling Paper
   effects:
   - {fileID: 11400000, guid: f6652deaf81b7424bab09830fd1cc110, type: 2}
   - {fileID: 11400000, guid: e679f1652bf59bb47a91aaa6f56251ee, type: 2}

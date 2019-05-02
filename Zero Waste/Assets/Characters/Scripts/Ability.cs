@@ -20,14 +20,21 @@ public class Ability : ScriptableObject {
     public string range;
 
     [Space]
-    public bool withDirect;
-    public int directIndex;
+    public bool withDirectEffect;
+    public int toSelfDirectEffect;
     public bool showValue;
 
     [Space]
     public bool repeatAnimation;
-    public int particleIndex;
+    public int castParticle;
+    public bool customCoords;
+    public bool cCoordX;
+    public float spawnX;
+    public bool cCoordY;
     public float spawnY;
+
+    [Space]
+    public string SFX;
 
     [Header("Ability Effects")]
     public Effect[] effects;

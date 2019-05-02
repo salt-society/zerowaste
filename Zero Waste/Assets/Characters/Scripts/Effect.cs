@@ -12,6 +12,8 @@ public class Effect : ScriptableObject {
     [Space]
     public string target; // HP, ANT, ATK, DEF, SPD, PL
     public string type; // Direct | Status
+    
+    [Space]
     public int particleIndex;
     public bool particleLoop;
 

@@ -26,6 +26,7 @@ MonoBehaviour:
   startCutscene: {fileID: 0}
   cutsceneAtEnd: 0
   endCutscene: {fileID: 0}
+  BGM: RPG Theme Looping
   nextLevels:
   - Battle
   levelIds: 11000000

@@ -102,10 +102,12 @@ public class TurnQueueManager : MonoBehaviour {
             if (deadCharacterList.Contains(character.GetInstanceID()))
             {
                 queueOverlays[i].SetActive(true);
+                FindObjectOfType<AudioManager>().PlaySound("Prrrt");
             }
             else
             {
                 queueOverlays[i].SetActive(false);
+                FindObjectOfType<AudioManager>().PlaySound("Click 01");
             }
 
             queueBars[i].SetActive(true);

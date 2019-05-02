@@ -120,6 +120,7 @@ public class CharacterMonitor : MonoBehaviour
     private CameraManager cameraManager;
     private TurnQueueManager turnQueueManager;
     private BattleInfoManager battleInfoManager;
+    private AudioManager audioManager;
     #endregion
 
     void OnCollisionEnter2D(Collision2D col)
@@ -145,6 +146,7 @@ public class CharacterMonitor : MonoBehaviour
         cameraManager = FindObjectOfType<CameraManager>();
         turnQueueManager = FindObjectOfType<TurnQueueManager>();
         battleInfoManager = FindObjectOfType<BattleInfoManager>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // <summary>
@@ -542,7 +544,9 @@ public class CharacterMonitor : MonoBehaviour
             if (effect.application.Equals("Condition"))
             {
                 EffectsAnimation(effect.effectIndex, effect);
-                StartCoroutine(particleManager.PlayParticles(effect.particleIndex, gameObject.GetComponent<BoxCollider2D>().bounds.center));
+
+                if (effect.particleIndex != -1)
+                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, gameObject.GetComponent<BoxCollider2D>().bounds.center));
                 yield return new WaitForSeconds(effect.animationLength);
             }
         }
@@ -588,6 +592,8 @@ public class CharacterMonitor : MonoBehaviour
     // </summary>
     public void CharacterBattleStance()
     {
+        audioManager.PlaySound("Amulet Absorption");
+
         // Trigger fight stance animation
         if (!isDying)
         {
@@ -765,12 +771,19 @@ public class CharacterMonitor : MonoBehaviour
 
         if (characterType.Equals("Scavenger")) 
         {
+            StartCoroutine(particleManager.PlayParticles(1, new Vector2(gameObject.transform.position.x, -2)));
+            audioManager.PlaySound("Monster Hurt");
+
             turnQueueManager.CharacterDead(scavenger);
             statusManager.HideStatusPanel(position);
         }
 
         if (characterType.Equals("Mutant"))
         {
+            StartCoroutine(particleManager.PlayParticles(9, new Vector2(gameObject.transform.position.x, -2)));
+            audioManager.PlaySound("Monster Hurt");
+            audioManager.PlaySound("Monster Dead");
+
             turnQueueManager.CharacterDead(mutant);
             battleInfoManager.AddScrap(mutant.currentScrapReward);
             battleInfoManager.AddExp(mutant.currentEXPReward);
@@ -779,14 +792,17 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator CharacterDying()
     {
+        //audioManager.PlaySound("Prrrt");
+
         gameObject.GetComponent<Animator>().SetBool("Idle", false);
         yield return new WaitForSeconds(1f);
         gameObject.GetComponent<Animator>().SetBool("Dying", true);
-
     }
 
     public IEnumerator CharacterRevive()
     {
+        audioManager.PlaySound("Heal");
+
         yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<Animator>().SetBool("Dying", false);
     }
@@ -796,6 +812,22 @@ public class CharacterMonitor : MonoBehaviour
         int particleIndex = (characterType.Equals("Scavenger")) ? 1 : 2;
         StartCoroutine(particleManager.PlayParticles(particleIndex, new Vector2(gameObject.transform.position.x, -2)));
 
+        if (characterType.Equals("Scavenger"))
+        {
+            if (scavenger.gender.Equals("Male"))
+            {
+                audioManager.PlaySound("Scavenger Hurt M");
+            }
+            else
+            {
+                audioManager.PlaySound("Scavenger Hurt M");
+            }
+        }
+        else
+        {
+            audioManager.PlaySound("Monster Hurt");
+        }
+
         gameObject.GetComponent<Animator>().SetBool("Hurt", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Hurt", false);
@@ -803,7 +835,9 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Heal()
     {
-        StartCoroutine(particleManager.PlayParticles(3, new Vector2(gameObject.transform.position.x, -2)));
+        StartCoroutine(particleManager.PlayParticles(3, gameObject.transform.position));
+        StartCoroutine(particleManager.PlayParticles(4, gameObject.transform.position));
+        audioManager.PlaySound("Heal");
         gameObject.GetComponent<Animator>().SetBool("Heal", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Heal", false);
@@ -811,7 +845,8 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Buff()
     {
-        StartCoroutine(particleManager.PlayParticles(7, new Vector2(gameObject.transform.position.x, -2)));
+        StartCoroutine(particleManager.PlayParticles(7, gameObject.transform.position));
+        audioManager.PlaySound("Buff");
         gameObject.GetComponent<Animator>().SetBool("Buff", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Buff", false);
@@ -819,7 +854,8 @@ public class CharacterMonitor : MonoBehaviour
 
     public IEnumerator Debuff()
     {
-        StartCoroutine(particleManager.PlayParticles(8, new Vector2(gameObject.transform.position.x, 8)));
+        StartCoroutine(particleManager.PlayParticles(8, new Vector2(gameObject.transform.position.x, 2)));
+        audioManager.PlaySound("Debuff");
         gameObject.GetComponent<Animator>().SetBool("Debuff", true);
         yield return new WaitForSeconds(1.0f);
         gameObject.GetComponent<Animator>().SetBool("Debuff", false);

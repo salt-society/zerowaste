@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterId: 2
   characterType: Scavenger
+  gender: F
   characterName: Paige
   characterThumb: {fileID: 21300000, guid: 5585309e09bb45f409709170881760be, type: 3}
   characterHalf: {fileID: 21300000, guid: b03de0c0ec9248040a2c2b5e9a1ae021, type: 3}

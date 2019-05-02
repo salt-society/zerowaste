@@ -10,6 +10,7 @@ public class BattleInfoManager : MonoBehaviour {
     private StatusManager statusManager;
     private ParticleManager particleManager;
     private CharacterManager characterManager;
+    private AudioManager audioManager;
 
     private int scrapReward;
     private int expReward;
@@ -42,18 +43,20 @@ public class BattleInfoManager : MonoBehaviour {
     [Space]
     public GameObject fadeTransition;
 
-    void Start()
+    void Awake()
     {
         dataController = FindObjectOfType<DataController>();
         statusManager = FindObjectOfType<StatusManager>();
         particleManager = FindObjectOfType<ParticleManager>();
         characterManager = FindObjectOfType<CharacterManager>();
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public void ShowStartAnimation(int visibility)
     {
         bool showComponent = (visibility > 0) ? true : false;
         battleStart.SetActive(showComponent);
+        //audioManager.PlaySound("Prrrt");
     }
 
     public IEnumerator ShowBossAnimation(int visibility)
@@ -65,6 +68,7 @@ public class BattleInfoManager : MonoBehaviour {
             bossBattleBackground.SetActive(showComponent);
             yield return new WaitForSeconds(0.5f);
             bossBattleStart.SetActive(showComponent);
+            //audioManager.PlaySound("Prrrt");
         }
         else
         {
@@ -163,6 +167,9 @@ public class BattleInfoManager : MonoBehaviour {
 
     public IEnumerator Victory(GameObject[] scavObjs)
     {
+        StartCoroutine(audioManager.StopSound(dataController.currentBattle.BGM, 1f));
+        audioManager.PlaySound("Victory");
+
         battleResult.SetActive(true);
         victoryLabel.SetActive(true);
         yield return new WaitForSeconds(2.0f);
@@ -207,6 +214,7 @@ public class BattleInfoManager : MonoBehaviour {
                             int levelUp = charMonitor.Scavenger.currentLevel;
                             if (levelUp++ <= charMonitor.Scavenger.currentLevelCap)
                             {
+                                audioManager.PlaySound("Level Up");
                                 float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
                                 scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
                                 float leftToFill = 1f - currentExp;
@@ -231,6 +239,7 @@ public class BattleInfoManager : MonoBehaviour {
                             }
                             else
                             {
+                                audioManager.PlaySound("Good Effect");
                                 scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
                                 scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
                                 scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
@@ -238,6 +247,7 @@ public class BattleInfoManager : MonoBehaviour {
                         }
                         else
                         {
+                            audioManager.PlaySound("Good Effect");
                             float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
                             float expRewardFloat = (float)expReward / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
                             scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
@@ -256,6 +266,7 @@ public class BattleInfoManager : MonoBehaviour {
                 }
                 else
                 {
+                    audioManager.PlaySound("Max Level");
                     scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
                     scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
                     scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
@@ -269,8 +280,8 @@ public class BattleInfoManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         scavengerExp.SetActive(false);
 
-        StartCoroutine(ShowVictoryLootBox());
-        yield return new WaitForSeconds(5.0f);
+        //StartCoroutine(ShowVictoryLootBox());
+        //yield return new WaitForSeconds(5.0f);
 
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
     }
@@ -290,6 +301,9 @@ public class BattleInfoManager : MonoBehaviour {
 
     public IEnumerator DefeatWithScraps(GameObject[] scavObjs)
     {
+        StartCoroutine(audioManager.StopSound(dataController.currentBattle.BGM, 1f));
+        audioManager.PlaySound("Defeat");
+
         battleResult.SetActive(true);
         defeatLabel.SetActive(true);
         yield return new WaitForSeconds(2.0f);
@@ -334,6 +348,7 @@ public class BattleInfoManager : MonoBehaviour {
                             int levelUp = charMonitor.Scavenger.currentLevel;
                             if (levelUp++ <= charMonitor.Scavenger.currentLevelCap)
                             {
+                                audioManager.PlaySound("Level Up");
                                 float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
                                 scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
                                 float leftToFill = 1f - currentExp;
@@ -358,6 +373,7 @@ public class BattleInfoManager : MonoBehaviour {
                             }
                             else
                             {
+                                audioManager.PlaySound("Good Effect");
                                 scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
                                 scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
                                 scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL CAP";
@@ -365,6 +381,7 @@ public class BattleInfoManager : MonoBehaviour {
                         }
                         else
                         {
+                            audioManager.PlaySound("Good Effect");
                             float currentExp = (float)charMonitor.Scavenger.currentExp / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
                             float expRewardFloat = (float)expReward / (float)levelReq.expReq[charMonitor.Scavenger.currentLevel - 1];
                             scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = currentExp;
@@ -383,6 +400,7 @@ public class BattleInfoManager : MonoBehaviour {
                 }
                 else
                 {
+                    audioManager.PlaySound("Max Level");
                     scavengerExpObj[i].transform.GetChild(4).GetChild(0).GetComponent<Image>().fillAmount = 1f;
                     scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
                     scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
@@ -396,8 +414,8 @@ public class BattleInfoManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         scavengerExp.SetActive(false);
 
-        StartCoroutine(ShowVictoryLootBox());
-        yield return new WaitForSeconds(5.0f);
+        //StartCoroutine(ShowVictoryLootBox());
+        //yield return new WaitForSeconds(5.0f);
 
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
     }
@@ -409,6 +427,9 @@ public class BattleInfoManager : MonoBehaviour {
 
     public IEnumerator DefeatWithoutScrap()
     {
+        StartCoroutine(audioManager.StopSound(dataController.currentBattle.BGM, 1f));
+        audioManager.PlaySound("Defeat");
+
         battleResult.SetActive(true);
         defeatLabel.SetActive(true);
         yield return new WaitForSeconds(2.0f);

@@ -24,12 +24,17 @@ MonoBehaviour:
   length: 1
   type: Defensive
   range: Self
-  withDirect: 0
-  directIndex: 0
+  withDirectEffect: 0
+  toSelfDirectEffect: 0
   showValue: 0
   repeatAnimation: 0
-  particleIndex: 7
+  castParticle: 7
+  customCoords: 0
+  cCoordX: 0
+  spawnX: 0
+  cCoordY: 0
   spawnY: 0
+  SFX: Buff
   effects:
   - {fileID: 11400000, guid: 1c474762af3e23846b0d6d48385c25f6, type: 2}
   - {fileID: 11400000, guid: af059a9ddc3b87842883733747ef0b12, type: 2}

@@ -24,6 +24,6 @@ MonoBehaviour:
   application: 
   duration: 0
   turnsRemaining: 0
-  receiveAnim: 
-  effectIndex: 0
-  animationLength: 0
+  receiveAnim: Hurt
+  effectIndex: 1
+  animationLength: 1

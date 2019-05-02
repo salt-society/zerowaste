@@ -19,15 +19,20 @@ MonoBehaviour:
   abilityDescription: 'Skip a turn to rest and meditate. Restores
 
     ANT.'
-  length: 0
+  length: 1
   type: Defensive
   range: Self
-  withDirect: 0
-  directIndex: 0
+  withDirectEffect: 0
+  toSelfDirectEffect: 0
   showValue: 0
   repeatAnimation: 0
-  particleIndex: 6
+  castParticle: 6
+  customCoords: 0
+  cCoordX: 0
+  spawnX: 0
+  cCoordY: 0
   spawnY: 0
+  SFX: Heal
   effects:
   - {fileID: 11400000, guid: d563125eddb69db4d8c4801ceebdadf9, type: 2}
   antRequirement: 0

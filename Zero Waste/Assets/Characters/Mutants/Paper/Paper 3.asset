@@ -20,12 +20,17 @@ MonoBehaviour:
   length: 1
   type: Defensive
   range: AOE
-  withDirect: 0
-  directIndex: 0
+  withDirectEffect: 0
+  toSelfDirectEffect: 0
   showValue: 0
   repeatAnimation: 0
-  particleIndex: 11
-  spawnY: 0
+  castParticle: 11
+  customCoords: 1
+  cCoordX: 0
+  spawnX: 0
+  cCoordY: 1
+  spawnY: 2
+  SFX: Crumpling Paper
   effects:
   - {fileID: 11400000, guid: 921265983bbde3c4794d74718592cecf, type: 2}
   - {fileID: 11400000, guid: bc4fadb0b5c36844cb677b63149e3801, type: 2}

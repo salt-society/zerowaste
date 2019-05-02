@@ -261,6 +261,16 @@ public class StatusManager : MonoBehaviour
             {
                 if (!effectPanel.transform.GetChild(i).gameObject.activeInHierarchy)
                 {
+                    if (effect.state.Equals("Buff"))
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("Good Effect");
+                    }
+                    else
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("Bad Effect");
+                    }
+                    
+
                     effectPanel.transform.GetChild(i).GetChild(1).
                         gameObject.GetComponent<Image>().sprite = effect.icon;
                     effectPanel.transform.GetChild(i).gameObject.SetActive(true);
