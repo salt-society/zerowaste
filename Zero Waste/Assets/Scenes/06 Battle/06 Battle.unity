@@ -14543,9 +14543,9 @@ MonoBehaviour:
   arrowRotation:
   - {x: 0, y: 0, z: 180, w: 0}
   instructions:
-  - Click yourself.
+  - Let's try to see how you're faring up. Click your character.
   descriptions:
-  - Here is the detailed blabla of blabla
+  - Here is the detailed statistics for your scavenger.
   instructionObject: {fileID: 403413367}
   instructionXY:
   - {x: -410, y: -45}
