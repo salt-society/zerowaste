@@ -60,4 +60,5 @@ MonoBehaviour:
   - {fileID: 8592093386426763795, guid: 58d25a3305d9e504bb4bd80350541a4f, type: 3}
   - {fileID: 3990694538004022074, guid: d6dd7f356e2db0c418fdbac92197c916, type: 3}
   - {fileID: 1692215172916842446, guid: d83e3f2128edb1045a193760e79351eb, type: 3}
+  - {fileID: 141602922647117725, guid: 33ac43f9fda9e4d4c8c06f275f6b9f15, type: 3}
   particlesOnLoop: []
