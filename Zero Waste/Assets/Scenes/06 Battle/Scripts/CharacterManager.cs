@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -179,6 +180,21 @@ public class CharacterManager : MonoBehaviour {
                 mutantPrefabs[i] = mutantObject;
             }
             i++;
+        }
+    }
+
+    public void ClearMutantPrefab(int mutantTeamLength)
+    {
+        // Basic safety check
+        if(mutantPrefabs != null)
+        {
+            // Destroy all created prefabs in mutant prefabs
+            foreach (GameObject prefab in mutantPrefabs)
+                Destroy(prefab);
+
+            // Safety check again
+            if (mutantPrefabs != null)
+                Array.Clear(mutantPrefabs, 0, mutantTeamLength);
         }
     }
 

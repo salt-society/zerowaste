@@ -17,6 +17,7 @@ public class BattleInfoManager : MonoBehaviour {
     private int expReward;
 
     public GameObject battleStart;
+    public GameObject suddenInvasion;
 
     public GameObject bossBattleBackground;
     public GameObject bossBattleStart;
@@ -59,6 +60,12 @@ public class BattleInfoManager : MonoBehaviour {
         bool showComponent = (visibility > 0) ? true : false;
         battleStart.SetActive(showComponent);
         //audioManager.PlaySound("Prrrt");
+    }
+
+    public void ShowSuddenInvasion(int visibility)
+    {
+        bool showComponent = (visibility > 0) ? true : false;
+        suddenInvasion.SetActive(showComponent);
     }
 
     public IEnumerator ShowBossAnimation(int visibility)
