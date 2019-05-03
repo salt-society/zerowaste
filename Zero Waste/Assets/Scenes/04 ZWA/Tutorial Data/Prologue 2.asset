@@ -16,7 +16,35 @@ MonoBehaviour:
   chapter: 
   title: Prologue 2
   firstBackground: {fileID: 0}
-  dialogues: []
+  dialogues:
+  - {fileID: 11400000, guid: 6ea77d2784ef0374693f498a708c9a05, type: 2}
+  - {fileID: 11400000, guid: f0bba3071b94e8e49930a7936f048c9b, type: 2}
+  - {fileID: 11400000, guid: c88278c68d1c2cf49b8e9d1393ac2f6d, type: 2}
+  - {fileID: 11400000, guid: 98b99af98544d4f46b61f81bf95f0259, type: 2}
+  - {fileID: 11400000, guid: 8bce3b16da8c4a04a8d4463811b21786, type: 2}
+  - {fileID: 11400000, guid: 54fc75bd1777ba247b9fbbd7a8de2d30, type: 2}
+  - {fileID: 11400000, guid: e4943068d60e3424bb7c93ab827fd13f, type: 2}
+  - {fileID: 11400000, guid: ba24caed1d07e4e4999f958a26a65b00, type: 2}
+  - {fileID: 11400000, guid: 5417745e8f8205844b9f7dbd941c295e, type: 2}
+  - {fileID: 11400000, guid: 838804a371867784fbe3bb68a9571be1, type: 2}
+  - {fileID: 11400000, guid: f096a8c21b41cda4a91b09c4b3657526, type: 2}
+  - {fileID: 11400000, guid: 92e05815d70ece54f8189b6772282498, type: 2}
+  - {fileID: 11400000, guid: 9e0f15798a267414abec9f6f6cebd579, type: 2}
+  - {fileID: 11400000, guid: 6f263aa40bc3e1c4c92ebde9a7526214, type: 2}
+  - {fileID: 11400000, guid: b8e0ae041d889784398be99b34727919, type: 2}
+  - {fileID: 11400000, guid: a9f50f9aff8703e4da35815df050cdc5, type: 2}
+  - {fileID: 11400000, guid: 6bcdded084d6e41448f733a7063e2f5f, type: 2}
+  - {fileID: 11400000, guid: 8c122ac60b449e94b918d07b3c8624e5, type: 2}
+  - {fileID: 11400000, guid: 3867965af5fbc6e4ba8d1b5c29dea107, type: 2}
+  - {fileID: 11400000, guid: cc96433b34d9e2f45bafbd65ac708fd3, type: 2}
+  - {fileID: 11400000, guid: 2c0239a37ef1cd949b38bf0814076523, type: 2}
+  - {fileID: 11400000, guid: 3c4b65fb2a5370d4db8dafc3e5364f03, type: 2}
+  - {fileID: 11400000, guid: 4ecc07fa48e60ee41a2bd6841a941121, type: 2}
+  - {fileID: 11400000, guid: 201af28a55864c04fb21b274c2df2f45, type: 2}
+  - {fileID: 11400000, guid: 6b8b9c90488a54346aaa7c63ab2dd86e, type: 2}
+  - {fileID: 11400000, guid: e02ee6c653c0f3943b1a4864003750f0, type: 2}
+  - {fileID: 11400000, guid: f34dbcd5fb20f2946a89ad37b560dc3e, type: 2}
+  - {fileID: 11400000, guid: 37ed5ab5128e7cb4bad0467047dce0ea, type: 2}
   nextLevels:
   - Battle
   levelIds: 01000000

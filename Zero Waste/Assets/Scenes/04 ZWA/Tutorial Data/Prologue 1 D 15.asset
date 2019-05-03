@@ -27,9 +27,9 @@ MonoBehaviour:
   startSimultaneousSFX: 0
   endSFX: []
   endSimultaneousSFX: 0
-  background: {fileID: 0}
+  background: {fileID: 21300000, guid: 981a1d1007fadd04b8fbd5eebaeb0bce, type: 3}
   dialogueBoxColor: {r: 0, g: 0, b: 0, a: 0}
-  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   withChoices: 0
   choices: []
   withItem: 0

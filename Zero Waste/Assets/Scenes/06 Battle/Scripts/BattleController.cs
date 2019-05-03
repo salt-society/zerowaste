@@ -44,6 +44,8 @@ public class BattleController : MonoBehaviour {
     private bool endOfLoop;
     private bool battleEnd;
 
+    public GameObject[] demoMessage;
+
     void Start()
     {
         // Get references to battle managers
@@ -60,7 +62,7 @@ public class BattleController : MonoBehaviour {
         enemyAbilityManager = FindObjectOfType<EnemyAbilityManager>();
         
 
-        // PlayBGM();
+        PlayBGM();
         // MarkAsPlayed();
         CheckMode();
     }
@@ -869,7 +871,16 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
 
-        int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
-        SceneManager.LoadScene(nextSceneId);
+        if (dataController.currentBattle.nextScene.Equals("Demo"))
+        {
+            foreach(GameObject message in demoMessage) 
+                message.SetActive(true);
+        }
+        else
+        {
+            int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
+            SceneManager.LoadScene(nextSceneId);
+        }
+        
     }
 }

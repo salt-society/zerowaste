@@ -444,7 +444,6 @@ public class DialogueManager : MonoBehaviour
 
         if (!canSkipDialogue)
         {
-            GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");
             return;
         }     
 
