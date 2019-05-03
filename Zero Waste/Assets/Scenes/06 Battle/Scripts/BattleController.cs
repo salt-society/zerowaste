@@ -883,6 +883,7 @@ public class BattleController : MonoBehaviour {
     public IEnumerator SuddenInvasion(Enemy[] newTeam)
     {
         statusManager.pollutionBar.GetComponent<Image>().fillAmount = 1;
+        yield return new WaitForSeconds(2f);
 
         battleInfoManager.ShowSuddenInvasion(1);
         yield return new WaitForSeconds(1f);
@@ -892,6 +893,7 @@ public class BattleController : MonoBehaviour {
 
         GetBattleData(newTeam);
         BattleSetup(true);
+        characterManager.SuddenInvasion();
 
         // Go for cooper corner here
     }
@@ -911,12 +913,13 @@ public class BattleController : MonoBehaviour {
                 // If the chance is enough, create a new enemy team
                 if (spawnChance <= dataController.currentBattle.wastePool.invasionChance)
                 {
+                    Debug.Log("Sudden Invasion!");
                     Enemy[] newTeam = dataController.currentBattle.wastePool.SelectWasteFromPool();
 
                     isInvasion = true;
-                    characterManager.SuddenInvasion();
                     hasDoneInvasion = true;
 
+                    StopAllCoroutines();
                     // Coroutine here for "Sudden Invasion"
                     StartCoroutine(SuddenInvasion(newTeam));
                 }
