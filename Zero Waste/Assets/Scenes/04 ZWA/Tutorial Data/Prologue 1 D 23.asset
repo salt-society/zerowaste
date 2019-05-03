@@ -19,11 +19,12 @@ MonoBehaviour:
   characterSprites:
   - {fileID: 21300000, guid: caa3ca25983b0e741b40aeba829fea24, type: 3}
   isCharacterLive2D: 0
-  content: '*HIT*'
+  content: '...'
   isNarration: 0
   canSkip: 0
   BGM: []
-  startSFX: []
+  startSFX:
+  - Monster Hurt
   startSimultaneousSFX: 0
   endSFX: []
   endSimultaneousSFX: 0

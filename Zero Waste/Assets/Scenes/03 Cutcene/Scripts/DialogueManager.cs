@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
 
     [Space]
     public bool canSkipDialogue;
+    public bool historyOn;
 
     private Cutscene cutscene;
     private List<Dialogue> dialogues;
@@ -443,9 +444,10 @@ public class DialogueManager : MonoBehaviour
             return;
 
         if (!canSkipDialogue)
-        {
             return;
-        }     
+
+        if (historyOn)
+            return;
 
         if (Input.touchCount > 0)
         {

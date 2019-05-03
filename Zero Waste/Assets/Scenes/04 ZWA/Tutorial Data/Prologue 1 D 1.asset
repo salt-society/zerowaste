@@ -21,7 +21,8 @@ MonoBehaviour:
   content: The worst problem for us people, is that we only learn when it's too late.
   isNarration: 1
   canSkip: 0
-  BGM: []
+  BGM:
+  - Bittersweet Memory
   startSFX: []
   startSimultaneousSFX: 0
   endSFX: []

@@ -22,7 +22,8 @@ MonoBehaviour:
     who would destroy the world.
   isNarration: 1
   canSkip: 0
-  BGM: []
+  BGM:
+  - Rain
   startSFX: []
   startSimultaneousSFX: 0
   endSFX: []

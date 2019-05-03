@@ -276,3 +276,43 @@ MonoBehaviour:
     spatialBlend: 0
     playOnAwake: 0
     loopClip: 0
+  - audioClip: {fileID: 8300000, guid: e20d665f373f55b48b4555ef10e1a5d5, type: 3}
+    soundName: Rain
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1
+  - audioClip: {fileID: 8300000, guid: 74dd3a28ca30d1e4e9fcaf4580d87021, type: 3}
+    soundName: Distant Thunder
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: b8cbd76661724ea47ba3d7c2b9b20db7, type: 3}
+    soundName: Heavy Thunder
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: 91b4e5a56d90cdf41aa6f225929d8d8b, type: 3}
+    soundName: Explosion
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 0
+  - audioClip: {fileID: 8300000, guid: d39a3ecbd69db2c47bd291ececa7378b, type: 3}
+    soundName: Bittersweet Memory
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    playOnAwake: 0
+    loopClip: 1

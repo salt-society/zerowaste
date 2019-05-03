@@ -77,7 +77,7 @@ public class CustceneController : MonoBehaviour
 
         // Show history box
         historyBox.SetActive(!historyBox.activeInHierarchy);
-        dialogueManager.canSkipDialogue = !historyBox.activeInHierarchy;
+        dialogueManager.historyOn = historyBox.activeInHierarchy;
     }
 
     public void CutsceneFinished()
@@ -101,8 +101,8 @@ public class CustceneController : MonoBehaviour
                         dataController.currentCutscene.levelIds);
 
                     // Save whatever progress made
-                    dataController.SaveSaveData();
-                    dataController.SaveGameData();
+                    //dataController.SaveSaveData();
+                    //dataController.SaveGameData();
                 }
             }
             else
@@ -119,8 +119,8 @@ public class CustceneController : MonoBehaviour
                 dataController.UnlockLevels(currentCutscene.nextLevels, currentCutscene.levelIds);
 
                 // Save whatever progress made
-                dataController.SaveSaveData();
-                dataController.SaveGameData();
+                //dataController.SaveSaveData();
+                //dataController.SaveGameData();
             }
 
             // Load next scene base on cutscene's nextSceneId

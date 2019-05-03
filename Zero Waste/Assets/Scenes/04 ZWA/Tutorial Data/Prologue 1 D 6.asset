@@ -24,8 +24,10 @@ MonoBehaviour:
     like properly discarding their trash...'
   isNarration: 0
   canSkip: 0
-  BGM: []
-  startSFX: []
+  BGM:
+  - Rain
+  startSFX:
+  - Distant Thunder
   startSimultaneousSFX: 0
   endSFX: []
   endSimultaneousSFX: 0

@@ -23,7 +23,8 @@ MonoBehaviour:
   isNarration: 0
   canSkip: 0
   BGM: []
-  startSFX: []
+  startSFX:
+  - Heavy Thunder
   startSimultaneousSFX: 0
   endSFX: []
   endSimultaneousSFX: 0

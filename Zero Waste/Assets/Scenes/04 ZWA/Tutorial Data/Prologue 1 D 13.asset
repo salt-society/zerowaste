@@ -23,7 +23,10 @@ MonoBehaviour:
   isNarration: 1
   canSkip: 0
   BGM: []
-  startSFX: []
+  startSFX:
+  - Explosion
+  - Explosion
+  - Explosion
   startSimultaneousSFX: 0
   endSFX: []
   endSimultaneousSFX: 0

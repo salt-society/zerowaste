@@ -21,7 +21,8 @@ MonoBehaviour:
   content: I thought that was my time there... Maybe I was also part of the problem...
   isNarration: 1
   canSkip: 0
-  BGM: []
+  BGM:
+  - Burning
   startSFX: []
   startSimultaneousSFX: 0
   endSFX: []

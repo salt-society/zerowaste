@@ -21,7 +21,8 @@ MonoBehaviour:
   content: I prepared myself for the worst.
   isNarration: 1
   canSkip: 0
-  BGM: []
+  BGM:
+  - Bittersweet Memory
   startSFX: []
   startSimultaneousSFX: 0
   endSFX: []

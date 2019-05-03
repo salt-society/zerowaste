@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: 
   nodeIcon: {fileID: 0}
-  background: {fileID: 21300000, guid: 40bc80d3f84541d41ba780f7df77f9b2, type: 3}
+  background: {fileID: 21300000, guid: 8efc9e2ff44e7a143b92c2e630b31e17, type: 3}
   battleId: 0
   battleName: Tutorial
   info: Learn the game!

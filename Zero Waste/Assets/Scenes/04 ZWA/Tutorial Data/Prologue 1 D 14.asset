@@ -21,7 +21,8 @@ MonoBehaviour:
   content: The trash around the world turned into vile and hideous monsters.
   isNarration: 1
   canSkip: 0
-  BGM: []
+  BGM:
+  - Burning
   startSFX: []
   startSimultaneousSFX: 0
   endSFX: []
