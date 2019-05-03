@@ -44,6 +44,7 @@ public class BattleController : MonoBehaviour {
     private bool endOfLoop;
     private bool battleEnd;
     private bool isInvasion;
+    private bool hasDoneInvasion;
 
     public GameObject[] demoMessage;
 
@@ -63,6 +64,7 @@ public class BattleController : MonoBehaviour {
         enemyAbilityManager = FindObjectOfType<EnemyAbilityManager>();
 
         isInvasion = false;
+        hasDoneInvasion = false;
 
         PlayBGM();
         // MarkAsPlayed();
@@ -878,11 +880,18 @@ public class BattleController : MonoBehaviour {
         attackController.HideAttackButtons();
     }
 
-    public IEnumerator SuddenInvasion()
+    public IEnumerator SuddenInvasion(Enemy[] newTeam)
     {
+        statusManager.pollutionBar.GetComponent<Image>().fillAmount = 1;
+
         battleInfoManager.ShowSuddenInvasion(1);
         yield return new WaitForSeconds(1f);
         battleInfoManager.ShowSuddenInvasion(0);
+
+        yield return new WaitForSeconds(2f);
+
+        GetBattleData(newTeam);
+        BattleSetup(true);
 
         // Go for cooper corner here
     }
@@ -894,7 +903,7 @@ public class BattleController : MonoBehaviour {
         if (targetCharacter == 0)
         {
             // Check for Sudden Invasion
-            if(dataController.currentBattle.wastePool.hasSuddenInvasion)
+            if(dataController.currentBattle.wastePool.hasSuddenInvasion && !hasDoneInvasion)
             {
                 // If there is a sudden invasion, roll the dice to check if it will happen
                 int spawnChance = Random.Range(0, 101);
@@ -905,11 +914,11 @@ public class BattleController : MonoBehaviour {
                     Enemy[] newTeam = dataController.currentBattle.wastePool.SelectWasteFromPool();
 
                     isInvasion = true;
+                    characterManager.SuddenInvasion();
+                    hasDoneInvasion = true;
 
                     // Coroutine here for "Sudden Invasion"
-                    StartCoroutine(SuddenInvasion());
-                    GetBattleData(newTeam);
-                    BattleSetup(true);
+                    StartCoroutine(SuddenInvasion(newTeam));
                 }
 
                 else

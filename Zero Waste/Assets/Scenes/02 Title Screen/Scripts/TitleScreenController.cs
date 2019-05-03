@@ -22,6 +22,7 @@ public class TitleScreenController : MonoBehaviour
     public GameObject fadeTransition;
 
     private int nextSceneId;
+    private bool canTouchScreen;
 
     void Start()
     {
@@ -35,6 +36,20 @@ public class TitleScreenController : MonoBehaviour
 
             // Disable continue button
             continueButton.enabled = false;
+            canTouchScreen = true;
+
+        }
+    }
+
+    void Update()
+    {
+        if (canTouchScreen)
+        {
+            if (Input.touchCount == 1)
+            {
+                canTouchScreen = false;
+                StartGame();
+            }
         }
     }
 
