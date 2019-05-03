@@ -94,15 +94,14 @@ public class CustceneController : MonoBehaviour
                 {
                     // Battles can be plain cutscenes or with cutscene at start/end
                     // If a battle is a major cutscene/end cutscene, mark it finished
-                    dataController.currentSaveData.FinishedBattle(battleId);
+                    // dataController.currentSaveData.FinishedBattle(battleId);
 
                     // Unlock next level(s)
-                    dataController.UnlockLevels(dataController.currentCutscene.nextLevels,
-                        dataController.currentCutscene.levelIds);
+                    // dataController.UnlockLevels(dataController.currentCutscene.nextLevels, dataController.currentCutscene.levelIds);
 
                     // Save whatever progress made
-                    //dataController.SaveSaveData();
-                    //dataController.SaveGameData();
+                    // dataController.SaveSaveData();
+                    // dataController.SaveGameData();
                 }
             }
             else
@@ -115,12 +114,12 @@ public class CustceneController : MonoBehaviour
 
                 // Cutscenes that are not part of battles, for example, prologue/epilogue/zwa
                 // can unlock stuffs such as next level to make the game progress
-                dataController.currentSaveData.FinishedCutscene(currentCutscene.cutsceneId);
-                dataController.UnlockLevels(currentCutscene.nextLevels, currentCutscene.levelIds);
+                // dataController.currentSaveData.FinishedCutscene(currentCutscene.cutsceneId);
+                // dataController.UnlockLevels(currentCutscene.nextLevels, currentCutscene.levelIds);
 
                 // Save whatever progress made
-                //dataController.SaveSaveData();
-                //dataController.SaveGameData();
+                // dataController.SaveSaveData();
+                // dataController.SaveGameData();
             }
 
             // Load next scene base on cutscene's nextSceneId

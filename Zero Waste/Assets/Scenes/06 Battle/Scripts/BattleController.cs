@@ -263,7 +263,6 @@ public class BattleController : MonoBehaviour {
             {
                 if (loopDone)
                 {
-                    audioManager.PlaySound("Processing Turn");
                     ProcessTurn();
                     turnQueueManager.ShowPointer(0);
 
@@ -398,7 +397,10 @@ public class BattleController : MonoBehaviour {
         {
             if (firstLoop)
             {
+                yield return new WaitForSeconds(3f);
+
                 cameraManager.Shake(true, 2);
+                audioManager.PlaySound("Monster Scream");
                 StartCoroutine(characterManager.ScavengersEntrance());
                 yield return new WaitForSeconds(scavengerEntranceDelay[dataController.scavengerCount - 1]);
                 StartCoroutine(characterManager.MutantEntrance());
@@ -445,7 +447,6 @@ public class BattleController : MonoBehaviour {
                     if (totalTurnCount == 0)
                         cooperCorner.PlayTutorial(9);
 
-                    audioManager.PlaySound("Processing Turn");
                     ProcessTurn();
                     turnQueueManager.ShowPointer(0);
 
@@ -525,6 +526,7 @@ public class BattleController : MonoBehaviour {
                             yield return new WaitUntil(cooperCorner.CanProceed);
 
                             cooperCorner.PlayTutorial(16);
+                            cooperCornerObject.GetComponent<Image>().color = new Color(0, 0, 0, 0.6f);
                             yield return new WaitUntil(cooperCorner.CanProceed);
 
                             tutorialSection.SetActive(false);
@@ -873,8 +875,16 @@ public class BattleController : MonoBehaviour {
 
         if (dataController.currentBattle.nextScene.Equals("Demo"))
         {
+            audioManager.PlaySound("Cheers");
+
             foreach(GameObject message in demoMessage) 
                 message.SetActive(true);
+
+            yield return new WaitForSeconds(5f);
+
+            int nextSceneId = dataController.GetNextSceneId("Splash Screen");
+            dataController.DeleteAllData();
+            SceneManager.LoadScene(nextSceneId);
         }
         else
         {

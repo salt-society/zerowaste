@@ -209,6 +209,12 @@ public class DataController : MonoBehaviour
         Debug.Log("Saving " + currentSaveData.fileName + "...");
     }
 
+    public void DeleteAllData()
+    {
+        if (Directory.Exists(Application.persistentDataPath + "/" + saveFolderName))
+            Directory.Delete(Application.persistentDataPath + "/" + saveFolderName, true);
+    }
+
     public void AddScavenger(Player scavenger)
     {
         scavengerRoster.Add(scavenger);
@@ -419,10 +425,5 @@ public class DataController : MonoBehaviour
     public void UseScrap(int scrap)
     {
         currentSaveData.UseScrap(scrap);
-    }
-
-    public void CreateTeam()
-    {
-        wasteTeam = currentBattle.wastePool.SelectWasteFromPool();
     }
 }
