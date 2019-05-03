@@ -630,7 +630,9 @@ public class StatusManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
 
-        for (int i = 4; i <= damageTaken; i+=4)
+        int decrementDamage = (int)(damageTaken / 10);
+
+        for (int i = decrementDamage; i <= damageTaken; i+=decrementDamage)
         {
             pollutionValue.text = ((currentCombinedPL + damageTaken) - i).ToString();
             yield return null;

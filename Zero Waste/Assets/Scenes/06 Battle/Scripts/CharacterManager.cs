@@ -191,10 +191,6 @@ public class CharacterManager : MonoBehaviour {
             // Destroy all created prefabs in mutant prefabs
             foreach (GameObject prefab in mutantPrefabs)
                 Destroy(prefab);
-
-            // Safety check again
-            if (mutantPrefabs != null)
-                Array.Clear(mutantPrefabs, 0, mutantTeamLength);
         }
     }
 
@@ -340,6 +336,7 @@ public class CharacterManager : MonoBehaviour {
                     // all prefabs, which just means all characters in a team is dead
                     if(characterObject.GetInstanceID() == (characterPrefabs[characterPrefabs.Length - 1]).GetInstanceID())
                     {
+                        Debug.Log("Got Here");
                         if (targetCharacter == 1)
                         {
                             battleController.GetComponent<BattleController>().CheckBattleEnd(targetCharacter);
@@ -350,6 +347,7 @@ public class CharacterManager : MonoBehaviour {
                         {
                             battleController.GetComponent<BattleController>().CheckBattleEnd(targetCharacter);
                             allMutantsAlive = false;
+                            Debug.Log("Hello");
                         }
                     }
                 }
@@ -368,5 +366,11 @@ public class CharacterManager : MonoBehaviour {
             StartCoroutine(CheckIfCharactersAreAlive(0));
             StartCoroutine(CheckIfCharactersAreAlive(1));
         }
+    }
+
+    public void SuddenInvasion()
+    {
+        allMutantsAlive = true;
+        Debug.Log("Got Here!");
     }
 }
