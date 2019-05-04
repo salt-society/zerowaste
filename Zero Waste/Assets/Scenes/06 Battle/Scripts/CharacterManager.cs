@@ -309,7 +309,6 @@ public class CharacterManager : MonoBehaviour {
 
     IEnumerator CheckIfCharactersAreAlive(int targetCharacter) 
     {
-        Debug.Log("Still being checked");
         // Get all prefabs of certain character type
         GameObject[] characterPrefabs = (targetCharacter == 0) ? mutantPrefabs : scavengerPrefabs;
 
@@ -340,7 +339,6 @@ public class CharacterManager : MonoBehaviour {
                     // all prefabs, which just means all characters in a team is dead
                     if(characterObject.GetInstanceID() == (characterPrefabs[characterPrefabs.Length - 1]).GetInstanceID())
                     {
-                        Debug.Log("Got Here!");
                         if (targetCharacter == 1)
                         {
                             battleController.GetComponent<BattleController>().CheckBattleEnd(targetCharacter);
@@ -364,14 +362,14 @@ public class CharacterManager : MonoBehaviour {
     {
         // Constantly check lives of characters per team
         // If all characters in a team, Scavenger or Mutant, are dead, battle should end
-        if ((allMutantsAlive && allScavengersAlive) && timeDelay >= 3)
+        if ((allMutantsAlive && allScavengersAlive) && timeDelay >= 5)
         {
             StartCoroutine(CheckIfCharactersAreAlive(0));
             StartCoroutine(CheckIfCharactersAreAlive(1));
             timeDelay = 0;
         }
 
-        if (timeDelay < 3)
+        if (timeDelay < 5)
             timeDelay += Time.deltaTime;
     }
 

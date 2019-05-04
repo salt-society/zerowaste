@@ -66,6 +66,8 @@ public class BattleController : MonoBehaviour {
         isInvasion = false;
         hasDoneInvasion = false;
 
+        Time.timeScale = 1.5f;
+
         PlayBGM();
         // MarkAsPlayed();
         CheckMode();
@@ -279,7 +281,9 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(characterManager.MutantEntrance());
         yield return new WaitForSeconds(mutantEntranceDelay[dataController.mutantCount - 1]);
 
-        StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeam));
+        if(!isInvasion)
+            StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeam));
+
         StartCoroutine(statusManager.DisplayMutantStatusSection(mutantTeam));
         yield return new WaitForSeconds(3f);
 
@@ -291,6 +295,8 @@ public class BattleController : MonoBehaviour {
     // </summary>
     public IEnumerator BattleLoop()
     {
+        yield return new WaitForSeconds(2f);
+
         if (!battleEnd)
         {
             if (firstLoop)
@@ -873,24 +879,22 @@ public class BattleController : MonoBehaviour {
         battleInfoManager.CalculateResult(victory);
 
         battleInfoManager.DisplayMiddleMessage(0);
-        turnQueueManager.ShowTurnQueue(0);
-        turnQueueManager.HideTurnQueue(1);
-        statusManager.HideMutantStatusSection();
         statusManager.HideScavengerStatusSection();
-        attackController.HideAttackButtons();
     }
 
     public IEnumerator SuddenInvasion(Enemy[] newTeam)
     {
-        statusManager.pollutionBar.GetComponent<Image>().fillAmount = 1;
-        yield return new WaitForSeconds(2f);
-
         battleInfoManager.ShowSuddenInvasion(1);
         yield return new WaitForSeconds(1f);
         battleInfoManager.ShowSuddenInvasion(0);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
+        statusManager.pollutionBar.GetComponent<Image>().fillAmount = 1;
+        yield return new WaitForSeconds(1.5f);
 
+        yield return new WaitForSeconds(1.5f);
+
+        battleEnd = false;
         GetBattleData(newTeam);
         BattleSetup(true);
         characterManager.SuddenInvasion();
@@ -901,11 +905,18 @@ public class BattleController : MonoBehaviour {
     // Check if the battle has ended
     public void CheckBattleEnd(int targetCharacter)
     {
+        battleEnd = true;
+
+        turnQueueManager.ShowTurnQueue(0);
+        turnQueueManager.HideTurnQueue(1);
+        statusManager.HideMutantStatusSection();
+        attackController.HideAttackButtons();
+
         // Here all mutants are dead, which means victory
         if (targetCharacter == 0)
         {
             // Check for Sudden Invasion
-            if(dataController.currentBattle.wastePool.hasSuddenInvasion && !hasDoneInvasion)
+            if (dataController.currentBattle.wastePool.hasSuddenInvasion && !hasDoneInvasion)
             {
                 // If there is a sudden invasion, roll the dice to check if it will happen
                 int spawnChance = Random.Range(0, 101);
@@ -913,38 +924,26 @@ public class BattleController : MonoBehaviour {
                 // If the chance is enough, create a new enemy team
                 if (spawnChance <= dataController.currentBattle.wastePool.invasionChance)
                 {
-                    Debug.Log("Sudden Invasion!");
                     Enemy[] newTeam = dataController.currentBattle.wastePool.SelectWasteFromPool();
 
                     isInvasion = true;
                     hasDoneInvasion = true;
 
-                    StopAllCoroutines();
                     // Coroutine here for "Sudden Invasion"
                     StartCoroutine(SuddenInvasion(newTeam));
-                }
-
-                else
-                {
-                    battleEnd = true;
-                    StartCoroutine(DisplayBattleResult(true));
                 }
             }
 
             else
             {
-                battleEnd = true;
                 StartCoroutine(DisplayBattleResult(true));
+                Debug.Log("Got here");
             }
         }
 
         // All scavengers are dead, defeat
         if (targetCharacter == 1)
-        {
-            battleEnd = true;
             StartCoroutine(DisplayBattleResult(false));
-        }
-
     }
 
     public void BattleEnd()
