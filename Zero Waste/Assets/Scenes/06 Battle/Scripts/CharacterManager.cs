@@ -372,9 +372,4 @@ public class CharacterManager : MonoBehaviour {
         if (timeDelay < 5)
             timeDelay += Time.deltaTime;
     }
-
-    public void SuddenInvasion()
-    {
-        allMutantsAlive = true;
-    }
 }
