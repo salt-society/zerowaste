@@ -43,8 +43,6 @@ public class BattleController : MonoBehaviour {
     private bool loopDone;
     private bool endOfLoop;
     private bool battleEnd;
-    private bool isInvasion;
-    private bool hasDoneInvasion;
 
     public GameObject[] demoMessage;
 
@@ -62,9 +60,6 @@ public class BattleController : MonoBehaviour {
         attackController = FindObjectOfType<AttackController>();
         cameraManager = FindObjectOfType<CameraManager>();
         enemyAbilityManager = FindObjectOfType<EnemyAbilityManager>();
-
-        isInvasion = false;
-        hasDoneInvasion = false;
 
         Time.timeScale = 1.25f;
 
@@ -184,27 +179,6 @@ public class BattleController : MonoBehaviour {
         }
     }
 
-    void GetBattleData(Enemy[] invasionTeam)
-    {
-        if (dataController != null)
-        {
-            List<Enemy> mutantTemp = new List<Enemy>();
-
-            foreach (Enemy mutant in invasionTeam)
-            {
-                if (mutant != null)
-                    mutantTemp.Add(mutant);
-
-                dataController.mutantCount = mutantTemp.Count;
-
-                mutantTeam = new Enemy[mutantTemp.Count];
-                mutantTeam = mutantTemp.ToArray();
-                mutantTeam = characterManager.InstantiateCharacterData(mutantTeam);
-                mutantTeam = characterManager.InitializeMutants(mutantTeam);
-            }
-        }
-    }
-
     void SetDefaultFlags()
     {
         firstLoop = true;
@@ -244,20 +218,6 @@ public class BattleController : MonoBehaviour {
         } 
     }
 
-    void BattleSetup(bool continueBattle)
-    {
-        if(dataController != null)
-        {
-            SetDefaultFlags();
-
-            statusManager.SetMutantDetails(mutantTeam);
-            characterManager.ClearMutantPrefab(mutantTeam.Length);
-            characterManager.InstantiateCharacterPrefab(mutantTeam);
-
-            StartCoroutine(BattleLoop());
-        }
-    }
-
     void ProcessTurn()
     {
         turnQueueManager.CalculateTurn(scavengerTeam, mutantTeam);
@@ -272,18 +232,12 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         battleInfoManager.ShowStartAnimation(0);
 
-        if(!isInvasion)
-        {
-            StartCoroutine(characterManager.ScavengersEntrance());
-            yield return new WaitForSeconds(scavengerEntranceDelay[dataController.scavengerCount - 1]);
-        }
-        
+        StartCoroutine(characterManager.ScavengersEntrance());
+        yield return new WaitForSeconds(scavengerEntranceDelay[dataController.scavengerCount - 1]);
         StartCoroutine(characterManager.MutantEntrance());
         yield return new WaitForSeconds(mutantEntranceDelay[dataController.mutantCount - 1]);
 
-        if(!isInvasion)
-            StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeam));
-
+        StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeam));
         StartCoroutine(statusManager.DisplayMutantStatusSection(mutantTeam));
         yield return new WaitForSeconds(3f);
 
@@ -880,26 +834,10 @@ public class BattleController : MonoBehaviour {
 
         battleInfoManager.DisplayMiddleMessage(0);
         statusManager.HideScavengerStatusSection();
-    }
-
-    public IEnumerator SuddenInvasion(Enemy[] newTeam)
-    {
-        battleInfoManager.ShowSuddenInvasion(1);
-        yield return new WaitForSeconds(1f);
-        battleInfoManager.ShowSuddenInvasion(0);
-
-        yield return new WaitForSeconds(1.5f);
-        statusManager.pollutionBar.GetComponent<Image>().fillAmount = 1;
-        yield return new WaitForSeconds(1.5f);
-
-        yield return new WaitForSeconds(1.5f);
-
-        battleEnd = false;
-        GetBattleData(newTeam);
-        BattleSetup(true);
-        characterManager.SuddenInvasion();
-
-        // Go for cooper corner here
+        turnQueueManager.ShowTurnQueue(0);
+        turnQueueManager.HideTurnQueue(1);
+        statusManager.HideMutantStatusSection();
+        attackController.HideAttackButtons();
     }
 
     // Check if the battle has ended
@@ -907,39 +845,9 @@ public class BattleController : MonoBehaviour {
     {
         battleEnd = true;
 
-        turnQueueManager.ShowTurnQueue(0);
-        turnQueueManager.HideTurnQueue(1);
-        statusManager.HideMutantStatusSection();
-        attackController.HideAttackButtons();
-
         // Here all mutants are dead, which means victory
         if (targetCharacter == 0)
-        {
-            // Check for Sudden Invasion
-            if (dataController.currentBattle.wastePool.hasSuddenInvasion && !hasDoneInvasion)
-            {
-                // If there is a sudden invasion, roll the dice to check if it will happen
-                int spawnChance = Random.Range(0, 101);
-
-                // If the chance is enough, create a new enemy team
-                if (spawnChance <= dataController.currentBattle.wastePool.invasionChance)
-                {
-                    Enemy[] newTeam = dataController.currentBattle.wastePool.SelectWasteFromPool();
-
-                    isInvasion = true;
-                    hasDoneInvasion = true;
-
-                    // Coroutine here for "Sudden Invasion"
-                    StartCoroutine(SuddenInvasion(newTeam));
-                }
-            }
-
-            else
-            {
-                StartCoroutine(DisplayBattleResult(true));
-                Debug.Log("Got here");
-            }
-        }
+            StartCoroutine(DisplayBattleResult(true));
 
         // All scavengers are dead, defeat
         if (targetCharacter == 1)
@@ -981,6 +889,5 @@ public class BattleController : MonoBehaviour {
             int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
             SceneManager.LoadScene(nextSceneId);
         }
-        
     }
 }

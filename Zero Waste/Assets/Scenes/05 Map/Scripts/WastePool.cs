@@ -15,10 +15,6 @@ public class WastePool : ScriptableObject
     public int baseLevel;
     public int maxLevel;
 
-    [Header("Sudden Invasion Details")]
-    public bool hasSuddenInvasion;
-    public int invasionChance;
-
     // Function for getting the array of wastes to be spawned
     public Enemy[] SelectWasteFromPool()
     {
