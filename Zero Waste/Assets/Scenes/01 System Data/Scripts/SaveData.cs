@@ -58,6 +58,15 @@ public class SaveData {
         // Set values of game at start
         playerName = "Ryleigh Nieves";
 
+        // dictionary
+        cutscenes = new Dictionary<int, bool>();
+        areas = new Dictionary<int, bool>();
+        nodes = new Dictionary<int, bool>();
+        battles = new Dictionary<int, bool>();
+        isBattlePlayed = new Dictionary<int, bool>();
+
+        boosterList = new Dictionary<int, int>();
+
         // Ids
         currentCutsceneId = -1;
         currentAreaId = -1;

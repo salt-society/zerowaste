@@ -476,6 +476,8 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Hello");
+
                     if (!dialogueFinished)
                     {
                         GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");

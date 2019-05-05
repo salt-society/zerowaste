@@ -59,6 +59,12 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void OnApplicationQuit()
+    {
+        // TEMP
+        DeleteAllData();
+    }
+
     public void CreateGameData()
     {
         string gameDataFileName = "ZeroWaste.Game";

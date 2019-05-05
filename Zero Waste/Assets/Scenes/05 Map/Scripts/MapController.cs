@@ -45,8 +45,10 @@ public class MapController : MonoBehaviour
     public GameObject pathPrefab;
 
     [Space]
+    public List<GameObject> nodeIcons;
     public List<GameObject> nodes;
     public List<GameObject> nodeContainers;
+    public List<GameObject> nodeIconContainers;
 
     private bool mapSelectionState;
     private bool focusOnSpecificArea;
@@ -338,7 +340,7 @@ public class MapController : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
 
             // Unlock area only if its less than or equal current areas unlocked
-            if (area.areaId <= (dataController.currentSaveData.areas.Count -1))
+            if (area.areaId <= (dataController.currentSaveData.areas.Count))
             {
                 locks[area.areaId].GetComponent<Animator>().SetBool("Unlock Map", true);
                 yield return new WaitForSeconds(1.5f);
@@ -385,11 +387,12 @@ public class MapController : MonoBehaviour
                         
                     // Show node
                     // nodes is a list of node gameObjects, not the data
+                    nodeIcons[node.nodeId].SetActive(true);
                     nodes[node.nodeId].SetActive(true);
 
                     // Check if node has path
                     // Only check if node preceeds/second to the latest unlocked node
-                    if (node.hasPath && (node.nodeId == (dataController.currentSaveData.nodes.Count - 2)))
+                    if (node.hasPath && (node.nodeId <= (dataController.currentSaveData.nodes.Count - 2)))
                     {
                         // Get path gameObject and set it to true
                         nodes[node.nodeId].transform.GetChild(1).gameObject.SetActive(true);
@@ -398,6 +401,7 @@ public class MapController : MonoBehaviour
             }
 
             // Activate node container
+            nodeIconContainers[dataController.currentArea.areaId].SetActive(true);
             nodeContainers[dataController.currentArea.areaId].SetActive(true);
         }
     }
@@ -501,7 +505,7 @@ public class MapController : MonoBehaviour
 
                 // Show latest node by activating node and its container
                 nodes[node.nodeId].SetActive(true);
-                nodeContainers[dataController.currentSaveData.areas.Count - 1].SetActive(true);
+                nodeContainers[dataController.currentSaveData.areas.Count].SetActive(true);
             }
         }
     }
@@ -704,6 +708,7 @@ public class MapController : MonoBehaviour
         {
             // Increment so unlock animation wont happend again for the first node
             dataController.currentSaveData.currentNodeId++;
+            //dataController.currentSaveData.UnlockNode(0, true);
             StartCoroutine(UnlockNodeWithAnimation(dataController.currentArea.nodes[0]));
 
             // Save progress

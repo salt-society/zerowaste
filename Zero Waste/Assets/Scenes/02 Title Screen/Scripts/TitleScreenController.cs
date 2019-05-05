@@ -70,6 +70,11 @@ public class TitleScreenController : MonoBehaviour
                 // Unlock prologue, set cutscene details
                 dataController.currentSaveData.UnlockCutscene(0, false);
 
+                // temp
+                /*dataController.currentSaveData.currentNodeId = 4;
+                for (int i = 0; i < 5; i++ ) 
+                    dataController.currentSaveData.UnlockNode(i, true);*/
+
                 // Then save changes made in save file
                 dataController.SaveSaveData();
                 dataController.SaveGameData();
@@ -104,18 +109,18 @@ public class TitleScreenController : MonoBehaviour
 
                         // Since tutorials and ZWA are not yet done, temporary
                         // go straight to Map
-                        /*nextSceneId = dataController.GetNextSceneId("Map");
+                        nextSceneId = dataController.GetNextSceneId("Map");
                         StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
                         StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
-                        StartCoroutine(LoadScene());*/
+                        StartCoroutine(LoadScene());
 
                         // Turn of Title Screen BGM
-                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
+                        /*StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
                         StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
 
                         nextSceneId = dataController.GetNextSceneId("Cutscene");
                         dataController.currentSaveData.UnlockCutscene(0, false);
-                        StartCoroutine(LoadScene());
+                        StartCoroutine(LoadScene());*/
                     }
                     // If not, repeat Prologue Cutscene
                     else

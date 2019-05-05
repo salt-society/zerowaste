@@ -18,8 +18,7 @@ public class Node : ScriptableObject
     public Areas area;
 
     [Space]
-    public int battleStartIndex;
-    public int battleEndIndex;
+    public List<int> battleIds;
 
     [Space]
     public bool hasPath;

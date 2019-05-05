@@ -66,7 +66,7 @@ public class BattleController : MonoBehaviour {
         isInvasion = false;
         hasDoneInvasion = false;
 
-        Time.timeScale = 1.5f;
+        Time.timeScale = 1.25f;
 
         PlayBGM();
         // MarkAsPlayed();
@@ -446,7 +446,7 @@ public class BattleController : MonoBehaviour {
         {
             if (firstLoop)
             {
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
 
                 cameraManager.Shake(true, 2);
                 audioManager.PlaySound("Monster Scream");

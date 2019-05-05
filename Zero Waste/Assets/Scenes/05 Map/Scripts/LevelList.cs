@@ -94,17 +94,16 @@ public class LevelList : MonoBehaviour
         // Since battle id increment from first to last area, index in the loop 
         // should start with the starting index of a battle within each node
         // and end with the last battle's index. Use another counter for getting battles
-        int nodeDataIndex = 0;
-        for (int battleIndex = nodeData.battleStartIndex; battleIndex <= nodeData.battleEndIndex; battleIndex++)
+        // temporary battleIds instead of battles
+        for (int i = 0; i < nodeData.battleIds.Count; i++)
         {
             // Create prefab instance
             battleCell = Instantiate(levelCellPrefab, transform);
 
             // Set every the battle object needs to know so it can handle itself
-            battleCell.GetComponent<LevelManager>().Battle = nodeData.battles[nodeDataIndex];
-            nodeDataIndex++;
+            battleCell.GetComponent<LevelManager>().Battle = nodeData.battles[i];
 
-            battleCell.GetComponent<LevelManager>().BattleObject = battleCell; 
+            battleCell.GetComponent<LevelManager>().BattleObject = battleCell;
             battleCell.GetComponent<LevelManager>().MapController = mapController;
             battleCell.GetComponent<LevelManager>().DataController = mapController.dataController;
             battleCell.GetComponent<LevelManager>().NodeManager = nodeManager;
@@ -112,18 +111,19 @@ public class LevelList : MonoBehaviour
             battleCell.GetComponent<LevelManager>().LevelList = levelList;
 
             // Set battle/level number
+            Debug.Log(nodeData.battleIds[i]);
             battleCell.transform.GetChild(0).transform.gameObject.
-                GetComponent<TextMeshProUGUI>().text = (battleIndex + 1).ToString();
+                GetComponent<TextMeshProUGUI>().text = (i).ToString();
 
             // Battle is unlocked if Battle Id is already in Battle Dictionary
             // Make cell interactable if Battle is unlocked
-            if (dataController.currentSaveData.battles.ContainsKey(battleIndex))
+            if (dataController.currentSaveData.battles.ContainsKey(nodeData.battleIds[i]))
             {
                 battleCell.GetComponent<Button>().interactable = true;
 
                 // Battle unlock doesn't mean its finished
                 // Check if battle is done and mark it green
-                if (dataController.currentSaveData.battles[battleIndex])
+                if (dataController.currentSaveData.battles[nodeData.battleIds[i]])
                 {
                     battleCell.GetComponent<Image>().color = finishedColor;
                     battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
@@ -135,19 +135,19 @@ public class LevelList : MonoBehaviour
                 {
                     // Check if battle is already played
                     // If yes, do not repeat unlock animation
-                    if (dataController.currentSaveData.isBattlePlayed[battleIndex])
+                    if (dataController.currentSaveData.isBattlePlayed[nodeData.battleIds[i]])
                     {
                         battleCell.GetComponent<Image>().color = currentColor;
                         battleCell.transform.GetChild(0).transform.gameObject.SetActive(true);
                         battleCell.transform.GetChild(1).transform.gameObject.SetActive(false);
 
-                        Debug.Log("Battle " + battleIndex + ": Played but not yet finished.");
+                        Debug.Log("Battle " + nodeData.battleIds[i] + ": Played but not yet finished.");
                     }
                     // Always play unlock animation to remind players
                     // that that battle is still untouched
                     else
                     {
-                        Debug.Log("Battle " + battleIndex + ": Not played.");
+                        Debug.Log("Battle " + nodeData.battleIds[i] + ": Not played.");
                         cellsToUnlock.Add(battleCell);
                     }
                 }

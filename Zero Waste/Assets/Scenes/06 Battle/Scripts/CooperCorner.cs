@@ -14,7 +14,9 @@ public class CooperCorner : MonoBehaviour
     public TextMeshProUGUI talkSection;
     public string[] talks;
     public int currentTalkIndex;
-    
+
+    [Space]
+    public GameObject cantSkipIcon;
 
     [Header("Sections")]
     public SpriteMask[] sectionMasks;
@@ -106,6 +108,7 @@ public class CooperCorner : MonoBehaviour
                         else
                         {
                             FindObjectOfType<AudioManager>().PlaySound("Beep Denied");
+                            StartCoroutine(ShowCantSkipIcon());
                         }
                     }
 
@@ -124,6 +127,7 @@ public class CooperCorner : MonoBehaviour
                         else
                         {
                             FindObjectOfType<AudioManager>().PlaySound("Beep Denied");
+                            // StartCoroutine(ShowCantSkipIcon());
                         }
                     }
 
@@ -208,7 +212,7 @@ public class CooperCorner : MonoBehaviour
         sectionMasks[currentSectionIndex].gameObject.SetActive(true);
         sectionDefs[currentSectionIndex].gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         sectionFinished = true;
     }
 
@@ -281,5 +285,12 @@ public class CooperCorner : MonoBehaviour
     public bool isRaycastBlockEnabled()
     {
         return disableRaycastBlock;
+    }
+
+    public IEnumerator ShowCantSkipIcon()
+    {
+        cantSkipIcon.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        cantSkipIcon.SetActive(false);
     }
 }
