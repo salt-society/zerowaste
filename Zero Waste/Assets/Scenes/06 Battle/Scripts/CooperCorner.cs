@@ -19,6 +19,7 @@ public class CooperCorner : MonoBehaviour
     public GameObject cantSkipIcon;
 
     [Header("Sections")]
+    public GameObject[] sectionsToMask;
     public SpriteMask[] sectionMasks;
     public TextMeshProUGUI[] sectionNames;
     public TextMeshProUGUI[] sectionDefs;
@@ -42,6 +43,8 @@ public class CooperCorner : MonoBehaviour
 
     [Space]
     public GameObject tutorialSection;
+    public GameObject helpButton;
+    public GameObject guidePanel;
 
     [Space]
     public bool talkFinished;
@@ -205,8 +208,13 @@ public class CooperCorner : MonoBehaviour
     {
         HideTalk();
         HideSectionTutorial();
-
         sectionFinished = false;
+
+        if (sectionsToMask[currentSectionIndex] != null)
+        {
+            Vector2 maskPosition = Camera.main.ScreenToWorldPoint(sectionsToMask[currentSectionIndex].transform.position);
+            sectionMasks[currentSectionIndex].transform.position = maskPosition;
+        }
 
         sectionNames[currentSectionIndex].gameObject.SetActive(true);
         sectionMasks[currentSectionIndex].gameObject.SetActive(true);
@@ -292,5 +300,15 @@ public class CooperCorner : MonoBehaviour
         cantSkipIcon.SetActive(true);
         yield return new WaitForSeconds(1f);
         cantSkipIcon.SetActive(false);
+    }
+
+    public void DisplayHelpButton()
+    {
+        helpButton.SetActive(!helpButton.activeInHierarchy);
+    }
+
+    public void DisplayHelp()
+    {
+        guidePanel.SetActive(!guidePanel.activeInHierarchy);
     }
 }

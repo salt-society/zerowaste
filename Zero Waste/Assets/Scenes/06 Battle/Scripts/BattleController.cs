@@ -531,9 +531,13 @@ public class BattleController : MonoBehaviour {
                             cooperCorner.PlayTutorial(16);
                             cooperCornerObject.GetComponent<Image>().color = new Color(0, 0, 0, 0.6f);
                             yield return new WaitUntil(cooperCorner.CanProceed);
+                            //cooperCorner.DisplayHelpButton();
 
                             tutorialSection.SetActive(false);
-                            cooperCornerObject.SetActive(false);
+                            cooperCornerObject.gameObject.SetActive(false);
+                            /*cooperCornerObject.GetComponent<Image>().color = new Color(0, 0, 0, 0.6f);
+                            cooperCornerObject.GetComponent<Image>().raycastTarget = false;*/
+                            //cooperCorner.HideTalk();
                         }
 
                         attackController.ScavengerAttackSetup();
@@ -887,6 +891,7 @@ public class BattleController : MonoBehaviour {
         else
         {
             int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
+            dataController.currentBattle = dataController.allBattles[1];
             SceneManager.LoadScene(nextSceneId);
         }
     }

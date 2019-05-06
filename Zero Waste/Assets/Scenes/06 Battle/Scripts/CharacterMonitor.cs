@@ -543,11 +543,14 @@ public class CharacterMonitor : MonoBehaviour
         {
             if (effect.application.Equals("Condition"))
             {
-                EffectsAnimation(effect.effectIndex, effect);
+                if (effect.target.Equals("HP") || effect.target.Equals("ANT") || effect.target.Equals("PL"))
+                {
+                    EffectsAnimation(effect.effectIndex, effect);
 
-                if (effect.particleIndex != -1)
-                    StartCoroutine(particleManager.PlayParticles(effect.particleIndex, gameObject.GetComponent<BoxCollider2D>().bounds.center));
-                yield return new WaitForSeconds(effect.animationLength);
+                    if (effect.particleIndex != -1)
+                        StartCoroutine(particleManager.PlayParticles(effect.particleIndex, gameObject.GetComponent<BoxCollider2D>().bounds.center));
+                    yield return new WaitForSeconds(effect.animationLength);
+                }
             }
         }
 

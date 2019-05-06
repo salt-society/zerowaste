@@ -130,13 +130,16 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (dataController != null)
                     {
-                        dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
+                        dialogueBox.transform.GetChild(3).gameObject.
                                 GetComponent<Image>().sprite = dataController.scavengerRoster[0].characterHalf;
+
+                        dialogueBox.transform.GetChild(3).gameObject.
+                                GetComponent<Image>().color = new Color(255, 255, 255, 1);
 
                         yield return null;
 
-                        dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(true);
-                        dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        dialogueBox.transform.GetChild(3).gameObject.SetActive(true);
+                        dialogueBox.transform.GetChild(4).gameObject.SetActive(false);
                     }
                 }
                 else if (currentDialogue.characterName.Equals("Paige"))
@@ -146,27 +149,58 @@ public class DialogueManager : MonoBehaviour
                         dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
                                 GetComponent<Image>().sprite = dataController.scavengerRoster[1].characterHalf;
 
+                        dialogueBox.transform.GetChild(3).gameObject.
+                                GetComponent<Image>().color = new Color(255, 255, 255, 1);
+
                         yield return null;
 
-                        dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(true);
-                        dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                        dialogueBox.transform.GetChild(3).gameObject.SetActive(true);
+                        dialogueBox.transform.GetChild(4).gameObject.SetActive(false);
                     }
                 }
                 else
                 {
-                    dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(false);
-                    dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(true);
+
+                    dialogueBox.transform.GetChild(3).gameObject.
+                                GetComponent<Image>().color = new Color(0, 0, 0, 1);
+
+                    dialogueBox.transform.GetChild(3).gameObject.SetActive(true);
+                    dialogueBox.transform.GetChild(3).gameObject.SetActive(true);
                 }
             }
             else
             {
-                dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
+                dialogueBox.transform.GetChild(3).gameObject.
                     GetComponent<Image>().sprite = currentDialogue.characterHalf;
+
+                if (currentDialogue.characterName.Equals("???"))
+                {
+                    if (currentDialogue.characterHalf.name == "Paige Girl Half"
+                        || currentDialogue.characterHalf.name == "Paige Boy Half"
+                        || currentDialogue.characterHalf.name == "Doctor Good Half"
+                        || currentDialogue.characterHalf.name == "Doctor Bad Half")
+                    {
+                        dialogueBox.transform.GetChild(3).gameObject.
+                                GetComponent<Image>().color = new Color(255, 255, 255, 1);
+                    }
+                    else
+                    {
+                        dialogueBox.transform.GetChild(3).gameObject.
+                                GetComponent<Image>().color = new Color(0, 0, 0, 1);
+                    }
+                    
+                }
+                else
+                {
+                    dialogueBox.transform.GetChild(3).gameObject.
+                                GetComponent<Image>().color = new Color(255, 255, 255, 1);
+                }
+                
 
                 yield return null;
 
-                dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.SetActive(true);
-                dialogueBox.transform.GetChild(3).GetChild(0).GetChild(0).gameObject.SetActive(false);
+                dialogueBox.transform.GetChild(3).gameObject.SetActive(true);
+                dialogueBox.transform.GetChild(4).gameObject.SetActive(false);
             }
 
             dialogueBox.transform.GetChild(2).GetChild(0).GetChild(0).gameObject.
