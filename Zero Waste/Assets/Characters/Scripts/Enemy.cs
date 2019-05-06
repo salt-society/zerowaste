@@ -21,8 +21,8 @@ public class Enemy : Character {
     private int expModifier;
     private int scrapModifier;
 
-    [HideInInspector] public int baseLevel;
-    [HideInInspector] public int maxLevel;
+    public int baseLevel;
+    public int maxLevel;
     [HideInInspector] public int mutantLevel;
 
     [HideInInspector] public List<Ability> instanceAbilities;
