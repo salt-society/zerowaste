@@ -16,10 +16,16 @@ public class WastePool : ScriptableObject
     public int maxLevel;
 
     // Function for getting the array of wastes to be spawned
-    public Enemy[] SelectWasteFromPool()
+    public Enemy[] SelectWasteFromPool(Battle battle)
     {
         // First find how many wastes will be spawned
-        int numberOfWastes = NumberOfWastes();
+        int numberOfWastes;
+
+        if (battle.isBossBattle)
+            numberOfWastes = 1;
+
+        else
+            numberOfWastes = NumberOfWastes();
 
         Enemy[] wasteTeam = new Enemy[numberOfWastes];
 

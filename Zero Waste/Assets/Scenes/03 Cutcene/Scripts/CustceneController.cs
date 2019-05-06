@@ -112,6 +112,11 @@ public class CustceneController : MonoBehaviour
                     dataController.currentBattle = dataController.allBattles[0];
                 }
 
+                if (currentCutscene.cutsceneId == 1)
+                {
+                    dataController.currentBattle = dataController.allBattles[1];
+                }
+
                 // Cutscenes that are not part of battles, for example, prologue/epilogue/zwa
                 // can unlock stuffs such as next level to make the game progress
                 // dataController.currentSaveData.FinishedCutscene(currentCutscene.cutsceneId);
