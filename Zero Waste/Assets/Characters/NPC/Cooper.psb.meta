@@ -1,0 +1,1199 @@
+fileFormatVersion: 2
+guid: c7430abe71374aa49ac559c79d456f57
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: Book_GO/Book_GO
+    100002: Book_GO/Book_GO/Book
+    100004: Book_GO/Book_GO/Cloak Back
+    100006: Book_GO/Book_GO/Cloak Right
+    100008: Book_GO/Book_GO/Cloak Right Back
+    100010: Book_GO/Book_GO/Clock Left
+    100012: Book_GO/Book_GO/Head
+    100014: Book_GO/Book_GO/Left Ankle
+    100016: Book_GO/Book_GO/Left Collar
+    100018: Book_GO/Book_GO/Left Foot
+    100020: Book_GO/Book_GO/Left Hand
+    100022: Book_GO/Book_GO/Left Lower Arm
+    100024: Book_GO/Book_GO/Left Ribbon
+    100026: Book_GO/Book_GO/Left Upper Arm
+    100028: Book_GO/Book_GO/Left Upper Leg
+    100030: Book_GO/Book_GO/Lower Left Leg
+    100032: Book_GO/Book_GO/Lower Right Leg
+    100034: Book_GO/Book_GO/Lower Torso
+    100036: Book_GO/Book_GO/Neck
+    100038: Book_GO/Book_GO/Neck Ribbon
+    100040: Book_GO/Book_GO/Pendant
+    100042: Book_GO/Book_GO/Right Ankle
+    100044: Book_GO/Book_GO/Right Foot
+    100046: Book_GO/Book_GO/Right Hand
+    100048: Book_GO/Book_GO/Right Lower Arm
+    100050: Book_GO/Book_GO/Right Ribbon
+    100052: Book_GO/Book_GO/Right Upper Arm
+    100054: Book_GO/Book_GO/Right Upper Leg
+    100056: Book_GO/Book_GO/Robe Back
+    100058: Book_GO/Book_GO/Robe Back Right
+    100060: Book_GO/Book_GO/Robe Front Right
+    100062: Book_GO/Book_GO/Robe Left Front
+    100064: Book_GO/Book_GO/Shawl Left
+    100066: Book_GO/Book_GO/Shawl Right
+    100068: Book_GO/Book_GO/Torso
+    400000: Book_GO/Book_GO/Transform
+    400002: Book_GO/Book_GO/Book/Transform
+    400004: Book_GO/Book_GO/Cloak Back/Transform
+    400006: Book_GO/Book_GO/Cloak Right/Transform
+    400008: Book_GO/Book_GO/Cloak Right Back/Transform
+    400010: Book_GO/Book_GO/Clock Left/Transform
+    400012: Book_GO/Book_GO/Head/Transform
+    400014: Book_GO/Book_GO/Left Ankle/Transform
+    400016: Book_GO/Book_GO/Left Collar/Transform
+    400018: Book_GO/Book_GO/Left Foot/Transform
+    400020: Book_GO/Book_GO/Left Hand/Transform
+    400022: Book_GO/Book_GO/Left Lower Arm/Transform
+    400024: Book_GO/Book_GO/Left Ribbon/Transform
+    400026: Book_GO/Book_GO/Left Upper Arm/Transform
+    400028: Book_GO/Book_GO/Left Upper Leg/Transform
+    400030: Book_GO/Book_GO/Lower Left Leg/Transform
+    400032: Book_GO/Book_GO/Lower Right Leg/Transform
+    400034: Book_GO/Book_GO/Lower Torso/Transform
+    400036: Book_GO/Book_GO/Neck/Transform
+    400038: Book_GO/Book_GO/Neck Ribbon/Transform
+    400040: Book_GO/Book_GO/Pendant/Transform
+    400042: Book_GO/Book_GO/Right Ankle/Transform
+    400044: Book_GO/Book_GO/Right Foot/Transform
+    400046: Book_GO/Book_GO/Right Hand/Transform
+    400048: Book_GO/Book_GO/Right Lower Arm/Transform
+    400050: Book_GO/Book_GO/Right Ribbon/Transform
+    400052: Book_GO/Book_GO/Right Upper Arm/Transform
+    400054: Book_GO/Book_GO/Right Upper Leg/Transform
+    400056: Book_GO/Book_GO/Robe Back/Transform
+    400058: Book_GO/Book_GO/Robe Back Right/Transform
+    400060: Book_GO/Book_GO/Robe Front Right/Transform
+    400062: Book_GO/Book_GO/Robe Left Front/Transform
+    400064: Book_GO/Book_GO/Shawl Left/Transform
+    400066: Book_GO/Book_GO/Shawl Right/Transform
+    400068: Book_GO/Book_GO/Torso/Transform
+    2800000: Cooper
+    21200000: Book_GO/Book_GO/Book/SpriteRenderer
+    21200002: Book_GO/Book_GO/Cloak Back/SpriteRenderer
+    21200004: Book_GO/Book_GO/Cloak Right/SpriteRenderer
+    21200006: Book_GO/Book_GO/Cloak Right Back/SpriteRenderer
+    21200008: Book_GO/Book_GO/Clock Left/SpriteRenderer
+    21200010: Book_GO/Book_GO/Head/SpriteRenderer
+    21200012: Book_GO/Book_GO/Left Ankle/SpriteRenderer
+    21200014: Book_GO/Book_GO/Left Collar/SpriteRenderer
+    21200016: Book_GO/Book_GO/Left Foot/SpriteRenderer
+    21200018: Book_GO/Book_GO/Left Hand/SpriteRenderer
+    21200020: Book_GO/Book_GO/Left Lower Arm/SpriteRenderer
+    21200022: Book_GO/Book_GO/Left Ribbon/SpriteRenderer
+    21200024: Book_GO/Book_GO/Left Upper Arm/SpriteRenderer
+    21200026: Book_GO/Book_GO/Left Upper Leg/SpriteRenderer
+    21200028: Book_GO/Book_GO/Lower Left Leg/SpriteRenderer
+    21200030: Book_GO/Book_GO/Lower Right Leg/SpriteRenderer
+    21200032: Book_GO/Book_GO/Lower Torso/SpriteRenderer
+    21200034: Book_GO/Book_GO/Neck/SpriteRenderer
+    21200036: Book_GO/Book_GO/Neck Ribbon/SpriteRenderer
+    21200038: Book_GO/Book_GO/Pendant/SpriteRenderer
+    21200040: Book_GO/Book_GO/Right Ankle/SpriteRenderer
+    21200042: Book_GO/Book_GO/Right Foot/SpriteRenderer
+    21200044: Book_GO/Book_GO/Right Hand/SpriteRenderer
+    21200046: Book_GO/Book_GO/Right Lower Arm/SpriteRenderer
+    21200048: Book_GO/Book_GO/Right Ribbon/SpriteRenderer
+    21200050: Book_GO/Book_GO/Right Upper Arm/SpriteRenderer
+    21200052: Book_GO/Book_GO/Right Upper Leg/SpriteRenderer
+    21200054: Book_GO/Book_GO/Robe Back/SpriteRenderer
+    21200056: Book_GO/Book_GO/Robe Back Right/SpriteRenderer
+    21200058: Book_GO/Book_GO/Robe Front Right/SpriteRenderer
+    21200060: Book_GO/Book_GO/Robe Left Front/SpriteRenderer
+    21200062: Book_GO/Book_GO/Shawl Left/SpriteRenderer
+    21200064: Book_GO/Book_GO/Shawl Right/SpriteRenderer
+    21200066: Book_GO/Book_GO/Torso/SpriteRenderer
+    21300000: Cloak Right
+    21300002: Right Lower Arm
+    21300004: Right Upper Arm
+    21300006: Right Hand
+    21300008: Shawl Right
+    21300010: Pendant
+    21300012: Right Ribbon
+    21300014: Left Ribbon
+    21300016: Neck Ribbon
+    21300018: Shawl Left
+    21300020: Torso
+    21300022: Lower Torso
+    21300024: Neck
+    21300026: Head
+    21300028: Clock Left
+    21300030: Left Collar
+    21300032: Left Lower Arm
+    21300034: Left Upper Arm
+    21300036: Left Hand
+    21300038: Cloak Right Back
+    21300040: Robe Left Front
+    21300042: Robe Front Right
+    21300044: Robe Back Right
+    21300046: Lower Right Leg
+    21300048: Lower Left Leg
+    21300050: Right Foot
+    21300052: Left Foot
+    21300054: Right Ankle
+    21300056: Right Upper Leg
+    21300058: Left Ankle
+    21300060: Left Upper Leg
+    21300062: Robe Back
+    21300064: Cloak Back
+    21300066: Book
+    100100000: Book_GO
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    isReadable: 0
+    streamingMipmaps: 1
+    streamingMipmapsPriority: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+  spriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 0, y: 0}
+  mosaicSpriteImportData: []
+  rigSpriteImportData:
+  - name: Cloak Right
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 286
+      y: 4
+      width: 169
+      height: 178
+    spriteID: 00c727fea447b9a48b78358f35005182
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 71, y: -272}
+  - name: Right Lower Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 612
+      y: 432
+      width: 59
+      height: 69
+    spriteID: 99c57ac3f3f20634ba53c3925611efe8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 387, y: 163}
+  - name: Right Upper Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 478
+      y: 537
+      width: 54
+      height: 129
+    spriteID: 97405fe971c61fa439209cae21522899
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 260, y: 219}
+  - name: Right Hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 347
+      y: 190
+      width: 53
+      height: 44
+    spriteID: 46d6a1df8f216ca458284982d0f4ecdf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 111, y: -48}
+  - name: Shawl Right
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 537
+      width: 138
+      height: 281
+    spriteID: 8db3063dfc7de714a8fba172b12395ec
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -140, y: 431}
+  - name: Pendant
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 540
+      y: 654
+      width: 19
+      height: 22
+    spriteID: 03b5fa4ef2e048542a2e082cba4d8300
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 352, y: 208}
+  - name: Right Ribbon
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 610
+      y: 537
+      width: 34
+      height: 80
+    spriteID: aa5f15c0c33b5a2499f90f36e1be314c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 421, y: 163}
+  - name: Left Ribbon
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 227
+      y: 698
+      width: 48
+      height: 96
+    spriteID: c1c5f1ea5cdd4ea449daddcec52163c5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 83, y: 337}
+  - name: Neck Ribbon
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 463
+      y: 222
+      width: 28
+      height: 15
+    spriteID: e7b0c381dd3e5f647bc72043728a491a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 261, y: -235}
+  - name: Shawl Left
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 816
+      y: 4
+      width: 99
+      height: 225
+    spriteID: cdcd083a279cb61428e6e39edb2156d1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 756, y: -165}
+  - name: Torso
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 289
+      y: 537
+      width: 106
+      height: 143
+    spriteID: e624e51f53d7329489a768d5ec41f46b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 141, y: 200}
+  - name: Lower Torso
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 701
+      y: 245
+      width: 174
+      height: 230
+    spriteID: 44984047232e4074c9dc8614e4a2d184
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 616, y: 52}
+  - name: Neck
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 463
+      y: 181
+      width: 31
+      height: 33
+    spriteID: 626af135d735fa8498363568ba3d51c6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 271, y: -275}
+  - name: Head
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 274
+      height: 233
+    spriteID: 43a82e4018a5b204a92fb269d01368af
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -67, y: -450}
+  - name: Clock Left
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 150
+      y: 537
+      width: 131
+      height: 153
+    spriteID: 669db5031ef48d84996cc2be5bec52c6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 108, y: 270}
+  - name: Left Collar
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 1002
+      y: 4
+      width: 18
+      height: 69
+    spriteID: 31912d14b95d95b49a08611b20d15358
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 865, y: -365}
+  - name: Left Lower Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 533
+      y: 432
+      width: 71
+      height: 74
+    spriteID: 0547d738a6e01a144b61cf62a0de11d6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 445, y: 153}
+  - name: Left Upper Arm
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 923
+      y: 4
+      width: 71
+      height: 126
+    spriteID: 455ca1e3b363a0347952fd06ed117b7d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 810, y: -323}
+  - name: Left Hand
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 286
+      y: 190
+      width: 53
+      height: 45
+    spriteID: 8693f4d814d410d4aa0d336ff55326c9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 209, y: -65}
+  - name: Cloak Right Back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 463
+      y: 4
+      width: 169
+      height: 169
+    spriteID: 8b763b00ba586584cbf972f1b02ceabf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 247, y: -275}
+  - name: Robe Left Front
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 883
+      y: 245
+      width: 119
+      height: 203
+    spriteID: 15eae5c81e1d36d41bdb7a157a1a31a0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 883, y: 180}
+  - name: Robe Front Right
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 245
+      width: 220
+      height: 284
+    spriteID: 363c1c465d624784aa5d2d86b30506a4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -204, y: 199}
+  - name: Robe Back Right
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 232
+      y: 245
+      width: 220
+      height: 284
+    spriteID: 66e8339e11d353e41845480cd99c9803
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 26, y: 198}
+  - name: Lower Right Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 883
+      y: 456
+      width: 51
+      height: 62
+    spriteID: cb9b8f352629c824c9c24c982968820e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 684, y: 367}
+  - name: Lower Left Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 942
+      y: 456
+      width: 54
+      height: 51
+    spriteID: d7ca7754e126f974686d58de8e04a899
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 820, y: 360}
+  - name: Right Foot
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 923
+      y: 138
+      width: 78
+      height: 90
+    spriteID: cba141caece75cf45b0878e9a2f2eefb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 732, y: 138}
+  - name: Left Foot
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 460
+      y: 432
+      width: 65
+      height: 85
+    spriteID: 4e81bcd6116a2f3449b4d726ace837c9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 354, y: 426}
+  - name: Right Ankle
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 408
+      y: 190
+      width: 29
+      height: 47
+    spriteID: 0da3683ea9bddad4fb1752765c04b367
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 193, y: 129}
+  - name: Right Upper Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 150
+      y: 698
+      width: 69
+      height: 119
+    spriteID: e88b81afd09e9684fa033b47bc437136
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: -26, y: 567}
+  - name: Left Ankle
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 502
+      y: 181
+      width: 27
+      height: 35
+    spriteID: 78e7a7d70466120429438bd2c769430b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 367, y: 109}
+  - name: Left Upper Leg
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 540
+      y: 537
+      width: 62
+      height: 109
+    spriteID: c9acdcdd5441e8a4ea3d8aa384836bf2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 424, y: 403}
+  - name: Robe Back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 460
+      y: 245
+      width: 233
+      height: 179
+    spriteID: cf465cecc73a30643a1820cc5e68f8f2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 455, y: 140}
+  - name: Cloak Back
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 640
+      y: 4
+      width: 168
+      height: 150
+    spriteID: 21bda4967caa83f4b829ee858b9569f1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 514, y: -323}
+  - name: Book
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 403
+      y: 537
+      width: 67
+      height: 110
+    spriteID: 93c9b2a1cb56c6247a31392bd10f4283
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    parentGroupIndex: -1
+    uvTransform: {x: 367, y: 357}
+  platformSettings: []
+  mosaicLayers: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  importedTextureWidth: 1024
+  importedTextureHeight: 1024
+  documentSize: {x: 431, y: 687}
+  textureActualWidth: 1024
+  textureActualHeight: 1024
+  spritePackingTag: 
+  resliceFromLayer: 0
+  characterMode: 1
+  mosaicPSDLayers: []
+  rigPSDLayers:
+  - name: Cloak Right
+    spriteName: Cloak Right
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 00c727fea447b9a48b78358f35005182
+    layerID: 196
+    mosaicPosition: {x: 286, y: 4}
+  - name: Right Lower Arm
+    spriteName: Right Lower Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 99c57ac3f3f20634ba53c3925611efe8
+    layerID: 190
+    mosaicPosition: {x: 612, y: 432}
+  - name: Right Upper Arm
+    spriteName: Right Upper Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 97405fe971c61fa439209cae21522899
+    layerID: 186
+    mosaicPosition: {x: 478, y: 537}
+  - name: Right Hand
+    spriteName: Right Hand
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 46d6a1df8f216ca458284982d0f4ecdf
+    layerID: 181
+    mosaicPosition: {x: 347, y: 190}
+  - name: Shawl Right
+    spriteName: Shawl Right
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8db3063dfc7de714a8fba172b12395ec
+    layerID: 178
+    mosaicPosition: {x: 4, y: 537}
+  - name: Pendant
+    spriteName: Pendant
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 03b5fa4ef2e048542a2e082cba4d8300
+    layerID: 172
+    mosaicPosition: {x: 540, y: 654}
+  - name: Right Ribbon
+    spriteName: Right Ribbon
+    isGroup: 0
+    parentIndex: -1
+    spriteID: aa5f15c0c33b5a2499f90f36e1be314c
+    layerID: 168
+    mosaicPosition: {x: 610, y: 537}
+  - name: Left Ribbon
+    spriteName: Left Ribbon
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c1c5f1ea5cdd4ea449daddcec52163c5
+    layerID: 164
+    mosaicPosition: {x: 227, y: 698}
+  - name: Neck Ribbon
+    spriteName: Neck Ribbon
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e7b0c381dd3e5f647bc72043728a491a
+    layerID: 160
+    mosaicPosition: {x: 463, y: 222}
+  - name: Shawl Left
+    spriteName: Shawl Left
+    isGroup: 0
+    parentIndex: -1
+    spriteID: cdcd083a279cb61428e6e39edb2156d1
+    layerID: 156
+    mosaicPosition: {x: 816, y: 4}
+  - name: Torso
+    spriteName: Torso
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e624e51f53d7329489a768d5ec41f46b
+    layerID: 152
+    mosaicPosition: {x: 289, y: 537}
+  - name: Lower Torso
+    spriteName: Lower Torso
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 44984047232e4074c9dc8614e4a2d184
+    layerID: 146
+    mosaicPosition: {x: 701, y: 245}
+  - name: Neck
+    spriteName: Neck
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 626af135d735fa8498363568ba3d51c6
+    layerID: 140
+    mosaicPosition: {x: 463, y: 181}
+  - name: Head
+    spriteName: Head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 43a82e4018a5b204a92fb269d01368af
+    layerID: 136
+    mosaicPosition: {x: 4, y: 4}
+  - name: Clock Left
+    spriteName: Clock Left
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 669db5031ef48d84996cc2be5bec52c6
+    layerID: 109
+    mosaicPosition: {x: 150, y: 537}
+  - name: Left Collar
+    spriteName: Left Collar
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 31912d14b95d95b49a08611b20d15358
+    layerID: 102
+    mosaicPosition: {x: 1002, y: 4}
+  - name: Left Lower Arm
+    spriteName: Left Lower Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 0547d738a6e01a144b61cf62a0de11d6
+    layerID: 98
+    mosaicPosition: {x: 533, y: 432}
+  - name: Left Upper Arm
+    spriteName: Left Upper Arm
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 455ca1e3b363a0347952fd06ed117b7d
+    layerID: 94
+    mosaicPosition: {x: 923, y: 4}
+  - name: Left Hand
+    spriteName: Left Hand
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8693f4d814d410d4aa0d336ff55326c9
+    layerID: 89
+    mosaicPosition: {x: 286, y: 190}
+  - name: Cloak Right Back
+    spriteName: Cloak Right Back
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8b763b00ba586584cbf972f1b02ceabf
+    layerID: 86
+    mosaicPosition: {x: 463, y: 4}
+  - name: Robe Left Front
+    spriteName: Robe Left Front
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 15eae5c81e1d36d41bdb7a157a1a31a0
+    layerID: 82
+    mosaicPosition: {x: 883, y: 245}
+  - name: Robe Front Right
+    spriteName: Robe Front Right
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 363c1c465d624784aa5d2d86b30506a4
+    layerID: 75
+    mosaicPosition: {x: 4, y: 245}
+  - name: Robe Back Right
+    spriteName: Robe Back Right
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 66e8339e11d353e41845480cd99c9803
+    layerID: 68
+    mosaicPosition: {x: 232, y: 245}
+  - name: Lower Right Leg
+    spriteName: Lower Right Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: cb9b8f352629c824c9c24c982968820e
+    layerID: 64
+    mosaicPosition: {x: 883, y: 456}
+  - name: Lower Left Leg
+    spriteName: Lower Left Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: d7ca7754e126f974686d58de8e04a899
+    layerID: 60
+    mosaicPosition: {x: 942, y: 456}
+  - name: Right Foot
+    spriteName: Right Foot
+    isGroup: 0
+    parentIndex: -1
+    spriteID: cba141caece75cf45b0878e9a2f2eefb
+    layerID: 43
+    mosaicPosition: {x: 923, y: 138}
+  - name: Left Foot
+    spriteName: Left Foot
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 4e81bcd6116a2f3449b4d726ace837c9
+    layerID: 39
+    mosaicPosition: {x: 460, y: 432}
+  - name: Right Ankle
+    spriteName: Right Ankle
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 0da3683ea9bddad4fb1752765c04b367
+    layerID: 51
+    mosaicPosition: {x: 408, y: 190}
+  - name: Right Upper Leg
+    spriteName: Right Upper Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e88b81afd09e9684fa033b47bc437136
+    layerID: 35
+    mosaicPosition: {x: 150, y: 698}
+  - name: Left Ankle
+    spriteName: Left Ankle
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 78e7a7d70466120429438bd2c769430b
+    layerID: 47
+    mosaicPosition: {x: 502, y: 181}
+  - name: Left Upper Leg
+    spriteName: Left Upper Leg
+    isGroup: 0
+    parentIndex: -1
+    spriteID: c9acdcdd5441e8a4ea3d8aa384836bf2
+    layerID: 56
+    mosaicPosition: {x: 540, y: 537}
+  - name: Robe Back
+    spriteName: Robe Back
+    isGroup: 0
+    parentIndex: -1
+    spriteID: cf465cecc73a30643a1820cc5e68f8f2
+    layerID: 30
+    mosaicPosition: {x: 460, y: 245}
+  - name: Cloak Back
+    spriteName: Cloak Back
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 21bda4967caa83f4b829ee858b9569f1
+    layerID: 26
+    mosaicPosition: {x: 640, y: 4}
+  - name: Book
+    spriteName: Book
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 93c9b2a1cb56c6247a31392bd10f4283
+    layerID: 22
+    mosaicPosition: {x: 403, y: 537}
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+  boneGOs: []
+  generateGOHierarchy: 0
