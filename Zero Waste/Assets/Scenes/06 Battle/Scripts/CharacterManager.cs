@@ -23,8 +23,6 @@ public class CharacterManager : MonoBehaviour {
     private GameObject[] scavengerPrefabs;
     private GameObject[] mutantPrefabs;
 
-    private float timeDelay;
-
     #region Properties
     private bool allScavengersAlive;
 
@@ -57,7 +55,6 @@ public class CharacterManager : MonoBehaviour {
     {
         allScavengersAlive = true;
         allMutantsAlive = true;
-        timeDelay = 0;
     }
 
     public Player[] InstantiateCharacterData(Player[] scavengers)
@@ -362,14 +359,10 @@ public class CharacterManager : MonoBehaviour {
     {
         // Constantly check lives of characters per team
         // If all characters in a team, Scavenger or Mutant, are dead, battle should end
-        if ((allMutantsAlive && allScavengersAlive) && timeDelay >= 5)
+        if (allMutantsAlive && allScavengersAlive)
         {
             StartCoroutine(CheckIfCharactersAreAlive(0));
             StartCoroutine(CheckIfCharactersAreAlive(1));
-            timeDelay = 0;
         }
-
-        if (timeDelay < 5)
-            timeDelay += Time.deltaTime;
     }
 }

@@ -90,7 +90,23 @@ public class ItemManager : MonoBehaviour
         {
             if (effect.type.Equals("Direct"))
             {
-                int valueChanged = scavObjs[currentScav].GetComponent<CharacterMonitor>().ScavengerHealed(effect.target, effect.strength);
+                if (effect.target == "Dispel")
+                {
+                    scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.IsCleared();
+                    StartCoroutine(particleManager.PlayParticles(4, scavObjs[currentScav].transform.position));
+                    break;
+                }
+
+                // Calculate the %age Value
+                int strength;
+
+                if (effect.target == "HP")
+                    strength = (int)((scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("HP")) * (effect.strength / 100));
+
+                else
+                    strength = (int)(scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.baseAnt * (effect.strength / 100));
+
+                int valueChanged = scavObjs[currentScav].GetComponent<CharacterMonitor>().ScavengerHealed(effect.target, strength);
 
                 // HP - Skill, Ult | ANT - Charge, Skill, Ult
                 if (effect.target.Equals("HP"))
@@ -111,8 +127,20 @@ public class ItemManager : MonoBehaviour
             }
             else
             {
+                Effect newEffect = Instantiate(effect);
+
+                if (effect.target == "ATK")
+                    newEffect.strength = (scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("ATK") * (newEffect.strength / 100));
+
+                else if (effect.target == "DEF")
+                    newEffect.strength = (scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("DEF") * (newEffect.strength / 100));
+
+                else if (effect.target == "SPD")
+                    newEffect.strength = (scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("SPD") * (newEffect.strength / 100));
+
+
                 // Buff Scavengers
-                scavObjs[currentScav].GetComponent<CharacterMonitor>().ScavengerBuffed(Instantiate(effect));
+                scavObjs[currentScav].GetComponent<CharacterMonitor>().ScavengerBuffed(newEffect);
 
                 if (effect.application.Equals("CharStats"))
                 {

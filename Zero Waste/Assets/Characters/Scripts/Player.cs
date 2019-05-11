@@ -64,6 +64,28 @@ public class Player : Character {
         return 0;
     }
 
+    // Get the current max values
+    public int GetMaxValue(string target)
+    {
+        switch(target)
+        {
+            case "HP":
+                return baseHP + (int)(currentLevel * hpModifier);
+
+            case "ATK":
+                return baseAtk + (int)(currentLevel * atkModifier);
+
+            case "DEF":
+                return baseDef + (int)(currentLevel * defModifier);
+
+            case "SPD":
+                return baseSpd;
+
+            default:
+                return 0;
+        }
+    }
+
     // Call if player has been attacked
     public int IsAttacked(string targetStat, int statModifier, Enemy attacker)
     {
