@@ -318,7 +318,7 @@ public class CharacterMonitor : MonoBehaviour
                         if (effect.state.Equals("Buff"))
                         {
                             int valueChanged = currentAnt;
-                            currentAnt = scavenger.CheckMax(currentHealth + effect.strength, "ANT");
+                            currentAnt = scavenger.CheckMax(currentAnt + effect.strength, "ANT");
                             valueChanged = currentAnt - valueChanged;
                             scavenger.currentAnt = currentAnt;
 
@@ -328,7 +328,7 @@ public class CharacterMonitor : MonoBehaviour
                         else
                         {
                             int valueChanged = currentAnt;
-                            currentAnt = scavenger.CheckMin(currentHealth - effect.strength);
+                            currentAnt = scavenger.CheckMin(currentAnt - effect.strength);
                             valueChanged -= currentAnt;
                             scavenger.currentAnt = currentAnt;
                             StartCoroutine(statusManager.DecrementAntidoteBar(currentAnt, currentMaxAnt, position));
@@ -353,7 +353,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "ATK":
                                     {
                                         if (effect.state == "Buff")
-                                            scavenger.currentAtk = scavenger.CheckMin(scavenger.currentAtk - effect.strength);
+                                            scavenger.currentAtk = scavenger.currentAtk - effect.strength;
                                         else
                                             scavenger.currentAtk = scavenger.currentAtk + effect.strength;
                                         break;
@@ -361,7 +361,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "DEF":
                                     {
                                         if (effect.state == "Buff")
-                                            scavenger.currentDef = scavenger.CheckMin(scavenger.currentDef - effect.strength);
+                                            scavenger.currentDef = scavenger.currentDef - effect.strength;
                                         else
                                             scavenger.currentDef = scavenger.currentDef + effect.strength;
                                         break;
@@ -369,7 +369,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "SPD":
                                     {
                                         if (effect.state == "Buff")
-                                            scavenger.currentSpd = scavenger.CheckMin(scavenger.currentSpd - effect.strength);
+                                            scavenger.currentSpd = scavenger.currentSpd - effect.strength;
                                         else
                                             scavenger.currentSpd = scavenger.currentSpd + effect.strength;
                                         break;
@@ -377,7 +377,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "ANTGEN":
                                     {
                                         if (effect.state == "Buff")
-                                            scavenger.currentAntGen = scavenger.CheckMin(scavenger.currentAntGen - effect.strength);
+                                            scavenger.currentAntGen = scavenger.currentAntGen - effect.strength;
                                         else
                                             scavenger.currentAntGen = scavenger.currentAntGen + effect.strength;
                                         break;
@@ -385,7 +385,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "TL":
                                     {
                                         if (effect.state == "Buff")
-                                            scavenger.currentThreatLevel = scavenger.CheckMin(scavenger.currentThreatLevel - effect.strength);
+                                            scavenger.currentThreatLevel = scavenger.currentThreatLevel - effect.strength;
                                         else
                                             scavenger.currentThreatLevel = scavenger.currentThreatLevel + effect.strength;
                                         break;
@@ -494,7 +494,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "ATK":
                                     {
                                         if (effect.state == "Buff")
-                                            mutant.currentAtk = mutant.CheckMin(mutant.currentAtk - effect.strength);
+                                            mutant.currentAtk = mutant.currentAtk - effect.strength;
                                         else
                                             mutant.currentAtk = mutant.currentAtk + effect.strength;
                                         break;
@@ -502,7 +502,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "DEF":
                                     {
                                         if (effect.state == "Buff")
-                                            mutant.currentDef = mutant.CheckMin(mutant.currentDef - effect.strength);
+                                            mutant.currentDef = mutant.currentDef - effect.strength;
                                         else
                                             mutant.currentDef = mutant.currentDef + effect.strength;
                                         break;
@@ -510,7 +510,7 @@ public class CharacterMonitor : MonoBehaviour
                                 case "SPD":
                                     {
                                         if (effect.state == "Buff")
-                                            mutant.currentSpd = mutant.CheckMin(mutant.currentSpd - effect.strength);
+                                            mutant.currentSpd = mutant.currentSpd - effect.strength;
                                         else
                                             mutant.currentSpd = mutant.currentSpd + effect.strength;
                                         break;
@@ -960,7 +960,7 @@ public class CharacterMonitor : MonoBehaviour
     public void MutantBuffed(Effect effect)
     {
         // Apply debuff and update values
-        mutant.IsDebuffed(Instantiate(effect));
+        mutant.IsBuffed(Instantiate(effect));
         currentHealth = mutant.currentPollutionLevel;
     }
 
