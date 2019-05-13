@@ -111,7 +111,6 @@ public class LevelList : MonoBehaviour
             battleCell.GetComponent<LevelManager>().LevelList = levelList;
 
             // Set battle/level number
-            Debug.Log(nodeData.battleIds[i]);
             battleCell.transform.GetChild(0).transform.gameObject.
                 GetComponent<TextMeshProUGUI>().text = (i).ToString();
 
