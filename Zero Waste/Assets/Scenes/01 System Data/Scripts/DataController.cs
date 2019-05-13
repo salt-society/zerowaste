@@ -49,6 +49,9 @@ public class DataController : MonoBehaviour
     [Space]
     public Booster[] boosters;
 
+    [Header("ZWA")]
+    public StoryLevel currentStory;
+
     void Awake()
     {
         if (instance == null)
