@@ -38,7 +38,7 @@ public class Boss : Enemy
 
         // Calculate thresholds for when to switch to next phase
         for (int CTR = 0; CTR < phaseNumbers.Length; CTR++)
-            thresholds[CTR] = (int)(basePollutionLevel * phaseNumbers[CTR]);
+            thresholds[CTR] = (int)((float)basePollutionLevel * phaseNumbers[CTR]);
 
         Debug.Log("Init Boss.");
     }

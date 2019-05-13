@@ -101,10 +101,10 @@ public class ItemManager : MonoBehaviour
                 int strength;
 
                 if (effect.target == "HP")
-                    strength = (int)((scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("HP")) * (effect.strength / 100));
+                    strength = (int)(((float)scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("HP") * ((float)effect.strength / 100)));
 
                 else
-                    strength = (int)(scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.baseAnt * (effect.strength / 100));
+                    strength = (int)((float)scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.baseAnt * ((float)effect.strength / 100));
 
                 int valueChanged = scavObjs[currentScav].GetComponent<CharacterMonitor>().ScavengerHealed(effect.target, strength);
 
@@ -129,15 +129,18 @@ public class ItemManager : MonoBehaviour
             {
                 Effect newEffect = Instantiate(effect);
 
+                Debug.Log(newEffect.strength);
+
                 if (effect.target == "ATK")
-                    newEffect.strength = (scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("ATK") * (newEffect.strength / 100));
+                    newEffect.strength = (int)((float)scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("ATK") * ((float)newEffect.strength / 100));
 
                 else if (effect.target == "DEF")
-                    newEffect.strength = (scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("DEF") * (newEffect.strength / 100));
+                    newEffect.strength = (int)((float)scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("DEF") * ((float)newEffect.strength / 100));
 
                 else if (effect.target == "SPD")
-                    newEffect.strength = (scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("SPD") * (newEffect.strength / 100));
+                    newEffect.strength = (int)((float)scavObjs[currentScav].GetComponent<CharacterMonitor>().Scavenger.GetMaxValue("SPD") * ((float)newEffect.strength / 100));
 
+                Debug.Log(newEffect.strength);
 
                 // Buff Scavengers
                 scavObjs[currentScav].GetComponent<CharacterMonitor>().ScavengerBuffed(newEffect);

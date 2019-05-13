@@ -287,8 +287,11 @@ public class EnemyAbilityManager : MonoBehaviour
 
             foreach (GameObject mutantObject in characterManager.GetAllCharacterPrefabs(0))
             {
-                if (mutantObject.GetComponent<CharacterMonitor>().IsAlive)
-                    aliveMutants.Add(mutantObject);
+                if(mutantObject != null)
+                {
+                    if (mutantObject.GetComponent<CharacterMonitor>().IsAlive)
+                        aliveMutants.Add(mutantObject);
+                }
             }
 
             foreach (GameObject targetObj in aliveMutants)
