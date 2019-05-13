@@ -26,6 +26,10 @@ public class Character : ScriptableObject {
     [Header("Abilities")]
     public Ability[] abilities;
 
+    [Header("Upgraded Abilities")]
+    public Ability UpgradedCA;
+    public Ability UpgradedUA;
+
     [Header("Status Effects")]
     public List<Effect> effects;
 
