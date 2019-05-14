@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopFunctions : MonoBehaviour
+public class ShopController : AreaController
 {
     [Header("Shop Items")]
     public ShopItems[] ShopItems;
 
-    private DataController myController;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        myController = FindObjectOfType<DataController>();
-    }
 
     // Display all available items
     public List<ShopItems> DisplayAvailableShopItems()
     {
-        int currentID = myController.currentSaveData.currentBattleId;
+        int currentID = dataController.currentSaveData.currentBattleId;
 
         List<ShopItems> availableList = new List<ShopItems>();
 
@@ -38,7 +31,7 @@ public class ShopFunctions : MonoBehaviour
         int total = price * quantity;
 
         // Reduce the scrap
-        myController.currentSaveData.UseScrap(total);
+        dataController.currentSaveData.UseScrap(total);
 
         // Add to Inventory
 

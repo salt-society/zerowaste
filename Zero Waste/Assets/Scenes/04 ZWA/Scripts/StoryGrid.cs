@@ -6,7 +6,12 @@ public class StoryGrid : MonoBehaviour
 {
     public DataController dataController;
     public GameObject storyPrefab;
+
+    [Space]
     public List<Sprite> mapIcons;
+
+    [Space]
+    public List<Battle> zwaStory;
 
     public void PopulateGrid()
     {
@@ -14,5 +19,7 @@ public class StoryGrid : MonoBehaviour
             return;
 
         GameObject storyCell;
+
+        
     }
 }

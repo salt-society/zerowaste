@@ -3,28 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TrainingFunctions : MonoBehaviour
+public class TrainingController : AreaController
 {
-    [Header("Necessities")]
-    public GameObject upgradePanel;
-
-    private DataController myController;
-
     // Variable to hold scraps needed to break
     private int neededScraps;
 
     // Variable to hold what number of break is available
     private int levelBreak;
 
-    private void Start()
-    {
-        myController = FindObjectOfType<DataController>();
-    }
-
     // Show scavenger roster
     public List<Player> DisplayCurrentRoster()
     {
-        return myController.scavengerRoster;
+        return dataController.scavengerRoster;
     }
 
     // Display the selected scavenger after he / she is selected from the scavenger list
@@ -60,6 +50,8 @@ public class TrainingFunctions : MonoBehaviour
         else if (selectedScavenger.currentLevelCap == 30)
         {
             // upgradePanel.scrapsNeeded.text = "N/A";
+            // upgradePanel.levelNote.text = selectedScavenger.name + " has already reached maxed level!";
+            // upgradePanel.scrapNote.text = selectedScavenger.name + " has already reached maxed level!";
             return;
         }
 
@@ -70,7 +62,7 @@ public class TrainingFunctions : MonoBehaviour
             // break.disable;
         }
 
-        if (myController.currentSaveData.scraps < neededScraps)
+        if (dataController.currentSaveData.scraps < neededScraps)
         {
             // Insufficient Scrap
             // upgradePanel.scrapNote.text = "You have insufficient scraps!";
@@ -83,7 +75,7 @@ public class TrainingFunctions : MonoBehaviour
     {
         // Only arrive here if sure that all requirements are met
         // First reduce scraps
-        myController.UseScrap(neededScraps);
+        dataController.UseScrap(neededScraps);
 
         // Next adjust player values
         if(levelBreak == 1)
