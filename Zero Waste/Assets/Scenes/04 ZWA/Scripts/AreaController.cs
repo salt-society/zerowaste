@@ -21,6 +21,7 @@ public class AreaController : MonoBehaviour
     public List<GameObject> partNames;
     public List<GameObject> parts;
 
+    [Space]
     public PartIdentifier currentPart;
     public bool isInteractable;
 
