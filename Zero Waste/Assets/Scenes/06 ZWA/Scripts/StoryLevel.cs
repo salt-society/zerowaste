@@ -21,10 +21,24 @@ public class StoryLevel : MonoBehaviour
     public Image mapIcon;
 
     [Space]
-    public List<Sprite> mapIcons;
+    public Sprite currentAreaSprite;
 
     [Space]
     public GameObject parentExit;
+
+    public void InitializeStoryLevel()
+    {
+        chapterNo = storyInfo.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        title = storyInfo.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>();
+        description = storyInfo.transform.GetChild(1).GetChild(4).GetComponent<TextMeshProUGUI>();
+        mapName = storyInfo.transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+        mapIcon = storyInfo.transform.GetChild(1).GetChild(1).GetComponent<Image>();
+
+        if (dataController == null)
+            return;
+
+        dataController.currentStory = this;
+    }
 
     public void SelectStoryLevel()
     {
@@ -53,7 +67,7 @@ public class StoryLevel : MonoBehaviour
         chapterNo.text = story.startCutscene.chapter;
         title.text = story.startCutscene.title;
         mapName.text = story.node.area.areaName;
-        mapIcon.sprite = mapIcons[story.node.area.areaId];
+        mapIcon.sprite = currentAreaSprite;
 
         yield return new WaitForSeconds(0.5f);
 
@@ -71,7 +85,7 @@ public class StoryLevel : MonoBehaviour
         HighlightStoryLevel();
         ShowHidePExit();
 
-        dataController.currentBattle = null;
         dataController.currentStory = null;
+        dataController.currentBattle = null;
     }
 }

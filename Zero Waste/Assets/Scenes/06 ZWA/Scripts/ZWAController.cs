@@ -6,10 +6,9 @@ using TMPro;
 
 public class ZWAController : MonoBehaviour
 {
-    [Header("Controllers")]
     private DataController dataController;
 
-    [Header("ZWA")]
+    [Space]
     public GameObject zwaSign;
     public GameObject mapPoints;
 
@@ -21,23 +20,22 @@ public class ZWAController : MonoBehaviour
     public List<GameObject> areasUI;
     public List<GameObject> areas;
 
+    [Space]
+    public GameObject fadeObject;
 
     void Start()
     {
-        
+        dataController = FindObjectOfType<DataController>();
     }
 
     public void OpenArea(int areaId)
     {
-        // Hide ZWA Sign and Map Points
         zwaSign.SetActive(!zwaSign.activeInHierarchy);
         mapPoints.SetActive(!mapPoints.activeInHierarchy);
 
-        // Show Area and UI
         areasUI[areaId].SetActive(!areasUI[areaId].activeInHierarchy);
         areas[areaId].SetActive(!areas[areaId].activeInHierarchy);
 
-        // Show parts of Area
         StartCoroutine(areaCtrls[areaId].ShowInteractableParts());
     }
 }
