@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AreaController : MonoBehaviour
 {
@@ -25,7 +26,13 @@ public class AreaController : MonoBehaviour
     public PartIdentifier currentPart;
     public bool isInteractable;
 
-    void Start()
+    [Space]
+    public int nextSceneId;
+
+    [Space]
+    public GameObject fadeTransition;
+
+    public virtual void Start()
     {
         dataController = FindObjectOfType<DataController>();
     }
@@ -49,7 +56,7 @@ public class AreaController : MonoBehaviour
         closeConfirmation.SetActive(!closeConfirmation.activeInHierarchy);
     }
 
-    public void CloseArea()
+    public virtual void CloseArea()
     {
         closeConfirmation.SetActive(!closeConfirmation.activeInHierarchy);
         areaBackground.SetActive(!areaBackground.activeInHierarchy);
@@ -80,6 +87,17 @@ public class AreaController : MonoBehaviour
 
         currentPart = null;
         isInteractable = true;
+    }
+
+    public IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene(2);
     }
 
     public virtual void Update()

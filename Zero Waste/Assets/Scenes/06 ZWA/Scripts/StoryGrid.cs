@@ -38,6 +38,7 @@ public class StoryGrid : MonoBehaviour
                 storyCell.GetComponent<StoryLevel>().storySelected = storyCell.transform.GetChild(0).GetChild(0).gameObject;
                 storyCell.GetComponent<StoryLevel>().storyInfo = storyInfo;
                 storyCell.GetComponent<StoryLevel>().parentExit = parentExit;
+                storyCell.GetComponent<StoryLevel>().InitializeStoryLevel();
 
                 storyCell.transform.GetChild(0).GetComponent<Image>().sprite = mapIcons[zwaStory[i].node.area.areaId];
                 storyCell.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = mapIconsSelected[zwaStory[i].node.area.areaId];
@@ -64,8 +65,6 @@ public class StoryGrid : MonoBehaviour
         {
             foreach (Transform cell in transform)
                 Destroy(cell.gameObject);
-
-            gameObject.SetActive(false);
         }
     }
 }

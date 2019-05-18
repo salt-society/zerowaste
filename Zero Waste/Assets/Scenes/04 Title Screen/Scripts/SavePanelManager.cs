@@ -21,7 +21,6 @@ public class SavePanelManager : MonoBehaviour
     public DataController dataController;
 
     private List<SaveData> saves;
-    private bool savePanelOpen;
 
     void Start()
     {
@@ -39,9 +38,6 @@ public class SavePanelManager : MonoBehaviour
 
     void SetUpSavePanel()
     {
-        // Set state of save panel, if its open or not
-        savePanelOpen = false;
-
         // Disable all buttons first
         foreach (Button button in saveButtons)
         {
@@ -93,8 +89,15 @@ public class SavePanelManager : MonoBehaviour
         if(dataController != null)
             GameObject.FindObjectOfType<AudioManager>().PlaySound("Button Click 1");
 
-        savePanel.SetActive(true);
-        savePanelOpen = true;
+        if (savePanel.activeInHierarchy == false)
+        {
+            savePanel.SetActive(!savePanel.activeInHierarchy);
+        }
+        else
+        {
+            StartCoroutine(HideSaves());
+        }
+        
     }
 
     IEnumerator HideSaves()
@@ -105,7 +108,7 @@ public class SavePanelManager : MonoBehaviour
         savePanel.GetComponent<Animator>().SetBool("Fade Out", true);
         yield return new WaitForSeconds(1f);
         savePanel.GetComponent<Animator>().SetBool("Fade Out", false);
-        savePanel.SetActive(false);
+        savePanel.SetActive(!savePanel.activeInHierarchy);
     }
 
     public void LoadSave(int saveNo)
@@ -122,22 +125,6 @@ public class SavePanelManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         saveResultPanel.SetActive(false);
         SetCurrentSave();
-    }
-
-    void Update()
-    {
-        if (savePanelOpen)
-        {
-            if (Input.touchCount > 0)
-            {
-                if (TouchPhase.Ended == Input.GetTouch(0).phase)
-                {
-                    StartCoroutine(HideSaves());
-                    savePanelOpen = false;
-                }
-            }
-        }
-        
     }
 }
 

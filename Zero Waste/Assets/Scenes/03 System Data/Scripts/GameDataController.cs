@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameDataController : MonoBehaviour
 {
-    [Header("Data Controller")]
     public DataController dataController;
+    public TextMeshProUGUI message;
 
-    [Header("Transition Components")]
+    [Space]
     public GameObject fadeTransition;
 
     void Start()
@@ -17,12 +18,11 @@ public class GameDataController : MonoBehaviour
         dataController = GameObject.FindObjectOfType<DataController>();
         if (dataController != null)
         {
-            Debug.Log("Game Data Exists: " + dataController.GameDataExists());
-
             // Check if there's already a Game Data 
             // and create if it doesn't exist
             if (dataController.GameDataExists())
             {
+                message.text = "Game data exists. Loading your save...";
                 dataController.ReadGameData();
 
                 // Check if scavenger list is null
@@ -30,16 +30,11 @@ public class GameDataController : MonoBehaviour
                 {
                     dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
                     dataController.currentSaveData.LaunchGameDetails();
-                    //PrintSaveDetails();
                 }
             }
             else
             {
-                // New game data
-                dataController.CreateGameData();
-
-                // Then create a save file for player
-                dataController.NewSaveData();
+                StartCoroutine(CreateGameData());
             }
 
             // Load next scene
@@ -47,10 +42,26 @@ public class GameDataController : MonoBehaviour
         }
     }
 
+    IEnumerator CreateGameData()
+    {
+        message.text = "Creating game data...";
+        yield return new WaitForSeconds(0.5f);
+
+        dataController.CreateGameData();
+        dataController.NewSaveData();
+        message.text = "Game data created. Auto Save feature is on.";
+    }
+
     IEnumerator LoadScene()
     {
-        yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene(dataController.GetNextSceneId("Title Screen"));
+        yield return new WaitForSeconds(2f);
+        AsyncOperation async = SceneManager.LoadSceneAsync(dataController.GetNextSceneId("Title Screen"));
+        async.allowSceneActivation = true;
+
+        while (!async.isDone)
+        {
+            yield return null;
+        }
     }
 
     void PrintSaveDetails()

@@ -189,7 +189,7 @@ public class TeamSelect : MonoBehaviour
                     GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
 
                     dataController.scavengerTeam = scavengerTeam;
-                    dataController.wasteTeam = wasteTeam;
+                    dataController.mutantTeam = wasteTeam;
 
                     return true;
                 }
@@ -212,7 +212,7 @@ public class TeamSelect : MonoBehaviour
                     GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
 
                     dataController.scavengerTeam = scavengerTeam;
-                    dataController.wasteTeam = wasteTeam;
+                    dataController.mutantTeam = wasteTeam;
 
                     return true;
                 }

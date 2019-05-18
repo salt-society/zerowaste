@@ -8,24 +8,31 @@ using System.Runtime.Serialization.Formatters.Binary;
 [System.Serializable]
 public class DataController : MonoBehaviour
 {
-    [Header("Data Controller")]
     public static DataController instance;
-    
-    [Header("Game Data")]
-    public string saveFolderName;
+
+    [Header("Game Mode")]
+    public bool testing;
+    public bool demo;
 
     [Space]
+    public int nextScene;
+
+    [Space]
+    public string saveFolderName;
     public GameData currentGameData;
     public SaveData currentSaveData;
 
-    [Header("Character List")]
+    [Header("Character Data")]
     public List<Player> allScavengersList;
     public List<Enemy> allWasteList;
 
     [Header("Player's Roster")]
     public List<Player> scavengerRoster;
 
-    [Header("Battles")]
+    [Header("Item Data")]
+    public Booster[] boosters;
+
+    [Header("Battle Data")]
     public List<Battle> allBattles;
 
     [Header("Battle Inputs")]
@@ -40,16 +47,14 @@ public class DataController : MonoBehaviour
     public GameObject currentBattleObject;
     public Battle currentBattle;
 
-    [Space]
+    [Header("Battle Team/Party")]
     public Player[] scavengerTeam;
     public int scavengerCount;
-    public Enemy[] wasteTeam;
+    public Enemy[] mutantTeam;
     public int mutantCount;
+    public Booster[] boosterInBattle;
 
-    [Space]
-    public Booster[] boosters;
-
-    [Header("ZWA")]
+    [Header("ZWA - HQ")]
     public StoryLevel currentStory;
 
     void Awake()
@@ -65,7 +70,7 @@ public class DataController : MonoBehaviour
     void OnApplicationQuit()
     {
         // TEMP
-        DeleteAllData();
+        //DeleteAllData();
     }
 
     public void CreateGameData()
@@ -361,33 +366,41 @@ public class DataController : MonoBehaviour
                 {
                     return 0;
                 }
-            case "Loading Data":
+            case "Disclaimer":
                 {
                     return 1;
                 }
-            case "Title Screen":
+            case "Loading":
                 {
                     return 2;
                 }
-            case "Cutscene":
+            case "Loading Data":
                 {
                     return 3;
                 }
-            case "ZWA":
+            case "Title Screen":
                 {
                     return 4;
                 }
-            case "Map":
+            case "Cutscene":
                 {
                     return 5;
                 }
-            case "Battle":
+            case "ZWA":
                 {
                     return 6;
                 }
+            case "Map":
+                {
+                    return 7;
+                }
+            case "Battle":
+                {
+                    return 8;
+                }
             default:
                 {
-                    return -1;
+                    return 0;
                 }
         }
     }

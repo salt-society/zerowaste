@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HQController : AreaController
 {
@@ -10,6 +9,13 @@ public class HQController : AreaController
 
     [Space]
     public GameObject storyInfo;
+    public GameObject storyGrid;
+    public GameObject parentExit;
+
+    public override void Start()
+    {
+        base.Start();
+    }
 
     // HQ
     public void ShowHideExit()
@@ -20,12 +26,17 @@ public class HQController : AreaController
     public override IEnumerator ShowPart(PartIdentifier partIdentifier)
     {
         ShowHideExit();
+        storyGrid.GetComponent<StoryGrid>().dataController = dataController;
+        storyGrid.GetComponent<StoryGrid>().storyInfo = storyInfo;
+        storyGrid.GetComponent<StoryGrid>().parentExit = parentExit;
+        storyGrid.GetComponent<StoryGrid>().PopulateGrid();
         return base.ShowPart(partIdentifier);
     }
 
     public override IEnumerator ClosePart()
     {
         ShowHideExit();
+        storyGrid.GetComponent<StoryGrid>().RemoveCells();
         return base.ClosePart();
     }
 
@@ -34,13 +45,20 @@ public class HQController : AreaController
         StartCoroutine(ClosePart());
     }
 
+    public override void CloseArea()
+    {
+        base.CloseArea();
+    }
+
     // Story
     public void ReadStory()
     {
         if (dataController == null)
             return;
 
-
+        dataController.nextScene = dataController.GetNextSceneId(dataController.currentStory.story.nextScene);
+        dataController.currentCutscene = dataController.currentStory.story.startCutscene;
+        StartCoroutine(LoadScene());
     }
 
     public void CloseStoryInfo()

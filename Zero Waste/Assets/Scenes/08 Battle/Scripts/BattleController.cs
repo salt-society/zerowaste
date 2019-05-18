@@ -154,7 +154,7 @@ public class BattleController : MonoBehaviour {
                     scavengerTemp.Add(scavenger);
             }     
 
-            foreach (Enemy mutant in dataController.wasteTeam)
+            foreach (Enemy mutant in dataController.mutantTeam)
             {
                 if (mutant != null)
                     mutantTemp.Add(mutant);

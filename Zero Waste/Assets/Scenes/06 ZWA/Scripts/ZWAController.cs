@@ -9,6 +9,9 @@ public class ZWAController : MonoBehaviour
     private DataController dataController;
 
     [Space]
+    public GameObject raycastBlock;
+
+    [Space]
     public GameObject zwaSign;
     public GameObject mapPoints;
 
@@ -26,6 +29,8 @@ public class ZWAController : MonoBehaviour
     void Start()
     {
         dataController = FindObjectOfType<DataController>();
+
+
     }
 
     public void OpenArea(int areaId)

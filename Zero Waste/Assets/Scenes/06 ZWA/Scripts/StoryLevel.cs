@@ -36,8 +36,6 @@ public class StoryLevel : MonoBehaviour
 
         if (dataController == null)
             return;
-
-        dataController.currentStory = this;
     }
 
     public void SelectStoryLevel()
@@ -50,6 +48,7 @@ public class StoryLevel : MonoBehaviour
         ShowHidePExit();
 
         dataController.currentBattle = story;
+        dataController.currentStory = this;
     }
 
     public void HighlightStoryLevel()
@@ -66,6 +65,7 @@ public class StoryLevel : MonoBehaviour
     {
         chapterNo.text = story.startCutscene.chapter;
         title.text = story.startCutscene.title;
+        description.text = story.info;
         mapName.text = story.node.area.areaName;
         mapIcon.sprite = currentAreaSprite;
 

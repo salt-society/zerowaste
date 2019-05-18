@@ -23,6 +23,8 @@ public class Enemy : Character {
 
     public int baseLevel;
     public int maxLevel;
+    public int areaEncountered;
+    public string description;
     [HideInInspector] public int mutantLevel;
 
     [HideInInspector] public List<Ability> instanceAbilities;

@@ -11,6 +11,21 @@ public class TrainingController : AreaController
     // Variable to hold what number of break is available
     private int levelBreak;
 
+    public override IEnumerator ShowPart(PartIdentifier partIdentifier)
+    {
+        return base.ShowPart(partIdentifier);
+    }
+
+    public override IEnumerator ClosePart()
+    {
+        return base.ClosePart();
+    }
+
+    public override void Update()
+    {
+        base.Update();
+    }
+
     // Show scavenger roster
     public List<Player> DisplayCurrentRoster()
     {

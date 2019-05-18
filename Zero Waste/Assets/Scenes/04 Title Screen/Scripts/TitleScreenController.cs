@@ -6,22 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreenController : MonoBehaviour
 {
-    [Header("Data Controller")]
+    [Space]
     public DataController dataController;
 
-    [Header("Gender Selection")]
+    [Space]
     public GameObject genderPanel;
     public GameObject[] genderImages;
     public Button[] genderButtons;
     public Button continueButton;
-
-    [Space]
     public Color clickedColor;
 
-    [Header("Transition")]
-    public GameObject fadeTransition;
+    [Space]
+    public GameObject privacyPolicyPanel;
 
-    private int nextSceneId;
+    [Space]
+    public GameObject fadeTransition;
     private bool canTouchScreen;
 
     void Start()
@@ -47,33 +46,60 @@ public class TitleScreenController : MonoBehaviour
         {
             if (Input.touchCount == 1)
             {
-                canTouchScreen = false;
-                StartGame();
+                if (TouchPhase.Began == Input.GetTouch(0).phase)
+                {
+                    Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                    RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.zero);
+
+                    if (hit.collider == null)
+                    {
+                        canTouchScreen = false;
+                        StartGame();
+                    }
+                }
             }
         }
     }
 
+    public void ShowPrivacyPolicy()
+    {
+        privacyPolicyPanel.SetActive(!privacyPolicyPanel.activeInHierarchy);
+        canTouchScreen = !canTouchScreen;
+    }
+
     public void StartGame()
     {
-        GameObject.FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
+        if (dataController == null)
+            return;
 
-        if (dataController != null)
+        FindObjectOfType<AudioManager>().PlaySound("Crumpling Paper");
+        if (dataController.testing)
+        {
+            // Unlock areas/nodes/battles
+            dataController.currentSaveData.UnlockBattle(7, false);
+            dataController.currentSaveData.UnlockBattle(1, true);
+            dataController.currentSaveData.UnlockBattle(13, false);
+
+            // Add scavengers to roster, default male
+            AddDefaultScavengers("Male");
+
+            // Scene testing
+            dataController.nextScene = dataController.GetNextSceneId("ZWA");
+            StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
+            StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
+            StartCoroutine(LoadScene());
+        }
+        else
         {
             // Check how many cutscenes are unlocked
             // No cutscenes = New Game
-            int cutsceneId = dataController.currentSaveData.currentCutsceneId;
-            if (cutsceneId == -1)
+            if (dataController.currentSaveData.battles == null)
             {
                 // Get next scene id
-                nextSceneId = dataController.GetNextSceneId("Cutscene");
+                dataController.nextScene = dataController.GetNextSceneId("Cutscene");
 
                 // Unlock prologue, set cutscene details
-                dataController.currentSaveData.UnlockCutscene(0, false);
-
-                // temp
-                /*dataController.currentSaveData.currentNodeId = 4;
-                for (int i = 0; i < 5; i++ ) 
-                    dataController.currentSaveData.UnlockNode(i, true);*/
+                // dataController.currentSaveData.UnlockCutscene(0, false);
 
                 // Then save changes made in save file
                 dataController.SaveSaveData();
@@ -86,53 +112,36 @@ public class TitleScreenController : MonoBehaviour
             // If there is a cutscene unlocked, signifies the game have been started
             else
             {
-                // Check again how many cutscenes are unlocked
-                // If its not more than one (3 if game is complete), check if that cutscene is finished
-                // because most likely the very first scene is Prologue
-                if (dataController.currentSaveData.cutscenes.Count > 1)
+                if (dataController.currentSaveData.battles.Count > 1)
                 {
-                    // NOTE: INSET CHECKING OF TUTORIALS HERE
+                    if (!dataController.currentSaveData.battleTutorial)
+                    {
 
-                    // Since tutorials and ZWA are not yet done, temporary
-                    // go straight to Map
-                    nextSceneId = dataController.GetNextSceneId("Map");
-                    StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
-                    StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
-                    StartCoroutine(LoadScene());
+                    }
+                    else if (!dataController.currentSaveData.zwaTutorial)
+                    {
+
+                    }
+                    else if (!dataController.currentSaveData.mapTutorial)
+                    {
+
+                    }
+                    else
+                    {
+                        dataController.nextScene = dataController.GetNextSceneId("ZWA");
+                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
+                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
+                        StartCoroutine(LoadScene());
+                    }
                 }
                 else
                 {
-                    // Check if Prologue is finished
-                    if (dataController.currentSaveData.cutscenes[0])
-                    {
-                        // NOTE: INSET CHECKING OF TUTORIALS HERE
+                    StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
+                    StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
 
-                        // Since tutorials and ZWA are not yet done, temporary
-                        // go straight to Map
-                        nextSceneId = dataController.GetNextSceneId("Map");
-                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
-                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
-                        StartCoroutine(LoadScene());
-
-                        // Turn of Title Screen BGM
-                        /*StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
-                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
-
-                        nextSceneId = dataController.GetNextSceneId("Cutscene");
-                        dataController.currentSaveData.UnlockCutscene(0, false);
-                        StartCoroutine(LoadScene());*/
-                    }
-                    // If not, repeat Prologue Cutscene
-                    else
-                    {
-                        // Turn of Title Screen BGM
-                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
-                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
-
-                        nextSceneId = dataController.GetNextSceneId("Cutscene");
-                        dataController.currentSaveData.UnlockCutscene(0, false);
-                        StartCoroutine(LoadScene());
-                    }
+                    dataController.nextScene = dataController.GetNextSceneId("Cutscene");
+                    dataController.currentSaveData.UnlockCutscene(0, false);
+                    StartCoroutine(LoadScene());
                 }
             }
         }
@@ -250,6 +259,6 @@ public class TitleScreenController : MonoBehaviour
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
         yield return new WaitForSeconds(2f);
 
-        SceneManager.LoadScene(nextSceneId);
+        SceneManager.LoadScene(dataController.GetNextSceneId("Loading"));
     }
 }

@@ -41,6 +41,7 @@ public class SaveData {
 
     [Header("Character Roster")]
     public List<int> scavengerList;
+    public List<int> mutantsEncounteredList;
     public Dictionary<int, int> boosterList;
 
     public void InitializeSaveData()
@@ -66,6 +67,10 @@ public class SaveData {
         isBattlePlayed = new Dictionary<int, bool>();
 
         boosterList = new Dictionary<int, int>();
+
+        // list
+        scavengerList = new List<int>();
+        mutantsEncounteredList = new List<int>();
 
         // Ids
         currentCutsceneId = -1;
@@ -268,6 +273,23 @@ public class SaveData {
         // Make sure key is existing before overriding values
         if(isBattlePlayed.ContainsKey(battleId))
             isBattlePlayed[battleId] = true;
+    }
+
+    public void EncounteredMutant(int mutantId)
+    {
+        if (mutantsEncounteredList == null)
+        {
+            mutantsEncounteredList = new List<int>();
+            mutantsEncounteredList.Add(mutantId);
+        }
+        else
+        {
+            if (!mutantsEncounteredList.Contains(mutantId))
+            {
+                mutantsEncounteredList.Add(mutantId);
+            }
+        }
+        
     }
 
     public void FinishedBattle(int battleId)
