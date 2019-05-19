@@ -865,6 +865,7 @@ public class BattleController : MonoBehaviour {
             dataController.currentCutscene = dataController.currentBattle.endCutscene;
         }
 
+        Time.timeScale = 1;
         StartCoroutine(LoadScene());
     }
 

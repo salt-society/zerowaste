@@ -143,7 +143,7 @@ public class BattleInfoManager : MonoBehaviour {
     {
         if (victory)
         {
-            //dataController.AddScrap(scrapReward);
+            dataController.AddScrap(scrapReward);
 
             GameObject[] scavObjs = characterManager.GetAllCharacterPrefabs(1);
             StartCoroutine(Victory(scavObjs));
@@ -155,7 +155,7 @@ public class BattleInfoManager : MonoBehaviour {
                 scrapReward = scrapReward - (scrapReward * (int)(0.10f));
                 expReward = expReward - (expReward * (int)(0.10f));
 
-                //dataController.AddScrap(scrapReward);
+                dataController.AddScrap(scrapReward);
 
                 GameObject[] scavObjs = characterManager.GetAllCharacterPrefabs(1);
                 StartCoroutine(DefeatWithScraps(scavObjs));
@@ -188,7 +188,6 @@ public class BattleInfoManager : MonoBehaviour {
             {
                 // Get scavenger data, add exp, then save before the animations
                 CharacterMonitor charMonitor = scavObj.GetComponent<CharacterMonitor>();
-                //dataController.AddExp(charMonitor.Scavenger, expReward);
 
                 // Set scavenger icon, name, current level
                 scavengerExpObj[i].transform.GetChild(0).GetComponent<Image>().sprite = charMonitor.Scavenger.characterThumb;
@@ -273,6 +272,7 @@ public class BattleInfoManager : MonoBehaviour {
                     scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
                     scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
                 }
+                dataController.AddExp(charMonitor.Scavenger);
             }
             i++;
         }
@@ -282,8 +282,8 @@ public class BattleInfoManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         scavengerExp.SetActive(false);
 
-        //StartCoroutine(ShowVictoryLootBox());
-        //yield return new WaitForSeconds(5.0f);
+        StartCoroutine(ShowVictoryLootBox());
+        yield return new WaitForSeconds(5.0f);
 
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
         battleController.BattleEnd();
@@ -323,7 +323,6 @@ public class BattleInfoManager : MonoBehaviour {
             {
                 // Get scavenger data, add exp, then save before the animations
                 CharacterMonitor charMonitor = scavObj.GetComponent<CharacterMonitor>();
-                //dataController.AddExp(charMonitor.Scavenger, expReward);
 
                 // Set scavenger icon, name, current level
                 scavengerExpObj[i].transform.GetChild(0).GetComponent<Image>().sprite = charMonitor.Scavenger.characterThumb;
@@ -408,6 +407,7 @@ public class BattleInfoManager : MonoBehaviour {
                     scavengerExpObj[i].transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
                     scavengerExpObj[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = "MAX LEVEL";
                 }
+                dataController.AddExp(charMonitor.Scavenger);
             }
             i++;
         }
@@ -417,8 +417,8 @@ public class BattleInfoManager : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         scavengerExp.SetActive(false);
 
-        //StartCoroutine(ShowVictoryLootBox());
-        //yield return new WaitForSeconds(5.0f);
+        StartCoroutine(ShowVictoryLootBox());
+        yield return new WaitForSeconds(5.0f);
 
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
         battleController.BattleEnd();

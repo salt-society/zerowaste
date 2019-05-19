@@ -313,47 +313,15 @@ public class DataController : MonoBehaviour
         }
     }
 
-    public void AddExp(Player scavengerToEnhance, int expToAdd)
+    public void AddExp(Player scavengerToEnhance)
     {
         LevelRequirements levelReq = new LevelRequirements();
         foreach (Player scavenger in scavengerRoster)
         {
             if (scavenger.characterId.Equals(scavengerToEnhance.characterId))
             {
-                // Check if Scavenger can still level up
-                if (scavenger.currentLevel < 30)
-                {
-                    // Loop while there's exp left to add
-                    while (expToAdd > 0)
-                    {
-                        // Check if exp to add plus scavenger's current exp exceeds level requirement
-                        if ((scavenger.currentExp + expToAdd) >= levelReq.expReq[scavenger.currentLevel - 1])
-                        {
-                            // Since exp requirement to level up is reached,
-                            // check if next level is less than level cap
-                            if (scavenger.currentLevel++ <= scavenger.currentLevelCap)
-                            {
-                                // Level up scav, reset exp, subtract exp requirment from exp to add
-                                scavenger.currentLevel++;
-                                scavenger.currentExp = 0;
-                                expToAdd -= levelReq.expReq[scavenger.currentLevel - 1] - scavenger.currentExp;
-                            }
-                            else
-                            // If not, reset current exp cause scavenger will not
-                            // level up until cap is broken and increase
-                            {
-                                scavenger.currentExp = 0;
-                                expToAdd -= expToAdd;
-                            }
-                        }
-                        // If not, just add the exp
-                        else
-                        {
-                            scavenger.currentExp += expToAdd;
-                            expToAdd -= expToAdd;
-                        }
-                    }
-                }
+                scavenger.currentLevel = scavengerToEnhance.currentLevel;
+                scavenger.currentExp = scavengerToEnhance.currentExp;
 
                 // Save
                 SaveScavenger(scavenger);
@@ -447,10 +415,14 @@ public class DataController : MonoBehaviour
     public void AddScrap(int scrap)
     {
         currentSaveData.AddScrap(scrap);
+        SaveSaveData();
+        SaveGameData();
     }
 
     public void UseScrap(int scrap)
     {
         currentSaveData.UseScrap(scrap);
+        SaveSaveData();
+        SaveGameData();
     }
 }
