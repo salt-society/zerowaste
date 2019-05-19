@@ -118,7 +118,7 @@ public class CustceneController : MonoBehaviour
             }
 
             // Load next scene base on cutscene's nextSceneId
-            nextSceneId = dataController.GetNextSceneId("Loading Data");
+            nextSceneId = dataController.GetNextSceneId("Loading");
             StartCoroutine(LoadScene());
         }
     }

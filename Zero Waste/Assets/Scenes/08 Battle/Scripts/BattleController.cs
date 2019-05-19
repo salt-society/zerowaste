@@ -119,7 +119,7 @@ public class BattleController : MonoBehaviour {
             scavengerTemp.Add(dataController.scavengerRoster[0]);
             dataController.scavengerCount = scavengerTemp.Count;
 
-            mutantTemp.Add(dataController.allWasteList[0]);
+            mutantTemp.Add(dataController.allWasteList[2]);
             dataController.mutantCount = mutantTemp.Count;
 
             mutantTemp[0].baseLevel = dataController.currentBattle.wastePool.baseLevel;
