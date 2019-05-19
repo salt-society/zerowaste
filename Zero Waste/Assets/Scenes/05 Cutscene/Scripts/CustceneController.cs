@@ -94,51 +94,41 @@ public class CustceneController : MonoBehaviour
                 {
                     // Battles can be plain cutscenes or with cutscene at start/end
                     // If a battle is a major cutscene/end cutscene, mark it finished
-                    // dataController.currentSaveData.FinishedBattle(battleId);
+                    dataController.currentSaveData.FinishedBattle(battleId);
 
                     // Unlock next level(s)
-                    // dataController.UnlockLevels(dataController.currentCutscene.nextLevels, dataController.currentCutscene.levelIds);
+                    dataController.UnlockLevels(dataController.currentCutscene.nextLevels, dataController.currentCutscene.levelIds);
 
                     // Save whatever progress made
-                    // dataController.SaveSaveData();
-                    // dataController.SaveGameData();
+                    dataController.SaveSaveData();
+                    dataController.SaveGameData();
+
+                    dataController.nextScene = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
                 }
             }
             else
             {
-
+                // Tutorial
                 if (currentCutscene.cutsceneId == 0)
                 {
+                    // Place tutorial on currentBattle
                     dataController.currentBattle = dataController.allBattles[0];
+                    dataController.nextScene = dataController.GetNextSceneId("Battle");
                 }
-
-                if (currentCutscene.cutsceneId == 1)
-                {
-                    dataController.currentBattle = dataController.allBattles[1];
-                }
-
-                // Cutscenes that are not part of battles, for example, prologue/epilogue/zwa
-                // can unlock stuffs such as next level to make the game progress
-                // dataController.currentSaveData.FinishedCutscene(currentCutscene.cutsceneId);
-                // dataController.UnlockLevels(currentCutscene.nextLevels, currentCutscene.levelIds);
-
-                // Save whatever progress made
-                // dataController.SaveSaveData();
-                // dataController.SaveGameData();
             }
 
             // Load next scene base on cutscene's nextSceneId
-            nextSceneId = dataController.GetNextSceneId(currentCutscene.nextScene);
+            nextSceneId = dataController.GetNextSceneId("Loading Data");
             StartCoroutine(LoadScene());
         }
     }
 
     IEnumerator LoadScene()
     {
-        yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
+        yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(nextSceneId);
     }

@@ -20,31 +20,30 @@ public class LoadingController : MonoBehaviour
 
         if (dataController != null)
         {
-            
-
-            if (dataController.nextScene == 0)
+            /*if (dataController.nextScene == 0)
             {
-
+                nextScene = dataController.GetNextSceneId("Splash Screen");
+                StartCoroutine(LoadScene());
             }
             else if (dataController.nextScene == 1)
             {
-
+                nextScene = dataController.GetNextSceneId("Disclaimer");
+                StartCoroutine(LoadScene());
             }
             else if (dataController.nextScene == 3)
             {
-                if (dataController.currentCutscene != null)
-                {
-                    nextScene = dataController.GetNextSceneId("Cutscene");
-                    StartCoroutine(LoadScene());
-                }
+                nextScene = dataController.GetNextSceneId("Loading Data");
+                StartCoroutine(LoadScene());
             }
             else if (dataController.nextScene == 4)
             {
-
+                nextScene = dataController.GetNextSceneId("Title Screen");
+                StartCoroutine(LoadScene());
             }
             else if (dataController.nextScene == 5)
             {
-
+                nextScene = dataController.GetNextSceneId("Cutscene");
+                StartCoroutine(LoadScene());
             }
             else if (dataController.nextScene == 6)
             {
@@ -53,12 +52,17 @@ public class LoadingController : MonoBehaviour
             }
             else if (dataController.nextScene == 7)
             {
-
+                nextScene = dataController.GetNextSceneId("Map");
+                StartCoroutine(LoadScene());
             }
             else if (dataController.nextScene == 8)
             {
+                nextScene = dataController.GetNextSceneId("Battle");
+                StartCoroutine(LoadScene());
+            }*/
 
-            }
+            nextScene = dataController.nextScene;
+            StartCoroutine(LoadScene());
         }
         else
         {

@@ -37,6 +37,11 @@ public class HQController : AreaController
             storyGrid.GetComponent<StoryGrid>().parentExit = parentExit;
             storyGrid.GetComponent<StoryGrid>().PopulateGrid();
         }
+        else if (partIdentifier.partName.Equals("Map"))
+        {
+            dataController.nextScene = dataController.GetNextSceneId("Map");
+            StartCoroutine(LoadScene());
+        }
         
         return base.ShowPartIE(partIdentifier);
     }
@@ -56,7 +61,6 @@ public class HQController : AreaController
     public void Close()
     {
         StartCoroutine(ClosePartIE());
-        CloseConfirmation();
     }
 
     public override void CloseArea()
@@ -71,6 +75,7 @@ public class HQController : AreaController
             return;
 
         dataController.nextScene = dataController.GetNextSceneId(dataController.currentStory.story.nextScene);
+        dataController.currentBattle = dataController.currentStory.story;
         dataController.currentCutscene = dataController.currentStory.story.startCutscene;
         StartCoroutine(LoadScene());
     }

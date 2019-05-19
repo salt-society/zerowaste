@@ -31,14 +31,14 @@ public class GameDataController : MonoBehaviour
                     dataController.LoadScavengers(dataController.currentSaveData.scavengerList);
                     dataController.currentSaveData.LaunchGameDetails();
                 }
+
+                // Load next scene
+                StartCoroutine(LoadScene());
             }
             else
             {
                 StartCoroutine(CreateGameData());
             }
-
-            // Load next scene
-            StartCoroutine(LoadScene());
         }
     }
 
@@ -50,6 +50,11 @@ public class GameDataController : MonoBehaviour
         dataController.CreateGameData();
         dataController.NewSaveData();
         message.text = "Game data created. Auto Save feature is on.";
+
+        yield return new WaitForSeconds(0.5f);
+
+        // Load next scene
+        StartCoroutine(LoadScene());
     }
 
     IEnumerator LoadScene()

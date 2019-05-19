@@ -82,7 +82,10 @@ public class TitleScreenController : MonoBehaviour
             dataController.currentSaveData.AddBooster(6, 19);
             dataController.currentSaveData.AddBooster(3, 45);
 
+            dataController.currentSaveData.currentAreaId++;
+
             // Add scavengers to roster, default male
+            dataController.currentSaveData.gender = "Male";
             AddDefaultScavengers("Male");
 
             // Scene testing
@@ -95,17 +98,13 @@ public class TitleScreenController : MonoBehaviour
         {
             // Check how many cutscenes are unlocked
             // No cutscenes = New Game
-            if (dataController.currentSaveData.battles == null)
+            if (dataController.currentSaveData.battles.Count == 0)
             {
                 // Get next scene id
                 dataController.nextScene = dataController.GetNextSceneId("Cutscene");
 
                 // Unlock prologue, set cutscene details
-                // dataController.currentSaveData.UnlockCutscene(0, false);
-
-                // Then save changes made in save file
-                dataController.SaveSaveData();
-                dataController.SaveGameData();
+                dataController.currentSaveData.UnlockCutscene(0, false);
 
                 // Show gender panel so player can choose which
                 // main character he/she will play
@@ -118,15 +117,12 @@ public class TitleScreenController : MonoBehaviour
                 {
                     if (!dataController.currentSaveData.battleTutorial)
                     {
+                        dataController.currentBattle = dataController.allBattles[0];
 
-                    }
-                    else if (!dataController.currentSaveData.zwaTutorial)
-                    {
-
-                    }
-                    else if (!dataController.currentSaveData.mapTutorial)
-                    {
-
+                        dataController.nextScene = dataController.GetNextSceneId("Battle");
+                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
+                        StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
+                        StartCoroutine(LoadScene());
                     }
                     else
                     {
@@ -255,11 +251,10 @@ public class TitleScreenController : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(dataController.GetNextSceneId("Loading"));
     }

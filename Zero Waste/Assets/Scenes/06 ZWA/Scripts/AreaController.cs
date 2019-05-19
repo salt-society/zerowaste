@@ -58,6 +58,9 @@ public class AreaController : MonoBehaviour
 
     public virtual void CloseArea()
     {
+        partNames[4].SetActive(false);
+        currentPart.partSelected.SetActive(false);
+
         closeConfirmation.SetActive(!closeConfirmation.activeInHierarchy);
         areaBackground.SetActive(!areaBackground.activeInHierarchy);
         areaUI.SetActive(!areaUI.activeInHierarchy);
@@ -74,14 +77,14 @@ public class AreaController : MonoBehaviour
 
         partIdentifier.Highlight();
         yield return new WaitForSeconds(1.0f);
-        parts[partIdentifier.partId].SetActive(!parts[partIdentifier.partId].activeInHierarchy);
+        parts[partIdentifier.partId].SetActive(true);
 
         isInteractable = false;
     }
 
     public virtual IEnumerator ClosePartIE() 
     {
-        parts[currentPart.partId].SetActive(!parts[currentPart.partId].activeInHierarchy);
+        parts[currentPart.partId].SetActive(false);
         yield return new WaitForSeconds(0.5f);
         currentPart.Highlight();
 

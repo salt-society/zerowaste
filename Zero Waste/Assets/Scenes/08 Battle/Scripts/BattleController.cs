@@ -64,7 +64,7 @@ public class BattleController : MonoBehaviour {
         Time.timeScale = 1.25f;
 
         PlayBGM();
-        // MarkAsPlayed();
+        MarkAsPlayed();
         CheckMode();
     }
 
@@ -894,6 +894,11 @@ public class BattleController : MonoBehaviour {
         }
         else
         {
+            if (dataController.currentBattle.isTutorial)
+            {
+
+            }
+
             int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
             dataController.currentBattle = dataController.allBattles[1];
             SceneManager.LoadScene(nextSceneId);

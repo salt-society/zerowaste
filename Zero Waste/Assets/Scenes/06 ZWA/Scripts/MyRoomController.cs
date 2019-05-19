@@ -64,6 +64,11 @@ public class MyRoomController : AreaController
         return base.ClosePartIE();
     }
 
+    public override void CloseArea()
+    {
+        base.CloseArea();
+    }
+
     // Shelf
     public void CloseMutantInfo()
     {
@@ -82,15 +87,8 @@ public class MyRoomController : AreaController
 
         if (subpartId == 0)
         {
-            if (!bedSubparts[subpartId].activeInHierarchy)
-            {
-                saveGrid.GetComponent<SaveGrid>().PopulateGrid();
-            }
-            else
-            {
-                saveGrid.GetComponent<SaveGrid>().RemoveCells();
-            }
-            
+            saveGrid.GetComponent<SaveGrid>().dataController = dataController;
+            saveGrid.GetComponent<SaveGrid>().DisplaySaveDetails();
         }
     }
 }
