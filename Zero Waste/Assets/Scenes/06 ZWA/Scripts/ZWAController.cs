@@ -29,8 +29,6 @@ public class ZWAController : MonoBehaviour
     void Start()
     {
         dataController = FindObjectOfType<DataController>();
-
-
     }
 
     public void OpenArea(int areaId)

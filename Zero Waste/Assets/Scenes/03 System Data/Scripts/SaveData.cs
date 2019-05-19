@@ -7,6 +7,7 @@ using UnityEngine;
 public class SaveData {
 
     [Header("Save Details")]
+    public int saveId;
     public string fileName;
     public int playCount;
 

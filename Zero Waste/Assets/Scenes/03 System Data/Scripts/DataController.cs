@@ -30,7 +30,7 @@ public class DataController : MonoBehaviour
     public List<Player> scavengerRoster;
 
     [Header("Item Data")]
-    public Booster[] boosters;
+    public List<Booster> boosters;
 
     [Header("Battle Data")]
     public List<Battle> allBattles;
@@ -57,6 +57,10 @@ public class DataController : MonoBehaviour
     [Header("ZWA - HQ")]
     public StoryLevel currentStory;
 
+    [Header("ZWA - My Room")]
+    public MutantInfo mutantInfo;
+    public BoosterInfo boosterInfo;
+
     void Awake()
     {
         if (instance == null)
@@ -70,7 +74,7 @@ public class DataController : MonoBehaviour
     void OnApplicationQuit()
     {
         // TEMP
-        //DeleteAllData();
+        DeleteAllData();
     }
 
     public void CreateGameData()
@@ -144,6 +148,7 @@ public class DataController : MonoBehaviour
                 newSaveData.fileName = saveDataFileName;
                 newSaveData.InitializeSaveData();
                 currentGameData.saves.Add(newSaveData);
+                newSaveData.saveId = currentGameData.saves.Count;
                 currentGameData.currentNoOfSaves++;
                 currentGameData.currentSave = newSaveData;
                 this.currentSaveData = newSaveData;

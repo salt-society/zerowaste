@@ -76,9 +76,11 @@ public class TitleScreenController : MonoBehaviour
         if (dataController.testing)
         {
             // Unlock areas/nodes/battles
-            dataController.currentSaveData.UnlockBattle(7, false);
-            dataController.currentSaveData.UnlockBattle(1, true);
-            dataController.currentSaveData.UnlockBattle(13, false);
+            dataController.currentSaveData.EncounteredMutant(0);
+            dataController.currentSaveData.EncounteredMutant(1);
+            dataController.currentSaveData.EncounteredMutant(2);
+            dataController.currentSaveData.AddBooster(6, 19);
+            dataController.currentSaveData.AddBooster(3, 45);
 
             // Add scavengers to roster, default male
             AddDefaultScavengers("Male");

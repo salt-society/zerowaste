@@ -68,7 +68,7 @@ public class AreaController : MonoBehaviour
         isInteractable = false;
     }
 
-    public virtual IEnumerator ShowPart(PartIdentifier partIdentifier)
+    public virtual IEnumerator ShowPartIE(PartIdentifier partIdentifier)
     {
         currentPart = partIdentifier;
 
@@ -79,7 +79,7 @@ public class AreaController : MonoBehaviour
         isInteractable = false;
     }
 
-    public virtual IEnumerator ClosePart() 
+    public virtual IEnumerator ClosePartIE() 
     {
         parts[currentPart.partId].SetActive(!parts[currentPart.partId].activeInHierarchy);
         yield return new WaitForSeconds(0.5f);
@@ -117,7 +117,7 @@ public class AreaController : MonoBehaviour
                         if (part.GetComponent<PartIdentifier>() != null)
                         {
                             PartIdentifier partIdentifier = part.GetComponent<PartIdentifier>();
-                            StartCoroutine(ShowPart(partIdentifier));
+                            StartCoroutine(ShowPartIE(partIdentifier));
                         }
                         else
                         {

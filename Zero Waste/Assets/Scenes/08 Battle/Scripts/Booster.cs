@@ -5,9 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Booster", menuName = "Item/Booster")]
 public class Booster : ScriptableObject
 {
+    public int boosterId;
+
+    [Space]
     public Sprite icon;
+    public Sprite selectedIcon;
     public string boosterName;
     public string type;
+    public Sprite typeIcon;
 
     [Space]
     public int particleIndex;

@@ -12,6 +12,8 @@ public class HQController : AreaController
     public GameObject storyGrid;
     public GameObject parentExit;
 
+    private string currentPartName;
+
     public override void Start()
     {
         base.Start();
@@ -23,26 +25,38 @@ public class HQController : AreaController
         exitButton.SetActive(!exitButton.activeInHierarchy);
     }
 
-    public override IEnumerator ShowPart(PartIdentifier partIdentifier)
+    public override IEnumerator ShowPartIE(PartIdentifier partIdentifier)
     {
         ShowHideExit();
-        storyGrid.GetComponent<StoryGrid>().dataController = dataController;
-        storyGrid.GetComponent<StoryGrid>().storyInfo = storyInfo;
-        storyGrid.GetComponent<StoryGrid>().parentExit = parentExit;
-        storyGrid.GetComponent<StoryGrid>().PopulateGrid();
-        return base.ShowPart(partIdentifier);
+        currentPartName = partIdentifier.partName;
+
+        if (partIdentifier.partName.Equals("Story"))
+        {
+            storyGrid.GetComponent<StoryGrid>().dataController = dataController;
+            storyGrid.GetComponent<StoryGrid>().storyInfo = storyInfo;
+            storyGrid.GetComponent<StoryGrid>().parentExit = parentExit;
+            storyGrid.GetComponent<StoryGrid>().PopulateGrid();
+        }
+        
+        return base.ShowPartIE(partIdentifier);
     }
 
-    public override IEnumerator ClosePart()
+    public override IEnumerator ClosePartIE()
     {
         ShowHideExit();
-        storyGrid.GetComponent<StoryGrid>().RemoveCells();
-        return base.ClosePart();
+
+        if (currentPartName.Equals("Story"))
+        {
+            storyGrid.GetComponent<StoryGrid>().RemoveCells();
+        }
+
+        return base.ClosePartIE();
     }
 
     public void Close()
     {
-        StartCoroutine(ClosePart());
+        StartCoroutine(ClosePartIE());
+        CloseConfirmation();
     }
 
     public override void CloseArea()
@@ -86,7 +100,7 @@ public class HQController : AreaController
                         if (part.GetComponent<PartIdentifier>() != null)
                         {
                             PartIdentifier partIdentifier = part.GetComponent<PartIdentifier>();
-                            StartCoroutine(ShowPart(partIdentifier));
+                            StartCoroutine(ShowPartIE(partIdentifier));
                         }
                         else
                         {

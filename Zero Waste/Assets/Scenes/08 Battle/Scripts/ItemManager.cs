@@ -41,7 +41,7 @@ public class ItemManager : MonoBehaviour
     {
         if (dataController != null)
         {
-            if (dataController.boosters.Length == 0)
+            if (dataController.boosters.Count == 0)
             {
                 noBoosterMessage.SetActive(true);
             }

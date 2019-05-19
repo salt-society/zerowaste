@@ -11,14 +11,14 @@ public class TrainingController : AreaController
     // Variable to hold what number of break is available
     private int levelBreak;
 
-    public override IEnumerator ShowPart(PartIdentifier partIdentifier)
+    public override IEnumerator ShowPartIE(PartIdentifier partIdentifier)
     {
-        return base.ShowPart(partIdentifier);
+        return base.ShowPartIE(partIdentifier);
     }
 
-    public override IEnumerator ClosePart()
+    public override IEnumerator ClosePartIE()
     {
-        return base.ClosePart();
+        return base.ClosePartIE();
     }
 
     public override void Update()
