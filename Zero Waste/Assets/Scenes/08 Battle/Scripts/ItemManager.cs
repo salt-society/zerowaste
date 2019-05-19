@@ -50,7 +50,7 @@ public class ItemManager : MonoBehaviour
                 noBoosterMessage.SetActive(false);
 
                 int i = 0;
-                foreach (Booster booster in dataController.boosters)
+                foreach (Booster booster in dataController.boosterInBattle)
                 {
                     boosters[i].GetComponent<Image>().sprite = booster.icon;
                     boosters[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = booster.boosterName;

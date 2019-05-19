@@ -146,7 +146,7 @@ public class DialogueManager : MonoBehaviour
                 {
                     if (dataController != null)
                     {
-                        dialogueBox.transform.GetChild(3).GetChild(0).GetChild(1).gameObject.
+                        dialogueBox.transform.GetChild(3).gameObject.
                                 GetComponent<Image>().sprite = dataController.scavengerRoster[1].characterHalf;
 
                         dialogueBox.transform.GetChild(3).gameObject.
