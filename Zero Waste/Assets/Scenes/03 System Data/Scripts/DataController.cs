@@ -405,6 +405,13 @@ public class DataController : MonoBehaviour
                 currentSaveData.UnlockBattle(levelIds[index], false);
                 index++;
             }
+
+            if(level.Equals("Scavenger"))
+            {
+                AddScavenger(allScavengersList[levelIds[index]]);
+                SaveScavenger(allScavengersList[levelIds[index]]);
+                index++;
+            }
         }
 
         // Save every time levels are unlocked

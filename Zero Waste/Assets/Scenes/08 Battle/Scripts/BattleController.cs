@@ -157,7 +157,10 @@ public class BattleController : MonoBehaviour {
             foreach (Enemy mutant in dataController.mutantTeam)
             {
                 if (mutant != null)
+                {
                     mutantTemp.Add(mutant);
+                    dataController.currentSaveData.EncounteredMutant(mutant.characterId);
+                }
             }
 
             dataController.scavengerCount = scavengerTemp.Count;
