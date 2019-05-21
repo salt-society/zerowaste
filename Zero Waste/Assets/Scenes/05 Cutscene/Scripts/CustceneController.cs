@@ -103,7 +103,7 @@ public class CustceneController : MonoBehaviour
                     dataController.SaveSaveData();
                     dataController.SaveGameData();
 
-                    dataController.nextScene = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
+                    dataController.nextScene = dataController.GetNextSceneId(dataController.currentCutscene.nextScene);
                 }
             }
             else
