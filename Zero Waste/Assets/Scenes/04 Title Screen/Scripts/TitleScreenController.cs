@@ -82,14 +82,14 @@ public class TitleScreenController : MonoBehaviour
             dataController.currentSaveData.AddBooster(6, 19);
             dataController.currentSaveData.AddBooster(3, 45);
 
-            dataController.currentSaveData.currentAreaId++;
+            dataController.currentSaveData.currentNodeId = 10;
 
             // Add scavengers to roster, default male
             dataController.currentSaveData.gender = "Male";
             AddDefaultScavengers("Male");
 
             // Scene testing
-            dataController.nextScene = dataController.GetNextSceneId("ZWA");
+            dataController.nextScene = dataController.GetNextSceneId("Map");
             StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
             StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
             StartCoroutine(LoadScene());

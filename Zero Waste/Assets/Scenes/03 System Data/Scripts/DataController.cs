@@ -365,7 +365,7 @@ public class DataController : MonoBehaviour
                 }
             case "Map":
                 {
-                    return 7;
+                    return 9;
                 }
             case "Battle":
                 {

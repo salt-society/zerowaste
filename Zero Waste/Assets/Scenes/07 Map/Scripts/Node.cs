@@ -7,6 +7,7 @@ public class Node : ScriptableObject
 {
     [Header("Details")]
     public Sprite nodeIcon;
+    public Sprite nodeBackground;
 
     [Space]
     public int nodeId;
