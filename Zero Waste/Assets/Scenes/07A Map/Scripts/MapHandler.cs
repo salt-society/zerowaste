@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MapHandler : MonoBehaviour
@@ -24,6 +25,7 @@ public class MapHandler : MonoBehaviour
     private DataController dataController;
 
     // Necessary variables
+
     // This is to hold the area that is selected or the user has come from
     private Areas area;
 
@@ -70,6 +72,7 @@ public class MapHandler : MonoBehaviour
             {
                 areaImages[CTR].GetComponent<Button>().interactable = true;
                 areaImages[CTR].transform.GetChild(0).gameObject.SetActive(false);
+                areaImages[CTR].transform.GetChild(1).gameObject.SetActive(true);
             }
                 
             CTR++;

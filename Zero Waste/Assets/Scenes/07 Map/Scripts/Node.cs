@@ -16,6 +16,9 @@ public class Node : ScriptableObject
     public Color threatLevel;
 
     [Space]
+    public WastePool wastePool;
+
+    [Space]
     public Areas area;
 
     [Space]

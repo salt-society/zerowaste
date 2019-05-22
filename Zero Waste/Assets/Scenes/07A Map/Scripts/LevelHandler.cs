@@ -19,6 +19,8 @@ public class LevelHandler : MonoBehaviour
 
     #region Private Variables
 
+    private Node node;
+
     #endregion
 
     // Setup the Screen with the selected level
@@ -26,6 +28,18 @@ public class LevelHandler : MonoBehaviour
     {
         nodeScreen.SetActive(true);
         nodeScreen.GetComponent<NodeHandler>().SetupNodes(area);
+    }
+
+    // Set the selected node
+    public void SetSelectedNode(Node selectedNode)
+    {
+        node = selectedNode;
+    }
+
+    // Empty the selected node
+    public void EmptySelectedNode()
+    {
+        node = null;
     }
 
     // Close the whole node screen
