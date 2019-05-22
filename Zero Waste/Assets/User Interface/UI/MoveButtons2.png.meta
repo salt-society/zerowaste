@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: b1ecae178320f7a458296bfa7664ad91
+guid: f818902438606b6488f19a1845db58b4
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Plus and Bubble_0
-    21300002: Plus and Bubble_1
+    21300000: MoveButtons2_0
+    21300002: MoveButtons2_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -119,41 +119,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Plus and Bubble_0
+      name: MoveButtons2_0
       rect:
         serializedVersion: 2
-        x: 1795
+        x: 0
         y: 0
-        width: 1498
-        height: 1496
+        width: 327
+        height: 359
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb11ee8977e7cbf4089f92aedb3bad82
+      spriteID: efdd3a3f43c324c4486d4bc582a31cec
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Plus and Bubble_1
+      name: MoveButtons2_1
       rect:
         serializedVersion: 2
-        x: 1813
-        y: 7
-        width: 1480
-        height: 1483
+        x: 370
+        y: 0
+        width: 327
+        height: 359
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b611cf6a12e1b6a499198ffda2289d94
+      spriteID: f71495e6d94d36340bbae3baad7b4df8
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 525c96e00ea385c4896e3766f0498271
+    spriteID: 68701cb092c75584693e49d175e57fb0
     vertices: []
     indices: 
     edges: []

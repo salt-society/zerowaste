@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopController : AreaController
+public class ShopController : MonoBehaviour
 {
     [Header("Shop Items")]
     public ShopItems[] ShopItems;
 
 
-    // Display all available items
+    /*// Display all available items
     public List<ShopItems> DisplayAvailableShopItems()
     {
         int currentID = dataController.currentSaveData.currentBattleId;
@@ -36,5 +36,5 @@ public class ShopController : AreaController
         // Add to Inventory
 
         // Save data here
-    }
+    }*/
 }

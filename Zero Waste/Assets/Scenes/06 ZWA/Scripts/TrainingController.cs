@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TrainingController : AreaController
+public class TrainingController : MonoBehaviour
 {
     // Variable to hold scraps needed to break
     private int neededScraps;
@@ -11,22 +11,7 @@ public class TrainingController : AreaController
     // Variable to hold what number of break is available
     private int levelBreak;
 
-    public override IEnumerator ShowPartIE(PartIdentifier partIdentifier)
-    {
-        return base.ShowPartIE(partIdentifier);
-    }
-
-    public override IEnumerator ClosePartIE()
-    {
-        return base.ClosePartIE();
-    }
-
-    public override void Update()
-    {
-        base.Update();
-    }
-
-    // Show scavenger roster
+    /*// Show scavenger roster
     public List<Player> DisplayCurrentRoster()
     {
         return dataController.scavengerRoster;
@@ -111,5 +96,5 @@ public class TrainingController : AreaController
 
         // Close the screens
         
-    }
+    }*/
 }

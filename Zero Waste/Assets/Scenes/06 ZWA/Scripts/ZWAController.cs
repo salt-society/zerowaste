@@ -9,20 +9,13 @@ public class ZWAController : MonoBehaviour
     private DataController dataController;
 
     [Space]
-    public GameObject raycastBlock;
+    public List<GameObject> locations;
+    public List<GameObject> locationDoorHighlights;
+    public List<GameObject> doorTooltips;
 
     [Space]
-    public GameObject zwaSign;
-    public GameObject mapPoints;
-
-    [Space]
-    public List<AreaController> areaCtrls;
-
-    [Space]
-    public List<Button> points;
-    public List<GameObject> areasUI;
-    public List<GameObject> areas;
-
+    public List<GameObject> newIcons;
+    
     [Space]
     public GameObject fadeObject;
 
@@ -31,14 +24,41 @@ public class ZWAController : MonoBehaviour
         dataController = FindObjectOfType<DataController>();
     }
 
-    public void OpenArea(int areaId)
+    public void OpenLocation(int locId)
     {
-        zwaSign.SetActive(!zwaSign.activeInHierarchy);
-        mapPoints.SetActive(!mapPoints.activeInHierarchy);
+        if (locations[locId].activeInHierarchy == false)
+        {
+            locations[locId].SetActive(!locations[locId].activeInHierarchy);
+        }
+        else
+        {
+            if (locId == 0)
+            {
+                locations[locId].SetActive(!locations[locId].activeInHierarchy);
+                return;
+            }
+            else
+            {
+                StartCoroutine(CloseLocation(locId));
+            }
+        }
+        
+    }
 
-        areasUI[areaId].SetActive(!areasUI[areaId].activeInHierarchy);
-        areas[areaId].SetActive(!areas[areaId].activeInHierarchy);
+    IEnumerator CloseLocation(int locId)
+    {
+        doorTooltips[locId].SetActive(!doorTooltips[locId].activeInHierarchy);
+        locationDoorHighlights[locId].SetActive(!locationDoorHighlights[locId].activeInHierarchy);
 
-        StartCoroutine(areaCtrls[areaId].ShowInteractableParts());
+        yield return new WaitForSeconds(0.75f);
+
+        doorTooltips[locId].GetComponent<Animator>().SetBool("Hide", true);
+        locationDoorHighlights[locId].SetActive(!locationDoorHighlights[locId].activeInHierarchy);
+
+        yield return new WaitForSeconds(0.15f);
+        doorTooltips[locId].SetActive(!doorTooltips[locId].activeInHierarchy);
+        doorTooltips[locId].GetComponent<Animator>().SetBool("Hide", false);
+
+        locations[locId].SetActive(!locations[locId].activeInHierarchy);
     }
 }
