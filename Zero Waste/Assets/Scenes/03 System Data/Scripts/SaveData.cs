@@ -45,6 +45,9 @@ public class SaveData {
     public List<int> mutantsEncounteredList;
     public Dictionary<int, int> boosterList;
 
+    [Space]
+    public List<int> lastPartyUsed;
+
     public void InitializeSaveData()
     {
         // Date when Save was created

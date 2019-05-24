@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelHandler : MonoBehaviour
@@ -18,6 +19,8 @@ public class LevelHandler : MonoBehaviour
     #endregion
 
     #region Private Variables
+
+    private DataController dataController;
 
     private Node node;
 
@@ -64,6 +67,7 @@ public class LevelHandler : MonoBehaviour
     public void SetupTeamSelect()
     {
         teamSelectScreen.SetActive(true);
+        teamSelectScreen.GetComponent<TeamSelectHandler>().SetupTeamSelect();
     }
 
     // Close the Team Select Screen
@@ -73,9 +77,10 @@ public class LevelHandler : MonoBehaviour
     }
 
     // Open the scavenger select screen
-    public void OpenScavengerSelect()
+    public void OpenScavengerSelect(int chosenSlot)
     {
         rosterScreen.SetActive(true);
+        rosterScreen.GetComponent<RosterHandler>().ShowRoster(chosenSlot);
     }
 
     // Close the scavenger select screen
@@ -89,5 +94,21 @@ public class LevelHandler : MonoBehaviour
     {
         gameObject.GetComponent<Image>().sprite = nodeBackground;
         overlay.GetComponent<Image>().sprite = nodeBackground;
+    }
+
+    // Go to battle with the necessary information
+    public void GoToBattle(List<Player> playerTeam)
+    {
+        dataController.currentNode = node;
+        dataController.scavengerTeam = playerTeam.ToArray();
+        dataController.mutantTeam = node.wastePool.SelectWasteFromPool();
+
+        int nextScene = dataController.GetNextSceneId("Battle");
+        SceneManager.LoadScene(nextScene);
+    }
+
+    private void Awake()
+    {
+        dataController = FindObjectOfType<DataController>();
     }
 }
