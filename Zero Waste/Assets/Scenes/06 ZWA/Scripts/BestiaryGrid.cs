@@ -25,6 +25,7 @@ public class BestiaryGrid : MonoBehaviour
 
     public void PopulateGrid()
     {
+        dataController = FindObjectOfType<DataController>();
         if (dataController == null)
             return;
 

@@ -92,7 +92,7 @@ public class TitleScreenController : MonoBehaviour
             dataController.AddScavenger(newCharacter);
 
             // Scene testing
-            dataController.nextScene = dataController.GetNextSceneId("Map");
+            dataController.nextScene = dataController.GetNextSceneId("ZWA");
             StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
             StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
             StartCoroutine(LoadScene());
