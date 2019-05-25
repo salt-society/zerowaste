@@ -12,7 +12,8 @@ public class SelectHandler : MonoBehaviour
     {
         heldPlayer = player;
 
-        DesignSlot();
+        if(heldPlayer != null)
+            DesignSlot();
     }
 
     private void DesignSlot()

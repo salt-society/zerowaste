@@ -169,7 +169,7 @@ public class BattleInfoManager : MonoBehaviour {
 
     public IEnumerator Victory(GameObject[] scavObjs)
     {
-        StartCoroutine(audioManager.StopSound(dataController.currentBattle.BGM, 1f));
+        StartCoroutine(audioManager.StopSound(dataController.currentNode.BGM, 1f));
         audioManager.PlaySound("Victory");
 
         battleResult.SetActive(true);
@@ -304,7 +304,7 @@ public class BattleInfoManager : MonoBehaviour {
 
     public IEnumerator DefeatWithScraps(GameObject[] scavObjs)
     {
-        StartCoroutine(audioManager.StopSound(dataController.currentBattle.BGM, 1f));
+        StartCoroutine(audioManager.StopSound(dataController.currentNode.BGM, 1f));
         audioManager.PlaySound("Defeat");
 
         battleResult.SetActive(true);
@@ -431,7 +431,7 @@ public class BattleInfoManager : MonoBehaviour {
 
     public IEnumerator DefeatWithoutScrap()
     {
-        StartCoroutine(audioManager.StopSound(dataController.currentBattle.BGM, 1f));
+        StartCoroutine(audioManager.StopSound(dataController.currentNode.BGM, 1f));
         audioManager.PlaySound("Defeat");
 
         battleResult.SetActive(true);

@@ -87,6 +87,9 @@ public class TitleScreenController : MonoBehaviour
             // Add scavengers to roster, default male
             dataController.currentSaveData.gender = "Male";
             AddDefaultScavengers("Male");
+            Player newCharacter = ScriptableObject.CreateInstance<Player>();
+            newCharacter = Instantiate(dataController.allScavengersList[4]);
+            dataController.AddScavenger(newCharacter);
 
             // Scene testing
             dataController.nextScene = dataController.GetNextSceneId("Map");

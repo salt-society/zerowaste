@@ -7,12 +7,14 @@ public class Node : ScriptableObject
 {
     [Header("Details")]
     public Sprite nodeIcon;
-    public Sprite nodeBackground;
+    public Sprite background;
 
     [Space]
     public int nodeId;
     public string nodeName;
     public string info;
+    public string BGM;
+    public bool isTutorial;
     public Color threatLevel;
 
     [Space]

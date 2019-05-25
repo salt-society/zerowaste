@@ -401,23 +401,16 @@ public class StatusManager : MonoBehaviour
 
         if (dataController != null)
         {
-            if (dataController.currentBattle.isBossBattle)
+            // Show mutant icons near PL Bar
+            i = 0;
+            foreach (Enemy mutant in mutantData)
             {
-                mutantStatusSection.transform.GetChild(5).gameObject.SetActive(true);
-            }
-            else
-            {
-                // Show mutant icons near PL Bar
-                i = 0;
-                foreach (Enemy mutant in mutantData)
+                // Make sure there's mutant in position
+                if (mutant != null)
                 {
-                    // Make sure there's mutant in position
-                    if (mutant != null)
-                    {
-                        mutantStatusPanel[i].SetActive(true);
-                        i++;
-                        yield return null;
-                    }
+                    mutantStatusPanel[i].SetActive(true);
+                    i++;
+                    yield return null;
                 }
             }
         }

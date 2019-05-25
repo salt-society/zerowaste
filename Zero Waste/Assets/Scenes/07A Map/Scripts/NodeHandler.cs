@@ -106,7 +106,7 @@ public class NodeHandler : MonoBehaviour
     private void SetupCurrentNode()
     {
         // Setup the image of the overlays
-        levelHandler.GetComponent<LevelHandler>().ChangeOverlay(unlockedNodes[nodeIndex].nodeBackground);
+        levelHandler.GetComponent<LevelHandler>().ChangeOverlay(unlockedNodes[nodeIndex].background);
 
         nodeIcon.sprite = unlockedNodes[nodeIndex].nodeIcon;
         nodeName.GetComponent<TextMeshProUGUI>().text = unlockedNodes[nodeIndex].nodeName;

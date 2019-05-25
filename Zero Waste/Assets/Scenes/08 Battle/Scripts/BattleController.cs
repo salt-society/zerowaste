@@ -64,7 +64,7 @@ public class BattleController : MonoBehaviour {
         Time.timeScale = 1.25f;
 
         PlayBGM();
-        MarkAsPlayed();
+        // MarkAsPlayed();
         CheckMode();
     }
 
@@ -84,8 +84,8 @@ public class BattleController : MonoBehaviour {
     {
         if (audioManager != null)
         {
-            if (!string.IsNullOrEmpty(dataController.currentBattle.BGM))
-                audioManager.PlaySound(dataController.currentBattle.BGM);
+            if (!string.IsNullOrEmpty(dataController.currentNode.BGM))
+                audioManager.PlaySound(dataController.currentNode.BGM);
         }
     }
 
@@ -93,7 +93,7 @@ public class BattleController : MonoBehaviour {
     {
         if (dataController != null)
         {
-            if (dataController.currentBattle.isTutorial)
+            if (dataController.currentNode.isTutorial)
             {
                 CreateBattleData();
                 BattleSetup();
@@ -122,8 +122,8 @@ public class BattleController : MonoBehaviour {
             mutantTemp.Add(dataController.allWasteList[2]);
             dataController.mutantCount = mutantTemp.Count;
 
-            mutantTemp[0].baseLevel = dataController.currentBattle.wastePool.baseLevel;
-            mutantTemp[0].maxLevel = dataController.currentBattle.wastePool.maxLevel;
+            mutantTemp[0].baseLevel = dataController.currentNode.wastePool.baseLevel;
+            mutantTemp[0].maxLevel = dataController.currentNode.wastePool.maxLevel;
 
             scavengerTeam = new Player[scavengerTemp.Count];
             scavengerTeam = scavengerTemp.ToArray();
@@ -134,10 +134,7 @@ public class BattleController : MonoBehaviour {
             mutantTeam = mutantTemp.ToArray();
             mutantTeam = characterManager.InstantiateCharacterData(mutantTeam);
 
-            if (dataController.currentBattle.isBossBattle)
-                mutantTeam = characterManager.InitializeBoss(mutantTeam[0]);
-            else
-                mutantTeam = characterManager.InitializeMutants(mutantTeam);
+            mutantTeam = characterManager.InitializeMutants(mutantTeam);
         }
     }
 
@@ -175,10 +172,7 @@ public class BattleController : MonoBehaviour {
             mutantTeam = mutantTemp.ToArray();
             mutantTeam = characterManager.InstantiateCharacterData(mutantTeam);
 
-            if (dataController.currentBattle.isBossBattle)
-                mutantTeam = characterManager.InitializeBoss(mutantTeam[0]);
-            else
-                mutantTeam = characterManager.InitializeMutants(mutantTeam);
+            mutantTeam = characterManager.InitializeMutants(mutantTeam);
         }
     }
 
@@ -197,26 +191,19 @@ public class BattleController : MonoBehaviour {
         {
             SetDefaultFlags();
 
-            environmentManager.SetBackground(dataController.currentBattle.background);
+            environmentManager.SetBackground(dataController.currentNode.background);
             statusManager.SetScavengerDetails(scavengerTeam);
             statusManager.SetMutantDetails(mutantTeam);
             characterManager.InstantiateCharacterPrefab(scavengerTeam);
             characterManager.InstantiateCharacterPrefab(mutantTeam);
 
-            if (!dataController.currentBattle.isBossBattle)
+            if (dataController.currentNode.isTutorial)
             {
-                if (dataController.currentBattle.isTutorial)
-                {
-                    StartCoroutine(BattleTutorialLoop());
-                }
-                else
-                {
-                    StartCoroutine(BattleLoop());
-                }
+                StartCoroutine(BattleTutorialLoop());
             }
-            else if (dataController.currentBattle.isBossBattle)
+            else
             {
-                StartCoroutine(BossBattleLoop());
+                StartCoroutine(BattleLoop());
             }
         } 
     }
@@ -818,16 +805,7 @@ public class BattleController : MonoBehaviour {
         StopAllCoroutines();
 
         turnCount++;
-        if (dataController.currentBattle.isBossBattle)
-        {
-            Debug.Log("Boss Battle");
-            StartCoroutine(BossBattleLoop());
-        }
-        else
-        {
             StartCoroutine(BattleLoop());
-        }
-        
     }
 
     IEnumerator DisplayBattleResult(bool victory)
@@ -863,11 +841,6 @@ public class BattleController : MonoBehaviour {
 
     public void BattleEnd()
     {
-        if (dataController.currentBattle.cutsceneAtEnd)
-        {
-            dataController.currentCutscene = dataController.currentBattle.endCutscene;
-        }
-
         Time.timeScale = 1;
         StartCoroutine(LoadScene());
     }
@@ -879,29 +852,6 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
 
-        if (dataController.currentBattle.nextScene.Equals("Demo"))
-        {
-            audioManager.PlaySound("Cheers");
-
-            foreach(GameObject message in demoMessage) 
-                message.SetActive(true);
-
-            yield return new WaitForSeconds(5f);
-
-            int nextSceneId = dataController.GetNextSceneId("Splash Screen");
-            dataController.DeleteAllData();
-            SceneManager.LoadScene(nextSceneId);
-        }
-        else
-        {
-            if (dataController.currentBattle.isTutorial)
-            {
-
-            }
-
-            int nextSceneId = dataController.GetNextSceneId(dataController.currentBattle.nextScene);
-            dataController.currentBattle = dataController.allBattles[1];
-            SceneManager.LoadScene(nextSceneId);
-        }
+        SceneManager.LoadScene("Map");
     }
 }

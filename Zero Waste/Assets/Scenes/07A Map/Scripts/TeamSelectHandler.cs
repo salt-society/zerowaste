@@ -186,11 +186,11 @@ public class TeamSelectHandler : MonoBehaviour
     {
         playerAtSlots = new List<Player>();
 
-        playerAtSlots[0] = dataController.scavengerRoster[0];
+        playerAtSlots.Add(dataController.scavengerRoster[0]);
         scavengerHolders[0].GetComponent<SelectHandler>().SetPlayer(playerAtSlots[0]);
 
-        playerAtSlots[1] = null;
-        playerAtSlots[2] = null;
+        playerAtSlots.Add(null);
+        playerAtSlots.Add(null);
     }
 
     // Find the data controller
