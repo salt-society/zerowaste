@@ -38,7 +38,7 @@ public class TeamSelectHandler : MonoBehaviour
         Player scavenger = dataController.scavengerRoster[0];
 
         scavengerHolders[0].transform.GetChild(0).GetComponent<Image>().sprite = scavenger.characterHalf;
-        scavengerHolders[0].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = scavenger.currentLevel.ToString();
+        scavengerHolders[0].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Level " + scavenger.currentLevel.ToString();
         scavengerHolders[0].transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = scavenger.name;
         scavengerHolders[0].transform.GetChild(3).GetComponent<Image>().sprite = scavenger.characterClass.roleLogo;
 

@@ -122,18 +122,18 @@ TextureImporter:
       name: Plus and Bubble_0
       rect:
         serializedVersion: 2
-        x: 1795
+        x: 0
         y: 0
         width: 1498
         height: 1496
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb11ee8977e7cbf4089f92aedb3bad82
+      spriteID: 746f52ba5b406a648a1d8d57c6ad46be
       vertices: []
       indices: 
       edges: []
@@ -147,13 +147,13 @@ TextureImporter:
         width: 1480
         height: 1483
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b611cf6a12e1b6a499198ffda2289d94
+      spriteID: dce954e0f51c31a4aba9c3c0b1b4efab
       vertices: []
       indices: 
       edges: []

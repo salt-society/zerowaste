@@ -75,6 +75,7 @@ public class SaveData {
         // list
         scavengerList = new List<int>();
         mutantsEncounteredList = new List<int>();
+        lastPartyUsed = new List<int>();
 
         // Ids
         currentCutsceneId = -1;
