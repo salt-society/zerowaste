@@ -12,6 +12,7 @@ public class Booster : ScriptableObject
     public Sprite selectedIcon;
     public string boosterName;
     public string type;
+    public string description;
     public Sprite typeIcon;
 
     [Space]

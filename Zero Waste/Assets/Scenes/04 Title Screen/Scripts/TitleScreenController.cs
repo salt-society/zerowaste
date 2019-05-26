@@ -79,17 +79,16 @@ public class TitleScreenController : MonoBehaviour
             dataController.currentSaveData.EncounteredMutant(0);
             dataController.currentSaveData.EncounteredMutant(1);
             dataController.currentSaveData.EncounteredMutant(2);
-            dataController.currentSaveData.AddBooster(6, 19);
-            dataController.currentSaveData.AddBooster(3, 45);
 
-            dataController.currentSaveData.currentNodeId = 10;
+            dataController.currentSaveData.currentNodeId = 9;
 
             // Add scavengers to roster, default male
             dataController.currentSaveData.gender = "Male";
             AddDefaultScavengers("Male");
             Player newCharacter = ScriptableObject.CreateInstance<Player>();
-            newCharacter = Instantiate(dataController.allScavengersList[4]);
+            newCharacter = Instantiate(dataController.allScavengersList[8]);
             dataController.AddScavenger(newCharacter);
+            dataController.AddScrap(500);
 
             // Scene testing
             dataController.nextScene = dataController.GetNextSceneId("ZWA");
