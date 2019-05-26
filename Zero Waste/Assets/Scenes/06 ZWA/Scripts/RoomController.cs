@@ -92,8 +92,10 @@ public class RoomController : MonoBehaviour
 
     public void OpenScavengerBook()
     {
-        scavBookButton.sprite = dataController.scavengerRoster[0].characterThumb;
+        // shelfExitButton.SetActive(!shelfExitButton.activeInHierarchy);
         booksButtonPanel.SetActive(!booksButtonPanel.activeInHierarchy);
+
+        scavPanel.SetActive(!scavPanel.activeInHierarchy);
     }
 
     public void OpenBestiary()
