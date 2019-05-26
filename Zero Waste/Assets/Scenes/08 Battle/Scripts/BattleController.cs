@@ -61,7 +61,7 @@ public class BattleController : MonoBehaviour {
         cameraManager = FindObjectOfType<CameraManager>();
         enemyAbilityManager = FindObjectOfType<EnemyAbilityManager>();
 
-        Time.timeScale = 1.25f;
+        Time.timeScale = 1.5f;
 
         PlayBGM();
         // MarkAsPlayed();
@@ -842,6 +842,14 @@ public class BattleController : MonoBehaviour {
     public void BattleEnd()
     {
         Time.timeScale = 1;
+
+        if(dataController.currentNode.nodeId == dataController.currentSaveData.currentNodeId)
+        {
+            dataController.currentSaveData.currentNodeId++;
+            dataController.SaveSaveData();
+            dataController.SaveGameData();
+        }
+
         StartCoroutine(LoadScene());
     }
 

@@ -33,7 +33,7 @@ public class DataController : MonoBehaviour
     public List<Booster> boosters;
 
     [Header("Battle Data")]
-    public List<Battle> allBattles;
+    public List<Node> allNodes;
 
     [Header("Battle Inputs")]
     public Cutscene currentCutscene;

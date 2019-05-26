@@ -100,7 +100,7 @@ public class TitleScreenController : MonoBehaviour
         {
             // Check how many cutscenes are unlocked
             // No cutscenes = New Game
-            if (dataController.currentSaveData.battles.Count == 0)
+            if (dataController.currentSaveData.nodes.Count == 0)
             {
                 // Get next scene id
                 dataController.nextScene = dataController.GetNextSceneId("Cutscene");
@@ -112,20 +112,21 @@ public class TitleScreenController : MonoBehaviour
                 // main character he/she will play
                 genderPanel.SetActive(true);
             }
-            // If there is a cutscene unlocked, signifies the game have been started
+            // If there is a cutscene unlocked, signifies the game has been started
             else
             {
-                if (dataController.currentSaveData.battles.Count > 1)
+                if (dataController.currentSaveData.nodes.Count > 1)
                 {
                     if (!dataController.currentSaveData.battleTutorial)
                     {
-                        dataController.currentBattle = dataController.allBattles[0];
+                        dataController.currentNode = dataController.allNodes[0];
 
                         dataController.nextScene = dataController.GetNextSceneId("Battle");
                         StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
                         StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("Burning", 2f));
                         StartCoroutine(LoadScene());
                     }
+
                     else
                     {
                         dataController.nextScene = dataController.GetNextSceneId("ZWA");
@@ -134,6 +135,7 @@ public class TitleScreenController : MonoBehaviour
                         StartCoroutine(LoadScene());
                     }
                 }
+
                 else
                 {
                     StartCoroutine(GameObject.FindObjectOfType<AudioManager>().StopSound("RPG Theme Looping", 2f));
