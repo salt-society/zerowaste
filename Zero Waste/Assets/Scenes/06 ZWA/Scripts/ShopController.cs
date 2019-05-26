@@ -1,40 +1,181 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class ShopController : MonoBehaviour
 {
+    #region Editor Variables
+
+    [Header("UI Components")]
+
+    public List<GameObject> partHighlights;
+    public List<GameObject> partNames;
+
+    [Header("Shelf Components")]
+    public GameObject shelf;
+    public GameObject scrollview;
+    public GameObject itemPrefab;
+
+    [Header("Item Component")]
+    public GameObject itemInfo;
+
     [Header("Shop Items")]
-    public ShopItems[] ShopItems;
+    public ShopItems[] shopItems;
 
+    #endregion
 
-    /*// Display all available items
-    public List<ShopItems> DisplayAvailableShopItems()
+    #region Private Variables
+
+    private DataController dataController;
+
+    int currentQuantity;
+
+    ShopItems currentItem;
+
+    #endregion
+
+    IEnumerator DisplayPartNames()
     {
-        int currentID = dataController.currentSaveData.currentBattleId;
+        foreach (GameObject tooltip in partNames)
+            tooltip.SetActive(!tooltip.activeInHierarchy);
 
-        List<ShopItems> availableList = new List<ShopItems>();
+        yield return new WaitForSeconds(1.0f);
 
-        foreach (ShopItems item in ShopItems)
+        foreach (GameObject tooltip in partNames)
+            tooltip.GetComponent<Animator>().SetBool("Hide", true);
+
+        yield return new WaitForSeconds(1.0f);
+
+        foreach (GameObject tooltip in partNames)
         {
-            if (item.battleIDMod <= currentID)
-                availableList.Add(item);
+            tooltip.SetActive(!tooltip.activeInHierarchy);
+            tooltip.GetComponent<Animator>().SetBool("Hide", false);
         }
-
-        return availableList;
     }
 
-    // Function after clicking the buy button
-    public void BuyBoosters(int price, int quantity, Booster booster)
+    public void ShowShop()
     {
-        // Calculate the total price
-        int total = price * quantity;
+        shelf.SetActive(true);
 
-        // Reduce the scrap
-        dataController.currentSaveData.UseScrap(total);
+        ShowStock();
+    }
 
-        // Add to Inventory
+    public void HideShop()
+    {
+        shelf.SetActive(false);
+    }
 
-        // Save data here
-    }*/
+    public void ShowItemDescription(ShopItems item)
+    {
+        currentItem = item;
+
+        SetItemDescription();
+    }
+
+    public void HideItemDescription()
+    {
+        itemInfo.SetActive(false);
+
+        currentQuantity = 1;
+        currentItem = null;
+    }
+
+    public void ChangeQuantity()
+    {
+        string name = EventSystem.current.currentSelectedGameObject.name;
+
+        Debug.Log(name);
+
+        switch(name)
+        {
+            case "Add":
+                currentQuantity++;
+                break;
+
+            case "Minus":
+                if (currentQuantity > 1)
+                    currentQuantity--;
+                break;
+        }
+
+        itemInfo.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = currentQuantity.ToString();
+        itemInfo.transform.GetChild(10).GetChild(1).GetComponent<TextMeshProUGUI>().text = (currentQuantity * currentItem.price).ToString();
+    }
+
+    public void BuyItem()
+    {
+        int totalPrice = currentQuantity * currentItem.price;
+
+        if(dataController.currentSaveData.scraps >= totalPrice)
+        {
+            dataController.UseScrap(totalPrice);
+
+            dataController.currentSaveData.AddBooster(currentItem.booster.boosterId, currentQuantity);
+
+            dataController.SaveSaveData();
+            dataController.SaveGameData();
+
+            currentQuantity = 1;
+            SetItemDescription();
+        }
+
+        else
+        {
+            itemInfo.transform.GetChild(11).gameObject.SetActive(true);
+            itemInfo.transform.GetChild(11).GetChild(0).GetComponent<TextMeshProUGUI>().text = "NOT ENOUGH SCRAPS!";
+        }
+    }
+
+    private void SetItemDescription()
+    {
+        itemInfo.SetActive(true);
+        itemInfo.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = currentItem.booster.boosterName;
+        itemInfo.transform.GetChild(1).GetComponent<Image>().sprite = currentItem.booster.icon;
+        itemInfo.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = currentItem.price.ToString();
+        itemInfo.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = currentItem.booster.description;
+        itemInfo.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "1";
+        itemInfo.transform.GetChild(10).GetChild(1).GetComponent<TextMeshProUGUI>().text = (currentQuantity * currentItem.price).ToString();
+        itemInfo.transform.GetChild(11).gameObject.SetActive(false);
+    }
+
+    private void ShowStock()
+    {
+        int currentNodeId = dataController.currentSaveData.currentNodeId;
+
+        ClearStock();
+
+        for (int CTR = 0; CTR < shopItems.Length; CTR++)
+        {
+            if(shopItems[CTR].battleIDMod <= currentNodeId)
+            {
+                GameObject instancePrefab = Instantiate(itemPrefab, scrollview.transform);
+                instancePrefab.GetComponent<ItemInstanceHandler>().SetItem(shopItems[CTR]);
+            }
+        }
+    }
+
+    private void ClearStock()
+    {
+        if (scrollview.transform.childCount > 0)
+        {
+            foreach (Transform child in scrollview.transform)
+                Destroy(child.gameObject);
+        }
+    }
+
+    private void Awake()
+    {
+        dataController = FindObjectOfType<DataController>();
+
+        currentQuantity = 1;
+        currentItem = null;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(DisplayPartNames());
+    }
 }

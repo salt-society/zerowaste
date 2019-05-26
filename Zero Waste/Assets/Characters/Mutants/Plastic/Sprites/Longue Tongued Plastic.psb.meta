@@ -2,79 +2,79 @@ fileFormatVersion: 2
 guid: 983bab34ce574504699c0d511064bc76
 ScriptedImporter:
   fileIDToRecycleName:
-    100000: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO
-    100002: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Body
-    100004: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Left
-    100006: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Right
-    100008: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Left
-    100010: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Right
-    100012: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Longue Tongue
-    100014: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Mouth
-    100016: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1
-    100018: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2
-    100020: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_3
-    100022: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4
-    100024: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4/bone_5
-    100026: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4/bone_6
-    100028: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4/bone_6/bone_7
-    100030: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_8
-    100032: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_8/bone_9
-    100034: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_10
-    100036: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_10/bone_11
-    100038: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_12
-    100040: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_12/bone_13
-    100042: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14
-    100056: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21
-    100058: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15
-    100060: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16
-    100062: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17
-    100064: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18
-    100066: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19
-    100068: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19/bone_20
-    400000: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Transform
-    400002: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Body/Transform
-    400004: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Left/Transform
-    400006: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Right/Transform
-    400008: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Left/Transform
-    400010: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Right/Transform
-    400012: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Longue Tongue/Transform
-    400014: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Mouth/Transform
-    400016: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/Transform
-    400018: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/Transform
-    400020: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_3/Transform
-    400022: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4/Transform
-    400024: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4/bone_5/Transform
-    400026: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4/bone_6/Transform
-    400028: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_4/bone_6/bone_7/Transform
-    400030: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_8/Transform
-    400032: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_8/bone_9/Transform
-    400034: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_10/Transform
-    400036: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_10/bone_11/Transform
-    400038: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_12/Transform
-    400040: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_2/bone_12/bone_13/Transform
-    400042: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/Transform
-    400056: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/Transform
-    400058: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/Transform
-    400060: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/Transform
-    400062: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/Transform
-    400064: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/Transform
-    400066: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19/Transform
-    400068: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19/bone_20/Transform
+    100044: Body_GO/Body_GO
+    100046: Body_GO/Body_GO/Body
+    100048: Body_GO/Body_GO/bone_1
+    100050: Body_GO/Body_GO/bone_1/bone_2
+    100052: Body_GO/Body_GO/bone_1/bone_2/bone_3
+    100054: Body_GO/Body_GO/bone_1/bone_2/bone_10
+    100070: Body_GO/Body_GO/bone_1/bone_2/bone_10/bone_11
+    100072: Body_GO/Body_GO/bone_1/bone_2/bone_12
+    100074: Body_GO/Body_GO/bone_1/bone_2/bone_12/bone_13
+    100076: Body_GO/Body_GO/bone_1/bone_4
+    100078: Body_GO/Body_GO/bone_1/bone_4/bone_5
+    100080: Body_GO/Body_GO/bone_1/bone_4/bone_6
+    100082: Body_GO/Body_GO/bone_1/bone_4/bone_6/bone_7
+    100084: Body_GO/Body_GO/bone_1/bone_8
+    100086: Body_GO/Body_GO/bone_1/bone_8/bone_9
+    100088: Body_GO/Body_GO/bone_1/bone_14
+    100090: Body_GO/Body_GO/bone_1/bone_14/bone_21
+    100092: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15
+    100094: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16
+    100096: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17
+    100098: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18
+    100100: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19
+    100102: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19/bone_20
+    100104: Body_GO/Body_GO/Eye Left
+    100106: Body_GO/Body_GO/Eye Right
+    100108: Body_GO/Body_GO/Kilay Left
+    100110: Body_GO/Body_GO/Kilay Right
+    100112: Body_GO/Body_GO/Longue Tongue
+    100114: Body_GO/Body_GO/Mouth
+    400044: Body_GO/Body_GO/Transform
+    400046: Body_GO/Body_GO/Body/Transform
+    400048: Body_GO/Body_GO/bone_1/Transform
+    400050: Body_GO/Body_GO/bone_1/bone_2/Transform
+    400052: Body_GO/Body_GO/bone_1/bone_2/bone_3/Transform
+    400054: Body_GO/Body_GO/bone_1/bone_2/bone_10/Transform
+    400070: Body_GO/Body_GO/bone_1/bone_2/bone_10/bone_11/Transform
+    400072: Body_GO/Body_GO/bone_1/bone_2/bone_12/Transform
+    400074: Body_GO/Body_GO/bone_1/bone_2/bone_12/bone_13/Transform
+    400076: Body_GO/Body_GO/bone_1/bone_4/Transform
+    400078: Body_GO/Body_GO/bone_1/bone_4/bone_5/Transform
+    400080: Body_GO/Body_GO/bone_1/bone_4/bone_6/Transform
+    400082: Body_GO/Body_GO/bone_1/bone_4/bone_6/bone_7/Transform
+    400084: Body_GO/Body_GO/bone_1/bone_8/Transform
+    400086: Body_GO/Body_GO/bone_1/bone_8/bone_9/Transform
+    400088: Body_GO/Body_GO/bone_1/bone_14/Transform
+    400090: Body_GO/Body_GO/bone_1/bone_14/bone_21/Transform
+    400092: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/Transform
+    400094: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/Transform
+    400096: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/Transform
+    400098: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/Transform
+    400100: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19/Transform
+    400102: Body_GO/Body_GO/bone_1/bone_14/bone_21/bone_15/bone_16/bone_17/bone_18/bone_19/bone_20/Transform
+    400104: Body_GO/Body_GO/Eye Left/Transform
+    400106: Body_GO/Body_GO/Eye Right/Transform
+    400108: Body_GO/Body_GO/Kilay Left/Transform
+    400110: Body_GO/Body_GO/Kilay Right/Transform
+    400112: Body_GO/Body_GO/Longue Tongue/Transform
+    400114: Body_GO/Body_GO/Mouth/Transform
     2800000: Longue Tongued Plastic
-    11400000: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Body/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400002: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Left/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400004: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Right/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400006: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Left/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400008: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Right/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400010: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Longue Tongue/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400012: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Mouth/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    21200000: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Body/SpriteRenderer
-    21200002: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Left/SpriteRenderer
-    21200004: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Eye Right/SpriteRenderer
-    21200006: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Left/SpriteRenderer
-    21200008: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Kilay Right/SpriteRenderer
-    21200010: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Longue Tongue/SpriteRenderer
-    21200012: Longue Tongued Plastic_GO/Longue Tongued Plastic_GO/Mouth/SpriteRenderer
+    11400014: Body_GO/Body_GO/Body/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400016: Body_GO/Body_GO/Eye Left/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400018: Body_GO/Body_GO/Eye Right/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400020: Body_GO/Body_GO/Kilay Left/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400022: Body_GO/Body_GO/Kilay Right/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400024: Body_GO/Body_GO/Longue Tongue/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400026: Body_GO/Body_GO/Mouth/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    21200014: Body_GO/Body_GO/Body/SpriteRenderer
+    21200016: Body_GO/Body_GO/Eye Left/SpriteRenderer
+    21200018: Body_GO/Body_GO/Eye Right/SpriteRenderer
+    21200020: Body_GO/Body_GO/Kilay Left/SpriteRenderer
+    21200022: Body_GO/Body_GO/Kilay Right/SpriteRenderer
+    21200024: Body_GO/Body_GO/Longue Tongue/SpriteRenderer
+    21200026: Body_GO/Body_GO/Mouth/SpriteRenderer
     21300000: Kilay Right
     21300002: Kilay Left
     21300004: Longue Tongue
@@ -82,7 +82,7 @@ ScriptedImporter:
     21300008: Eye Left
     21300010: Mouth
     21300012: Body
-    100100000: Longue Tongued Plastic_GO
+    100100002: Body_GO
   externalObjects: {}
   userData: 
   assetBundleName: 
@@ -14640,47 +14640,46 @@ ScriptedImporter:
       bones: 080000000700000002000000010000000000000005000000030000000600000004000000
     dimension: {x: 0, y: 0}
   boneGOs:
-  - go: {fileID: 100016, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100048, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 0
-  - go: {fileID: 100018, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100050, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 1
-  - go: {fileID: 100020, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100052, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 2
-  - go: {fileID: 100022, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100076, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 3
-  - go: {fileID: 100024, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100078, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 4
-  - go: {fileID: 100026, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100080, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 5
-  - go: {fileID: 100028, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100082, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 6
-  - go: {fileID: 100030, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100084, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 7
-  - go: {fileID: 100032, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100086, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 8
-  - go: {fileID: 100034, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100054, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 9
-  - go: {fileID: 100036, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100070, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 10
-  - go: {fileID: 100038, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100072, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 11
-  - go: {fileID: 100040, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100074, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 12
-  - go: {fileID: 100042, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100088, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 13
-  - go: {fileID: 100058, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100092, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 14
-  - go: {fileID: 100060, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100094, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 15
-  - go: {fileID: 100062, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100096, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 16
-  - go: {fileID: 100064, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100098, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 17
-  - go: {fileID: 100066, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100100, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 18
-  - go: {fileID: 100068, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100102, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 19
-  - go: {fileID: 100056, guid: 983bab34ce574504699c0d511064bc76, type: 3}
+  - go: {fileID: 100090, guid: 983bab34ce574504699c0d511064bc76, type: 3}
     index: 20
-  firstCreate: 0
   generateGOHierarchy: 0
