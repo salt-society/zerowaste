@@ -57,14 +57,14 @@ public class MapHandler : MonoBehaviour
 
     public void GoToZWA()
     {
+        StartCoroutine(FindObjectOfType<AudioManager>().StopSound("Misty Bog", 2f));
+
         dataController.nextScene = dataController.GetNextSceneId("ZWA");
         StartCoroutine(LoadScene());
     }
 
     IEnumerator LoadScene()
     {
-        StartCoroutine(FindObjectOfType<AudioManager>().StopSound("Misty Bog", 2f));
-
         yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
         yield return new WaitForSeconds(2f);
