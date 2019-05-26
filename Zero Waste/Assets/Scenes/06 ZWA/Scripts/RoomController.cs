@@ -25,6 +25,8 @@ public class RoomController : MonoBehaviour
     public Image scavBookButton;
     public GameObject scavPanel;
 
+    [Header("Bag")]
+
     [Space]
     private int currentPartIndex;
 

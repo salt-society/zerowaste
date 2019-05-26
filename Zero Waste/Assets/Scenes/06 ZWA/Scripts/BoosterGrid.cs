@@ -22,6 +22,8 @@ public class BoosterGrid : MonoBehaviour
 
         GameObject boosterCell;
 
+        RemoveCells();
+
         List<Booster> boosterList = dataController.boosters;
         for (int i = 0; i < boosterList.Count; i++)
         {
@@ -57,5 +59,10 @@ public class BoosterGrid : MonoBehaviour
             foreach (Transform cell in transform)
                 Destroy(cell.gameObject);
         }
+    }
+
+    private void Awake()
+    {
+        dataController = FindObjectOfType<DataController>();
     }
 }
