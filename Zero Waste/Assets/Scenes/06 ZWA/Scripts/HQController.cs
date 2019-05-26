@@ -13,10 +13,14 @@ public class HQController : MonoBehaviour
     public List<GameObject> partContents;
 
     [Space]
+    public GameObject fadeTransition;
+
+    [Space]
     private int currentPartIndex;
 
     void Start()
     {
+        dataController = FindObjectOfType<DataController>();
         StartCoroutine(DisplayPartNames());
     }
 
@@ -72,6 +76,19 @@ public class HQController : MonoBehaviour
 
     public void Map()
     {
-        SceneManager.LoadScene("Map");
+        dataController.nextScene = dataController.GetNextSceneId("Map");
+        StartCoroutine(LoadScene());
+    }
+
+    IEnumerator LoadScene()
+    {
+        StartCoroutine(FindObjectOfType<AudioManager>().StopSound("Astral Journey", 2f));
+
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
+
+        SceneManager.LoadScene(2);
     }
 }

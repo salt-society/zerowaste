@@ -19,6 +19,9 @@ public class MapHandler : MonoBehaviour
     // Holds the areas scriptable objects
     public Areas[] areas;
 
+    [Space]
+    public GameObject fadeTransition;
+
     #endregion
 
     #region Private Variables
@@ -54,7 +57,20 @@ public class MapHandler : MonoBehaviour
 
     public void GoToZWA()
     {
-        SceneManager.LoadScene("ZWA");
+        dataController.nextScene = dataController.GetNextSceneId("ZWA");
+        StartCoroutine(LoadScene());
+    }
+
+    IEnumerator LoadScene()
+    {
+        StartCoroutine(FindObjectOfType<AudioManager>().StopSound("Misty Bog", 2f));
+
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
+        yield return new WaitForSeconds(2f);
+        fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
+
+        SceneManager.LoadScene(dataController.GetNextSceneId("Loading"));
     }
 
     // First find data controller when object is awake
@@ -66,6 +82,8 @@ public class MapHandler : MonoBehaviour
     // Find out which areas are unlocked and do something about it
     private void Start()
     {
+        FindObjectOfType<AudioManager>().PlaySound("Misty Bog");
+
         // Set current node for system to know where the user currently is
         currentNode = dataController.currentSaveData.currentNodeId;
 

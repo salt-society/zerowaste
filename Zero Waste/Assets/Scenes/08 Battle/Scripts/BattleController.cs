@@ -30,6 +30,9 @@ public class BattleController : MonoBehaviour {
     [Space]
     public GameObject cooperCornerObject;
     public GameObject tutorialSection;
+    public GameObject menu;
+    public GameObject exitConfirmation;
+    public GameObject recruitement;
 
     [Space]
     private Player[] scavengerTeam;
@@ -43,7 +46,9 @@ public class BattleController : MonoBehaviour {
     private bool loopDone;
     private bool endOfLoop;
     private bool battleEnd;
+    private bool resultOfBattle;
 
+    [Space]
     public GameObject[] demoMessage;
 
     void Start()
@@ -97,9 +102,6 @@ public class BattleController : MonoBehaviour {
             {
                 CreateBattleData();
                 BattleSetup();
-
-                cooperCornerObject.SetActive(true);
-                cooperCorner = FindObjectOfType<CooperCorner>();
             }
             else
             {
@@ -199,13 +201,24 @@ public class BattleController : MonoBehaviour {
 
             if (dataController.currentNode.isTutorial)
             {
-                StartCoroutine(BattleTutorialLoop());
+                tutorialSection.SetActive(true);
+                StartCoroutine(BattleLoop());
             }
             else
             {
                 StartCoroutine(BattleLoop());
             }
         } 
+    }
+
+    public void OpenGuide()
+    {
+        tutorialSection.SetActive(true);
+    }
+
+    public void CloseGuide()
+    {
+        tutorialSection.SetActive(false);
     }
 
     void ProcessTurn()
@@ -230,6 +243,8 @@ public class BattleController : MonoBehaviour {
         StartCoroutine(statusManager.DisplayScavengerStatusSection(scavengerTeam));
         StartCoroutine(statusManager.DisplayMutantStatusSection(mutantTeam));
         yield return new WaitForSeconds(3f);
+
+        menu.SetActive(true);
 
         firstLoop = false;
         yield return null;
@@ -832,25 +847,55 @@ public class BattleController : MonoBehaviour {
 
         // Here all mutants are dead, which means victory
         if (targetCharacter == 0)
+        {
+            resultOfBattle = true;
             StartCoroutine(DisplayBattleResult(true));
+        }
+            
 
         // All scavengers are dead, defeat
         if (targetCharacter == 1)
+        {
+            resultOfBattle = false;
             StartCoroutine(DisplayBattleResult(false));
+        }
+            
     }
 
     public void BattleEnd()
     {
         Time.timeScale = 1;
 
-        if(dataController.currentNode.nodeId == dataController.currentSaveData.currentNodeId)
+        if (dataController.currentNode.nodeId == dataController.currentSaveData.currentNodeId)
         {
-            dataController.currentSaveData.currentNodeId++;
-            dataController.SaveSaveData();
-            dataController.SaveGameData();
+            if (resultOfBattle)
+            {
+                dataController.currentSaveData.currentNodeId++;
+
+                dataController.SaveSaveData();
+                dataController.SaveGameData();
+            }
         }
 
         StartCoroutine(LoadScene());
+    }
+
+    public void RetreatFromBattle()
+    {
+        exitConfirmation.SetActive(true);
+    }
+
+    public void RetreatConfirmation(int buttonNo)
+    {
+        if (buttonNo == 0)
+        {
+            exitConfirmation.SetActive(false);
+        }
+        else
+        {
+            dataController.nextScene = dataController.GetNextSceneId("Map");
+            StartCoroutine(LoadScene());
+        }
     }
 
     IEnumerator LoadScene()
@@ -860,6 +905,13 @@ public class BattleController : MonoBehaviour {
         yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
 
-        SceneManager.LoadScene("Map");
+        if (dataController.currentNode.isTutorial)
+        {
+            SceneManager.LoadScene(dataController.GetNextSceneId("ZWA"));
+        }
+        else
+        {
+            SceneManager.LoadScene(dataController.GetNextSceneId("Map"));
+        }
     }
 }

@@ -8,6 +8,7 @@ using System;
 public class ZWAController : MonoBehaviour
 {
     private DataController dataController;
+    private AudioManager audioManager;
 
     [Space]
     public List<GameObject> locations;
@@ -26,7 +27,9 @@ public class ZWAController : MonoBehaviour
     void Start()
     {
         dataController = FindObjectOfType<DataController>();
+        audioManager = FindObjectOfType<AudioManager>();
 
+        audioManager.PlaySound("Astral Journey");
         StartCoroutine(UpdateScrapHolder());
     }
 

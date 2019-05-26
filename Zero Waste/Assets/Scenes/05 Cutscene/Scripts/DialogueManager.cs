@@ -19,6 +19,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject notification;
 
     [Space]
+    public List<string> bgmPlaying;
+
+    [Space]
     public bool canSkipDialogue;
     public bool historyOn;
 
@@ -33,6 +36,8 @@ public class DialogueManager : MonoBehaviour
     {
         dataController = GameObject.FindObjectOfType<DataController>();
         audioManager = GameObject.FindObjectOfType<AudioManager>();
+
+        bgmPlaying = new List<string>();
     }
 
     public void SetDialogues(List<Dialogue> dialogues)
@@ -298,6 +303,7 @@ public class DialogueManager : MonoBehaviour
             foreach (string bgm in currentDialogue.BGM)
             {
                 audioManager.PlaySound(bgm);
+                bgmPlaying.Add(bgm);
             }
         }
         else
@@ -310,6 +316,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
+                    bgmPlaying.Add(bgm);
                     audioManager.PlaySound(bgm);
                 }
             }
@@ -452,7 +459,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator ShowItem()
     {
-        itemBox.transform.GetChild(1).gameObject.GetComponent<Image>().
+        itemBox.transform.GetChild(0).gameObject.GetComponent<Image>().
             sprite = currentDialogue.itemSprite;
 
         yield return null;
@@ -510,8 +517,6 @@ public class DialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Hello");
-
                     if (!dialogueFinished)
                     {
                         GameObject.FindObjectOfType<AudioManager>().PlaySound("Click 01");

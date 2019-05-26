@@ -49,7 +49,7 @@ public class GameDataController : MonoBehaviour
 
         dataController.CreateGameData();
         dataController.NewSaveData();
-        message.text = "Game data created. Auto Save feature is on.";
+        message.text = "Game data created.";
 
         yield return new WaitForSeconds(0.5f);
 

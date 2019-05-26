@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CustceneController : MonoBehaviour
 {
     public DataController dataController;
+    public AudioManager audioManager;
     public Cutscene currentCutscene;
 
     [Space]
@@ -15,16 +16,19 @@ public class CustceneController : MonoBehaviour
 
     [Space]
     public GameObject historyBox;
+    public GameObject pausePanel;
 
     [Space]
     public GameObject fadeTransition;
 
     private int nextSceneId;
+    private bool isPaused = false;
 
     void Start()
     {
         // Get data controller
-        dataController = GameObject.FindObjectOfType<DataController>();
+        dataController = FindObjectOfType<DataController>();
+        audioManager = FindObjectOfType<AudioManager>();
 
         // Just to be safe, always check if there's a data controller before execution
         if (dataController != null)
@@ -106,10 +110,49 @@ public class CustceneController : MonoBehaviour
     IEnumerator LoadScene()
     {
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         fadeTransition.GetComponent<Animator>().SetBool("Fade Out", false);
         yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(nextSceneId);
+    }
+
+    public void Play()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 1;
+            isPaused = false;
+
+            dialogueManager.canSkipDialogue = true;
+            pausePanel.SetActive(false);
+        }
+    }
+
+    public void Pause()
+    {
+        if (!isPaused)
+        {
+            Time.timeScale = 0;
+            isPaused = true;
+
+            dialogueManager.canSkipDialogue = false;
+            pausePanel.SetActive(true);
+        }
+    }
+
+    public void Skip()
+    {
+        dialogueManager.canSkipDialogue = false;
+        foreach (string bgm in dialogueManager.bgmPlaying)
+        {
+            if (audioManager.IsSoundPlaying(bgm))
+            {
+                StartCoroutine(audioManager.StopSound(bgm, 2f));
+            }
+        }
+        audioManager.PlaySound("Crumpling Paper");
+
+        CutsceneFinished();
     }
 }
