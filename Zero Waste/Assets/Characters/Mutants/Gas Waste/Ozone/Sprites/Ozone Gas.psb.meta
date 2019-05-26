@@ -2,70 +2,70 @@ fileFormatVersion: 2
 guid: c5baf7a47a97a3c41944949b2622e7e5
 ScriptedImporter:
   fileIDToRecycleName:
-    100000: Ozone Gas_GO/Ozone Gas_GO/bone_1
-    100002: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2
-    100004: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3
-    100006: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4
-    100008: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5
-    100010: Ozone Gas_GO/Ozone Gas_GO
-    100012: Ozone Gas_GO/Ozone Gas_GO/Anthena
-    100014: Ozone Gas_GO/Ozone Gas_GO/Body
-    100016: Ozone Gas_GO/Ozone Gas_GO/Left Arm
-    100018: Ozone Gas_GO/Ozone Gas_GO/Right Arm
-    100020: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6
-    100022: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7
-    100024: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8
-    100026: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8/bone_9
-    100028: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_10
-    100030: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_10/bone_11
-    100032: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12
-    100034: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12/bone_13
-    100036: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12/bone_13/bone_14
-    100038: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12/bone_13/bone_14/bone_15
-    100040: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16
-    100042: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17
-    100044: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17/bone_18
-    100046: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17/bone_18/bone_19
-    100048: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17/bone_18/bone_19/bone_20
-    400000: Ozone Gas_GO/Ozone Gas_GO/bone_1/Transform
-    400002: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/Transform
-    400004: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/Transform
-    400006: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/Transform
-    400008: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/Transform
-    400010: Ozone Gas_GO/Ozone Gas_GO/Transform
-    400012: Ozone Gas_GO/Ozone Gas_GO/Anthena/Transform
-    400014: Ozone Gas_GO/Ozone Gas_GO/Body/Transform
-    400016: Ozone Gas_GO/Ozone Gas_GO/Left Arm/Transform
-    400018: Ozone Gas_GO/Ozone Gas_GO/Right Arm/Transform
-    400020: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/Transform
-    400022: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/Transform
-    400024: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8/Transform
-    400026: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8/bone_9/Transform
-    400028: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_10/Transform
-    400030: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_10/bone_11/Transform
-    400032: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12/Transform
-    400034: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12/bone_13/Transform
-    400036: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12/bone_13/bone_14/Transform
-    400038: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_12/bone_13/bone_14/bone_15/Transform
-    400040: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/Transform
-    400042: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17/Transform
-    400044: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17/bone_18/Transform
-    400046: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17/bone_18/bone_19/Transform
-    400048: Ozone Gas_GO/Ozone Gas_GO/bone_1/bone_16/bone_17/bone_18/bone_19/bone_20/Transform
+    100050: Anthena_GO/Anthena_GO
+    100052: Anthena_GO/Anthena_GO/Anthena
+    100054: Anthena_GO/Anthena_GO/Body
+    100056: Anthena_GO/Anthena_GO/bone_1
+    100058: Anthena_GO/Anthena_GO/bone_1/bone_2
+    100060: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3
+    100062: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4
+    100064: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5
+    100066: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6
+    100068: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7
+    100070: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8
+    100072: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8/bone_9
+    100074: Anthena_GO/Anthena_GO/bone_1/bone_10
+    100076: Anthena_GO/Anthena_GO/bone_1/bone_10/bone_11
+    100078: Anthena_GO/Anthena_GO/bone_1/bone_12
+    100080: Anthena_GO/Anthena_GO/bone_1/bone_12/bone_13
+    100082: Anthena_GO/Anthena_GO/bone_1/bone_12/bone_13/bone_14
+    100084: Anthena_GO/Anthena_GO/bone_1/bone_12/bone_13/bone_14/bone_15
+    100086: Anthena_GO/Anthena_GO/bone_1/bone_16
+    100088: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17
+    100090: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17/bone_18
+    100092: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17/bone_18/bone_19
+    100094: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17/bone_18/bone_19/bone_20
+    100096: Anthena_GO/Anthena_GO/Left Arm
+    100098: Anthena_GO/Anthena_GO/Right Arm
+    400050: Anthena_GO/Anthena_GO/Transform
+    400052: Anthena_GO/Anthena_GO/Anthena/Transform
+    400054: Anthena_GO/Anthena_GO/Body/Transform
+    400056: Anthena_GO/Anthena_GO/bone_1/Transform
+    400058: Anthena_GO/Anthena_GO/bone_1/bone_2/Transform
+    400060: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/Transform
+    400062: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/Transform
+    400064: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/Transform
+    400066: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/Transform
+    400068: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/Transform
+    400070: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8/Transform
+    400072: Anthena_GO/Anthena_GO/bone_1/bone_2/bone_3/bone_4/bone_5/bone_6/bone_7/bone_8/bone_9/Transform
+    400074: Anthena_GO/Anthena_GO/bone_1/bone_10/Transform
+    400076: Anthena_GO/Anthena_GO/bone_1/bone_10/bone_11/Transform
+    400078: Anthena_GO/Anthena_GO/bone_1/bone_12/Transform
+    400080: Anthena_GO/Anthena_GO/bone_1/bone_12/bone_13/Transform
+    400082: Anthena_GO/Anthena_GO/bone_1/bone_12/bone_13/bone_14/Transform
+    400084: Anthena_GO/Anthena_GO/bone_1/bone_12/bone_13/bone_14/bone_15/Transform
+    400086: Anthena_GO/Anthena_GO/bone_1/bone_16/Transform
+    400088: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17/Transform
+    400090: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17/bone_18/Transform
+    400092: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17/bone_18/bone_19/Transform
+    400094: Anthena_GO/Anthena_GO/bone_1/bone_16/bone_17/bone_18/bone_19/bone_20/Transform
+    400096: Anthena_GO/Anthena_GO/Left Arm/Transform
+    400098: Anthena_GO/Anthena_GO/Right Arm/Transform
     2800002: Ozone Gas
-    11400000: Ozone Gas_GO/Ozone Gas_GO/Anthena/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400002: Ozone Gas_GO/Ozone Gas_GO/Body/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400004: Ozone Gas_GO/Ozone Gas_GO/Left Arm/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    11400006: Ozone Gas_GO/Ozone Gas_GO/Right Arm/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
-    21200008: Ozone Gas_GO/Ozone Gas_GO/Anthena/SpriteRenderer
-    21200010: Ozone Gas_GO/Ozone Gas_GO/Body/SpriteRenderer
-    21200012: Ozone Gas_GO/Ozone Gas_GO/Left Arm/SpriteRenderer
-    21200014: Ozone Gas_GO/Ozone Gas_GO/Right Arm/SpriteRenderer
+    11400008: Anthena_GO/Anthena_GO/Anthena/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400010: Anthena_GO/Anthena_GO/Body/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400012: Anthena_GO/Anthena_GO/Left Arm/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    11400014: Anthena_GO/Anthena_GO/Right Arm/MonoBehaviour-UnityEngine.Experimental.U2D.Animation.SpriteSkin
+    21200000: Anthena_GO/Anthena_GO/Anthena/SpriteRenderer
+    21200002: Anthena_GO/Anthena_GO/Body/SpriteRenderer
+    21200004: Anthena_GO/Anthena_GO/Left Arm/SpriteRenderer
+    21200006: Anthena_GO/Anthena_GO/Right Arm/SpriteRenderer
     21300000: Body
     21300002: Right Arm
     21300004: Left Arm
     21300006: Anthena
-    100100002: Ozone Gas_GO
+    100100000: Anthena_GO
   externalObjects: {}
   userData: 
   assetBundleName: 
@@ -9503,45 +9503,44 @@ ScriptedImporter:
       bones: 0200000003000000040000000500000006000000070000000800000001000000
     dimension: {x: 0, y: 0}
   boneGOs:
-  - go: {fileID: 100000, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100056, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 0
-  - go: {fileID: 100002, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100058, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 1
-  - go: {fileID: 100004, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100060, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 2
-  - go: {fileID: 100006, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100062, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 3
-  - go: {fileID: 100008, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100064, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 4
-  - go: {fileID: 100020, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100066, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 5
-  - go: {fileID: 100022, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100068, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 6
-  - go: {fileID: 100024, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100070, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 7
-  - go: {fileID: 100026, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100072, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 8
-  - go: {fileID: 100028, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100074, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 9
-  - go: {fileID: 100030, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100076, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 10
-  - go: {fileID: 100032, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100078, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 11
-  - go: {fileID: 100034, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100080, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 12
-  - go: {fileID: 100036, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100082, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 13
-  - go: {fileID: 100038, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100084, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 14
-  - go: {fileID: 100040, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100086, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 15
-  - go: {fileID: 100042, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100088, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 16
-  - go: {fileID: 100044, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100090, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 17
-  - go: {fileID: 100046, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100092, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 18
-  - go: {fileID: 100048, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
+  - go: {fileID: 100094, guid: c5baf7a47a97a3c41944949b2622e7e5, type: 3}
     index: 19
-  firstCreate: 0
   generateGOHierarchy: 0
