@@ -21,6 +21,10 @@ public class Node : ScriptableObject
     public WastePool wastePool;
 
     [Space]
+    public bool doesUnlockScavenger;
+    public int scavengerID;
+
+    [Space]
     public Areas area;
 
     [Space]
