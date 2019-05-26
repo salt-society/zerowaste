@@ -72,8 +72,6 @@ public class HQController : MonoBehaviour
 
     public void Map()
     {
-        
+        SceneManager.LoadScene("Map");
     }
-
-    
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MapHandler : MonoBehaviour
@@ -49,6 +50,11 @@ public class MapHandler : MonoBehaviour
     {
         levelSelectScreen.gameObject.SetActive(true);
         levelSelectScreen.GetComponent<LevelHandler>().SetupLevel(area);
+    }
+
+    public void GoToZWA()
+    {
+        SceneManager.LoadScene("ZWA");
     }
 
     // First find data controller when object is awake
