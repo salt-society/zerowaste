@@ -294,6 +294,8 @@ public class BattleInfoManager : MonoBehaviour {
         victoryLootBox.SetActive(true);
         yield return new WaitForSeconds(1.0f);
 
+        victoryLootBox.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = scrapReward.ToString();
+
         victoryLootBox.GetComponent<Animator>().SetBool("Open", true);
         yield return new WaitForSeconds(1.0f);
 

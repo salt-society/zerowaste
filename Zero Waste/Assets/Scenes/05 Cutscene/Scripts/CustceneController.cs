@@ -42,16 +42,6 @@ public class CustceneController : MonoBehaviour
                 currentCutscene = cutsceneList[cutsceneId];
             }
 
-            // If there's a current battle, check if this cutscene is
-            // a major cutscene or not
-            if (dataController.currentBattle != null)
-            {
-                // If major cutscene, treat this cutscene as a battle
-                // Set battle as played to stop it from being unlocked all over again
-                if (dataController.currentBattle.isMajorCutscene)
-                    dataController.currentSaveData.PlayBattle(dataController.currentBattle.battleId);
-            }
-
             PlayCutscene();
         }
     }
@@ -86,33 +76,23 @@ public class CustceneController : MonoBehaviour
         if (dataController != null)
         {
             // If there is a current battle, it means this cutscene is either a start/end or major cutscene
-            if (dataController.currentBattle != null)
+            if (dataController.currentNode != null)
             {
-                // Get current id of battle and check if its a major cutscene or end cutscene of a battle
-                int battleId = dataController.currentBattle.battleId;
-                if (dataController.currentBattle.isMajorCutscene || dataController.currentBattle.cutsceneAtEnd)
-                {
-                    // Battles can be plain cutscenes or with cutscene at start/end
-                    // If a battle is a major cutscene/end cutscene, mark it finished
-                    dataController.currentSaveData.FinishedBattle(battleId);
+                // Save whatever progress made
+                dataController.SaveSaveData();
+                dataController.SaveGameData();
 
-                    // Unlock next level(s)
-                    dataController.UnlockLevels(dataController.currentCutscene.nextLevels, dataController.currentCutscene.levelIds);
-
-                    // Save whatever progress made
-                    dataController.SaveSaveData();
-                    dataController.SaveGameData();
-
-                    dataController.nextScene = dataController.GetNextSceneId(dataController.currentCutscene.nextScene);
-                }
+                dataController.nextScene = dataController.GetNextSceneId("ZWA");
             }
+
             else
             {
                 // Tutorial
                 if (currentCutscene.cutsceneId == 0)
                 {
                     // Place tutorial on currentBattle
-                    dataController.currentBattle = dataController.allBattles[0];
+                    dataController.currentNode = dataController.allNodes[0];
+                    dataController.currentSaveData.currentNodeId = -1;
                     dataController.nextScene = dataController.GetNextSceneId("Battle");
                 }
             }
