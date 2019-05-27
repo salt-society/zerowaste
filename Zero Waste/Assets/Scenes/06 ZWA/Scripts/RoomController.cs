@@ -18,14 +18,13 @@ public class RoomController : MonoBehaviour
     public GameObject booksButtonPanel;
 
     [Space]
-    public BestiaryGrid bestiaryGrid;
+    public GameObject mutantInfo;
     public GameObject bestiaryPanel;
 
     [Space]
     public Image scavBookButton;
     public GameObject scavPanel;
-
-    [Header("Bag")]
+    public GameObject scavInfo;
 
     [Space]
     private int currentPartIndex;
@@ -94,17 +93,27 @@ public class RoomController : MonoBehaviour
 
     public void OpenScavengerBook()
     {
-        // shelfExitButton.SetActive(!shelfExitButton.activeInHierarchy);
+        shelfExitButton.SetActive(!shelfExitButton.activeInHierarchy);
         booksButtonPanel.SetActive(!booksButtonPanel.activeInHierarchy);
 
         scavPanel.SetActive(!scavPanel.activeInHierarchy);
     }
 
+    public void CloseScavInfo()
+    {
+        scavInfo.SetActive(false);
+    }
+
     public void OpenBestiary()
     {
-        shelfExitButton.SetActive(!shelfExitButton.activeInHierarchy);
+        // shelfExitButton.SetActive(!shelfExitButton.activeInHierarchy);
         booksButtonPanel.SetActive(!booksButtonPanel.activeInHierarchy);
 
         bestiaryPanel.SetActive(!booksButtonPanel.activeInHierarchy);
+    }
+
+    public void CloseMutantInfo()
+    {
+        mutantInfo.SetActive(false);
     }
 }
