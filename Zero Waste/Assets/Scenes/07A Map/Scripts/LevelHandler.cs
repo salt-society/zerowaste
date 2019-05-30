@@ -99,6 +99,8 @@ public class LevelHandler : MonoBehaviour
     // Go to battle with the necessary information
     public void GoToBattle(List<Player> playerTeam)
     {
+        StartCoroutine(FindObjectOfType<AudioManager>().StopSound("Misty Bog", 2f));
+
         dataController.currentNode = node;
         dataController.scavengerTeam = playerTeam.ToArray();
         dataController.mutantTeam = node.wastePool.SelectWasteFromPool();
