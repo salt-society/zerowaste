@@ -25,6 +25,9 @@ public class Node : ScriptableObject
     public int scavengerID;
 
     [Space]
+    public bool isEpilogue;
+
+    [Space]
     public Areas area;
 
     [Space]

@@ -71,12 +71,6 @@ public class DataController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void OnApplicationQuit()
-    {
-        // TEMP
-        DeleteAllData();
-    }
-
     public void CreateGameData()
     {
         string gameDataFileName = "ZeroWaste.Game";
@@ -315,13 +309,32 @@ public class DataController : MonoBehaviour
 
     public void AddExp(Player scavengerToEnhance)
     {
-        LevelRequirements levelReq = new LevelRequirements();
         foreach (Player scavenger in scavengerRoster)
         {
             if (scavenger.characterId.Equals(scavengerToEnhance.characterId))
             {
                 scavenger.currentLevel = scavengerToEnhance.currentLevel;
                 scavenger.currentExp = scavengerToEnhance.currentExp;
+
+                // Save
+                SaveScavenger(scavenger);
+                SaveSaveData();
+                SaveGameData();
+            }
+        }
+    }
+
+    public void AddExp(Player scavengerToEnhance, int level)
+    {
+        foreach (Player scavenger in scavengerRoster)
+        {
+            if (scavenger.characterId.Equals(scavengerToEnhance.characterId))
+            {
+                scavenger.currentLevel = level;
+                scavenger.currentExp = 0;
+                scavenger.currentLevelCap = 30;
+                scavenger.abilities[2] = scavenger.UpgradedCA;
+                scavenger.abilities[3] = scavenger.UpgradedUA;
 
                 // Save
                 SaveScavenger(scavenger);

@@ -98,6 +98,7 @@ public class CustceneController : MonoBehaviour
                     dataController.currentNode = dataController.allNodes[0];
                     dataController.currentSaveData.currentNodeId = -1;
                     dataController.nextScene = dataController.GetNextSceneId("Battle");
+                    dataController.currentSaveData.currentCutsceneId++;
                 }
             }
 

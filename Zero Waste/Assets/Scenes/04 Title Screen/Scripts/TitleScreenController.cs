@@ -80,7 +80,7 @@ public class TitleScreenController : MonoBehaviour
             dataController.currentSaveData.EncounteredMutant(1);
             dataController.currentSaveData.EncounteredMutant(2);
 
-            dataController.currentSaveData.currentNodeId = 9;
+            dataController.currentSaveData.currentNodeId = 14;
 
             // Add scavengers to roster, default male
             dataController.currentSaveData.gender = "Male";
@@ -88,7 +88,11 @@ public class TitleScreenController : MonoBehaviour
             Player newCharacter = ScriptableObject.CreateInstance<Player>();
             newCharacter = Instantiate(dataController.allScavengersList[8]);
             dataController.AddScavenger(newCharacter);
-            dataController.AddScrap(500);
+            dataController.AddScrap(1000);
+
+            dataController.AddExp(dataController.scavengerRoster[0], 30);
+            dataController.AddExp(dataController.scavengerRoster[1], 30);
+            dataController.currentSaveData.currentCutsceneId = 1;
 
             // Scene testing
             dataController.nextScene = dataController.GetNextSceneId("ZWA");
@@ -100,7 +104,7 @@ public class TitleScreenController : MonoBehaviour
         {
             // Check how many cutscenes are unlocked
             // No cutscenes = New Game
-            if (dataController.currentSaveData.nodes.Count == 0)
+            if (dataController.currentSaveData.currentNodeId < 0)
             {
                 // Get next scene id
                 dataController.nextScene = dataController.GetNextSceneId("Cutscene");
@@ -115,7 +119,7 @@ public class TitleScreenController : MonoBehaviour
             // If there is a cutscene unlocked, signifies the game has been started
             else
             {
-                if (dataController.currentSaveData.nodes.Count > 1)
+                if (dataController.currentSaveData.currentNodeId >= 0)
                 {
                     if (!dataController.currentSaveData.battleTutorial)
                     {

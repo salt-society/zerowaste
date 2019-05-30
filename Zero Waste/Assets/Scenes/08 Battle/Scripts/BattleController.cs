@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class BattleController : MonoBehaviour {
 
@@ -33,6 +34,7 @@ public class BattleController : MonoBehaviour {
     public GameObject menu;
     public GameObject exitConfirmation;
     public GameObject recruitement;
+    public GameObject retreat;
 
     [Space]
     private Player[] scavengerTeam;
@@ -100,6 +102,7 @@ public class BattleController : MonoBehaviour {
         {
             if (dataController.currentNode.isTutorial)
             {
+                retreat.SetActive(false);
                 CreateBattleData();
                 BattleSetup();
             }
@@ -872,12 +875,40 @@ public class BattleController : MonoBehaviour {
             {
                 dataController.currentSaveData.currentNodeId++;
 
+                if(dataController.currentNode.doesUnlockScavenger)
+                {
+                    Player newCharacter = ScriptableObject.CreateInstance<Player>();
+                    newCharacter = Instantiate(dataController.allScavengersList[dataController.currentNode.scavengerID]);
+                    dataController.AddScavenger(newCharacter);
+
+                    StartCoroutine(ShowNewRecruit());
+                }
+
+                if (dataController.currentNode.isEpilogue)
+                {
+                    dataController.SaveSaveData();
+                    dataController.SaveGameData();
+
+
+                }
+
                 dataController.SaveSaveData();
                 dataController.SaveGameData();
             }
         }
 
         StartCoroutine(LoadScene());
+    }
+
+    IEnumerator ShowNewRecruit()
+    {
+        recruitement.SetActive(true);
+
+        recruitement.transform.GetChild(0).GetComponent<Image>().sprite = dataController.allScavengersList[dataController.currentNode.scavengerID].characterHalf;
+
+        yield return new WaitForSeconds(1);
+
+        recruitement.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = dataController.allScavengersList[dataController.currentNode.scavengerID].characterName;
     }
 
     public void RetreatFromBattle()
@@ -909,7 +940,14 @@ public class BattleController : MonoBehaviour {
         {
             SceneManager.LoadScene(dataController.GetNextSceneId("ZWA"));
         }
-        else
+
+        else if(dataController.currentNode.isEpilogue)
+        {
+            dataController.currentCutscene = null;
+            SceneManager.LoadScene(dataController.GetNextSceneId("Cutscene"));
+        }
+
+        else 
         {
             SceneManager.LoadScene(dataController.GetNextSceneId("Map"));
         }
